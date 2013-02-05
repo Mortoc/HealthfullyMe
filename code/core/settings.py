@@ -105,11 +105,7 @@ ROOT_URLCONF = 'core.urls'
 WSGI_APPLICATION = 'core.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-    os.path.join(BASE_DIR, '../home/templates'),
 )
-
-
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -120,6 +116,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 	'south',
 	
+    'home',
 	'giftcards',
 )
 
