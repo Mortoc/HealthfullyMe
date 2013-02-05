@@ -12,13 +12,22 @@ class Giftcard(models.Model):
 	)
 	
 	organization = models.CharField( max_length=4, choices=ORGANIZATION_CHOICES)
-	cardId = models.BigIntegerField()
-	remainingValue = models.DecimalField(decimal_places=2, max_digits=16)
-	assignedTo = models.EmailField(null=True)
-	cardLoadedDate = models.DateTimeField(default=timezone.now())
-	cardSoldDate = models.DateTimeField(null=True)
+	card_id = models.BigIntegerField()
+	remaining_value = models.DecimalField(decimal_places=2, max_digits=16)
+	assigned_to = models.EmailField(null=True)
+	created_date = models.DateTimeField(default=timezone.now())
+	sold_date = models.DateTimeField(null=True)
 	
-	def isSold(self):
-		return self.assignedTo is not None
+	
+	def is_sold(self):
+		return self.assigned_to is not None
+
+	is_sold.admin_order_field = 'sold_date'
+	is_sold.boolean = True
+	is_sold.short_description = 'Is Sold?'
 		
-admin.site.register(Giftcard)
+		
+class GiftcardAdmin(admin.ModelAdmin):
+    list_display = ('organization', 'card_id', 'is_sold')
+		
+admin.site.register(Giftcard, GiftcardAdmin)
