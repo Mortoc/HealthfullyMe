@@ -1,0 +1,208 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.main-content {
+    width: 100%;
+
+    position: relative;
+    height:auto !important;
+    height:100%;
+}
+
+.centered-content {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.logo {
+    float: left;
+    position: relative;
+    top: -20px;
+    background: url(../img/hm-logo.jpg) no-repeat;
+    
+    background-size: 371px 371px;
+    min-height: 371px;
+    min-width: 371px;
+    margin: 0 auto;
+}
+
+.message-row {
+    float: left;
+    position: relative;
+    left: 100px;
+    width: 450px;
+}
+
+
+.email-submit {
+    font-family: 'Signika', sans-serif;
+    font-size: 22px;
+    color:#666666;
+}
+
+.email-submit input {
+    background-color: #ffffff;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 4px solid #24adae;
+    display: inline-block;
+    
+    padding: 6px 24px;
+}
+
+
+#orange-button {
+    float: left;
+    background-color: #f6b33d;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #eda933;
+    display: inline-block;
+    color: #ffffff;
+
+    font-family: 'Signika', sans-serif;
+    font-size: 15px;
+
+    padding: 6px 24px;
+    text-shadow: 1px 1px 0px #cd8a15;
+    margin: 0 12px 0 12px;
+    width: 200px;
+}#orange-button:hover {
+    background-color: #d29105;
+}#orange-button:active {
+    position: relative;
+    top: 1px;
+}
+
+.teal-button {
+    float: left;
+    background-color: #24adae;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #1c8283;
+    display: inline-block;
+    color: #ffffff;
+
+    font-family: 'Signika', sans-serif;
+    font-size: 15px;
+
+    padding: 6px 24px;
+    text-decoration: none;
+    text-shadow: 1px 1px 0px #125858;
+    margin: 0 12px 0 12px;
+    width: 200px;
+}.teal-button:hover {
+    background-color: #125858;
+}.teal-button:active {
+    position: relative;
+    top: 1px;
+}
+
+.top-bar {
+    background: url(../img/top-bar.jpg) repeat;
+    position: relative; 
+    height: 48px;
+    width: 100%;
+    top: 0;
+}
+
+.bottom-bar {
+    background: url(../img/bottom-bar.jpg) repeat;
+    
+    position: absolute; 
+    height: 48px;
+    width: 100%;
+    
+    bottom: 0;
+}
+
+.food-banner {
+    background: url(../img/food-banner.jpg) repeat;
+    background-size: 1002px 101px;
+    
+    position: absolute;
+    width: 100%;
+    height: 101px;
+    bottom: -100px;
+}
+
+.debug-div {
+    border: 2px solid red;
+}
+
+.header-text {
+    font-family: 'Signika', sans-serif;
+    font-size: 48px;
+}
+
+.scripty-header-text {
+    float: left;
+    font-family: 'Montez', sans-serif;
+    font-size: 48px;
+}
+
+.green-dash {
+    float: left;
+    background: url(../img/green-dash.jpg) no-repeat;
+    background-size: 70px 10px;
+    
+    min-width: 70px;
+    min-height: 10px;
+    
+    margin: 32px 16px;
+}
+
+.subheader-container {
+    width: 400px;
+    margin: 0px auto;
+}
+
+.message-text {
+    float: none;
+}
+
+.center-vertically {
+    height: 400px;
+    margin: 60px 0 80px 0;
+}
+	
+
+/* ====================================================== */
+/* ! Provide higher res assets for high-res displays      */
+/* ====================================================== */
+
+/*
+@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+
+	.logo {
+		background: url(../img/hm-logo-highres.jpg) no-repeat;
+		
+		float: left;
+		background-size: 371px 371px;
+        min-height: 371px;
+        min-width: 371px;
+	}
+    	
+    .food-banner {
+        background: url(../img/food-banner-highres.jpg) repeat;
+         
+        background-size: 1002px 101px;
+        position: absolute;
+        width: 100%;
+        height: 101px;
+        bottom: 128px;
+    }
+
+
+}*/
