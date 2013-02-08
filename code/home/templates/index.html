@@ -1,69 +1,47 @@
-{% extends "home_base.html" %}
+{% extends "simple_home_page.html" %}
 
-{% block title %}Healthfully.me{% endblock %}
+{% block centered_content %}
 
-{% block extra_style %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css" type="text/css" media="screen" />
-    
-    <!-- Google Web Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Montez' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Signika:300' rel='stylesheet' type='text/css'>
-{% endblock %} 
-
-{% block body %}
-
-
-<div class="top-bar"></div>
-    
-
-<div class="main-content">
-
-    <div class="centered-content">
-        <div class="logo"></div>
-        
-        <div class="center-vertically">
-        
-            <div class="message-row">
-                <span class="header-text">Putting healthy meals</span>
-            </div>
-            
-            <div class="message-row">
-                <div class="subheader-container">
-                    <div class="green-dash"></div>
-                    <span class="scripty-header-text">on your table</span>
-                    <div class="green-dash"></div>
-                </div>
-            </div>
-                
-            <div class="message-row">
-                <p class="message-text">
-                    text text text text text text text text text text text text text text text
-                    text text text text text text text text text text text text text text text
-                    text text text text text
-                </p>
-            </div>
-            
-            <div class="message-row">
-                <form class="email-submit" action="/submit_email_request/" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input id="orange-button" type="submit" value="Request an invite code" />
-                </form>
-                    <a href="http://www.google.com">
-                        <input class="teal-button" type="submit" value="I have a code!" />
-                    </a>
-            </div>
-            
-        </div>
-    </div>
-    
-    
-    <div class="food-banner"></div>
-
+<div class="logo">
 </div>
 
+<div class="center-vertically">
 
-<div class="bottom-bar"></div>
-
-
+    <div class="message-row">
+        <span class="header-text">Putting healthy meals</span>
+    </div>
+    
+    <div class="message-row">
+        <div class="subheader-container">
+            <div class="green-dash">
+            </div>
+            <span class="scripty-header-text">on your table</span>
+            <div class="green-dash">
+            </div>
+        </div>
+    </div>
+        
+    <div class="message-row">
+        <p class="message-text">
+            text text text text text text text text text text text text text text text
+            text text text text text text text text text text text text text text text
+            text text text text text
+        </p>
+    </div>
+    
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    
+    <div class="message-row">
+        <form class="email-submit" action="submit_email_request/" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input id="orange-button" type="submit" value="Request an invite code" />
+        </form>
+            <a href="http://www.google.com">
+                <input class="teal-button" type="submit" value="I have a code!" />
+            </a>
+    </div>
+    
+</div>
+        
 {% endblock %}
