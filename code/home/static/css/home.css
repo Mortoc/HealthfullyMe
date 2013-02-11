@@ -6,6 +6,10 @@ html {
 body {
     height: 100%;
     width: 100%;
+    
+    max-height: 800px;
+    
+    padding: 0;
     overflow: hidden;
 }
 
@@ -13,8 +17,10 @@ body {
     width: 100%;
 
     position: relative;
-    height:auto !important;
-    height:100%;
+    height: 100%;
+    min-height: 400px;
+    
+    overflow-y: scroll;
 }
 
 .centered-content {
@@ -49,9 +55,12 @@ body {
     position: relative;
     left: 70px;
     top: -5px;
+
+    line-height: 22px;
 }
 
 .email-submit input {
+    float: left;
     background-color: #ffffff;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -61,6 +70,14 @@ body {
     
     padding: 6px 24px;
 }
+
+.email-submit label {
+    float: left;
+    position: relative;
+    left: -15px;
+    top: 10px;
+}
+
 
 
 #orange-button {
@@ -90,7 +107,7 @@ body {
     top: 1px;
 }
 
-.teal-button {
+.green-button {
     float: left;
     background-color: #7fc44e;
     -moz-border-radius: 6px;
@@ -107,10 +124,11 @@ body {
     text-decoration: none;
     text-shadow: 1px 1px 0px #7abc4c;
     margin: 0 12px 0 12px;
+    
     width: 200px;
-}.teal-button:hover {
+}.green-button:hover {
     background-color: #97e161;
-}.teal-button:active {
+}.green-button:active {
     position: relative;
     top: 1px;
 }
@@ -133,16 +151,6 @@ body {
     bottom: 0;
 }
 
-.food-banner {
-    background: url(../img/food-banner.jpg) repeat;
-    background-size: 1002px 101px;
-    
-    position: absolute;
-    width: 100%;
-    height: 101px;
-    bottom: -160px;
-}
-
 .debug-div {
     border: 2px solid red;
 }
@@ -150,7 +158,7 @@ body {
 .header-text {
     font-family: 'Signika', sans-serif;
     font-size: 48px;
-    color:#24adae;
+    color: #24adae;
 }
 
 .scripty-header-text {
@@ -158,6 +166,8 @@ body {
     font-family: 'Montez', sans-serif;
     font-size: 64px;
     color: #ffa05b;
+    height: 89px;
+    line-height: 89px;
 }
 
 .green-dash {
@@ -185,6 +195,7 @@ body {
     font-family: 'Signika', sans-serif;
     font-size: 16px;
     color:#666666;
+    text-align: justify;
 }
 
 .center-vertically {
@@ -208,15 +219,4 @@ body {
         min-height: 371px;
         min-width: 371px;
 	}
-    	
-    .food-banner {
-        background: url(../img/food-banner-highres.jpg) repeat;
-        background-size: 1002px 101px;
-        
-        position: absolute;
-        width: 100%;
-        height: 101px;
-        bottom: -160px;
-    }
-
 }
