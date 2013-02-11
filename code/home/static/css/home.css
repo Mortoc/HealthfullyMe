@@ -54,7 +54,7 @@ body {
     color:#666666;
     position: relative;
     left: 70px;
-    top: -5px;
+    top: 10px;
 
     line-height: 22px;
 }
@@ -79,7 +79,6 @@ body {
 }
 
 
-
 #orange-button {
     position: relative;
     top: 5px;
@@ -98,8 +97,8 @@ body {
 
     padding: 6px 24px;
     text-shadow: 1px 1px 0px #cd8a15;
-    margin: 0 12px 0 12px;
-    width: 200px;
+    
+    width: 100%;
 }#orange-button:hover {
     background-color: #ffb884;
 }#orange-button:active {
@@ -159,6 +158,9 @@ body {
     font-family: 'Signika', sans-serif;
     font-size: 48px;
     color: #24adae;
+    
+    width: 100%;
+    text-align: justify;
 }
 
 .scripty-header-text {
@@ -168,6 +170,9 @@ body {
     color: #ffa05b;
     height: 89px;
     line-height: 89px;
+    
+    width: 310px;
+    text-align: center;
 }
 
 .green-dash {
@@ -182,7 +187,7 @@ body {
     width: 70px;
     height: 3px;
     
-    margin: 44px 16px;
+    margin-top: 44px;
 }
 
 .subheader-container {
