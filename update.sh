@@ -12,6 +12,8 @@ fi
 git stash
 git pull
 
+chmod -R 777 .
+
 cd code
 ./manage.py collectstatic
 ./manage.py syncdb
