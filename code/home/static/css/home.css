@@ -219,7 +219,7 @@ body {
 
 }*/
 
-@media only screen and (max-device-width: 480px) {
+@media only screen and (max-device-width: 320px) {
     body {
         height: 100%;
         width: 100%;
@@ -228,7 +228,5 @@ body {
         
         padding: 0;
         overflow: hidden;
-        
-        zoom: 200%;    
     }
 }
