@@ -1,22 +1,14 @@
 #! /bin/bash
 
-ROOT_UID="0"
-
-# Check if run as root
-if [ "$UID" -ne "$ROOT_UID" ] ; then
-	echo "update reqires root access"
-	exit 1
-fi
-
 # Update from git
-git stash
-git pull
+sudo git stash
+sudo git pull
 
-chmod -R 777 .
+sudo chmod -R 777 .
 
 cd code
-./manage.py collectstatic
-./manage.py syncdb
+sudo ./manage.py collectstatic
+sudo ./manage.py syncdb
 
 echo ""
 echo "** Update complete **"
