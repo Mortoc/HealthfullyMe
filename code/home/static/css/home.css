@@ -14,39 +14,22 @@ body {
 }
 
 .main-content {
-    width: 100%;
-
-    position: relative;
-    height: 100%;
     min-height: 400px;
-    
+    height: 100%;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
-.centered-content {
-    width: 900px;
-    margin: 0 auto;
+.logo-container {
+    float:none;
+    
+    margin: 50px auto;
+    width: 371px;
 }
 
 .logo {
-    float: left;
-    position: relative;
-    top: -20px;
-    background: url(../img/hm-logo.jpg) no-repeat;
-    
-    background-size: 371px 371px;
-    min-height: 371px;
-    min-width: 371px;
-    margin: 0 auto;
+    width: 371px;   
 }
-
-.message-row {
-    float: left;
-    position: relative;
-    left: 100px;
-    width: 450px;
-}
-
 
 .email-submit {
     font-family: 'Signika', sans-serif;
@@ -154,6 +137,23 @@ body {
     border: 2px solid red;
 }
 
+.debug-div2 {
+    border: 4px solid green;
+}
+
+.message-container {
+    float:none;
+    
+    margin: 100px auto;
+    width: 450px;
+    min-height: 500px;
+}
+
+.message-row {
+    float: left;
+    min-width: 450px;
+}
+
 .header-text {
     font-family: 'Signika', sans-serif;
     font-size: 48px;
@@ -201,6 +201,7 @@ body {
     font-size: 16px;
     color:#666666;
     text-align: justify;
+    max-width: 450px;
 }
 
 .center-vertically {
@@ -216,12 +217,4 @@ body {
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) { 
 
-	.logo {
-		background: url(../img/hm-logo-highres.jpg) no-repeat;
-		
-		float: left;
-		background-size: 371px 371px;
-        min-height: 371px;
-        min-width: 371px;
-	}
 }

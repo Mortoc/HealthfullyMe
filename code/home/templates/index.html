@@ -2,43 +2,43 @@
 
 {% block centered_content %}
     
-<div class="center-vertically">
+    <div class="message-container">
+            
+        <div class="message-row">
+            <span class="header-text">Take the stress out of</span>
+        </div>
         
-    <div class="message-row">
-        <span class="header-text">Take the stress out of</span>
-    </div>
-    
-    <div class="message-row">
-        <div class="subheader-container">
-            <div class="green-dash">
-            </div>
-            <span class="scripty-header-text">healthy eating</span>
-            <div class="green-dash">
+        <div class="message-row">
+            <div class="subheader-container">
+                <div class="green-dash">
+                </div>
+                <span class="scripty-header-text">healthy eating</span>
+                <div class="green-dash">
+                </div>
             </div>
         </div>
-    </div>
         
-    <div class="message-row">
-        <p class="message-text">
-The path to healthful living is confusing.  Our tastes, schedules, and health conditions are so unique, there is no one-sized fits all answer.  We partner with care providers to make healthy eating easy, fun, and affordable for you and your family.   We’re launching our closed beta soon so request your invite today!
-        </p>
+        <div class="message-row">
+            <p class="message-text">
+                We partner with care providers to make healthy eating easy, fun, and affordable for you and your family.   We’re launching our closed beta soon so request your invite today!
+            </p>
+        </div>
+        
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+        
+        <div class="message-row">
+            <form class="email-submit" action="submit_email_request/" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input id="orange-button" type="submit" value="Request an invite code" />
+            </form>
+            <!-- <a href="http://www.google.com">
+                <input class="green-button" style="width: 200px" type="submit" value="I have a code!" />
+            </a> -->
+        </div>
     </div>
     
-    {% if error_message %}
-        <p><strong>{{ error_message }}</strong></p>
-    {% endif %}
-    
-    <div class="message-row">
-        <form class="email-submit" action="submit_email_request/" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input id="orange-button" type="submit" value="Request an invite code" />
-        </form>
-        <!-- <a href="http://www.google.com">
-            <input class="green-button" style="width: 200px" type="submit" value="I have a code!" />
-        </a> -->
-    </div>
-    
-</div>
         
 {% endblock %}
