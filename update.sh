@@ -15,3 +15,6 @@ git pull
 cd code
 ./manage.py collectstatic
 ./manage.py syncdb
+
+echo ""
+echo "** Update complete **"
