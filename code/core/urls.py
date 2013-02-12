@@ -4,8 +4,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-                       
-                       
     url(r'^$', 'home.views.index', name='index'),
     url(r'^submit-email', 'home.views.submit_email_request', name='submit-request'),
     url(r'^email-success', 'home.views.email_submission_success', name='submission-success'),
