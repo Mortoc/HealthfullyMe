@@ -27,7 +27,7 @@
 {% endif %}
 
 <div class="message-row">
-    <form class="email-submit" action="submit_email_request/" method="post">
+    <form class="email-submit" action="submit-email/" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input id="orange-button" type="submit" value="Request an invite code" />

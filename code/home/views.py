@@ -22,17 +22,17 @@ def submit_email_request(request):
                 print( "Creating new email request: " + form_email)
                 EmailRequest(email = form_email).save()
 
-            return HttpResponseRedirect('/email_submition_success/')
+            return HttpResponseRedirect('/email-success/')
         else:
-            return HttpResponseRedirect('/email_submition_failure/')
+            return HttpResponseRedirect('/email-failure/')
 
     else:
         return index(request)
 
 
-def email_submition_success(request):
-    return render(request, "email_submition_success.html")
+def email_submission_success(request):
+    return render(request, "email_submission_success.html")
 
 
-def email_submition_failure(request):
-    return render(request, "email_submition_failure.html")
+def email_submission_failure(request):
+    return render(request, "email_submission_failure.html")
