@@ -21,17 +21,18 @@
 <div class="main-content container-fluid">
     <div class="row-fluid">
         
-        <div class="span6 debug-div">
+        <div class="span6">
             <div class="logo-container">
                 <img class="logo" src="{{ STATIC_URL }}img/hm-logo.jpg"></img>    
             </div>
         </div>
         
-        <div class="span6 debug-div2">
-            {% block centered_content %}
-            {% endblock %}
+        <div class="span6">
+            <div class="message-container">
+                {% block centered_content %}
+                {% endblock %}
+            </div>
         </div>
-        
         
     </div>    
 </div>

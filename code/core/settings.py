@@ -1,27 +1,13 @@
-# Django settings for core project.
+from local_settings import *
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Mortoc', 'Mortoc@healthfully.me'),
 )
 
 MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangostack',
-        'HOST': '/Applications/djangostack-1.4.3-0/postgresql',
-        'PORT': '5433',
-        'USER': 'bitnami',
-        'PASSWORD': 'eed6f63afb'
-    }
-}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -114,10 +100,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-	'south',
-	
+    'south',
+    
     'home',
-	'giftcards',
+    'giftcards',
 )
 
 # A sample logging configuration. The only tangible logging
