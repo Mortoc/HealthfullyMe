@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib import admin
 
 class Giftcard(models.Model):
 	
@@ -25,9 +24,3 @@ class Giftcard(models.Model):
 	is_sold.admin_order_field = 'sold_date'
 	is_sold.boolean = True
 	is_sold.short_description = 'Is Sold?'
-		
-		
-class GiftcardAdmin(admin.ModelAdmin):
-	list_display = ('organization', 'card_id', 'is_sold')
-		
-admin.site.register(Giftcard, GiftcardAdmin)

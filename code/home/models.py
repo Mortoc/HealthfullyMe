@@ -1,8 +1,6 @@
 from django.db import models
 from django import forms
 from django.utils import timezone
-from django.contrib import admin
-
 
 class EmailRequest(models.Model):
     email = models.EmailField()
@@ -12,9 +10,3 @@ class EmailRequest(models.Model):
 class EmailRequestForm(forms.Form):
     email = forms.EmailField()
 
-
-class EmailRequestAdmin(admin.ModelAdmin):
-    list_display = ('email', 'created_date')
-        
-
-admin.site.register(EmailRequest, EmailRequestAdmin)
