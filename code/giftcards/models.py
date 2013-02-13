@@ -28,6 +28,6 @@ class Giftcard(models.Model):
 		
 		
 class GiftcardAdmin(admin.ModelAdmin):
-    list_display = ('organization', 'card_id', 'is_sold')
+	list_display = ('organization', 'card_id', 'is_sold')
 		
 admin.site.register(Giftcard, GiftcardAdmin)
