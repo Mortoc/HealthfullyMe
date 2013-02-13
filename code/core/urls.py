@@ -4,7 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', '/static/favicon.ico'),
+    url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', '/static/img/favicon.ico'),
     
     url(r'^$', 'home.views.index', name='index'),
     url(r'^submit-email', 'home.views.submit_email_request', name='submit-request'),
