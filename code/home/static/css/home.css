@@ -105,7 +105,7 @@ body {
     text-shadow: 1px 1px 0px #7abc4c;
     text-align: center;
     
-    width: 150px;
+    width: 128px;
 }.green-button:hover {
     background-color: #97e161;
 }.green-button:active {
@@ -204,7 +204,7 @@ body {
     color:#666666;
     text-align: justify;
     max-width: 350px;
-    margin: 0 auto;
+    margin: 60px auto 60px auto;
 }
 
 a {
@@ -234,6 +234,6 @@ a {
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
     
     body {
-        zoom: 0.66;
+        zoom: 0.75;
     }
 }
