@@ -236,4 +236,15 @@ a {
     body {
         zoom: 0.75;
     }
+    
+    .scripty-header-text {
+        font-size: 30px;
+        line-height: 64px;
+    }
+        
+    .header-text {
+        font-size: 25px;
+        line-height: 38px;
+    }
+
 }
