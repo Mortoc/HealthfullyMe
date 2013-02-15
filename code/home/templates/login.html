@@ -1,0 +1,47 @@
+{% extends "home_base.html" %}
+
+{% block title %}Healthfully.me{% endblock %}
+
+{% block extra_style %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css" type="text/css" media="screen" />
+    
+    <!-- Google Web Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Montez' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Signika:300' rel='stylesheet' type='text/css'>
+    
+    {% block more_extra_style %}{% endblock %}
+{% endblock %}
+
+{% block body %}
+<div class="top-bar">
+</div>
+
+<div class="centered-main-content">
+    
+    <div class="login-container">
+        {% block centered_content %}
+        <h1 class="login-header-text">Login</h1><br />        
+        
+        <form class="login-form" action="/login/" method="post">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+    
+            <input class="green-button" type="submit" value="Log In" />
+            {% if error %}
+            <a class="forgot-login" href="mailto:help@healthfully.me?subject=Forgot Password">Forgot Your Password?</a>
+            {% else %}
+            <a class="forgot-login" href="/">Back</a>
+            {% endif %}
+        </form>
+        
+        {% endblock %}
+        
+        <br style="clear: both;" />
+    </div>
+</div>
+
+<div class="bottom-bar">
+    
+</div>
+{% endblock %}

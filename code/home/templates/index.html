@@ -27,14 +27,15 @@
 {% endif %}
 
 <div class="message-row">
-    <form class="email-submit" action="submit-email/" method="post">
+    <form class="default-form" action="submit-email/" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input id="orange-button" type="submit" value="Request an invite code" />
+        <div class="text-box">
+            {{ form.as_p }}
+        </div>
+        <input class="green-button" style="width: 100%; margin-top: -12px" type="submit" value="Request an invite code" />
     </form>
-    <!-- <a href="http://www.google.com">
-        <input class="green-button" style="width: 200px" type="submit" value="I have a code!" />
-    </a> -->
+        <a class="orange-button" style="float: right; margin: 8px 0;" href="/register/">I already have a code</a>
+        
 </div>
 
         

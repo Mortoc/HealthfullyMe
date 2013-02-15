@@ -1,0 +1,15 @@
+{% extends "login.html" %}
+
+{% block centered_content %}
+    <h1 class="scripty-header-text">Register Here!</h1><br />
+
+    <form class="login-form" action="/register/" method="post">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+
+        <input class="green-button" type="submit" value="Register" />
+        <a class="forgot-login" href="/">Back</a>
+    </form>
+    
+{% endblock %}

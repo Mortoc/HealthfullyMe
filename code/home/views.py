@@ -1,15 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from home.models import EmailRequest, EmailRequestForm
+from core.validators import validate_email
 import string
-import re
 
-
-def validateEmail(email):
-    if len(email) > 7:
-        if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", email) != None:
-            return 1
-    return 0
 
 def index(request):
     return render(request, "index.html", {
@@ -25,7 +19,7 @@ def submit_email_request(request):
             form_email = string.lower(form['email'].data)
             
             # additional data verification
-            if not validateEmail(form_email):
+            if not validate_email(form_email):
                 return HttpResponseRedirect('/email-failure/')
             
             try:

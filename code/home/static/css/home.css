@@ -18,6 +18,17 @@ body {
     overflow-x: hidden;
 }
 
+.centered-main-content {
+    position: relative;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+    width: 100%;
+    
+    margin: 0 auto;
+}
+
 .logo-container {
     float:none;
     
@@ -29,42 +40,94 @@ body {
     width: 371px;   
 }
 
-.email-submit {
+.default-form {
+    float: left;
     font-family: 'Signika', sans-serif;
     font-size: 16px;
     color:#666666;
-    position: relative;
-    left: 20px;
-    top: 10px;
-
+    
+    width: 350px;
     line-height: 22px;
 }
 
-.email-submit input {
+.default-form label {
     float: left;
+    width: 100%;
+}
+
+.errorlist {
+    float: right;
+    font-family: 'Signika', sans-serif;
+    font-size: 12px;
+    list-style-type: none;
+    color: red;
+    
+    position: relative;
+    top: 32px;
+}
+
+.text-box input {
+    float: none;
     
     background-color: #ffffff;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
     border: 4px solid #24adae;
-    display: inline-block;
     
-    padding: 6px 24px;
+    width: 330px;
 }
 
-.email-submit label {
+.login-container {
+    padding: 32px;
+    
+    margin: 32px auto;
+    
+    width: 384px;
+    height: auto;
+    min-height: 384px;
+}
+
+.login-form {
     float: left;
-    position: relative;
-    left: -15px;
-    top: 10px;
+    font-family: 'Signika', sans-serif;
+    font-size: 16px;
+    color:#666666;
+    
+    width: 100%;
+    height: 300px;
+    margin-top: 16px;
+}
+
+.error {
+    font-family: 'Signika', sans-serif;
+    font-size: 16px;
+    color: red;
 }
 
 
-#orange-button {
-    position: relative;
-    top: 5px;
-    left: -20px;
+.forgot-login {
+    margin-top: 100px;
+}
+
+.login-header-text {
+    float: left;
+    font-family: 'Montez', sans-serif;
+    font-size: 50px;
+    color: #ffa05b;
+    height: 64px;
+    line-height: 64px;
+    
+    width: 100%;
+    text-align: center;
+}
+
+.default-form label {
+    float: left;
+    width: 100%;
+}
+
+.orange-button {
     float: left;
     background-color: #ffa05b;
     -moz-border-radius: 6px;
@@ -77,13 +140,14 @@ body {
     font-family: 'Signika', sans-serif;
     font-size: 15px;
 
-    padding: 6px 24px;
+    text-align: center;
+    padding: 12px 24px;
     text-shadow: 1px 1px 0px #cd8a15;
     
-    width: 100%;
-}#orange-button:hover {
+    margin-right: 12px;
+}.orange-button:hover {
     background-color: #ffb884;
-}#orange-button:active {
+}.orange-button:active {
     position: relative;
     top: 1px;
 }
@@ -100,12 +164,12 @@ body {
     font-family: 'Signika', sans-serif;
     font-size: 15px;
 
-    padding: 6px 24px;
+    padding: 12px 24px;
     text-decoration: none;
     text-shadow: 1px 1px 0px #7abc4c;
     text-align: center;
     
-    width: 128px;
+    margin-right: 12px;
 }.green-button:hover {
     background-color: #97e161;
 }.green-button:active {
@@ -119,6 +183,14 @@ body {
     height: 48px;
     width: 100%;
     top: 0;
+}
+
+.top-bar #login-link {
+    float: right;
+    color: white;
+    margin: 14px 21px;
+    line-height: 20px;
+    clear: all;
 }
 
 .debug-div {
@@ -238,7 +310,7 @@ a {
     }
     
     .scripty-header-text {
-        font-size: 30px;
+        font-size: 40px;
         line-height: 64px;
     }
         
@@ -246,5 +318,11 @@ a {
         font-size: 25px;
         line-height: 38px;
     }
+    
+    .login_container {
+        padding: 32px;
+        margin: 64px;
+    }
+
 
 }
