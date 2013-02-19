@@ -7,26 +7,25 @@ body {
     height: 100%;
     width: 100%;
     
+    background-color: #24adae;
     padding: 0;
-    overflow: hidden;
 }
 
 .main-content {
     min-height: 400px;
     height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    
+    background-color: white;
 }
 
 .centered-main-content {
     position: relative;
     height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
     
     width: 100%;
     
     margin: 0 auto;
+    background-color: white;
 }
 
 .logo-container {
@@ -183,9 +182,11 @@ body {
     height: 48px;
     width: 100%;
     top: 0;
+    
+    border-bottom: 4px solid #24adae;
 }
 
-.top-bar #login-link {
+.top-bar .login-link {
     float: right;
     color: white;
     margin: 14px 21px;
@@ -193,16 +194,18 @@ body {
     clear: all;
 }
 
+.top-bar a {
+    color: white;
+}
+
 .debug-div {
     border: 2px solid red;
 }
 
 .bottom-bar {
-    
     background-color: #24adae;
     height: 200px;
     width: 100%;
-    margin: 0;
 }
 
 .container-fluid {
@@ -215,7 +218,7 @@ body {
     
     margin: 70px auto;
     width: 350px;
-    min-height: 500px;
+    min-height: 400px;
 }
 
 .message-row {
@@ -310,12 +313,12 @@ a {
     }
     
     .scripty-header-text {
-        font-size: 40px;
+        font-size: 50px;
         line-height: 64px;
     }
         
     .header-text {
-        font-size: 25px;
+        font-size: 37px;
         line-height: 38px;
     }
     

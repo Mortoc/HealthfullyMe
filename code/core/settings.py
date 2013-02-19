@@ -1,6 +1,15 @@
 from local_settings import *
 import os
 
+
+# Test Key
+STRIPE_SECRET_KEY = "sk_test_qxHGPxPMzqErH3QWxjhcDhCo"
+STRIPE_PUBLIC_KEY = "pk_test_1Kp5hj2mMh26L6eRJBbz1Kb3"
+
+# Live Key
+# STRIPE_SECRET_KEY = "sk_live_NsfXzNtk6iBhh8Nn8pXhKU7j"
+# STRIPE_PUBLIC_KEY = "pk_live_U7o0baBYeO20Ex4bKaOlphC8"
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 ADMINS = (
@@ -104,6 +113,7 @@ INSTALLED_APPS = (
     
     'home',
     'giftcards',
+    'store'
 )
 
 # A sample logging configuration. The only tangible logging

@@ -7,7 +7,7 @@ import string
 
 def index(request):
     return render(request, "index.html", {
-       'form' : EmailRequestForm()                                   
+       'form' : EmailRequestForm()                    
     });
     
     

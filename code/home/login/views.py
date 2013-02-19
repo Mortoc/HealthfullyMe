@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django import forms
+import string
 
 class UserLoginForm(forms.Form):
     email = forms.EmailField()
@@ -11,6 +12,8 @@ class UserLoginForm(forms.Form):
     
     def clean(self):
         cleaned_data = super(UserLoginForm, self).clean()
+        
+        cleaned_data["email"] = cleaned_data.get("email").lower()
         
         try:
             User.objects.get(username=cleaned_data.get("email"))
@@ -29,6 +32,8 @@ class UserRegistrationForm(forms.Form):
     def clean(self):
         cleaned_data = super(UserRegistrationForm, self).clean()
         
+        cleaned_data["email"] = cleaned_data.get("email").lower()
+        
         if cleaned_data.get("password") != cleaned_data.get("password_again"):
             self._errors["password"] = self.error_class(["Passwords must match"])
             self._errors["password_again"] = self.error_class(["Passwords must match"])
@@ -42,11 +47,9 @@ class UserRegistrationForm(forms.Form):
         if user_exists:
             self._errors["email"] = self.error_class(["That Email is already registered"])
             
-            
         if cleaned_data.get('auth_code') != '12345':
             self._errors['auth_code'] = self.error_class(["Invalid Code"])
             
-        
         print "Cleaning UserRegistrationForm"
         
         return cleaned_data
@@ -68,7 +71,7 @@ def login_user(request):
             
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('/store/')
+                return HttpResponseRedirect('/')
     else:
         form = UserLoginForm()
         
@@ -78,9 +81,9 @@ def login_user(request):
             context_instance = RequestContext(request)
         )
     
-def logout(request):
+def logout_user(request):
     logout(request)
-    HttpResponseRedirect('/')
+    return HttpResponseRedirect('/')
     
 def register_user(request):
     if request.user.is_authenticated():
@@ -98,9 +101,9 @@ def register_user(request):
             user = User.objects.create_user(username = username, email = username, password = password)
             user.save()
             
-            login(request, user)
+            login(request, authenticate(username = username, password = password))
             
-            return HttpResponseRedirect('/store/')
+            return HttpResponseRedirect('/')
     else:
         form = UserRegistrationForm()
              

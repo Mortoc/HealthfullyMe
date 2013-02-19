@@ -46,6 +46,10 @@
         <!-- Styles -->
         <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
         <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        
+        <!-- Google Web Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Montez' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Signika:300' rel='stylesheet' type='text/css'>
 
         {% block extra_style %}{% endblock %}
     </head>
@@ -53,5 +57,35 @@
     <body>
         {% block body %}{% endblock %}
     </body>
+    
+     <!-- Setup so jquery can make ajax POST calls to Django (Send the CSRF_TOKEN) -->
+    <script type="application/javascript">
+        $.ajaxSetup({ 
+             beforeSend: function(xhr, settings) {
+                 function getCookie(name) {
+                     var cookieValue = null;
+                     if (document.cookie && document.cookie != '') {
+                         var cookies = document.cookie.split(';');
+                         for (var i = 0; i < cookies.length; i++) {
+                             var cookie = jQuery.trim(cookies[i]);
+                             // Does this cookie string begin with the name we want?
+                             if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                 break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                 }
+                 
+                 if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                     // Only send the token to relative URLs i.e. locally.
+                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                 }
+                 
+                 console.log("Set up CSRF_TOKEN for ajax POST")
+             } 
+        });
+    </script>
 
 </html>
