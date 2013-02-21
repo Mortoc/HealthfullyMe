@@ -23,7 +23,7 @@ class Offer(models.Model):
     description_line_4 = models.CharField(max_length=96, default="", null=True, blank=True)
     description_line_5 = models.CharField(max_length=96, default="", null=True, blank=True)
     image = models.CharField(max_length=128, default="/static/img/product/wholefoods.jpg")
-    thumbnail_image = models.CharField(max_length=128, default="/static/img/product/wholefoods128.jpg")
+    thumbnail_image = models.CharField(max_length=128, default="/static/img/product/wholefoods128.png")
     buy_window_title = models.CharField(max_length=64)
     buy_window_description = models.CharField(max_length=64, null=True)
     price = models.IntegerField(default=4000)

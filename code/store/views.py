@@ -29,7 +29,7 @@ def main(request):
             "stripe_public_key" : settings.STRIPE_PUBLIC_KEY,
             "idea1" : three_random_ideas[0],
             "idea2" : three_random_ideas[1],
-            "idea3" : three_random_ideas[2],
+            "idea3" : three_random_ideas[2]
         })
         
 def record_charge_ajax(request):

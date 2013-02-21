@@ -57,6 +57,8 @@
                         <form action="/charge" method="post">
                             <button id="buy-offer-{{ offer.id }}" class="buy-button">Buy</button>
                             <script>
+                                imageUrl = '{{ offer.thumbnail_image }}';
+                                
                                 $('#buy-offer-{{ offer.id }}').click(function() {
                                     StripeCheckout.open({
                                         key : '{{ stripe_public_key }}',
@@ -65,7 +67,7 @@
                                         name : '{{ offer.buy_window_title }}',
                                         description : '{{ offer.buy_window_description }}',
                                         panelLabel : 'Pay Now: ',
-                                        image : '{{ offer.thumbnail_image }}',
+                                        image : imageUrl,
                                         token : function(res) { 
                                             record_charge(res, {{ offer.id }}); 
                                         }
