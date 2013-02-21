@@ -13,12 +13,19 @@ class UserLoginForm(forms.Form):
     def clean(self):
         cleaned_data = super(UserLoginForm, self).clean()
         
-        cleaned_data["email"] = cleaned_data.get("email").lower()
+        email_string = cleaned_data.get("email")
         
-        try:
-            User.objects.get(username=cleaned_data.get("email"))
-        except User.DoesNotExist:
-            raise forms.ValidationError("User does not exist")
+        if email_string != None:
+            cleaned_data["email"] = email_string.lower()
+                
+            try:
+                User.objects.get(username=cleaned_data.get("email"))
+            except User.DoesNotExist:
+                raise forms.ValidationError("User does not exist")
+
+        else:
+            self._errors['email'] = self.error_class(["Invalid Email"])
+        
         
         return cleaned_data
             
@@ -32,7 +39,11 @@ class UserRegistrationForm(forms.Form):
     def clean(self):
         cleaned_data = super(UserRegistrationForm, self).clean()
         
-        cleaned_data["email"] = cleaned_data.get("email").lower()
+        email_string = cleaned_data.get("email")
+        if email_string != None:
+            cleaned_data["email"] = email_string.lower()
+        else:
+            self._errors['email'] = self.error_class(["Invalid Email"])
         
         if cleaned_data.get("password") != cleaned_data.get("password_again"):
             self._errors["password"] = self.error_class(["Passwords must match"])
