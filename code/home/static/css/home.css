@@ -11,8 +11,19 @@ body {
     padding: 0;
 }
 
+h3 {
+    font-family: 'Signika', sans-serif;
+    font-size: 25px;
+    line-height: 40px;
+    color: #666;
+    
+    margin-left: 10px;
+    text-align: center;
+    width: 100%;
+}
+
 .main-content {
-    min-height: 400px;
+    min-height: 600px;
     height: 100%;
     
     background-color: white;
@@ -79,12 +90,7 @@ body {
 
 .login-container {
     padding: 32px;
-    
-    margin: 32px auto;
-    
-    width: 384px;
-    height: auto;
-    min-height: 384px;
+    background-color: white;
 }
 
 .login-form {
@@ -163,12 +169,11 @@ body {
     font-family: 'Signika', sans-serif;
     font-size: 15px;
 
-    padding: 12px 24px;
+    padding: 15px 30px;
     text-decoration: none;
     text-shadow: 1px 1px 0px #7abc4c;
     text-align: center;
     
-    margin-right: 12px;
 }.green-button:hover {
     background-color: #97e161;
 }.green-button:active {
@@ -276,10 +281,9 @@ body {
     float: none;
     font-family: 'Signika', sans-serif;
     font-size: 16px;
+    line-height: 32px;
     color:#666666;
     text-align: justify;
-    max-width: 350px;
-    margin: 60px auto 60px auto;
 }
 
 a {
