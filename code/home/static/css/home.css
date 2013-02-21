@@ -91,6 +91,8 @@ h3 {
 .login-container {
     padding: 32px;
     background-color: white;
+    width: 230px;
+    margin: 0 auto;
 }
 
 .login-form {
