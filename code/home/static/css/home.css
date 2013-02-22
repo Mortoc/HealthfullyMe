@@ -66,14 +66,22 @@ h3 {
 }
 
 .errorlist {
-    float: right;
+    position: absolute;
+    right: 0;
     font-family: 'Signika', sans-serif;
     font-size: 12px;
     list-style-type: none;
     color: red;
     
-    position: relative;
-    top: 32px;
+    margin: 32px auto;
+    
+    width: 120px;
+}
+
+.error {
+    font-family: 'Signika', sans-serif;
+    font-size: 16px;
+    color: red;
 }
 
 .text-box input {
@@ -89,10 +97,15 @@ h3 {
 }
 
 .login-container {
+    position: relative;
     padding: 32px;
     background-color: white;
-    width: 350px;
+    width: 320px;
     margin: 0 auto;
+}
+
+.login-container input {
+    width: 175px;
 }
 
 .login-form {
@@ -106,15 +119,8 @@ h3 {
     margin-top: 16px;
 }
 
-.error {
-    font-family: 'Signika', sans-serif;
-    font-size: 16px;
-    color: red;
-}
-
-
 .forgot-login {
-    margin-top: 100px;
+    margin-left: 20px;
 }
 
 .login-header-text {
@@ -126,7 +132,7 @@ h3 {
     line-height: 64px;
     
     width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
 .default-form label {
@@ -190,6 +196,8 @@ h3 {
     width: 100%;
     top: 0;
     
+    padding: 10px;
+    
     border-bottom: 4px solid #24adae;
 }
 
@@ -198,7 +206,6 @@ h3 {
     color: white;
     margin: 14px 21px;
     line-height: 20px;
-    clear: all;
 }
 
 .top-bar a {

@@ -5,8 +5,6 @@ import random
 import sys
 import stripe
 from core import settings
-
-from core import settings
 from store.models import ComingSoonIdea, Offer, Transaction
 
 
@@ -16,9 +14,6 @@ def main(request):
         return HttpResponseRedirect("/")
     else:
         three_random_ideas = list(ComingSoonIdea.objects.order_by('?'))
-        
-        # This would be a really bad idea if we ever got a huge number of ComingSoonIdeas
-        # but since it isn't a huge set, it's common to get non-unique entires
         
         while len(three_random_ideas) > 3:
             del three_random_ideas[ random.randint(0, len(three_random_ideas) - 1) ]
@@ -41,8 +36,6 @@ def record_charge_ajax(request):
     post_stripe_token = request.POST['stripe_token']
     
     transaction = Transaction(user = request.user, offer = post_offer, stripe_token = post_stripe_token)
-    
-    print transaction
     
     try:
         stripe.Charge.create(

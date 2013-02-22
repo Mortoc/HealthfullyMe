@@ -13,7 +13,7 @@
     {% if user.is_authenticated %}
     <span class="login-link">
        Welcome {{ user.username }} | <a href="/logout">Logout</a>
-    </span> 
+    </span>
     {% else %}
     <span class="login-link">
         <a href="/login">Login</a> | <a href="/register">Register</a>
