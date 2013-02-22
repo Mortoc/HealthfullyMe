@@ -1,14 +1,29 @@
 from django.db import models
-from django.utils import timezone
 from django.db.models.signals import post_save
 from core.base62encode import base62_encode
 from django.contrib.auth.models import User
+from django.utils.timezone import utc
+from dateutil import tz
 import random
 import math
 
+import datetime
+
 class EmailRequest(models.Model):
     email = models.EmailField()
-    created_date = models.DateTimeField(default=timezone.now())
+    created_date = models.DateTimeField( default = datetime.datetime.utcnow().replace(tzinfo=utc) )
+    
+    def created_date_in_EST(self):
+        from_zone = tz.gettz('UTC')
+        to_zone = tz.gettz('America/New_York')
+        
+        time = self.created_date
+        time = time.replace(tzinfo=from_zone)
+
+        # Convert time zone
+        time = time.astimezone(to_zone)
+
+        return time.strftime("%b %d %Y %I:%M %p")
     
 
 MAX_CODE_LENGTH = 5
@@ -16,7 +31,7 @@ class AuthCode(models.Model):
     id = models.AutoField(primary_key=True)
     code = models.SlugField(max_length=MAX_CODE_LENGTH)
     uses_left = models.IntegerField(default=1)
-    created_date = models.DateTimeField(default=timezone.now())
+    created_date = models.DateTimeField( default = datetime.datetime.utcnow().replace(tzinfo=utc) )
     registered_users = models.ManyToManyField( User )
     
     def generate_code(self):
