@@ -1,0 +1,344 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    
+    background-color: #24adae;
+    padding: 0;
+}
+
+h3 {
+    font-family: 'Signika', sans-serif;
+    font-size: 25px;
+    line-height: 40px;
+    color: #666;
+    
+    margin-left: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.main-content {
+    min-height: 600px;
+    height: 100%;
+    
+    background-color: white;
+}
+
+.centered-main-content {
+    position: relative;
+    height: 100%;
+    
+    width: 100%;
+    
+    margin: 0 auto;
+    background-color: white;
+}
+
+.logo-container {
+    float:none;
+    
+    margin: 50px auto;
+    width: 371px;
+}
+
+.logo {
+    width: 371px;   
+}
+
+.default-form {
+    float: left;
+    font-family: 'Signika', sans-serif;
+    font-size: 16px;
+    color:#666666;
+    
+    width: 350px;
+    line-height: 22px;
+}
+
+.default-form label {
+    float: left;
+    width: 100%;
+}
+
+.errorlist {
+    position: absolute;
+    right: 0;
+    font-family: 'Signika', sans-serif;
+    font-size: 12px;
+    list-style-type: none;
+    color: red;
+    
+    margin: 32px auto;
+    
+    width: 120px;
+}
+
+.error {
+    font-family: 'Signika', sans-serif;
+    font-size: 16px;
+    color: red;
+}
+
+.text-box input {
+    float: none;
+    
+    background-color: #ffffff;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 4px solid #24adae;
+    
+    width: 330px;
+}
+
+.login-container {
+    position: relative;
+    padding: 32px;
+    background-color: white;
+    width: 320px;
+    margin: 0 auto;
+}
+
+.login-container input {
+    width: 175px;
+}
+
+.login-form {
+    float: left;
+    font-family: 'Signika', sans-serif;
+    font-size: 16px;
+    color:#666666;
+    
+    width: 100%;
+    height: 300px;
+    margin-top: 16px;
+}
+
+.forgot-login {
+    margin-left: 20px;
+}
+
+.login-header-text {
+    float: left;
+    font-family: 'Montez', sans-serif;
+    font-size: 50px;
+    color: #ffa05b;
+    height: 64px;
+    line-height: 64px;
+    
+    width: 100%;
+    text-align: left;
+}
+
+.default-form label {
+    float: left;
+    width: 100%;
+}
+
+.orange-button {
+    float: left;
+    background-color: #ffa05b;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #eda933;
+    display: inline-block;
+    color: #ffffff;
+
+    font-family: 'Signika', sans-serif;
+    font-size: 15px;
+
+    text-align: center;
+    padding: 12px 24px;
+    text-shadow: 1px 1px 0px #cd8a15;
+    
+    margin-right: 12px;
+}.orange-button:hover {
+    background-color: #ffb884;
+}.orange-button:active {
+    position: relative;
+    top: 1px;
+}
+
+.green-button {
+    background-color: #7fc44e;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #7abc4c;
+    display: inline-block;
+    color: #ffffff;
+
+    font-family: 'Signika', sans-serif;
+    font-size: 15px;
+
+    padding: 15px 30px;
+    text-decoration: none;
+    text-shadow: 1px 1px 0px #7abc4c;
+    text-align: center;
+    
+}.green-button:hover {
+    background-color: #97e161;
+}.green-button:active {
+    position: relative;
+    top: 1px;
+}
+
+.top-bar {
+    background-color:#7FC44E;
+    position: relative; 
+    height: 48px;
+    width: 100%;
+    top: 0;
+    
+    padding: 10px;
+    
+    border-bottom: 4px solid #24adae;
+}
+
+.top-bar .login-link {
+    float: right;
+    color: white;
+    margin: 14px 21px;
+    line-height: 20px;
+}
+
+.top-bar a {
+    color: white;
+}
+
+.debug-div {
+    border: 2px solid red;
+}
+
+.bottom-bar {
+    background-color: #24adae;
+    height: 200px;
+    width: 100%;
+}
+
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+.message-container {
+    float:none;
+    
+    margin: 70px auto;
+    width: 350px;
+    min-height: 400px;
+}
+
+.message-row {
+    float: left;
+    min-width: 350px;
+    margin-top: 10px;
+}
+
+.header-text {
+    font-family: 'Signika', sans-serif;
+    font-size: 37px;
+    line-height: 38px;
+    color: #24adae;
+    
+    margin: 0 auto;
+}
+
+.scripty-header-text {
+    float: left;
+    font-family: 'Montez', sans-serif;
+    font-size: 50px;
+    color: #ffa05b;
+    height: 64px;
+    line-height: 64px;
+    
+    width: 250px;
+    text-align: center;
+}
+
+.green-dash {
+    float: left;
+
+    background-color: #7fc44e;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    display: inline-block;
+    
+    width: 45px;
+    height: 3px;
+    
+    margin: 31px 0;
+}
+
+.message-text {
+    float: none;
+    font-family: 'Signika', sans-serif;
+    font-size: 16px;
+    color:#666666;
+    text-align: justify;
+    max-width: 350px;
+}
+
+.email-result-message {
+    float: none;
+    font-family: 'Signika', sans-serif;
+    font-size: 16px;
+    line-height: 32px;
+    color:#666666;
+    text-align: justify;
+}
+
+a {
+    font-family: 'Signika', sans-serif;
+}
+	
+
+/* ====================================================== */
+/* ! Provide higher res assets for high-res displays      */
+/* ====================================================== */
+
+/* Swap out assets for retina displays
+@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+
+}*/
+@media only screen and (max-width: 767px) {
+    
+    .message-container {
+        margin: 20px auto;
+    }
+    .logo {
+        position: relative;
+        left: 8px;
+    }
+}
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+    
+    body {
+        zoom: 0.75;
+    }
+    
+    .scripty-header-text {
+        font-size: 50px;
+        line-height: 64px;
+    }
+        
+    .header-text {
+        font-size: 37px;
+        line-height: 38px;
+    }
+    
+    .login_container {
+        padding: 32px;
+        margin: 64px;
+    }
+
+
+}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Healthfully.me{% endblock %}
+
+{% block extra_style %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css" type="text/css" media="screen" />
+    {% block more_extra_style %}{% endblock %}
+{% endblock %}
+
+{% block body %}
+
+<div class="top-bar" style="float: none;">
+    {% if user.is_authenticated %}
+    <span class="login-link">
+       Welcome {{ user.username }} | <a href="/logout">Logout</a>
+    </span>
+    {% else %}
+    <span class="login-link">
+        <a href="/login">Login</a> | <a href="/register">Register</a>
+    </span> 
+    {% endif %}
+</div>
+
+<div class="container-fluid">
+    <div class="main-content">
+        {% block main_content %}
+        {% endblock %}
+    </div>
+</div>
+
+{% endblock %}
