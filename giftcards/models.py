@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+from core.dbutil import get_utc_now
 
 class Giftcard(models.Model):
 	
@@ -14,7 +14,7 @@ class Giftcard(models.Model):
 	card_id = models.BigIntegerField()
 	remaining_value = models.DecimalField(decimal_places=2, max_digits=16)
 	assigned_to = models.EmailField(null=True)
-	created_date = models.DateTimeField(default=timezone.now())
+	created_date = models.DateTimeField(default= get_utc_now)
 	sold_date = models.DateTimeField(null=True)
 	
 	

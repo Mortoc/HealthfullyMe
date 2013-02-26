@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
+from core.dbutil import get_utc_now
 
 class ComingSoonIdea(models.Model):
     id = models.AutoField(primary_key=True)
     text = models.CharField(max_length=160)
     times_shown = models.IntegerField(default=0)
     times_selected = models.IntegerField(default=0)
+    active = models.BooleanField(default=False)
     
     def selection_percentage(self):
         if self.times_shown > 0:
@@ -39,5 +40,5 @@ class Transaction(models.Model):
     id = models.AutoField(primary_key=True)
     offer = models.ForeignKey( Offer )
     user = models.ForeignKey( User )
-    timestamp = models.DateTimeField(default=timezone.now())
+    timestamp = models.DateTimeField(default=get_utc_now)
     stripe_token = models.CharField(max_length=200)

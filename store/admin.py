@@ -2,7 +2,7 @@ from django.contrib import admin
 from store.models import ComingSoonIdea, Offer, Transaction
 
 class ComingSoonIdeaAdmin(admin.ModelAdmin):
-    list_display = ('text', 'selection_percentage')
+    list_display = ('text', 'selection_percentage', 'active')
     readonly_fields = ('times_shown', 'times_selected')
     
 class OfferAdmin(admin.ModelAdmin):

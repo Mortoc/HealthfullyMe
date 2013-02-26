@@ -1,7 +1,5 @@
 # any local settings that change per host
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 DATABASES = {
     'default': {

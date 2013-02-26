@@ -13,7 +13,7 @@ def main(request):
     if request.user.is_anonymous():
         return HttpResponseRedirect("/")
     else:
-        three_random_ideas = list(ComingSoonIdea.objects.order_by('?'))
+        three_random_ideas = list(ComingSoonIdea.objects.filter(active=True).order_by('?'))
         
         while len(three_random_ideas) > 3:
             del three_random_ideas[ random.randint(0, len(three_random_ideas) - 1) ]
