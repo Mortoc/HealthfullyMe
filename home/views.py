@@ -73,25 +73,30 @@ def register_user(request):
             auth_code = form.cleaned_data['auth_code']
             username = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            
-            # create the user here but only save it if the auth code is good
-            user = User.objects.create_user(username = username, email = username, password = password)
                 
-            auth_code_result = use_auth_code( auth_code, user )
-            if auth_code_result == AuthCodeResult.SUCCESS:
-                user.save()
-                
-                login(request, authenticate(username = username, password = password))
-                
-                return HttpResponseRedirect('/')
-            
-            elif auth_code_result == AuthCodeResult.PREVIOUSLY_USED:
-                user.delete()
-                form._errors['auth_code'] = form.error_class(["No uses left"])
+            # some extra verification
+            if len(username) > 30:
+                form._errors['email'] = form.error_class(["This field is {0} characters long, Max is 30".format(len(username))])
                 
             else:
-                user.delete()
-                form._errors['auth_code'] = form.error_class(["Invalid Code"])
+                # create the user here but only save it if the auth code is good
+                user = User.objects.create_user(username = username, email = username, password = password)
+                
+                auth_code_result = use_auth_code( auth_code, user )
+                if auth_code_result == AuthCodeResult.SUCCESS:
+                    user.save()
+                
+                    login(request, authenticate(username = username, password = password))
+                
+                    return HttpResponseRedirect('/')
+            
+                elif auth_code_result == AuthCodeResult.PREVIOUSLY_USED:
+                    user.delete()
+                    form._errors['auth_code'] = form.error_class(["No uses left"])
+                
+                else:
+                    user.delete()
+                    form._errors['auth_code'] = form.error_class(["Invalid Code"])
                 
     else:
         form = UserRegistrationForm()
