@@ -78,7 +78,7 @@ def register_user(request):
             user = User.objects.create_user(username = username, email = username, password = password)
                 
             auth_code_result = use_auth_code( auth_code, user )
-            if auth_code_result == AuthCodeResult.SUCCESS: 
+            if auth_code_result == AuthCodeResult.SUCCESS:
                 user.save()
                 
                 login(request, authenticate(username = username, password = password))
@@ -86,9 +86,11 @@ def register_user(request):
                 return HttpResponseRedirect('/')
             
             elif auth_code_result == AuthCodeResult.PREVIOUSLY_USED:
+                user.delete()
                 form._errors['auth_code'] = form.error_class(["No uses left"])
                 
             else:
+                user.delete()
                 form._errors['auth_code'] = form.error_class(["Invalid Code"])
                 
     else:

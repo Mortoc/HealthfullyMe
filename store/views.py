@@ -9,7 +9,6 @@ from store.models import ComingSoonIdea, Offer, Transaction
 
 
 def main(request):
-    
     if request.user.is_anonymous():
         return HttpResponseRedirect("/")
     else:
