@@ -9,6 +9,9 @@ DATABASES = { 'default' : dj_database_url.config(default="postgres://bitnami:eed
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 
 # Test Key
 STRIPE_SECRET_KEY = "sk_test_qxHGPxPMzqErH3QWxjhcDhCo"
