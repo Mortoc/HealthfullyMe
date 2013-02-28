@@ -143,8 +143,14 @@ function record_charge(res, offer_id) {
         data: {
             offer_id : offer_id,
             stripe_token : res.id
+        },
+        success: function(data) {
+            window.location = "/store/purchase-complete";
+        },
+        failure: function(data) {
+            window.location = "/store/purchase-failed";
         }
-    });
+    })
 }
 
 // Idea Selector Handler

@@ -26,28 +26,40 @@ def main(request):
             "idea3" : three_random_ideas[2]
         })
         
+def purchase_complete(request):
+    
+    recent_transaction = Transaction.objects.filter(user = request.user).order_by('timestamp')[0]
+    recent_offer = recent_transaction.offer;
+    
+    return render(request, "purchase_complete.html",
+    {
+        "offer" : recent_offer
+    })
+
+        
 def record_charge_ajax(request):
-    print "Recording Charge"
-    
-    stripe.api_key = settings.STRIPE_SECRET_KEY
-    
-    post_offer = Offer.objects.get(id = request.POST['offer_id'])
-    post_stripe_token = request.POST['stripe_token']
-    
-    transaction = Transaction(user = request.user, offer = post_offer, stripe_token = post_stripe_token)
-    
     try:
-        stripe.Charge.create(
-            amount = post_offer.price,
-            currency = "usd",
-            card = post_stripe_token,
-            description = request.user.username
-        )
-    except stripe.AuthenticationError:
-        print sys.exc_info()
-        return HttpResponse( json.dumps("failure"), mimetype="application/json" )
-    
-    transaction.save()
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        
+        post_offer = Offer.objects.get(id = request.POST['offer_id'])
+        post_stripe_token = request.POST['stripe_token']
+        
+        transaction = Transaction(user = request.user, offer = post_offer, stripe_token = post_stripe_token)
+        
+        try:
+            stripe.Charge.create(
+                amount = post_offer.price,
+                currency = "usd",
+                card = post_stripe_token,
+                description = request.user.username
+            )
+        except stripe.AuthenticationError:
+            print sys.exc_info()[0]
+            return HttpResponse( json.dumps("failure"), mimetype="application/json" )
+        
+        transaction.save()
+    except:
+        print sys.exc_info()[0]
     
     return HttpResponse( json.dumps("success"), mimetype="application/json" )
 
