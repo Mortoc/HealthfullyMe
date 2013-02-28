@@ -3,26 +3,16 @@ from django.db.models.signals import post_save
 from core.base62encode import base62_encode
 from django.contrib.auth.models import User
 from core.dbutil import get_utc_now
-from dateutil import tz
+from core.timeutil import show_time_as
 import random
 import math
-
 
 class EmailRequest(models.Model):
     email = models.EmailField()
     created_date = models.DateTimeField(default=get_utc_now)
     
     def created_date_in_EST(self):
-        from_zone = tz.gettz('UTC')
-        to_zone = tz.gettz('America/New_York')
-        
-        time = self.created_date
-        time = time.replace(tzinfo=from_zone)
-
-        # Convert time zone
-        time = time.astimezone(to_zone)
-
-        return time.strftime("%b %d %Y %I:%M %p")
+        return show_time_as(self.created_date, 'America/New_York')
     
 
 MAX_CODE_LENGTH = 5
