@@ -1,0 +1,27 @@
+{% extends "user_page.html" %}
+
+{% block more_extra_style %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css" type="text/css" media="screen" />
+{% endblock %}
+
+{% block extra_script_include %}
+  <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+{% endblock %}
+
+{% block main_content %}
+
+<div class="row-fluid">
+    <div style="width: 400px; margin: 50px auto">
+        <h1 class="scripty-header-text" style="width: 400px; text-align: center">Purchase Complete</h1>
+        <p class="message-text" style="width: 400px; max-width: 400px; text-align: center">
+            Your purchase of "{{ offer.header_text }}" for {{ offer.offer_price }} was successful.
+            We will send an invoice to your email within 1 business day.
+            <br />
+            <br />
+            <a href="/store">Back to Store</a>
+        </p>
+        
+    </div>
+</div>
+
+{% endblock %}

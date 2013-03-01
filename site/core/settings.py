@@ -1,24 +1,31 @@
-from local_settings import *
 import dj_database_url
-import os
+import os, sys
 
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+if 'test' in sys.argv:
+    DATABASES = { 'default' : {
+                    'ENGINE': 'django.db.backends.sqlite3',
+                    'NAME': 'test_db'
+                    }
+                }
+else:
+    # Parse database configuration from $DATABASE_URL
+    DATABASES = { 'default' : dj_database_url.config(default="postgres://bitnami:eed6f63afb@localhost:5433/djangostack") }
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-
 # Test Key
-# STRIPE_SECRET_KEY = "sk_test_qxHGPxPMzqErH3QWxjhcDhCo"
-# STRIPE_PUBLIC_KEY = "pk_test_1Kp5hj2mMh26L6eRJBbz1Kb3"
+STRIPE_SECRET_KEY = "sk_test_qxHGPxPMzqErH3QWxjhcDhCo"
+STRIPE_PUBLIC_KEY = "pk_test_1Kp5hj2mMh26L6eRJBbz1Kb3"
 
 # Live Key
-STRIPE_SECRET_KEY = "sk_live_NsfXzNtk6iBhh8Nn8pXhKU7j"
-STRIPE_PUBLIC_KEY = "pk_live_U7o0baBYeO20Ex4bKaOlphC8"
+# STRIPE_SECRET_KEY = "sk_live_NsfXzNtk6iBhh8Nn8pXhKU7j"
+# STRIPE_PUBLIC_KEY = "pk_live_U7o0baBYeO20Ex4bKaOlphC8"
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname( os.path.abspath(__file__) )
 
 ADMINS = (
     ('Mortoc', 'Mortoc@healthfully.me'),
@@ -118,6 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django_extensions',
     'south',
     
     'home',

@@ -68,7 +68,7 @@
                                         description : '{{ offer.buy_window_description }}',
                                         panelLabel : 'Pay Now: ',
                                         image : imageUrl,
-                                        token : function(res) { 
+                                        token : function(res) {
                                             record_charge(res, {{ offer.id }}); 
                                         }
                                     });
@@ -137,14 +137,25 @@
 <script type="text/javascript">
 
 function record_charge(res, offer_id) {
+    
+            alert( JSON.stringify(res) );
     $.ajax({
         url: "store/record-charge",
         type: "POST",
         data: {
             offer_id : offer_id,
             stripe_token : res.id
+        },
+        success: function(data) {
+           if( data == "success" )
+                window.location = "/store/purchase-complete";
+           else
+                window.location = "/store/purchase-failed";
+        },
+        failure: function(data) {
+            window.location = "/store/purchase-failed";
         }
-    });
+    })
 }
 
 // Idea Selector Handler
