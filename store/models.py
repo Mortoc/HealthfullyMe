@@ -6,7 +6,7 @@ from django.utils.timezone import now
 import hashlib
 import math
 
-from core.base62encode import base62_encode
+from core.encode import base62_encode
 from core.timeutil import show_time_as
 
 class ComingSoonIdea(models.Model):
