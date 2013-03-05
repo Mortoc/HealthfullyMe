@@ -4,7 +4,7 @@ from django.utils.timezone import now
 from django.contrib.auth.models import User
 
 from core.timeutil import show_time_as
-from core.base62encode import base62_encode
+from core.encode import base62_encode
 
 import random
 import math
