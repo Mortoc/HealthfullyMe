@@ -12,7 +12,7 @@
 <div class="top-bar" style="float: none;">
     {% if user.is_authenticated %}
     <span class="login-link">
-       Welcome {{ user.username }} | <a href="/logout">Logout</a>
+       Welcome {{ user.email }} | <a href="/logout">Logout</a>
     </span>
     {% else %}
     <span class="login-link">

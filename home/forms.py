@@ -44,8 +44,6 @@ class UserRegistrationForm(forms.Form):
             
         if user_exists:
             self._errors["email"] = self.error_class(["That Email is already registered"])
-            
-        print "Cleaning UserRegistrationForm"
         
         return cleaned_data
     

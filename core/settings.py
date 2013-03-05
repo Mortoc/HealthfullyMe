@@ -1,11 +1,24 @@
 import dj_database_url
-import os
+import os, sys
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-# Parse database configuration from $DATABASE_URL
-DATABASES = { 'default' : dj_database_url.config(default="postgres://bitnami:eed6f63afb@localhost:5433/djangostack") }
+BASE_DIR = os.path.dirname( os.path.abspath(__file__) )
+                                    
+if 'test' in sys.argv:
+    DATABASES = { 'default' : {
+                    'ENGINE': 'django.db.backends.sqlite3',
+                    'NAME': 'test_db'
+                    }
+                }
+else:
+    # Parse database configuration from $DATABASE_URL
+    DATABASES = { 
+        'default' : dj_database_url.config(
+            default="sqlite:///" + os.path.join(BASE_DIR, "../local_dev_db")
+        ) 
+    }
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -18,7 +31,6 @@ STRIPE_PUBLIC_KEY = "pk_test_1Kp5hj2mMh26L6eRJBbz1Kb3"
 # STRIPE_SECRET_KEY = "sk_live_NsfXzNtk6iBhh8Nn8pXhKU7j"
 # STRIPE_PUBLIC_KEY = "pk_live_U7o0baBYeO20Ex4bKaOlphC8"
 
-BASE_DIR = os.path.dirname( os.path.abspath(__file__) )
 
 ADMINS = (
     ('Mortoc', 'Mortoc@healthfully.me'),
@@ -118,11 +130,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django_extensions',
     'south',
     
     'home',
     'giftcards',
-    'store'
+    'store',
+    'core'
 )
 
 # A sample logging configuration. The only tangible logging

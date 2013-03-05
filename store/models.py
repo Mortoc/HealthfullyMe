@@ -1,12 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.utils.timezone import now
 
 import hashlib
 import math
 
 from core.base62encode import base62_encode
-from core.dbutil import get_utc_now
 from core.timeutil import show_time_as
 
 class ComingSoonIdea(models.Model):
@@ -21,7 +21,8 @@ class ComingSoonIdea(models.Model):
             return "{0:.0f} %".format( float(100 * self.times_selected) / float(self.times_shown) )
         else:
             return "Not Yet Shown"
-    
+
+
 class Offer(models.Model):
     id = models.AutoField(primary_key=True)
     header_text = models.CharField(max_length=128)
@@ -43,6 +44,7 @@ class Offer(models.Model):
     def __unicode__(self):
         return self.header_text + " | " + self.offer_price()
 
+
 ID_SLUG_LENGTH = 16
 PRIVATE_TRANSACTION_KEY = 349659
 class Transaction(models.Model):
@@ -50,7 +52,7 @@ class Transaction(models.Model):
     id_slug = models.CharField(max_length=ID_SLUG_LENGTH, default='')
     offer = models.ForeignKey( Offer )
     user = models.ForeignKey( User )
-    timestamp = models.DateTimeField(default=get_utc_now)
+    timestamp = models.DateTimeField(default=now)
     stripe_token = models.CharField(max_length=200)
     
     def timestamp_in_est(self):
@@ -59,11 +61,10 @@ class Transaction(models.Model):
     def generate_id_slug(self):
         
         # if this offer id is a 6 digit number, we won't have room for it in the id_slug field
-        if offer.id > 99999:
+        if self.offer.id > 99999:
             self.id_slug = "error 56";
-            
-        self.id_slug = str(offer.id) + "-" + hashlib.sha1( str(PRIVATE_TRANSACTION_KEY + int(self.id)) ).hexdigest()[:ID_SLUG_LENGTH - 7]
         
+        self.id_slug = str(self.offer.id) + "-" + hashlib.sha1( str(PRIVATE_TRANSACTION_KEY + int(self.id)) ).hexdigest()[:ID_SLUG_LENGTH - 7]
         self.save()
         
         

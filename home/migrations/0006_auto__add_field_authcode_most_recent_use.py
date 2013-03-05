@@ -8,15 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Transaction.id_slug'
-        db.add_column('store_transaction', 'id_slug',
-                      self.gf('django.db.models.fields.CharField')(default='', max_length=5),
+        # Adding field 'AuthCode.most_recent_use'
+        db.add_column('home_authcode', 'most_recent_use',
+                      self.gf('django.db.models.fields.DateTimeField')(null=True),
                       keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting field 'Transaction.id_slug'
-        db.delete_column('store_transaction', 'id_slug')
+        # Deleting field 'AuthCode.most_recent_use'
+        db.delete_column('home_authcode', 'most_recent_use')
 
 
     models = {
@@ -56,39 +56,21 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'store.comingsoonidea': {
-            'Meta': {'object_name': 'ComingSoonIdea'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+        'home.authcode': {
+            'Meta': {'object_name': 'AuthCode'},
+            'code': ('django.db.models.fields.SlugField', [], {'max_length': '5'}),
+            'created_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '160'}),
-            'times_selected': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'times_shown': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+            'most_recent_use': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
+            'registered_users': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'symmetrical': 'False'}),
+            'uses_left': ('django.db.models.fields.IntegerField', [], {'default': '1'})
         },
-        'store.offer': {
-            'Meta': {'object_name': 'Offer'},
-            'buy_window_description': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True'}),
-            'buy_window_title': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
-            'description_line_1': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '96', 'null': 'True', 'blank': 'True'}),
-            'description_line_2': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '96', 'null': 'True', 'blank': 'True'}),
-            'description_line_3': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '96', 'null': 'True', 'blank': 'True'}),
-            'description_line_4': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '96', 'null': 'True', 'blank': 'True'}),
-            'description_line_5': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '96', 'null': 'True', 'blank': 'True'}),
-            'enabled': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'header_text': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.CharField', [], {'default': "'/static/img/product/wholefoods.jpg'", 'max_length': '128'}),
-            'price': ('django.db.models.fields.IntegerField', [], {'default': '4000'}),
-            'thumbnail_image': ('django.db.models.fields.CharField', [], {'default': "'/static/img/product/wholefoods128.png'", 'max_length': '128'})
-        },
-        'store.transaction': {
-            'Meta': {'object_name': 'Transaction'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'id_slug': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '5'}),
-            'offer': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['store.Offer']"}),
-            'stripe_token': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'timestamp': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 2, 28, 0, 0)'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+        'home.emailrequest': {
+            'Meta': {'object_name': 'EmailRequest'},
+            'created_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         }
     }
 
-    complete_apps = ['store']
+    complete_apps = ['home']

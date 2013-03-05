@@ -1,27 +1,75 @@
 {% extends "user_page.html" %}
 
 {% block more_extra_style %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css" type="text/css" media="screen" />
-{% endblock %}
-
-{% block extra_script_include %}
-  <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/store.css" type="text/css" media="screen" />
 {% endblock %}
 
 {% block main_content %}
 
 <div class="row-fluid">
-    <div style="width: 400px; margin: 50px auto">
-        <h1 class="scripty-header-text" style="width: 400px; text-align: center">Purchase Complete</h1>
-        <p class="message-text" style="width: 400px; max-width: 400px; text-align: center">
-            Your purchase of "{{ offer.header_text }}" for {{ offer.offer_price }} was successful.
-            We will send an invoice to your email within 1 business day.
+    <div class="span12">
+        <h1 class="scripty-header-text" style="width: 100%; margin-top: 30px">Order Successful</h1>
+        <br style="clear: both;" />
+        <p class="order-message">
+            Your purchase has been placed :)<br/>
+            If you'd like to ship to a different address please contact us at  
+            <a href="mailto:orders@healthfully.me?subject=Update Shipping for Order #{{ transaction.id }}">
+                orders@healthfully.me.
+            </a> 
             <br />
-            <br />
-            <a href="/store">Back to Store</a>
+            We'll take care of the rest.
         </p>
         
+        <div style="clear: both;">
+        </div>
     </div>
+    <div class="span10 offset1 confirmation-container">
+        <div class="span5 confirmation-panel">
+            <p class="order-message">
+                Your order number is {{ transaction.id }}.
+                You'll recieve an email confirmation shortly at {{ user.email }}.
+                <br />
+                <br />
+                Please allow 1-3 business days for delivery.
+            </p>
+            <div style="clear: both;">
+            </div>
+        </div>
+
+        <div class="span7 confirmation-panel-left">
+            <div class="span6">
+                <p class="order-message">
+                    <b>Shipping Address:</b><br />
+                    Person Name<br />
+                    Address Line 1<br />
+                    Address Line 2<br />
+                    Address Line 3
+                </p>
+                
+            <div style="clear: both;">
+            </div>
+            </div>
+            <div class="span6">
+                <p class="order-message">
+                    <b>Billing Address:</b><br />
+                    Person Name<br />
+                    Address Line 1<br />
+                    Address Line 2<br />
+                    Address Line 3
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="span12" style="padding: 30px">
+        <a href="mailto:orders@healthfully.me?subject=Regarding Order #{{ transaction.id }}">
+            <button class="confirmation-button">Contact Us!</button>
+        </a>
+        <a href="/store">
+            <button class="confirmation-button">Back</button>
+        </a>
+    </div>
+          
 </div>
 
 {% endblock %}
