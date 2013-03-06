@@ -47,28 +47,36 @@ class Offer(models.Model):
 
 class Card(models.Model):
     @staticmethod
+    def clean(charge_data):
+        if charge_data is None:
+            return ""
+        
+        return charge_data
+    
+    
+    @staticmethod
     def from_stripe_charge(charge, user):
         try:
             card = Card.objects.get(fingerprint = charge.card.fingerprint)
         except Card.DoesNotExist:
             address = Address(
-                name = charge.card.name,
-                line1 = charge.card.address_line1,
-                line2 = charge.card.address_line2,
-                city = charge.card.address_city,
-                state = charge.card.address_state,
-                zip = charge.card.address_zip,
-                country = charge.card.address_country,
+                name = Card.clean(charge.card.name),
+                line1 = Card.clean(charge.card.address_line1),
+                line2 = Card.clean(charge.card.address_line2),
+                city = Card.clean(charge.card.address_city),
+                state = Card.clean(charge.card.address_state),
+                zip = Card.clean(charge.card.address_zip),
+                country = Card.clean(charge.card.address_country),
             )
             address.save()
             
             card = Card(
                 user = user,
-                name = charge.card.name,
-                fingerprint = charge.card.fingerprint,
-                last4 = charge.card.last4,
+                name = Card.clean(charge.card.name),
+                fingerprint = Card.clean(charge.card.fingerprint),
+                last4 = Card.clean(charge.card.last4),
                 address = address,
-                type = charge.card.type,
+                type = Card.clean(charge.card.type),
                 expire_month = int(charge.card.exp_month),
                 expire_year = int(charge.card.exp_year)
             )

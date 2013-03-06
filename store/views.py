@@ -98,8 +98,7 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
                 card.address.city + "\n" +
                 card.address.state + "\n" +
                 card.address.zip + "\n" +
-                card.address.country + "\n" + 
-                "Please allow for 24-48 hours for your order to be fulfilled.  If you have any questions or feedback, please send us an email at orders@healthfully.me.  Thank you!",
+                "\n\n\n\Please allow for 24-48 hours for your order to be fulfilled.  If you have any questions or feedback, please send us an email at orders@healthfully.me.  Thank you!",
             'hello@healthfully.me',
             [request.user.email], 
             ['orders@healthfully.me'],
@@ -121,9 +120,9 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "message" : "A Non-stripe error occured"
         }
         
-        #print sys.exc_info()
-        #print sys.exc_value
-        #print traceback.format_exc()
+        print sys.exc_info()
+        print sys.exc_value
+        print traceback.format_exc()
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
 
