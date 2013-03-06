@@ -3,6 +3,7 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
 
 import hashlib
 
@@ -86,6 +87,22 @@ def register_user(request):
                 user.save()
                 
                 login(request, authenticate(username=username, password=password))
+                       
+                email = EmailMessage(
+                    'Thank You For Your Purchase! - Healthfully Me', 
+                    "Hi!\n\n" + 
+                    "Thanks for creating your Healthfully Me account!  We know staying healthy can be tough so we're working on some new services and tools to make it easier, but we'd love to hear from you.\n\n" +
+                    "In the meantime, want to save some money making those healthy meals at home?  Just login to our site to get exclusive access to 20% discount for your groceries at Whole Foods.\n\n" +   
+                    "We'll have much more than just healthy savings very soon so check back often, and let us know what we can do to help you meet your health goals.\n\n" +  
+                    "Follow us for updates and other healthy tips on our blog, twitter, facebook, pinterest, and instagram!\n\n" +
+                    "Your Healthfully Me Support Team,\n\n"
+                    "Emily, Jamie, Brittany, and Caitlin",
+                    'hello@healthfully.me',
+                    [request.user.email], 
+                    [],
+                    headers = {'Reply-To': 'hello@healthfully.me'}
+                )
+                email.send()
             
                 return HttpResponseRedirect('/')
         
