@@ -19,6 +19,7 @@ def base62_encode(num, alphabet=BASE_62_ALPHABET):
     arr.reverse()
     return ''.join(arr)
 
+
 def base62_decode(string, alphabet=BASE_62_ALPHABET):
     """Decode a Base X encoded string into the number
 

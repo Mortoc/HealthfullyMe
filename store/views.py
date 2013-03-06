@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils import simplejson as json
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.template import Context, Template
         
 import random
 import sys
 import stripe
+import traceback
 
 from core import settings
 from store.models import ComingSoonIdea, Offer, Transaction, Card
@@ -85,8 +86,8 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
         )
         transaction.save()
         
-        send_mail(
-            'Thank You For Your Purchase! - Healthfully Me',
+        email = EmailMessage(
+            'Thank You For Your Purchase! - Healthfully Me', 
             "You purchased:\n\n" +
                 transaction.id_slug + " - " + 
                 post_offer.header_text + " - " +
@@ -101,8 +102,10 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
                 "Please allow for 24-48 hours for your order to be fulfilled.  If you have any questions or feedback, please send us an email at orders@healthfully.me.  Thank you!",
             'hello@healthfully.me',
             [request.user.email], 
-            fail_silently=False
+            ['orders@healthfully.me'],
+            headers = {'Reply-To': 'help@healthfully.me'}
         )
+        email.send()
         
         return HttpResponse(json.dumps( {"status" : "success"} ), mimetype="application/json")
     except (stripe.StripeError, stripe.CardError) as e:
@@ -118,9 +121,9 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "message" : "A Non-stripe error occured"
         }
         
-        print sys.exc_info()[0]
-        print sys.exc_info()[1]
-        print sys.exc_info()[2].print_tb()
+        #print sys.exc_info()
+        #print sys.exc_value
+        #print traceback.format_exc()
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
 

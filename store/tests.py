@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 from store.models import Transaction, Offer
 from store.views import record_charge_ajax
+
 import stripe
 
 class TransactionTest(TestCase):
@@ -33,16 +34,37 @@ class TransactionTest(TestCase):
             enabled = True
         )
         self.test_offer.save()
+        
+    def generate_mock_charge(self):
+        charge = stripe.Charge()
+        card = stripe.Customer()
+        charge.card = card
+        card.name = "TEST_USER"
+        card.address_line1 = "Somewhere"
+        card.address_line2 = "Over the rainbow"
+        card.address_city = "Way up high"
+        card.address_zip = "12345"
+        card.address_state = "NY"
+        card.address_country = "USA"
+        card.fingerprint = "test_fingerprint"
+        card.last4 = "1234"
+        card.exp_month = 12
+        card.exp_year = 2034
+        card.type = "Visa"
+        
+        return charge
     
-    def mock_run_stripe_charge(self, price, stripe_token, username):
+    def mock_run_stripe_charge(self, price, stripe_token, email):
         self.assertEqual(price, self.test_offer.price)
         self.assertEqual(stripe_token, "test_token")
-        self.assertEqual(username, "TEST_USER")
+        self.assertEqual(email.lower(), "TEST@USER.COM".lower())
+        
+        return self.generate_mock_charge()
     
-    def mock_run_stripe_charge_failure(self, price, stripe_token, username):
+    def mock_run_stripe_charge_failure(self, price, stripe_token, email):
         self.assertEqual(price, self.test_offer.price)
         self.assertEqual(stripe_token, "test_token")
-        self.assertEqual(username, "TEST_USER")
+        self.assertEqual(email.lower(), "TEST@USER.COM".lower())
         
         raise stripe.CardError("TEST ERROR", "failed", "123", "200")
     
