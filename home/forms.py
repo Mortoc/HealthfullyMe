@@ -21,7 +21,7 @@ class UserRegistrationForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(max_length=30, widget=forms.PasswordInput())
     password_again = forms.CharField(max_length=30, widget=forms.PasswordInput())
-    auth_code = forms.CharField(max_length=30)
+    invite_code = forms.CharField(max_length=30)
     
     def clean(self):
         cleaned_data = super(UserRegistrationForm, self).clean()

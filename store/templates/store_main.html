@@ -13,12 +13,12 @@
 <div class="row-fluid">
     
     <div class="span12">
-        <h1 class="store-headline">It's Shoppy Time</h1>
+        <h1 class="store-headline">Take Control of Your Health</h1>
                 
         <div class="row-fluid">
             
             <div class="span10 offset1">
-                <h2 class="section-header">Current Offers</h2>
+                <h2 class="section-header">Grocery Savings</h2>
                 
                 <div class="row-fluid">
                     
@@ -73,8 +73,14 @@
                                         }
                                     });
                                     
+                                    analytics.track('/store/clicked-buy-button', {
+                                        offerid        : '{{ offer.id }}',
+                                        offer_description : '{{ offer.buy_window_description }}',
+                                        offer_price : '{{ offer.offer_price }}'
+                                    });
+                                    
                                     return false;
-                                }); 
+                                });
                             </script>
                         </form>
                         
@@ -101,7 +107,7 @@
                     </div> -->
                     
                     <h2 class="section-header">Coming Soon...</h2>
-                    <span style="position: relative; top: -12px; left: 10px;">Select your favorite idea below:</span>
+                    <span style="position: relative; top: -12px; left: 10px;">Help us, help you!  Click on an idea below to cast your vote on what new member service we offer next.   What would you find useful?</span>
                     <div class="span12">
                         
                         {% if idea1 %}
@@ -160,7 +166,6 @@ function record_charge(res, offer_id) {
             stripe_token : res.id
         },
         success: function(data) {
-            alert( data['status'] );
             if( data['status'] == "success" ) {
                 window.location = "/store/purchase-complete";   
             } else if( data['status'] == "card-declined" ) {
@@ -168,7 +173,6 @@ function record_charge(res, offer_id) {
             } else {
                 window.location = "/server-error";
             }
-                
         },
         failure: function(data) {
             window.location = "/server-error";

@@ -48,7 +48,7 @@ class RegistrationVerification(TestCase):
  
         request.method = "POST"
         request.POST = {
-            'auth_code' : self.auth_code.code,
+            'invite_code' : self.auth_code.code,
             'email' : 'test@user.com',
             'password' : 'test_password',
             'password_again' : 'test_password'
@@ -71,7 +71,7 @@ class RegistrationVerification(TestCase):
         
         request.method = "POST"
         request.POST = {
-            'auth_code' : self.auth_code.code,
+            'invite_code' : self.auth_code.code,
             'email' : email,
             'password' : 'test_password',
             'password_again' : 'test_password'

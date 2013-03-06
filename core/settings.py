@@ -1,6 +1,9 @@
 import dj_database_url
 import os, sys
 
+# dev == False, live == True
+LIVE = False
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -23,13 +26,24 @@ else:
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Test Key
-STRIPE_SECRET_KEY = "sk_test_qxHGPxPMzqErH3QWxjhcDhCo"
-STRIPE_PUBLIC_KEY = "pk_test_1Kp5hj2mMh26L6eRJBbz1Kb3"
+# Stripe
+if not LIVE:
+    # Test Key
+    STRIPE_SECRET_KEY = "sk_test_qxHGPxPMzqErH3QWxjhcDhCo"
+    STRIPE_PUBLIC_KEY = "pk_test_1Kp5hj2mMh26L6eRJBbz1Kb3"
+else:
+    # Live Key
+    STRIPE_SECRET_KEY = "sk_live_NsfXzNtk6iBhh8Nn8pXhKU7j"
+    STRIPE_PUBLIC_KEY = "pk_live_U7o0baBYeO20Ex4bKaOlphC8"
 
-# Live Key
-# STRIPE_SECRET_KEY = "sk_live_NsfXzNtk6iBhh8Nn8pXhKU7j"
-# STRIPE_PUBLIC_KEY = "pk_live_U7o0baBYeO20Ex4bKaOlphC8"
+
+# Segment.io
+if not LIVE:
+    #dev
+    SEGMENT_IO_KEY = "34t4a37fwy"
+else:
+    #live
+    SEGMENT_IO_KEY = "hspdwym69u"
 
 
 ADMINS = (
@@ -37,6 +51,15 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+
+
+# Email settings
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_HOST_USER = "mortoc"
+EMAIL_HOST_PASSWORD = "cab8dixo"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

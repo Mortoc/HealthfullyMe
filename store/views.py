@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils import simplejson as json
+from django.core.mail import send_mail
+from django.template import Context, Template
+        
 import random
 import sys
 import stripe
 
 from core import settings
-from store.models import ComingSoonIdea, Offer, Transaction
+from store.models import ComingSoonIdea, Offer, Transaction, Card
 
 
 def main(request):
@@ -35,13 +38,17 @@ def main(request):
         return render(request, "store_main.html", context)
         
 def purchase_complete(request):
-    recent_transaction = Transaction.objects.filter(user=request.user).order_by('timestamp')[0]
+    recent_transaction = Transaction.objects.filter(user=request.user).order_by('-timestamp')[0]
     recent_offer = recent_transaction.offer;
+    
+    print recent_transaction.card.address
     
     return render(request, "purchase_complete.html",
     {
         "offer" : recent_offer,
-        "transaction" : recent_transaction
+        "transaction" : recent_transaction,
+        "shipping_address" : recent_transaction.card.address,
+        "billing_address" : recent_transaction.card.address
     })
     
 def purchase_error(request):
@@ -63,19 +70,39 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
         post_offer = Offer.objects.get(id=int(request.POST['offer_id']))
         post_stripe_token = request.POST['stripe_token']
         
-        transaction = Transaction(
-            user=request.user,
-            offer=post_offer,
-            stripe_token=post_stripe_token
-        )
-        
         charge = run_charge(
             post_offer.price,
             post_stripe_token,
-            request.user.username 
+            request.user.email 
         )
         
+        card = Card.from_stripe_charge(charge, request.user)
+        
+        transaction = Transaction(
+            user=request.user,
+            offer=post_offer,
+            card=card
+        )
         transaction.save()
+        
+        send_mail(
+            'Thank You For Your Purchase! - Healthfully Me',
+            "You purchased:\n\n" +
+                transaction.id_slug + " - " + 
+                post_offer.header_text + " - " +
+                post_offer.offer_price() + "\n\n\n" +
+                "Shipping Address:\n\n" + 
+                card.address.line1 + "\n" +
+                card.address.line2 + "\n" +
+                card.address.city + "\n" +
+                card.address.state + "\n" +
+                card.address.zip + "\n" +
+                card.address.country + "\n" + 
+                "Please allow for 24-48 hours for your order to be fulfilled.  If you have any questions or feedback, please send us an email at orders@healthfully.me.  Thank you!",
+            'hello@healthfully.me',
+            [request.user.email], 
+            fail_silently=False
+        )
         
         return HttpResponse(json.dumps( {"status" : "success"} ), mimetype="application/json")
     except (stripe.StripeError, stripe.CardError) as e:
@@ -90,6 +117,10 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "status" : "server-error",
             "message" : "A Non-stripe error occured"
         }
+        
+        print sys.exc_info()[0]
+        print sys.exc_info()[1]
+        print sys.exc_info()[2].print_tb()
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
 
@@ -112,18 +143,18 @@ def vote_ajax(request):
     
     selection = int(request.GET['selection'])
     
-    selectionObj = None
+    selection_obj = None
     
     if selection == 1:
-        selectionObj = ComingSoonIdea.objects.get(id=option1)
+        selection_obj = ComingSoonIdea.objects.get(id=option1)
     elif selection == 2:
-        selectionObj = ComingSoonIdea.objects.get(id=option2)
+        selection_obj = ComingSoonIdea.objects.get(id=option2)
     elif selection == 3:
-        selectionObj = ComingSoonIdea.objects.get(id=option3)
+        selection_obj = ComingSoonIdea.objects.get(id=option3)
     else:
         return HttpResponse(json.dumps("failure"), mimetype="application/json")
     
-    selectionObj.times_selected += 1
-    selectionObj.save()
+    selection_obj.times_selected += 1
+    selection_obj.save()
     
     return HttpResponse(json.dumps("success"), mimetype="application/json")

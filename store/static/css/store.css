@@ -137,6 +137,19 @@ span {
     padding: 20px;
 }
 
+.address-text {
+    float: none;
+    font-family: 'Signika', sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+    color:#666666;
+    padding: 20px;
+}
+
+.address-container {
+    width: 50%;
+    float: left;
+}
 
 .confirmation-panel {
    padding: 20px; 

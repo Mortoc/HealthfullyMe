@@ -8,6 +8,7 @@ import math
 
 from core.encode import base62_encode
 from core.timeutil import show_time_as
+from core.models import Address
 
 class ComingSoonIdea(models.Model):
     id = models.AutoField(primary_key=True)
@@ -44,6 +45,53 @@ class Offer(models.Model):
     def __unicode__(self):
         return self.header_text + " | " + self.offer_price()
 
+class Card(models.Model):
+    @staticmethod
+    def from_stripe_charge(charge, user):
+        try:
+            card = Card.objects.get(fingerprint = charge.card.fingerprint)
+        except Card.DoesNotExist:
+            address = Address(
+                name = charge.card.name,
+                line1 = charge.card.address_line1,
+                line2 = charge.card.address_line2,
+                city = charge.card.address_city,
+                state = charge.card.address_state,
+                zip = charge.card.address_zip,
+                country = charge.card.address_country,
+            )
+            address.save()
+            
+            card = Card(
+                user = user,
+                name = charge.card.name,
+                fingerprint = charge.card.fingerprint,
+                last4 = charge.card.last4,
+                address = address,
+                type = charge.card.type,
+                expire_month = int(charge.card.exp_month),
+                expire_year = int(charge.card.exp_year)
+            )
+            card.save()
+            
+        return card
+        
+        
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User)
+    name = models.CharField(max_length=256) #name used on credit card
+    fingerprint = models.CharField(max_length=128)
+    last4 = models.CharField(max_length=4)
+    
+    address = models.ForeignKey(Address, null=True, default=None)
+    
+    type = models.CharField(max_length=32)
+    expire_month = models.IntegerField(null=True)
+    expire_year = models.IntegerField(null=True)    
+    
+    def user_email(self):
+        return self.user.email
+    
 
 ID_SLUG_LENGTH = 16
 PRIVATE_TRANSACTION_KEY = 349659
@@ -52,11 +100,17 @@ class Transaction(models.Model):
     id_slug = models.CharField(max_length=ID_SLUG_LENGTH, default='')
     offer = models.ForeignKey( Offer )
     user = models.ForeignKey( User )
+    card = models.ForeignKey( Card, null=True )
     timestamp = models.DateTimeField(default=now)
-    stripe_token = models.CharField(max_length=200)
     
     def timestamp_in_est(self):
         return show_time_as(self.timestamp, 'America/New_York')
+    
+    def user_email(self):
+        return self.user.email
+    
+    def card_info(self):
+        return "{0}  |  ...{1}".format(self.card.type, self.card.last4)
     
     def generate_id_slug(self):
         
@@ -64,7 +118,7 @@ class Transaction(models.Model):
         if self.offer.id > 99999:
             self.id_slug = "error 56";
         
-        self.id_slug = str(self.offer.id) + "-" + hashlib.sha1( str(PRIVATE_TRANSACTION_KEY + int(self.id)) ).hexdigest()[:ID_SLUG_LENGTH - 7]
+        self.id_slug = str(self.offer.id) + "x" + str(self.id) + "x" + hashlib.sha1( str(PRIVATE_TRANSACTION_KEY + int(self.id)) ).hexdigest()[:ID_SLUG_LENGTH - 7]
         self.save()
         
         

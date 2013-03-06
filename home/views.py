@@ -73,7 +73,7 @@ def register_user(request):
         form = UserRegistrationForm(request.POST)
         
         if form.is_valid():
-            auth_code = form.cleaned_data['auth_code']
+            auth_code = form.cleaned_data['invite_code']
             email = form.cleaned_data['email']
             username = email_to_username(email)
             password = form.cleaned_data['password']
@@ -91,11 +91,11 @@ def register_user(request):
         
             elif auth_code_result == AuthCodeResult.PREVIOUSLY_USED:
                 user.delete()
-                form._errors['auth_code'] = form.error_class(["No uses left"])
+                form._errors['invite_code'] = form.error_class(["No uses left"])
             
             else:
                 user.delete()
-                form._errors['auth_code'] = form.error_class(["Invalid Code"])
+                form._errors['invite_code'] = form.error_class(["Invalid Code"])
             
     else:
         form = UserRegistrationForm()
