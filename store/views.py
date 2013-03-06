@@ -99,7 +99,7 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
                 card.address.state + "\n" +
                 card.address.zip + "\n" +
                 "\n\n\n\Please allow for 24-48 hours for your order to be fulfilled.  If you have any questions or feedback, please send us an email at orders@healthfully.me.  Thank you!",
-            'hello@healthfully.me',
+            'orders@healthfully.me',
             [request.user.email], 
             ['orders@healthfully.me'],
             headers = {'Reply-To': 'help@healthfully.me'}
