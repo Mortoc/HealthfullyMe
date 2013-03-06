@@ -1,6 +1,7 @@
 from django.db import models
 
 class Address(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=256, null=True)
     line1 = models.CharField(max_length=256)
     line2 = models.CharField(max_length=256, null=True)
