@@ -89,7 +89,7 @@ def register_user(request):
                 login(request, authenticate(username=username, password=password))
                        
                 email = EmailMessage(
-                    'Thank You For Your Purchase! - Healthfully Me', 
+                    'Welcome to Healthfully Me!', 
                     "Hi!\n\n" + 
                     "Thanks for creating your Healthfully Me account!  We know staying healthy can be tough so we're working on some new services and tools to make it easier, but we'd love to hear from you.\n\n" +
                     "In the meantime, want to save some money making those healthy meals at home?  Just login to our site to get exclusive access to 20% discount for your groceries at Whole Foods.\n\n" +   
