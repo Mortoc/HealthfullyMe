@@ -5,19 +5,13 @@
 	<projects>
 	</projects>
 	<buildSpec>
-		<buildCommand>
-			<name>org.python.pydev.PyDevBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>com.aptana.projects.webnature</nature>
-		<nature>org.python.pydev.pythonNature</nature>
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1362040748791</id>
+			<id>1363022599831</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -26,7 +20,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1362040748794</id>
+			<id>1363022599842</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -35,7 +29,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1362040748797</id>
+			<id>1363022599843</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -44,12 +38,39 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1362040748879</id>
+			<id>1363022599848</id>
 			<name></name>
 			<type>6</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-projectRelativePath-matches-false-false-*.pyc</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1363022599852</id>
+			<name></name>
+			<type>10</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-projectRelativePath-matches-false-false-bin</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1363022599857</id>
+			<name></name>
+			<type>10</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-projectRelativePath-matches-false-false-lib</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1363022599861</id>
+			<name></name>
+			<type>10</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-projectRelativePath-matches-false-false-include</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>
