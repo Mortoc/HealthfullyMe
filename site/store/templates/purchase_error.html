@@ -1,0 +1,29 @@
+{% extends "user_page.html" %}
+
+{% block more_extra_style %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css" type="text/css" media="screen" />
+{% endblock %}
+
+{% block extra_script_include %}
+  <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+{% endblock %}
+
+{% block main_content %}
+
+<div class="row-fluid">
+    <div style="width: 400px; margin: 50px auto">
+        <h1 class="scripty-header-text" style="width: 400px; text-align: center">Purchase Error</h1>
+        <p class="message-text">
+            It looks like your card was declined. Please verify that your payment information was entered correctly and try again.  If you continue to have issues just send us an email at <a href="mailto:help@healthfully.me?subject=Billing Problem">help@healthfully.me</a> and we'll be sure to respond in no time. Thank you.
+            <br />
+            <br />
+        </p>
+        
+        <p style="width: 400px; text-align: center">
+            <a href="/store" >Back</a>
+        </p>
+        
+    </div>
+</div>
+
+{% endblock %}

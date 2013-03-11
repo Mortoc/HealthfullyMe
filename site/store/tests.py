@@ -1,12 +1,13 @@
 from django.utils import unittest
 from django.test.client import RequestFactory
 from django.test import TestCase
-
+from django.utils import simplejson as json
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from store.models import Transaction, Offer
 from store.views import record_charge_ajax
+
 import stripe
 
 class TransactionTest(TestCase):
@@ -34,22 +35,41 @@ class TransactionTest(TestCase):
         )
         self.test_offer.save()
         
+    def generate_mock_charge(self):
+        charge = stripe.Charge()
+        card = stripe.Customer()
+        charge.card = card
+        card.name = "TEST_USER"
+        card.address_line1 = "Somewhere"
+        card.address_line2 = "Over the rainbow"
+        card.address_city = "Way up high"
+        card.address_zip = "12345"
+        card.address_state = "NY"
+        card.address_country = "USA"
+        card.fingerprint = "test_fingerprint"
+        card.last4 = "1234"
+        card.exp_month = 12
+        card.exp_year = 2034
+        card.type = "Visa"
         
-    def test_id_slug_generation(self):
-        pass;
+        return charge
     
-    
-    def mock_run_stripe_charge(self, price, stripe_token, username):
+    def mock_run_stripe_charge(self, price, stripe_token, email):
         self.assertEqual(price, self.test_offer.price)
         self.assertEqual(stripe_token, "test_token")
-        self.assertEqual(username, "TEST_USER")
+        self.assertEqual(email.lower(), "TEST@USER.COM".lower())
+        
+        return self.generate_mock_charge()
     
-    def mock_run_stripe_charge_failure(self, price, stripe_token, username):
+    def mock_run_stripe_charge_failure(self, price, stripe_token, email):
         self.assertEqual(price, self.test_offer.price)
         self.assertEqual(stripe_token, "test_token")
-        self.assertEqual(username, "TEST_USER")
+        self.assertEqual(email.lower(), "TEST@USER.COM".lower())
         
         raise stripe.CardError("TEST ERROR", "failed", "123", "200")
+    
+    def mock_run_stripe_charge_server_error(self, price, stripe_token, username):
+        raise Exception("Fake Server Error")
     
     
     def test_record_charge_ajax_on_successful_card(self):
@@ -61,16 +81,18 @@ class TransactionTest(TestCase):
             'stripe_token' : "test_token"
         }
         
-        response = record_charge_ajax (
+        response = record_charge_ajax(
             request, 
             self.mock_run_stripe_charge
         )
         
-        self.assertEqual(response.content ,"\"success\"")
-        self.assertEqual(response.status_code, 200)
+        response_content = json.loads( response.content )
+        
+        self.assertEqual( response_content['status'] ,"success" )
+        self.assertEqual( response.status_code, 200 )
 
 
-    def test_record_charge_ajax_on_failed_card(self):
+    def test_record_charge_ajax_error_handling(self):
         request = self.factory.get('/store/record-charge')
         request.user = self.test_user
         request.method = "POST"
@@ -79,10 +101,24 @@ class TransactionTest(TestCase):
             'stripe_token' : "test_token"
         }
         
-        response = record_charge_ajax (
+        response = record_charge_ajax(
             request, 
             self.mock_run_stripe_charge_failure
         )
         
-        self.assertEqual(response.content, '\"card-declined\"')
+        response_content = json.loads( response.content )
+        
+        self.assertEqual(response_content['status'], 'card-declined')
+        self.assertEqual(response_content['message'], 'failed')
+        self.assertEqual(response.status_code, 200)
+        
+        response = record_charge_ajax(
+            request,
+            self.mock_run_stripe_charge_server_error
+        )
+        
+        response_content = json.loads( response.content )
+        
+        self.assertEqual(response_content['status'], 'server-error')
+        self.assertTrue(len(response_content['message']) > 0)
         self.assertEqual(response.status_code, 200)

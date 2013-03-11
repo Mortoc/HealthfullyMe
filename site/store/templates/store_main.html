@@ -13,12 +13,12 @@
 <div class="row-fluid">
     
     <div class="span12">
-        <h1 class="store-headline">It's Shoppy Time</h1>
+        <h1 class="store-headline">Take Control of Your Health</h1>
                 
         <div class="row-fluid">
             
             <div class="span10 offset1">
-                <h2 class="section-header">Current Offers</h2>
+                <h2 class="section-header">Grocery Savings</h2>
                 
                 <div class="row-fluid">
                     
@@ -72,9 +72,15 @@
                                             record_charge(res, {{ offer.id }}); 
                                         }
                                     });
-                            
+                                    
+                                    analytics.track('/store/clicked-buy-button', {
+                                        offerid        : '{{ offer.id }}',
+                                        offer_description : '{{ offer.buy_window_description }}',
+                                        offer_price : '{{ offer.offer_price }}'
+                                    });
+                                    
                                     return false;
-                                }); 
+                                });
                             </script>
                         </form>
                         
@@ -101,26 +107,40 @@
                     </div> -->
                     
                     <h2 class="section-header">Coming Soon...</h2>
-                    <span style="position: relative; top: -12px; left: 10px;">Select your favorite idea below:</span>
+                    <span style="position: relative; top: -12px; left: 10px;">Help us, help you!  Click on an idea below to cast your vote on what new member service we offer next.   What would you find useful?</span>
                     <div class="span12">
                         
+                        {% if idea1 %}
                         <div id="idea1" class="span4 coming-soon-idea" onmousedown="idea_selected(1)">
                             <p>
                                 {{ idea1.text }}
                             </p>
                         </div>
+                        {% endif %}
                         
+                        {% if idea2 %}
                         <div id="idea2" class="span4 coming-soon-idea" onmousedown="idea_selected(2)">
                             <p>
                                 {{ idea2.text }}
                             </p>    
                         </div>
+                        {% endif %}
                         
+                        {% if idea3 %}
                         <div id="idea3" class="span4 coming-soon-idea" onmousedown="idea_selected(3)">
                             <p>
                                 {{ idea3.text }}
                             </p>
                         </div>
+                        {% endif %}
+                        
+                        {% if not idea1 and not idea2 and not idea3 %}
+                        <div class="span4 coming-soon-idea">
+                            <p>
+                                We add some ideas to our database so we have something to show you here.
+                            </p>
+                        </div>
+                        {% endif %}
                         
                         <div style="clear: both;">
                         </div>  
@@ -138,7 +158,6 @@
 
 function record_charge(res, offer_id) {
     
-            alert( JSON.stringify(res) );
     $.ajax({
         url: "store/record-charge",
         type: "POST",
@@ -147,18 +166,22 @@ function record_charge(res, offer_id) {
             stripe_token : res.id
         },
         success: function(data) {
-           if( data == "success" )
-                window.location = "/store/purchase-complete";
-           else
-                window.location = "/store/purchase-failed";
+            if( data['status'] == "success" ) {
+                window.location = "/store/purchase-complete";   
+            } else if( data['status'] == "card-declined" ) {
+                window.location = "/store/purchase-error";
+            } else {
+                window.location = "/server-error";
+            }
         },
         failure: function(data) {
-            window.location = "/store/purchase-failed";
+            window.location = "/server-error";
         }
     })
 }
 
 // Idea Selector Handler
+{% if idea1 and idea2 and idea3 %} 
 function idea_selected(selected_idea_num) {
     // Reset all the ideas
     $('#idea1').removeClass("coming-soon-favorite");
@@ -184,6 +207,11 @@ function idea_selected(selected_idea_num) {
         }
     });
 }
+{% else %}
+function idea_selected(selected_idea_num) {
+    alert("Voting won't work until there's at least 3 choices in the database");
+}
+{% endif %}
 </script>
         
 {% endblock %}

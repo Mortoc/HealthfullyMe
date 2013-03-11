@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.utils.timezone import now
 
 import hashlib
 import math
 
-from core.base62encode import base62_encode
-from core.dbutil import get_utc_now
+from core.encode import base62_encode
 from core.timeutil import show_time_as
+from core.models import Address
 
 class ComingSoonIdea(models.Model):
     id = models.AutoField(primary_key=True)
@@ -21,7 +22,8 @@ class ComingSoonIdea(models.Model):
             return "{0:.0f} %".format( float(100 * self.times_selected) / float(self.times_shown) )
         else:
             return "Not Yet Shown"
-    
+
+
 class Offer(models.Model):
     id = models.AutoField(primary_key=True)
     header_text = models.CharField(max_length=128)
@@ -43,6 +45,62 @@ class Offer(models.Model):
     def __unicode__(self):
         return self.header_text + " | " + self.offer_price()
 
+class Card(models.Model):
+    @staticmethod
+    def clean(charge_data):
+        if charge_data is None:
+            return ""
+        
+        return charge_data
+    
+    
+    @staticmethod
+    def from_stripe_charge(charge, user):
+        try:
+            card = Card.objects.get(fingerprint = charge.card.fingerprint)
+        except Card.DoesNotExist:
+            address = Address(
+                name = Card.clean(charge.card.name),
+                line1 = Card.clean(charge.card.address_line1),
+                line2 = Card.clean(charge.card.address_line2),
+                city = Card.clean(charge.card.address_city),
+                state = Card.clean(charge.card.address_state),
+                zip = Card.clean(charge.card.address_zip),
+                country = Card.clean(charge.card.address_country),
+            )
+            address.save()
+            
+            card = Card(
+                user = user,
+                name = Card.clean(charge.card.name),
+                fingerprint = Card.clean(charge.card.fingerprint),
+                last4 = Card.clean(charge.card.last4),
+                address = address,
+                type = Card.clean(charge.card.type),
+                expire_month = int(charge.card.exp_month),
+                expire_year = int(charge.card.exp_year)
+            )
+            card.save()
+            
+        return card
+        
+        
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User)
+    name = models.CharField(max_length=256) #name used on credit card
+    fingerprint = models.CharField(max_length=128)
+    last4 = models.CharField(max_length=4)
+    
+    address = models.ForeignKey(Address, null=True, default=None)
+    
+    type = models.CharField(max_length=32)
+    expire_month = models.IntegerField(null=True)
+    expire_year = models.IntegerField(null=True)    
+    
+    def user_email(self):
+        return self.user.email
+    
+
 ID_SLUG_LENGTH = 16
 PRIVATE_TRANSACTION_KEY = 349659
 class Transaction(models.Model):
@@ -50,20 +108,25 @@ class Transaction(models.Model):
     id_slug = models.CharField(max_length=ID_SLUG_LENGTH, default='')
     offer = models.ForeignKey( Offer )
     user = models.ForeignKey( User )
-    timestamp = models.DateTimeField(default=get_utc_now)
-    stripe_token = models.CharField(max_length=200)
+    card = models.ForeignKey( Card, null=True )
+    timestamp = models.DateTimeField(default=now)
     
     def timestamp_in_est(self):
         return show_time_as(self.timestamp, 'America/New_York')
+    
+    def user_email(self):
+        return self.user.email
+    
+    def card_info(self):
+        return "{0}  |  ...{1}".format(self.card.type, self.card.last4)
     
     def generate_id_slug(self):
         
         # if this offer id is a 6 digit number, we won't have room for it in the id_slug field
         if self.offer.id > 99999:
             self.id_slug = "error 56";
-            
-        self.id_slug = str(self.offer.id) + "-" + hashlib.sha1( str(PRIVATE_TRANSACTION_KEY + int(self.id)) ).hexdigest()[:ID_SLUG_LENGTH - 7]
         
+        self.id_slug = str(self.offer.id) + "x" + str(self.id) + "x" + hashlib.sha1( str(PRIVATE_TRANSACTION_KEY + int(self.id)) ).hexdigest()[:ID_SLUG_LENGTH - 7]
         self.save()
         
         

@@ -1,9 +1,14 @@
 import dj_database_url
 import os, sys
 
+# dev == False, live == True
+LIVE = False
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+BASE_DIR = os.path.dirname( os.path.abspath(__file__) )
+                                    
 if 'test' in sys.argv:
     DATABASES = { 'default' : {
                     'ENGINE': 'django.db.backends.sqlite3',
@@ -12,26 +17,49 @@ if 'test' in sys.argv:
                 }
 else:
     # Parse database configuration from $DATABASE_URL
-    DATABASES = { 'default' : dj_database_url.config(default="postgres://bitnami:eed6f63afb@localhost:5433/djangostack") }
+    DATABASES = { 
+        'default' : dj_database_url.config(
+            default="sqlite:///" + os.path.join(BASE_DIR, "../local_dev_db")
+        ) 
+    }
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Test Key
-STRIPE_SECRET_KEY = "sk_test_qxHGPxPMzqErH3QWxjhcDhCo"
-STRIPE_PUBLIC_KEY = "pk_test_1Kp5hj2mMh26L6eRJBbz1Kb3"
+# Stripe
+if not LIVE:
+    # Test Key
+    STRIPE_SECRET_KEY = "sk_test_qxHGPxPMzqErH3QWxjhcDhCo"
+    STRIPE_PUBLIC_KEY = "pk_test_1Kp5hj2mMh26L6eRJBbz1Kb3"
+else:
+    # Live Key
+    STRIPE_SECRET_KEY = "sk_live_NsfXzNtk6iBhh8Nn8pXhKU7j"
+    STRIPE_PUBLIC_KEY = "pk_live_U7o0baBYeO20Ex4bKaOlphC8"
 
-# Live Key
-# STRIPE_SECRET_KEY = "sk_live_NsfXzNtk6iBhh8Nn8pXhKU7j"
-# STRIPE_PUBLIC_KEY = "pk_live_U7o0baBYeO20Ex4bKaOlphC8"
 
-BASE_DIR = os.path.dirname( os.path.abspath(__file__) )
+# Segment.io
+if not LIVE:
+    #dev
+    SEGMENT_IO_KEY = "34t4a37fwy"
+else:
+    #live
+    SEGMENT_IO_KEY = "hspdwym69u"
+
 
 ADMINS = (
     ('Mortoc', 'Mortoc@healthfully.me'),
 )
 
 MANAGERS = ADMINS
+
+
+# Email settings
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_HOST_USER = "mortoc"
+EMAIL_HOST_PASSWORD = "cab8dixo"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -115,8 +143,9 @@ ROOT_URLCONF = 'core.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'core.wsgi.application'
 
-TEMPLATE_DIRS = (
-)
+TEMPLATE_DIRS = [
+    os.path.join(BASE_DIR, 'core/templates')
+]
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -130,7 +159,8 @@ INSTALLED_APPS = (
     
     'home',
     'giftcards',
-    'store'
+    'store',
+    'core'
 )
 
 # A sample logging configuration. The only tangible logging

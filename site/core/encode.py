@@ -1,6 +1,8 @@
-ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+import hashlib
 
-def base62_encode(num, alphabet=ALPHABET):
+BASE_62_ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+def base62_encode(num, alphabet=BASE_62_ALPHABET):
     """Encode a number in Base X
 
     `num`: The number to encode
@@ -17,7 +19,8 @@ def base62_encode(num, alphabet=ALPHABET):
     arr.reverse()
     return ''.join(arr)
 
-def base62_decode(string, alphabet=ALPHABET):
+
+def base62_decode(string, alphabet=BASE_62_ALPHABET):
     """Decode a Base X encoded string into the number
 
     Arguments:
@@ -35,3 +38,7 @@ def base62_decode(string, alphabet=ALPHABET):
         idx += 1
 
     return num
+
+
+def email_to_username(email):
+    return hashlib.sha1(email.lower()).hexdigest()[:29]
