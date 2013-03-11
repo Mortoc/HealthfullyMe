@@ -8,3 +8,4 @@ venv
 bin
 include
 lib
+local_dev_db
