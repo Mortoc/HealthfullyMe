@@ -19,7 +19,7 @@ else:
     # Parse database configuration from $DATABASE_URL
     DATABASES = { 
         'default' : dj_database_url.config(
-            default="sqlite:///" + os.path.join(BASE_DIR, "../local_dev_db")
+            default="postgres://postgres@localhost/healthfullyme_local"
         ) 
     }
 

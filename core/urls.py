@@ -1,10 +1,14 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from core import settings
+from django.conf import settings
+
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
+                       
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    
     url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', '/static/favicon.ico'),
     
     url(r'^$', 'home.views.index', name='index'),
@@ -24,10 +28,5 @@ urlpatterns = patterns('',
     url(r'^server-error', 'core.views.server_error', name='server-error'),
 
     url(r'^admin/', include(admin.site.urls)),
-)
-
-if not settings.DEBUG:
-    urlpatterns += patterns('',
-        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT})
-    )
     
+)
