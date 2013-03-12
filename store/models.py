@@ -100,6 +100,9 @@ class Card(models.Model):
     def user_email(self):
         return self.user.email
     
+    def __unicode__(self):
+        return self.type + " | " + self.last4
+    
 
 ID_SLUG_LENGTH = 16
 PRIVATE_TRANSACTION_KEY = 349659

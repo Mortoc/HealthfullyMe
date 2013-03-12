@@ -6,7 +6,7 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-                       
+    # serving static files through gunicorn on heroku for now
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     
     url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', '/static/favicon.ico'),

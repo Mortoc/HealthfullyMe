@@ -42,8 +42,6 @@ def purchase_complete(request):
     recent_transaction = Transaction.objects.filter(user=request.user).order_by('-timestamp')[0]
     recent_offer = recent_transaction.offer;
     
-    print recent_transaction.card.address
-    
     return render(request, "purchase_complete.html",
     {
         "offer" : recent_offer,

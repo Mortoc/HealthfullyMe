@@ -1,8 +1,17 @@
 import dj_database_url
 import os, sys
 
-# dev == False, live == True
-LIVE = False
+
+LIVE = False # dev == False, live == True
+
+
+if os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LIVE":
+    LIVE = True
+elif os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "DEV":
+    LIVE = False
+else:
+    raise Exception("HEALTHFULLY_ME_DEPLOYMENT hasn't been set on this machine")
+    
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -126,6 +135,16 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    #"django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.contrib.messages.context_processors.messages",
+    "core.context_processors.config_data"
 )
 
 MIDDLEWARE_CLASSES = (
