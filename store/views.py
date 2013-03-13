@@ -10,6 +10,7 @@ import stripe
 import traceback
 
 from core import settings
+from core.email import message_from_template
 from store.models import ComingSoonIdea, Offer, Transaction, Card
 
 
