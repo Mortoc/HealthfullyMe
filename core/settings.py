@@ -28,7 +28,7 @@ else:
     # Parse database configuration from $DATABASE_URL
     DATABASES = { 
         'default' : dj_database_url.config(
-            default="postgres://postgres@localhost/healthfullyme_local"
+            default="postgres://postgres:cab8dixo@localhost/healthfullyme_local"
         ) 
     }
 
@@ -128,7 +128,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '@huwrgdpurvt)ps&amp;pb#7!e0ifr_i!0ergoe&amp;46x%^u0(&amp;u12si'
+SECRET_KEY = '@huwrgdpurvt)ps534p;pb#7!e0ifr_i!0ergoe&amp;46x%^u0(&amp;u12si'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

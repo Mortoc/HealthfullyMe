@@ -42,6 +42,20 @@ def purchase_complete(request):
     recent_transaction = Transaction.objects.filter(user=request.user).order_by('-timestamp')[0]
     recent_offer = recent_transaction.offer;
     
+    email = message_from_template(
+        "email/purchase_confirmation.html", 
+        request.user.email, 
+        "orders@healthfully.me",
+        {
+            "user" : request.user,
+            "offer" : recent_offer,
+            "transaction" : recent_transaction,
+            "shipping_address" : recent_transaction.card.address,
+            "billing_address" : recent_transaction.card.address
+        }
+    )
+    email.send()
+    
     return render(request, "purchase_complete.html",
     {
         "offer" : recent_offer,

@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     
     url(r'^server-error', 'core.views.server_error', name='server-error'),
 
+    url(r'^admin/tools/email-viewer/(?P<email_name>.*)$', 'core.email.view_email'),
     url(r'^admin/', include(admin.site.urls)),
     
 )

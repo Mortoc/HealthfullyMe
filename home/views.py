@@ -9,6 +9,7 @@ import hashlib
 
 from core.validators import validate_email
 from core.encode import email_to_username
+from core.email import message_from_template
 from home.models import EmailRequest, AuthCode
 from home.forms import UserLoginForm, UserRegistrationForm, EmailRequestForm
 
@@ -87,20 +88,8 @@ def register_user(request):
                 user.save()
                 
                 login(request, authenticate(username=username, password=password))
-                       
-                email = EmailMessage(
-                    'Welcome to Healthfully Me!', 
-                    "Hi!\n\n" + 
-                    "Thanks for creating your Healthfully Me account!  We know staying healthy can be tough so we're working on some new services and tools to make it easier, but we'd love to hear from you.\n\n" +
-                    "In the meantime, want to save some money making those healthy meals at home?  Just login to our site to get exclusive access to 20% discount for your groceries at Whole Foods.\n\n" +   
-                    "We'll have much more than just healthy savings very soon so check back often, and let us know what we can do to help you meet your health goals.\n\n" +  
-                    "Your Healthfully Me Support Team,\n\n"
-                    "Emily, Jamie, Brittany, and Caitlin",
-                    'hello@healthfully.me',
-                    [request.user.email], 
-                    [],
-                    headers = {'Reply-To': 'hello@healthfully.me'}
-                )
+                
+                email = message_from_template("email/welcome_new_registration.html", request.user.email, "hello@healthfully.me")
                 email.send()
                 
                 return HttpResponseRedirect('/')
