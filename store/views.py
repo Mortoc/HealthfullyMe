@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
-from django.utils import simplejson as json
 from django.core.mail import EmailMessage
 from django.template import Context, Template
-        
+
+import json        
 import random
 import sys
 import stripe
@@ -131,10 +131,6 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "status" : "server-error",
             "message" : "A Non-stripe error occured"
         }
-        
-        print sys.exc_info()
-        print sys.exc_value
-        print traceback.format_exc()
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
 

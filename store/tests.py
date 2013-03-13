@@ -1,13 +1,12 @@
 from django.utils import unittest
 from django.test.client import RequestFactory
 from django.test import TestCase
-from django.utils import simplejson as json
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-
 from store.models import Transaction, Offer
 from store.views import record_charge_ajax
 
+import json
 import stripe
 
 class TransactionTest(TestCase):
