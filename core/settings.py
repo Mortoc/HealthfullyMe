@@ -112,6 +112,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, '../static_compiled/')
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+SOUTH_TESTS_MIGRATE = False
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, '../core/static'),
@@ -172,6 +174,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    
     'django_extensions',
     'south',
     

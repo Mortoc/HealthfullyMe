@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Address'
-        db.create_table('core_address', (
+        db.create_table(u'core_address', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=256, null=True)),
             ('line1', self.gf('django.db.models.fields.CharField')(max_length=256)),
@@ -19,16 +19,16 @@ class Migration(SchemaMigration):
             ('zip', self.gf('django.db.models.fields.CharField')(max_length=8)),
             ('country', self.gf('django.db.models.fields.CharField')(max_length=64, null=True)),
         ))
-        db.send_create_signal('core', ['Address'])
+        db.send_create_signal(u'core', ['Address'])
 
 
     def backwards(self, orm):
         # Deleting model 'Address'
-        db.delete_table('core_address')
+        db.delete_table(u'core_address')
 
 
     models = {
-        'core.address': {
+        u'core.address': {
             'Meta': {'object_name': 'Address'},
             'city': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True'}),
             'country': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True'}),

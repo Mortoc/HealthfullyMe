@@ -9,8 +9,6 @@ urlpatterns = patterns('',
     # serving static files through gunicorn on heroku for now
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     
-    url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', '/static/favicon.ico'),
-    
     url(r'^$', 'home.views.index', name='index'),
     url(r'^login', 'home.views.login_user', name='login'),
     url(r'^logout', 'home.views.logout_user', name='logout'),
