@@ -38,7 +38,7 @@ class UserRegistrationForm(forms.Form):
         
         user_exists = True
         try:
-            User.objects.get(username = cleaned_data.get("email"))
+            User.objects.get(email = cleaned_data.get("email"))
         except User.DoesNotExist:
             user_exists = False
             

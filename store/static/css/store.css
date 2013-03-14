@@ -151,6 +151,22 @@ span {
     float: left;
 }
 
+#store-content .processing-header {
+    float: left;
+    font-family: 'Signika', sans-serif;
+    font-size: 24px;
+    color:#666666;
+    width: 100%;
+    text-align: center;
+}
+
+#store-content .loader-gif {
+    float: left;
+    margin: 0 50% 0 50%;
+    position: relative;
+    left: -105px;
+}
+
 .confirmation-panel {
    padding: 20px; 
 }

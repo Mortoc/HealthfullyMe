@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block centered_content %}
-
+    <script type="text/javascript">
+        analytics.track('/register/view-page', {});
+    </script>
     <h1 class="scripty-header-text">Register Here!</h1><br />
 
     <form class="login-form" action="/register/" method="post">

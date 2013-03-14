@@ -89,7 +89,13 @@ def register_user(request):
                 
                 login(request, authenticate(username=username, password=password))
                 
-                email = message_from_template("email/welcome_new_registration.html", request.user.email, "hello@healthfully.me")
+                email = message_from_template
+                (
+                    "email/welcome_new_registration.html",
+                    "hello@healthfully.me",
+                    "hello@healthfully.me", 
+                    request.user.email
+                )
                 email.send()
                 
                 return HttpResponseRedirect('/')

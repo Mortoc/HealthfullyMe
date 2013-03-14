@@ -77,7 +77,13 @@
 	                 }
 	             } 
 	        });
-	    
+	        
+            page_name = document.location.pathname;
+            
+            if( page_name === '/' )
+                page_name = "index"
+                
+            analytics.track(page_name + '/view-page', {});
 	    </script>
 		
     </head>

@@ -13,7 +13,7 @@ class TransactionAdmin(admin.ModelAdmin):
     
 class CardAdmin(admin.ModelAdmin):
     list_display = ('user_email', 'name', 'type', 'last4')
-    readonly_fields = ('user', 'fingerprint', 'last4', 'type')
+    readonly_fields = ('user', 'fingerprint', 'last4', 'type', 'address')
     
 admin.site.register(ComingSoonIdea, ComingSoonIdeaAdmin)
 admin.site.register(Offer, OfferAdmin)

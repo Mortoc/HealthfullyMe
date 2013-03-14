@@ -9,7 +9,7 @@ import re
 
 RE_FIND_TITLE_IN_HTML = re.compile('<title>(.+)</title>')
 
-def message_from_template(template_path, send_to, from_email, context={}):
+def message_from_template(template_path, from_email, reply_to, send_to, bcc = [], context={}):
     template = get_template( template_path )
     
     message = template.render( Context(context) )
@@ -21,9 +21,9 @@ def message_from_template(template_path, send_to, from_email, context={}):
       subject,
       message,
       from_email,
-      [send_to],
-      [],
-      headers={}
+      send_to,
+      bcc,
+      headers = { 'Reply-To': reply_to }
     )
     
     email.content_subtype = "html"

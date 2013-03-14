@@ -43,20 +43,6 @@ def purchase_complete(request):
     recent_transaction = Transaction.objects.filter(user=request.user).order_by('-timestamp')[0]
     recent_offer = recent_transaction.offer;
     
-    email = message_from_template(
-        "email/purchase_confirmation.html", 
-        request.user.email, 
-        "orders@healthfully.me",
-        {
-            "user" : request.user,
-            "offer" : recent_offer,
-            "transaction" : recent_transaction,
-            "shipping_address" : recent_transaction.card.address,
-            "billing_address" : recent_transaction.card.address
-        }
-    )
-    email.send()
-    
     return render(request, "purchase_complete.html",
     {
         "offer" : recent_offer,
@@ -98,24 +84,20 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             card=card
         )
         transaction.save()
-        
-        email = EmailMessage(
-            'Thank You For Your Purchase! - Healthfully Me', 
-            "You purchased:\n\n" +
-                transaction.id_slug + " - " + 
-                post_offer.header_text + " - " +
-                post_offer.offer_price() + "\n\n\n" +
-                "Shipping Address:\n\n" + 
-                card.address.line1 + "\n" +
-                card.address.line2 + "\n" +
-                card.address.city + "\n" +
-                card.address.state + "\n" +
-                card.address.zip + "\n" +
-                "\n\n\n\Please allow for 24-48 hours for your order to be fulfilled.  If you have any questions or feedback, please send us an email at orders@healthfully.me.  Thank you!",
-            'orders@healthfully.me',
-            [request.user.email], 
-            ['orders@healthfully.me'],
-            headers = {'Reply-To': 'help@healthfully.me'}
+            
+        email = message_from_template(
+            "email/purchase_confirmation.html", 
+            "orders@healthfully.me",
+            "help@healthfully.me",
+            request.user.email, 
+            "orders@healthfully.me", 
+            {
+                "user" : request.user,
+                "offer" : recent_offer,
+                "transaction" : recent_transaction,
+                "shipping_address" : recent_transaction.card.address,
+                "billing_address" : recent_transaction.card.address
+            }
         )
         email.send()
         
@@ -126,12 +108,21 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "message" : e.param,
             "code" : e.code
         }
+        
+        print sys.exc_info()
+        print sys.exc_value
+        print traceback.format_exc()
+        
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
     except:
         response_data = {
             "status" : "server-error",
             "message" : "A Non-stripe error occured"
         }
+        
+        print sys.exc_info()
+        print sys.exc_value
+        print traceback.format_exc()
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
 
