@@ -89,12 +89,11 @@ def register_user(request):
                 
                 login(request, authenticate(username=username, password=password))
                 
-                email = message_from_template
-                (
+                email = message_from_template(
                     "email/welcome_new_registration.html",
                     "hello@healthfully.me",
                     "hello@healthfully.me", 
-                    request.user.email
+                    [request.user.email]
                 )
                 email.send()
                 

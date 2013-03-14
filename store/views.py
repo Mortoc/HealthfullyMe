@@ -89,14 +89,14 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "email/purchase_confirmation.html", 
             "orders@healthfully.me",
             "help@healthfully.me",
-            request.user.email, 
-            "orders@healthfully.me", 
+            [request.user.email], 
+            ["orders@healthfully.me"], 
             {
                 "user" : request.user,
-                "offer" : recent_offer,
-                "transaction" : recent_transaction,
-                "shipping_address" : recent_transaction.card.address,
-                "billing_address" : recent_transaction.card.address
+                "offer" : post_offer,
+                "transaction" : transaction,
+                "shipping_address" : card.address,
+                "billing_address" : card.address
             }
         )
         email.send()
@@ -109,9 +109,9 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "code" : e.code
         }
         
-        print sys.exc_info()
-        print sys.exc_value
-        print traceback.format_exc()
+#        print sys.exc_info()
+#        print sys.exc_value
+#        print traceback.format_exc()
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
     except:
@@ -120,9 +120,9 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "message" : "A Non-stripe error occured"
         }
         
-        print sys.exc_info()
-        print sys.exc_value
-        print traceback.format_exc()
+#        print sys.exc_info()
+#        print sys.exc_value
+#        print traceback.format_exc()
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
 
