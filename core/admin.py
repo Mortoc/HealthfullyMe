@@ -58,12 +58,12 @@ class HMUserAdmin(UserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'is_admin',)
+    list_display = ('email', 'created_date', 'is_admin',)
     list_filter = ('is_admin', 'created_date',)
     fieldsets = (
-        (None, {'fields': ('email', 'password',)}),
+        (None, {'fields': ('email', 'password', 'first_name', 'last_name', 'created_date',)}),
         ('Permissions', {'fields': ('is_admin',)}),
-        ('Important dates', {'fields': ('created_date',)}),
+        ('Logins', {'fields': ('logins',)}),
     )
     add_fieldsets = (
         (None, {
@@ -72,8 +72,8 @@ class HMUserAdmin(UserAdmin):
         ),
     )
     search_fields = ('email',)
-    ordering = ('email',)
-    readonly_fields = ('created_date', 'is_legacy',)
+    ordering = ('email', 'created_date',)
+    readonly_fields = ('created_date', 'logins',)
     filter_horizontal = ()
 
 # Now register the new UserAdmin...

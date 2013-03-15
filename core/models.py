@@ -1,6 +1,10 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.views import login
 from django.utils.timezone import now
+
+from core.timeutil import show_time_as
 
 class HMUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -30,6 +34,17 @@ class HMUserManager(BaseUserManager):
         user.is_admin = True
         user.save(using=self._db)
         return user
+    
+    
+class LoginInfo(models.Model):
+    id = models.AutoField(primary_key=True)
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
+    timestamp = models.DateTimeField(default=now)
+    
+    def __unicode__(self):
+        return show_time_as(self.timestamp, 'UTC')
+
 
 class HMUser(AbstractBaseUser):
     email = models.EmailField(
@@ -40,6 +55,11 @@ class HMUser(AbstractBaseUser):
     )
 
     created_date = models.DateTimeField(default=now)
+    
+    first_name = models.CharField(default="", max_length=128)
+    last_name = models.CharField(default="", max_length=128)
+    
+    logins = models.ManyToManyField(LoginInfo)
     
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -57,6 +77,9 @@ class HMUser(AbstractBaseUser):
     def get_short_name(self):
         # The user is identified by their email address
         return self.email
+    
+    def get_created_date_est(self):
+        return show_time_as(self.created_date, 'America/New_York')
 
     def __unicode__(self):
         return self.email
@@ -76,7 +99,18 @@ class HMUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
-    
+
+
+    def login(self, request, *args, **kwargs):
+        response = login(request, *args, **kwargs)
+        
+        login_info = LoginInfo(user=self)
+        login_info.save()
+        
+        self.logins.add( login_info )
+        self.save()
+        
+        return response
     
 
 

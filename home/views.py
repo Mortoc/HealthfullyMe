@@ -29,10 +29,10 @@ def login_user(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             
-            user = authenticate(username=email_to_username(email), password=password)
+            user = authenticate(email=email, password=password)
             
             if user is not None:
-                login(request, user)
+                user.login(request)
                 return HttpResponseRedirect('/')
             else:
                 error = "Invalid Username or Password"
@@ -85,7 +85,8 @@ def register_user(request):
             if auth_code_result == AuthCodeResult.SUCCESS:
                 user.save()
                 
-                login(request, authenticate(email=email, password=password))
+                user = authenticate(email=email, password=password)
+                user.login(request)
                 
                 email = message_from_template(
                     "email/welcome_new_registration.html",

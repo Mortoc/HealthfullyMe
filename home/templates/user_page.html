@@ -7,6 +7,15 @@
     {% block more_extra_style %}{% endblock %}
 {% endblock %}
 
+{% block extra_script_include %}
+
+<script type="text/javascript">
+    analytics.identify('{{ user.email }}', {
+        email : '{{ user.email }}'
+    }); 
+</script> 
+{% endblock %}
+
 {% block body %}
 
 <div class="top-bar" style="float: none;">
@@ -29,11 +38,5 @@
 	    </div>
 	</div>
 </div>
-
-<script type="application/javascript">
-    analytics.identify('{{ user.username }}', {
-        email            : '{{ user.mail }}'
-    }); 
-</script> 
 {% endblock %}
 
