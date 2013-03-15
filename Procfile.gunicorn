@@ -1,1 +1,1 @@
-web: sh initialize.sh; gunicorn_django -b 0.0.0.0:$PORT -w 3
+web: sh initialize.sh; gunicorn_django --workers=4 --bind=0.0.0.0:$PORT core/settings.py
