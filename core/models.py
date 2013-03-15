@@ -127,5 +127,5 @@ class Address(models.Model):
         if self.line2:
             return "{0}\n{1}\n{2}\n{3}, {4}\n{5}\n{6}".format(self.name, self.line1, self.line2, self.city, self.state, self.zip, self.country)
         else:
-            return "{0}\n{1}\n{2}, {3}\n45}\n{5}".format(self.name, self.line1, self.city, self.state, self.zip, self.country)
+            return "{0}\n{1}\n{2}, {3}\n{4}\n{5}".format(self.name, self.line1, self.city, self.state, self.zip, self.country)
     

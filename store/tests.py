@@ -36,6 +36,7 @@ class TransactionTest(TestCase):
     def generate_mock_charge(self):
         charge = stripe.Charge()
         card = stripe.Customer()
+        charge.id = "some_crazyID2350894735"
         charge.card = card
         card.name = "TEST_USER"
         card.address_line1 = "Somewhere"

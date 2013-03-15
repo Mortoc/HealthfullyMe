@@ -109,6 +109,8 @@ class Transaction(models.Model):
     id = models.AutoField(primary_key=True)
     id_slug = models.CharField(max_length=ID_SLUG_LENGTH, default='')
     stripe_id = models.CharField(max_length=64, default="invalid")
+    shipping_tracking_data = models.CharField(max_length=255, default=" ")
+    shipped = models.BooleanField(default=False)
     offer = models.ForeignKey(Offer)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     card = models.ForeignKey(Card, null=True)
@@ -132,10 +134,20 @@ class Transaction(models.Model):
         self.id_slug = str(self.offer.id) + "x" + str(self.id) + "x" + hashlib.sha1(str(PRIVATE_TRANSACTION_KEY + int(self.id))).hexdigest()[:ID_SLUG_LENGTH - 7]
         self.save()
         
+    def set_shipping(self):
+        if len(self.shipping_tracking_data) > 2 and not self.shipped:
+            self.shipped = True
+            self.save()
+        elif len(self.shipping_tracking_data) <= 2 and self.shipped:
+            self.shipped = False
+            self.save()
         
-def model_created(sender, **kwargs):
+        
+def model_saved(sender, **kwargs):
     instance = kwargs['instance']
     if kwargs['created']:
         instance.generate_id_slug()
 
-post_save.connect(model_created, sender=Transaction)
+    instance.set_shipping()
+
+post_save.connect(model_saved, sender=Transaction)

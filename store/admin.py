@@ -9,8 +9,8 @@ class OfferAdmin(admin.ModelAdmin):
     list_display = ('header_text', 'buy_window_description', 'offer_price', 'enabled')
     
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('id_slug', 'user_email', 'card_info', 'offer', 'timestamp_in_est')
-    readonly_fields = ('id_slug', 'stripe_id', 'offer', 'user', 'card', 'timestamp')
+    list_display = ('id_slug', 'user_email', 'card_info', 'offer', 'timestamp_in_est', 'shipped')
+    readonly_fields = ('id_slug', 'stripe_id', 'offer', 'user', 'card', 'timestamp', 'shipped')
     
 class CardAdmin(admin.ModelAdmin):
     list_display = ('user_email', 'name', 'type', 'last4')
