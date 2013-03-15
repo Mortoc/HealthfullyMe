@@ -2,13 +2,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 
 import hashlib
 
+from core.models import HMUser
 from core.validators import validate_email
-from core.encode import email_to_username
 from core.email import message_from_template
 from home.models import EmailRequest, AuthCode
 from home.forms import UserLoginForm, UserRegistrationForm, EmailRequestForm
@@ -77,17 +76,16 @@ def register_user(request):
         if form.is_valid():
             auth_code = form.cleaned_data['invite_code']
             email = form.cleaned_data['email']
-            username = email_to_username(email)
             password = form.cleaned_data['password']
             
             # create the user here but only save it if the auth code is good
-            user = User.objects.create_user(username=username, email=email, password=password)
+            user = HMUser.objects.create_user(email=email, password=password)
             
             auth_code_result = use_auth_code(auth_code, user)
             if auth_code_result == AuthCodeResult.SUCCESS:
                 user.save()
                 
-                login(request, authenticate(username=username, password=password))
+                login(request, authenticate(email=email, password=password))
                 
                 email = message_from_template(
                     "email/welcome_new_registration.html",

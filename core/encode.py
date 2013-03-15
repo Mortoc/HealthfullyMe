@@ -38,7 +38,3 @@ def base62_decode(string, alphabet=BASE_62_ALPHABET):
         idx += 1
 
     return num
-
-
-def email_to_username(email):
-    return hashlib.sha1(email.lower()).hexdigest()[:29]

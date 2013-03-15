@@ -1,11 +1,12 @@
 from django.utils import unittest
 from django.test.client import RequestFactory
+from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase
-from django.contrib.auth.models import User, AnonymousUser
 from django.http import HttpResponseRedirect
 
 from home.views import *
 from home.models import *
+from core.models import *
 from core.encode import *
 
 class MockSession(dict):
@@ -23,10 +24,9 @@ class RegistrationVerification(TestCase):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
         
-        self.test_user = User.objects.create_user (
-            username = "TEST_USER", 
-            email = "TEST@USER.COM", 
-            password = "OMG_TESTS!"
+        self.test_user = HMUser.objects.create_user (
+            email="TEST@USER.COM",
+            password="OMG_TESTS!"
         )
         
         self.auth_code = AuthCode()
@@ -41,7 +41,7 @@ class RegistrationVerification(TestCase):
         
         
     def test_register_existing_username(self):
-        existing_user_count = User.objects.all().count()
+        existing_user_count = HMUser.objects.all().count()
         request = self.factory.get('/register')
         request.user = AnonymousUser()
         request.session = MockSession()
@@ -58,16 +58,16 @@ class RegistrationVerification(TestCase):
         
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response['location'], "/")
-        self.assertEqual(existing_user_count + 1, User.objects.all().count())
+        self.assertEqual(existing_user_count + 1, HMUser.objects.all().count())
         
         
     def test_register_long_username(self):
-        existing_user_count = User.objects.all().count()
+        existing_user_count = HMUser.objects.all().count()
         request = self.factory.get('/register')
         request.user = AnonymousUser()
         request.session = MockSession()
         
-        email = "T123456789012345678901234567890@reallylongwebsitedomain.com.om"
+        email = "T1234567890123456789012345678901234567@reallylongwebsitedomain.com.om"
         
         request.method = "POST"
         request.POST = {
@@ -79,16 +79,15 @@ class RegistrationVerification(TestCase):
         
         response = register_user(request)
         
-        created_user = User.objects.get(username = email_to_username(email))
+        created_user = HMUser.objects.get(email=email.lower())
         
-        self.assertLess( len(created_user.username), 30, "The username needs to be less than 30 characters for postgres")
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response['location'], "/")
-        self.assertEqual(existing_user_count + 1, User.objects.all().count())
+        self.assertEqual(existing_user_count + 1, HMUser.objects.all().count())
         
         
     def test_register_invalid_auth_declines(self):
-        existing_user_count = User.objects.all().count()
+        existing_user_count = HMUser.objects.all().count()
         
         request = self.factory.get('/register')
         request.user = AnonymousUser()
@@ -105,4 +104,4 @@ class RegistrationVerification(TestCase):
         response = register_user(request)
         
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(existing_user_count, User.objects.all().count(), "Invalid auth code still created a user")
+        self.assertEqual(existing_user_count, HMUser.objects.all().count(), "Invalid auth code still created a user")

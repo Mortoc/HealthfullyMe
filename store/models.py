@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.utils.timezone import now
+from django.conf import settings
 
 import hashlib
 import math
@@ -50,9 +51,7 @@ class Card(models.Model):
     def clean(charge_data):
         if charge_data is None:
             return ""
-        
         return charge_data
-    
     
     @staticmethod
     def from_stripe_charge(charge, user):
@@ -86,7 +85,7 @@ class Card(models.Model):
         
         
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     name = models.CharField(max_length=256) #name used on credit card
     fingerprint = models.CharField(max_length=128)
     last4 = models.CharField(max_length=4)
@@ -109,9 +108,9 @@ PRIVATE_TRANSACTION_KEY = 349659
 class Transaction(models.Model):
     id = models.AutoField(primary_key=True)
     id_slug = models.CharField(max_length=ID_SLUG_LENGTH, default='')
-    offer = models.ForeignKey( Offer )
-    user = models.ForeignKey( User )
-    card = models.ForeignKey( Card, null=True )
+    offer = models.ForeignKey(Offer)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    card = models.ForeignKey(Card, null=True)
     timestamp = models.DateTimeField(default=now)
     
     def timestamp_in_est(self):

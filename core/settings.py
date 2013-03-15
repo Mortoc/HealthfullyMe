@@ -114,6 +114,8 @@ STATIC_URL = '/static/'
 
 SOUTH_TESTS_MIGRATE = False
 
+AUTH_USER_MODEL = 'core.HMUser'
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, '../core/static'),

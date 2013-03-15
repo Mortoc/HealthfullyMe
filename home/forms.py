@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from core.models import HMUser
 
 class UserLoginForm(forms.Form):
     email = forms.EmailField()
@@ -38,8 +38,8 @@ class UserRegistrationForm(forms.Form):
         
         user_exists = True
         try:
-            User.objects.get(email = cleaned_data.get("email"))
-        except User.DoesNotExist:
+            HMUser.objects.get(email = cleaned_data.get("email"))
+        except HMUser.DoesNotExist:
             user_exists = False
             
         if user_exists:

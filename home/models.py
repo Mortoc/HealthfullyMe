@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.utils.timezone import now
 from django.contrib.auth.models import User
+from django.conf import settings
 
 from core.timeutil import show_time_as
 from core.encode import base62_encode
@@ -23,7 +24,7 @@ class AuthCode(models.Model):
     code = models.SlugField(max_length=CODE_LENGTH)
     uses_left = models.IntegerField(default=1)
     created_date = models.DateTimeField(default=now)
-    registered_users = models.ManyToManyField(User)
+    registered_users = models.ManyToManyField(settings.AUTH_USER_MODEL)
     
     def generate_code(self):
         # we want to get a value that uses all 5 digits of the base-62 encoded string

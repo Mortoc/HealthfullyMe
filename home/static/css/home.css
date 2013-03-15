@@ -162,6 +162,7 @@ h3 {
     padding: 12px 24px;
     text-shadow: 1px 1px 0px #cd8a15;
     
+    cursor: pointer;
     margin-right: 12px;
 }.orange-button:hover {
     background-color: #ffb884;

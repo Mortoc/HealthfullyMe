@@ -8,6 +8,19 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding model 'HMUser'
+        db.create_table(u'core_hmuser', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('password', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('last_login', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
+            ('email', self.gf('django.db.models.fields.EmailField')(unique=True, max_length=255, db_index=True)),
+            ('created_date', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
+            ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('is_admin', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('is_legacy', self.gf('django.db.models.fields.BooleanField')(default=False)),
+        ))
+        db.send_create_signal(u'core', ['HMUser'])
+
         # Adding model 'Address'
         db.create_table(u'core_address', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -23,6 +36,9 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Deleting model 'HMUser'
+        db.delete_table(u'core_hmuser')
+
         # Deleting model 'Address'
         db.delete_table(u'core_address')
 
@@ -38,6 +54,17 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True'}),
             'state': ('django.db.models.fields.CharField', [], {'max_length': '2', 'null': 'True'}),
             'zip': ('django.db.models.fields.CharField', [], {'max_length': '8'})
+        },
+        u'core.hmuser': {
+            'Meta': {'object_name': 'HMUser'},
+            'created_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '255', 'db_index': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'is_admin': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_legacy': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'})
         }
     }
 

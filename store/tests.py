@@ -2,10 +2,10 @@ from django.utils import unittest
 from django.test.client import RequestFactory
 from django.test import TestCase
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
 from store.models import Transaction, Offer
 from store.views import record_charge_ajax
 
+from core.models import HMUser
 import json
 import stripe
 
@@ -14,8 +14,7 @@ class TransactionTest(TestCase):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
         
-        self.test_user = User.objects.create_user (
-            username = "TEST_USER", 
+        self.test_user = HMUser.objects.create_user (
             email = "TEST@USER.COM", 
             password = "OMG_TESTS!"
         )

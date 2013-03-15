@@ -2,12 +2,17 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Template, RequestContext, Context
 from django.template.loader import get_template
 from django.core.mail import EmailMessage
+from django.conf import settings
 from core.htmlutil import minify_html
 from store.models import Transaction
 
 import re
 
 RE_FIND_TITLE_IN_HTML = re.compile('<title>(.+)</title>')
+
+class __DevEmailMessage(EmailMessage):
+    def send(self):
+        pass
 
 def message_from_template(template_path, from_email, reply_to, send_to, bcc = [], context={}):
     template = get_template( template_path )
@@ -17,15 +22,25 @@ def message_from_template(template_path, from_email, reply_to, send_to, bcc = []
     
     subject = __get_email_subject_from_message(message)
     
-    email = EmailMessage(
-      subject,
-      message,
-      from_email,
-      send_to,
-      bcc,
-      headers = { 'Reply-To': reply_to }
-    )
-    
+    if settings.LIVE:
+        email = EmailMessage(
+          subject,
+          message,
+          from_email,
+          send_to,
+          bcc,
+          headers = { 'Reply-To': reply_to }
+        )
+    else:
+        email = __DevEmailMessage(
+          subject,
+          message,
+          from_email,
+          send_to,
+          bcc,
+          headers = { 'Reply-To': reply_to }
+        )
+           
     email.content_subtype = "html"
     return email
 
