@@ -57,19 +57,19 @@
             
             
             if( selected_idea_num == 1 )
-                analytics.track('/store/selected-idea' + selected_idea_num, 
+                analytics.track('/store/selected-idea' + "{{ idea1.id }}", 
                 {
                     "idea_id" : "{{ idea1.id }}",
                     "idea_text" :  "{{ idea1.text }}"
                 });
             else if( selected_idea_num == 2 )
-                analytics.track('/store/selected-idea' + selected_idea_num, 
+                analytics.track('/store/selected-idea' + "{{ idea2.id }}", 
                 {
                     "idea_id" : "{{ idea2.id }}",
                     "idea_text" :  "{{ idea2.text }}"
                 });
             else if( selected_idea_num == 3 )
-                analytics.track('/store/selected-idea' + selected_idea_num, 
+                analytics.track('/store/selected-idea' + "{{ idea3.id }}", 
                 {
                     "idea_id" : "{{ idea3.id }}",
                     "idea_text" :  "{{ idea3.text }}"
