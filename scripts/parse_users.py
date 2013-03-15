@@ -1,5 +1,4 @@
-from django.contrib.auth.models import User
-from core.encode import email_to_username
+from core.models import HMUser
 
 def from_csv(filename):
     all_lines = open(filename).readlines()
@@ -15,16 +14,13 @@ def from_csv(filename):
             email = line_split[2]
             password = line_split[3].rstrip()
             
-            username = email_to_username(email) 
-            
             try:
-                user = User.objects.get(username = username)
-            except User.DoesNotExist:
+                user = HMUser.objects.get(email = email)
+            except HMUser.DoesNotExist:
                 # create the user here but only save it if the auth code is good
-                user = User.objects.create_user(username=username, email=email, password=password)
+                user = HMUser.objects.create_user(email=email, password=password)
                 user.first_name = firstname
                 user.last_name = lastname
-                
                 user.save()
             
             print "(" + str(current_line) + " of " + str(total_lines) + ") Processed: " + line
