@@ -10,6 +10,7 @@ class OfferAdmin(admin.ModelAdmin):
     
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('id_slug', 'user_email', 'card_info', 'offer', 'timestamp_in_est')
+    readonly_fields = ('id_slug', 'stripe_id', 'offer', 'user', 'card', 'timestamp')
     
 class CardAdmin(admin.ModelAdmin):
     list_display = ('user_email', 'name', 'type', 'last4')

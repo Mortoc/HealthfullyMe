@@ -25,6 +25,7 @@ class AuthCode(models.Model):
     uses_left = models.IntegerField(default=1)
     created_date = models.DateTimeField(default=now)
     registered_users = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    notes = models.TextField(default=" ")
     
     def generate_code(self):
         # we want to get a value that uses all 5 digits of the base-62 encoded string

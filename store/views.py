@@ -81,7 +81,8 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
         transaction = Transaction(
             user=request.user,
             offer=post_offer,
-            card=card
+            card=card,
+            stripe_id=charge.id
         )
         transaction.save()
             

@@ -63,7 +63,7 @@ class HMUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password', 'first_name', 'last_name', 'created_date',)}),
         ('Permissions', {'fields': ('is_admin', 'is_legacy',)}),
-        ('Logins', {'fields': ('logins',)}),
+        ('Logins', {'fields': ('logins',), 'classes': ['collapse']}),
     )
     add_fieldsets = (
         (None, {
