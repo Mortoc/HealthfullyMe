@@ -92,7 +92,8 @@ def register_user(request):
                     "email/welcome_new_registration.html",
                     "hello@healthfully.me",
                     "hello@healthfully.me", 
-                    [user.email]
+                    [user.email],
+                    ["hello@healthfully.me"]
                 )
                 email.send()
                 
