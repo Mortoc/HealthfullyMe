@@ -62,7 +62,7 @@ class HMUserAdmin(UserAdmin):
     list_filter = ('is_admin', 'created_date',)
     fieldsets = (
         (None, {'fields': ('email', 'password', 'first_name', 'last_name', 'created_date',)}),
-        ('Permissions', {'fields': ('is_admin',)}),
+        ('Permissions', {'fields': ('is_admin', 'is_legacy',)}),
         ('Logins', {'fields': ('logins',)}),
     )
     add_fieldsets = (
