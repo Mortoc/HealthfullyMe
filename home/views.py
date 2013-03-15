@@ -32,7 +32,7 @@ def login_user(request):
             user = authenticate(email=email, password=password)
             
             if user is not None:
-                user.login(request)
+                login(request, user)
                 return HttpResponseRedirect('/')
             else:
                 error = "Invalid Username or Password"
@@ -86,7 +86,7 @@ def register_user(request):
                 user.save()
                 
                 user = authenticate(email=email, password=password)
-                user.login(request)
+                login(request, user)
                 
                 email = message_from_template(
                     "email/welcome_new_registration.html",

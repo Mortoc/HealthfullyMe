@@ -3,6 +3,7 @@ from django.test.client import RequestFactory
 from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase
 from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login
 
 from home.views import *
 from home.models import *
@@ -18,13 +19,46 @@ class MockSession(dict):
         
     def cycle_key(self):
         pass
+    
+    
+class LoginVerification(TestCase):
+    def setUp(self):
+        # Every test needs access to the request factory.
+        self.factory = RequestFactory()
+        
+        self.test_user = HMUser.objects.create_user (
+            email="TEST@USER.COM".lower(),
+            password="OMG_TESTS!"
+        )
+        self.test_user.save()
+        
+        self.auth_code = AuthCode()
+        self.auth_code.save()
+        
+        
+    def test_login(self):
+        request = self.factory.get('/login')
+        request.user = AnonymousUser()
+        request.session = MockSession()
+        
+        request.method = "POST"
+        request.POST = {
+            'email' : 'test@user.com',
+            'password' : 'OMG_TESTS!',
+        }
+        
+        response = login_user(request)
+        
+        user = HMUser.objects.get(email = "test@user.com")
+        self.assertTrue(user.is_authenticated)
+
 
 class RegistrationVerification(TestCase):
     def setUp(self):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
         
-        self.test_user = HMUser.objects.create_user (
+        self.test_user = HMUser.objects.create_user(
             email="TEST@USER.COM",
             password="OMG_TESTS!"
         )
@@ -33,11 +67,11 @@ class RegistrationVerification(TestCase):
         self.auth_code.save()
         
         
-    def auth_code_generation(self):
+    def test_auth_code_generation(self):
         auth = AuthCode()
         auth.save()
         
-        self.assertEqual(len(auth.code), home.models.CODE_LENGTH, "Saving the auth code should generate a code")
+        self.assertEqual(len(auth.code), CODE_LENGTH, "Saving the auth code should generate a code")
         
         
     def test_register_existing_username(self):

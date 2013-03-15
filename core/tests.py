@@ -2,7 +2,10 @@ from django.utils import unittest
 from django.test.client import RequestFactory
 from django.test import TestCase
 from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import AnonymousUser
 
+from home.views import login_user
 from core.models import *
 
 class MockSession(dict):
@@ -24,16 +27,31 @@ class HMUserVerification(TestCase):
         self.factory = RequestFactory()
         
         self.test_user = HMUser.objects.create_user (
-            email="TEST@USER.COM",
+            email="TEST@USER.COM".lower(),
             password="OMG_TESTS!"
         )
+        
+        self.test_user.save()
         
         
     def test_logins_are_recorded(self):
         request = self.factory.get('/login')
+        request.user = AnonymousUser()
         request.session = MockSession()
         
         initial_logins = self.test_user.logins.count()
-        self.test_user.login(request)
+
+        request = self.factory.get('/login')
+        request.user = AnonymousUser()
+        request.session = MockSession()
         
-        self.assertEqual(initial_logins + 1, self.test_user.logins.count())
+        request.method = "POST"
+        request.POST = {
+            'email' : 'test@user.com',
+            'password' : 'OMG_TESTS!',
+        }
+        
+        response = login_user(request)
+        
+        user = HMUser.objects.get(email = 'test@user.com')
+        self.assertEqual(initial_logins + 1, user.logins.count())
