@@ -37,9 +37,7 @@
             
             <div class="message-row">
                 {% if user.is_authenticated %}
-                    <a href="/store">
-                        <input class="orange-button" style="width: 304px; margin-top: 50px;" value="Go to the Store"></input>
-                    </a>
+                    <input class="orange-button" style="width: 304px; margin-top: 50px;" type="submit" onclick="window.location = '/store'" value="Go to the Store"></input>
                 {% else %}
                 <form class="default-form" action="submit-email/" method="post">
                     {% csrf_token %}
