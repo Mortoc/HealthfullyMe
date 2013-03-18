@@ -40,7 +40,7 @@ def main(request):
         return render(request, "store_main.html", context)
         
 def purchase_complete(request):
-    recent_transaction = Transaction.objects.filter(user=request.user).order_by('-timestamp')[0]
+    recent_transaction = Transaction.objects.filter(user=request.user.pk).order_by('-timestamp')[0]
     recent_offer = recent_transaction.offer;
     
     return render(request, "purchase_complete.html",
