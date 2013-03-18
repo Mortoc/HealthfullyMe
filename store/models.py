@@ -5,7 +5,6 @@ from django.utils.timezone import now
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
-
 import hashlib
 import math
 

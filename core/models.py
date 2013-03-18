@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth.signals import user_logged_in
 from django.utils.timezone import now
+from django.utils.safestring import mark_safe
 
 from core.timeutil import show_time_as
 
@@ -62,6 +63,7 @@ class HMUser(AbstractBaseUser):
     logins = models.ManyToManyField(LoginInfo)
     
     is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_legacy = models.BooleanField(default=False) # is this user imported from ROI Health
 
@@ -90,14 +92,13 @@ class HMUser(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
-
-    @property
-    def is_staff(self):
-        "Is the user a member of staff?"
-        # Simplest possible answer: All admins are staff
-        return self.is_admin
-
-
+    
+    def password_admin_reset(self):
+        html = "<span>********&nbsp&nbsp&nbsp&nbsp<a href='#'>reset</a></span>";
+        return mark_safe(html)
+    
+    password_admin_reset.allow_tags = True
+    password_admin_reset.short_description = "Password"
 
 
 def add_login_info(sender, user, request, **kwargs):
@@ -107,32 +108,25 @@ def add_login_info(sender, user, request, **kwargs):
     user.logins.add( login_info )
     user.save()
 
-
 user_logged_in.connect(add_login_info)
-
-
 
 
 class Address(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=256, null=True)
+    name = models.CharField(max_length=256, null=True, blank=True)
     line1 = models.CharField(max_length=256)
-    line2 = models.CharField(max_length=256, null=True)
-    city = models.CharField(max_length=256, null=True)
-    state = models.CharField(max_length=2, null=True)
+    line2 = models.CharField(max_length=256, null=True, blank=True)
+    city = models.CharField(max_length=256, null=True, blank=True)
+    state = models.CharField(max_length=2, null=True, blank=True)
     zip = models.CharField(max_length=8)
-    country = models.CharField(max_length=64, null=True)
+    country = models.CharField(max_length=64, null=True, blank=True)
 
     def __unicode__(self):
-        if self.line2:
+        if self.line2 and self.line2 != " ":
             return "{0}\n{1}\n{2}\n{3}, {4}\n{5}\n{6}".format(self.name, self.line1, self.line2, self.city, self.state, self.zip, self.country)
         else:
             return "{0}\n{1}\n{2}, {3}\n{4}\n{5}".format(self.name, self.line1, self.city, self.state, self.zip, self.country)
         
-        
     def html(self):
-        if self.line2:
-            return "{0}<br />{1}<br />{2}<br />{3}, {4}<br />{5}<br />{6}".format(self.name, self.line1, self.line2, self.city, self.state, self.zip, self.country)
-        else:
-            return "{0}<br />{1}<br />{2}, {3}<br />{4}<br />{5}".format(self.name, self.line1, self.city, self.state, self.zip, self.country)
+        return self.__unicode__().replace("\n", "<br />")
     

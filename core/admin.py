@@ -32,48 +32,17 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
-
-class UserChangeForm(forms.ModelForm):
-    """A form for updating users. Includes all the fields on
-    the user, but replaces the password field with admin's
-    password hash display field.
-    """
-    password = ReadOnlyPasswordHashField()
-
-    class Meta:
-        model = HMUser
-
-    def clean_password(self):
-        # Regardless of what the user provides, return the initial value.
-        # This is done here, rather than on the field, because the
-        # field does not have access to the initial value
-        return self.initial["password"]
-
-
-class HMUserAdmin(UserAdmin):
-    # The forms to add and change user instances
-    form = UserChangeForm
-    add_form = UserCreationForm
-
-    # The fields to be used in displaying the User model.
-    # These override the definitions on the base UserAdmin
-    # that reference specific fields on auth.User.
+class HMUserAdmin(admin.ModelAdmin):
     list_display = ('email', 'created_date', 'is_admin',)
     list_filter = ('is_admin', 'created_date',)
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'first_name', 'last_name', 'created_date',)}),
+        (None, {'fields': ('email', 'password_admin_reset', 'first_name', 'last_name', 'created_date',)}),
         ('Permissions', {'fields': ('is_admin', 'is_legacy',)}),
         ('Logins', {'fields': ('logins',), 'classes': ['collapse']}),
     )
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2',)}
-        ),
-    )
     search_fields = ('email',)
     ordering = ('email', 'created_date',)
-    readonly_fields = ('created_date', 'logins',)
+    readonly_fields = ('created_date', 'logins', 'password_admin_reset',)
     filter_horizontal = ()
 
 admin.site.register(HMUser, HMUserAdmin)
