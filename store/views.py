@@ -87,11 +87,11 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
         transaction.save()
             
         email = message_from_template(
-            "email/purchase_confirmation.html", 
+            "email/purchase_confirmation.html",
             "orders@healthfully.me",
             "help@healthfully.me",
-            [request.user.email], 
-            ["orders@healthfully.me"], 
+            [request.user.email],
+            ["orders@healthfully.me"],
             {
                 "user" : request.user,
                 "offer" : post_offer,
@@ -102,7 +102,7 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
         )
         email.send()
         
-        return HttpResponse(json.dumps( {"status" : "success"} ), mimetype="application/json")
+        return HttpResponse(json.dumps({"status" : "success"}), mimetype="application/json")
     except (stripe.StripeError, stripe.CardError) as e:
         response_data = {
             "status" : "card-declined",
