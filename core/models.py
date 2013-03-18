@@ -65,6 +65,7 @@ class HMUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
+    receives_newsletter = models.BooleanField(default=False)
     is_legacy = models.BooleanField(default=False) # is this user imported from ROI Health
 
     objects = HMUserManager()
@@ -99,6 +100,9 @@ class HMUser(AbstractBaseUser):
     
     password_admin_reset.allow_tags = True
     password_admin_reset.short_description = "Password"
+    
+    #def send_reset_password_email(self):
+        
 
 
 def add_login_info(sender, user, request, **kwargs):
@@ -118,7 +122,7 @@ class Address(models.Model):
     line2 = models.CharField(max_length=256, null=True, blank=True)
     city = models.CharField(max_length=256, null=True, blank=True)
     state = models.CharField(max_length=2, null=True, blank=True)
-    zip = models.CharField(max_length=8)
+    zip = models.CharField(max_length=10)
     country = models.CharField(max_length=64, null=True, blank=True)
 
     def __unicode__(self):

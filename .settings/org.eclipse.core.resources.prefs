@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
 encoding//core/migrations/0005_auto__add_field_hmuser_is_staff.py=utf-8
+encoding//core/migrations/0006_auto__add_field_hmuser_communications_opt_out.py=utf-8
+encoding//core/migrations/0007_auto__del_field_hmuser_communications_opt_out__add_field_hmuser_receiv.py=utf-8

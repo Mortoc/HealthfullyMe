@@ -126,9 +126,6 @@ class Transaction(models.Model):
     def timestamp_in_est(self):
         return show_time_as(self.timestamp, 'America/New_York')
     
-    def user_email(self):
-        return self.user.email
-    
     def card_info(self):
         return "{0}  |  ...{1}".format(self.card.type, self.card.last4)
     

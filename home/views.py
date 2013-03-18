@@ -83,6 +83,7 @@ def register_user(request):
             
             auth_code_result = use_auth_code(auth_code, user)
             if auth_code_result == AuthCodeResult.SUCCESS:
+                user.receives_newsletter = form.cleaned_data['newsletter']
                 user.save()
                 
                 user = authenticate(email=email, password=password)

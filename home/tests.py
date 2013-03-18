@@ -85,7 +85,8 @@ class RegistrationVerification(TestCase):
             'invite_code' : self.auth_code.code,
             'email' : 'test@user.com',
             'password' : 'test_password',
-            'password_again' : 'test_password'
+            'password_again' : 'test_password',
+            'newsletter' : True
         }
         
         response = register_user(request)
@@ -108,16 +109,21 @@ class RegistrationVerification(TestCase):
             'invite_code' : self.auth_code.code,
             'email' : email,
             'password' : 'test_password',
-            'password_again' : 'test_password'
+            'password_again' : 'test_password',
+            'newsletter' : True
         }
         
         response = register_user(request)
         
+#        print "\n"
+#        for user in HMUser.objects.all():
+#            print user.email
+        
         created_user = HMUser.objects.get(email=email.lower())
         
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], "/")
         self.assertEqual(existing_user_count + 1, HMUser.objects.all().count())
+        self.assertEqual(response['location'], "/")
+        self.assertEqual(response.status_code, 302)
         
         
     def test_register_invalid_auth_declines(self):

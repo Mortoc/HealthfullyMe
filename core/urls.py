@@ -6,7 +6,8 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # serving static files through gunicorn on heroku for now
+    # serving static files through gunicorn on heroku for now. This isn't going to scale nicely,
+    #  eventually we're gonna want to put our static files on S3
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     
     url(r'^$', 'home.views.index', name='index'),

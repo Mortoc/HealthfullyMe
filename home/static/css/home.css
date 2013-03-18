@@ -109,8 +109,11 @@ h3 {
     margin: 0 auto 100px auto;
 }
 
-.login-container input {
-    width: 175px;
+.login-container #id_newsletter {
+    float: right;
+    position: relative;
+    top: -26px;
+    left: -150px;
 }
 
 .login-form {
@@ -121,7 +124,7 @@ h3 {
     
     width: 100%;
     height: 300px;
-    margin-top: 16px;
+    margin: 16px 0 16px 0;
 }
 
 .forgot-login {

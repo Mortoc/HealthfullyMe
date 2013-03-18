@@ -22,6 +22,7 @@ class UserRegistrationForm(forms.Form):
     password = forms.CharField(max_length=30, widget=forms.PasswordInput())
     password_again = forms.CharField(max_length=30, widget=forms.PasswordInput())
     invite_code = forms.CharField(max_length=30)
+    newsletter = forms.BooleanField(label="Receive the newsletter", initial=True)
     
     def clean(self):
         cleaned_data = super(UserRegistrationForm, self).clean()
