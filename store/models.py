@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.utils.timezone import now
 from django.conf import settings
+from django.utils.safestring import mark_safe
+
 
 import hashlib
 import math
@@ -83,6 +85,12 @@ class Card(models.Model):
             
         return card
         
+    
+    def address_for_admin(self):
+        return mark_safe("<p>{0}<br /><a href='/admin/core/address/{1}'>edit</a></p>".format(self.address.html(), self.address.pk))
+    
+    address_for_admin.allow_tags = True
+    address_for_admin.short_description = "Address"
         
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from store.models import ComingSoonIdea, Offer, Transaction, Card
+from core.models import Address
 
 class ComingSoonIdeaAdmin(admin.ModelAdmin):
     list_display = ('text', 'selection_percentage', 'active')
@@ -12,9 +13,14 @@ class TransactionAdmin(admin.ModelAdmin):
     list_display = ('id_slug', 'user_email', 'card_info', 'offer', 'timestamp_in_est', 'shipped')
     readonly_fields = ('id_slug', 'stripe_id', 'offer', 'user', 'card', 'timestamp', 'shipped')
     
+    
 class CardAdmin(admin.ModelAdmin):
-    list_display = ('user_email', 'name', 'type', 'last4')
-    readonly_fields = ('user', 'fingerprint', 'last4', 'type', 'address', 'expire_month', 'expire_year', 'name')
+    fields = ('user', 'fingerprint', 'last4', 'type', 'expire_month', 'expire_year', 'name', 'address_for_admin',)
+    
+    list_display = ('user_email', 'name', 'type', 'last4',)
+    readonly_fields = ('user', 'fingerprint', 'last4', 'expire_month', 'expire_year', 'address_for_admin', 'type', )
+
+    
     
 admin.site.register(ComingSoonIdea, ComingSoonIdeaAdmin)
 admin.site.register(Offer, OfferAdmin)

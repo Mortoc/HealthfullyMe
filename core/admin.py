@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from core.models import HMUser
+from core.models import HMUser, Address
 
 
 class UserCreationForm(forms.ModelForm):
@@ -76,8 +76,9 @@ class HMUserAdmin(UserAdmin):
     readonly_fields = ('created_date', 'logins',)
     filter_horizontal = ()
 
-# Now register the new UserAdmin...
 admin.site.register(HMUser, HMUserAdmin)
-# ... and, since we're not using Django's builtin permissions,
+admin.site.register(Address)
+
+# since we're not using Django's builtin permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
