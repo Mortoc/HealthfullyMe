@@ -17,7 +17,7 @@ class Migration(SchemaMigration):
         #default to true for all admins
         for user in HMUser.objects.all():
             if user.is_admin:
-                user.is_staff = true
+                user.is_staff = True
                 user.save()
 
     def backwards(self, orm):
