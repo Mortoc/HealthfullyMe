@@ -5,7 +5,6 @@ import os, sys
 LIVE = False # dev == False, live == True
 TEST = 'test' in sys.argv
 
-
 if os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LIVE":
     LIVE = True
 elif os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "DEV":

@@ -15,7 +15,6 @@ from home.forms import UserLoginForm, UserRegistrationForm, EmailRequestForm
 def enum(**enums):
     return type('Enum', (), enums)
 
-
 def login_user(request):
     if request.user.is_authenticated():
         HttpResponseRedirect('/store/')
@@ -92,7 +91,7 @@ def register_user(request):
                 email = message_from_template(
                     "email/welcome_new_registration.html",
                     "hello@healthfully.me",
-                    "hello@healthfully.me", 
+                    "hello@healthfully.me",
                     [user.email],
                     ["hello@healthfully.me"]
                 )
