@@ -121,9 +121,10 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "message" : "A Non-stripe error occured"
         }
         
-#        print sys.exc_info()
-#        print sys.exc_value
-#        print traceback.format_exc()
+        if not settings.TEST:
+            print sys.exc_info()
+            print sys.exc_value
+            print traceback.format_exc()
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
 

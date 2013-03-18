@@ -3,6 +3,7 @@ import os, sys
 
 
 LIVE = False # dev == False, live == True
+TEST = 'test' in sys.argv
 
 
 if os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LIVE":
@@ -17,8 +18,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 BASE_DIR = os.path.dirname( os.path.abspath(__file__) )
-                                    
-if 'test' in sys.argv:
+
+if TEST:
     DATABASES = { 'default' : {
                     'ENGINE': 'django.db.backends.sqlite3',
                     'NAME': 'test_db'
