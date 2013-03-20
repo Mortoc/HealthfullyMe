@@ -49,28 +49,34 @@ class Offer(models.Model):
 
 class Card(models.Model):    
     @staticmethod
+    def __clean_input(input):
+        if input is None:
+            return ""
+        return input
+        
+    @staticmethod
     def from_stripe_charge(charge, user):
         try:
             card = Card.objects.get(fingerprint=charge.card.fingerprint)
         except Card.DoesNotExist:
             address = Address(
-                name=Card.clean(charge.card.name),
-                line1=Card.clean(charge.card.address_line1),
-                line2=Card.clean(charge.card.address_line2),
-                city=Card.clean(charge.card.address_city),
-                state=Card.clean(charge.card.address_state),
-                zip=Card.clean(charge.card.address_zip),
-                country=Card.clean(charge.card.address_country),
+                name=Card.__clean_input(charge.card.name),
+                line1=Card.__clean_input(charge.card.address_line1),
+                line2=Card.__clean_input(charge.card.address_line2),
+                city=Card.__clean_input(charge.card.address_city),
+                state=Card.__clean_input(charge.card.address_state),
+                zip=Card.__clean_input(charge.card.address_zip),
+                country=Card.__clean_input(charge.card.address_country),
             )
             address.save()
             
             card = Card(
                 user=user,
-                name=Card.clean(charge.card.name),
-                fingerprint=Card.clean(charge.card.fingerprint),
-                last4=Card.clean(charge.card.last4),
+                name=Card.__clean_input(charge.card.name),
+                fingerprint=Card.__clean_input(charge.card.fingerprint),
+                last4=Card.__clean_input(charge.card.last4),
                 address=address,
-                type=Card.clean(charge.card.type),
+                type=Card.__clean_input(charge.card.type),
                 expire_month=int(charge.card.exp_month),
                 expire_year=int(charge.card.exp_year)
             )
@@ -137,6 +143,9 @@ class Transaction(models.Model):
         self.save()
         
     def set_shipping(self):
+        if not self.shipping_tracking_data:
+            return 
+        
         if len(self.shipping_tracking_data) > 2 and not self.shipped:
             self.shipped = True
             self.save()
