@@ -8,6 +8,7 @@ from store.models import Transaction
 
 import re
 
+SEND_EMAILS_IN_DEV = True
 RE_FIND_TITLE_IN_HTML = re.compile('<title>(.+)</title>')
 
 class __DevEmailMessage(EmailMessage):
@@ -22,7 +23,7 @@ def message_from_template(template_path, from_email, reply_to, send_to, bcc = []
     
     subject = __get_email_subject_from_message(message)
     
-    if settings.LIVE:
+    if settings.LIVE or SEND_EMAILS_IN_DEV:
         email = EmailMessage(
           subject,
           message,

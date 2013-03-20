@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     
     url(r'^server-error', 'core.views.server_error', name='server-error'),
     
-    url(r'^set-my-password/(?P<key>.*)$', 'core.views.set_my_password'),
+    url(r'^reset-password/(?P<key>.*)$', 'core.views.set_my_password'),
     url(r'^admin/tools/email-viewer/(?P<email_name>.*)$', 'core.email.view_email'),
     url(r'^admin/tools/reset-password/(?P<user_email>.*)$', 'core.views.reset_user_password'),
     url(r'^admin/', include(admin.site.urls)),

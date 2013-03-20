@@ -4,6 +4,10 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.contrib.auth.signals import user_logged_in
 from django.utils.timezone import now
 from django.utils.safestring import mark_safe
+from django.contrib.auth.hashers import make_password
+
+import hashlib
+from datetime import timedelta
 
 from core.timeutil import show_time_as
 
@@ -47,7 +51,7 @@ class LoginInfo(models.Model):
         return show_time_as(self.timestamp, 'UTC')
 
 
-class HMUser(AbstractBaseUser):
+class HMUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name='Email Address',
         max_length=255,
@@ -95,14 +99,32 @@ class HMUser(AbstractBaseUser):
         return True
     
     def password_admin_reset(self):
-        html = "<span>********&nbsp&nbsp&nbsp&nbsp<a href='#'>reset</a></span>";
+        html = "<span>********&nbsp&nbsp&nbsp&nbsp<a href='/admin/tools/reset-password/" + self.email + "'>reset</a></span>";
         return mark_safe(html)
     
     password_admin_reset.allow_tags = True
     password_admin_reset.short_description = "Password"
     
-    #def send_reset_password_email(self):
+# SingleUserUrl a key for a url that's tied to a single user account
+class UserAccessCode(models.Model):
+    @staticmethod
+    def create(user, expires=now() + timedelta(weeks=1)):
         
+        hash = hashlib.sha1()
+        hash.update(user.email + settings.SECRET_KEY + show_time_as(now(), "UTC"))
+        
+        return UserAccessCode(
+            code = hash.hexdigest(),
+            user = user,
+            valid_until = expires
+        )
+        
+    id = models.AutoField(primary_key=True)
+    code = models.CharField(max_length=40, db_index=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    created_date = models.DateTimeField(default=now)
+    valid_until = models.DateTimeField(null=True, blank=True)
 
 
 def add_login_info(sender, user, request, **kwargs):

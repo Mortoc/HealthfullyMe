@@ -47,13 +47,7 @@ class Offer(models.Model):
     def __unicode__(self):
         return self.header_text + " | " + self.offer_price()
 
-class Card(models.Model):
-    @staticmethod
-    def clean(charge_data):
-        if charge_data is None:
-            return ""
-        return charge_data
-    
+class Card(models.Model):    
     @staticmethod
     def from_stripe_charge(charge, user):
         try:
@@ -116,15 +110,19 @@ class Transaction(models.Model):
     id = models.AutoField(primary_key=True)
     id_slug = models.CharField(max_length=ID_SLUG_LENGTH, default='')
     stripe_id = models.CharField(max_length=64, default="invalid")
-    shipping_tracking_data = models.CharField(max_length=255, default=" ")
+    shipping_tracking_data = models.CharField(max_length=255, null=True, blank=True)
     shipped = models.BooleanField(default=False)
     offer = models.ForeignKey(Offer)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     card = models.ForeignKey(Card, null=True)
     timestamp = models.DateTimeField(default=now)
+    notes = models.TextField(default="", null=True, blank=True)
     
     def timestamp_in_est(self):
         return show_time_as(self.timestamp, 'America/New_York')
+    
+    def shipping_address(self):
+        return self.card.address.__unicode__()
     
     def card_info(self):
         return "{0}  |  ...{1}".format(self.card.type, self.card.last4)

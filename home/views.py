@@ -39,7 +39,8 @@ def login_user(request):
         form = UserLoginForm()
         
     return render_to_response (
-            'login.html', { 
+            'login.html', 
+            { 
                 'form': form,
                 'error' : error 
             },

@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import AnonymousUser
 
-from home.views import login_user
+from home.views import login_user, logout_user
 from core.models import *
 
 class MockSession(dict):
@@ -33,25 +33,52 @@ class HMUserVerification(TestCase):
         
         self.test_user.save()
         
-        
-    def test_logins_are_recorded(self):
+    def do_login(self, email, password):
         request = self.factory.get('/login')
         request.user = AnonymousUser()
         request.session = MockSession()
-        
-        initial_logins = self.test_user.logins.count()
-
-        request = self.factory.get('/login')
-        request.user = AnonymousUser()
-        request.session = MockSession()
+        request.user.session = request.session 
         
         request.method = "POST"
         request.POST = {
-            'email' : 'test@user.com',
-            'password' : 'OMG_TESTS!',
+            'email' : email,
+            'password' : password,
         }
         
-        response = login_user(request)
+        return login_user(request)
+    
         
-        user = HMUser.objects.get(email = 'test@user.com')
-        self.assertEqual(initial_logins + 1, user.logins.count())
+    def test_logins_are_recorded(self):
+        initial_logins = self.test_user.logins.count()
+
+        self.do_login('test@user.com', 'OMG_TESTS!')
+        self.assertEqual(initial_logins + 1, HMUser.objects.get(email = 'test@user.com').logins.count(), "Logging in didn't increment the logins count")
+        
+        self.do_login('test@user.com', 'THIS IS THE WRONG PASSWORD')
+        self.assertEqual(initial_logins + 1, HMUser.objects.get(email = 'test@user.com').logins.count(), "Failed login still incremented the logins count")
+        
+    def test_set_new_password(self):
+        first_password = "OMG_TESTS_NEW!"
+        second_password = "ERMAGHAD_TERSTS!"
+        
+        initial_logins = HMUser.objects.get(email = 'test@user.com').logins.count()
+        
+        self.test_user.set_password(first_password)
+        self.test_user.save()
+        self.do_login('test@user.com', first_password)
+        self.assertEqual(HMUser.objects.get(email = 'test@user.com').logins.count(), initial_logins + 1, "Logging in after setting a new password failed")
+        
+        self.test_user.set_password(second_password)
+        self.test_user.save()
+        self.do_login('test@user.com', first_password) #login with the wrong password, make sure it doesn't work
+        self.assertEqual(HMUser.objects.get(email = 'test@user.com').logins.count(), initial_logins + 1, "Failed login after setting a new password still incremented logins count")
+        
+        self.do_login('test@user.com', second_password)
+        self.assertEqual(HMUser.objects.get(email = 'test@user.com').logins.count(), initial_logins + 2, "Setting a new password didn't work")
+        
+        self.test_user.set_password(first_password)
+        self.test_user.save()
+        self.do_login('test@user.com', first_password)
+        self.assertEqual(HMUser.objects.get(email = 'test@user.com').logins.count(), initial_logins + 3, "Setting back to an earlier password didn't work")
+        
+        

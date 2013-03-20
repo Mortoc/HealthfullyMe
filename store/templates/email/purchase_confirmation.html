@@ -1,5 +1,5 @@
 {% extends "email/boilerplate.html" %} 
-{% block subject %}Order Confirmation - Healthfully Me{% endblock %} 
+{% block subject %}Healthfully Me Order: {{ transaction.id_slug }}{% endblock %} 
 {% block body %}
 <style>
     @import url(http://fonts.googleapis.com/css?family=Signika);

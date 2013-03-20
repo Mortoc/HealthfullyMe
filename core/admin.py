@@ -48,6 +48,3 @@ class HMUserAdmin(admin.ModelAdmin):
 admin.site.register(HMUser, HMUserAdmin)
 admin.site.register(Address)
 
-# since we're not using Django's builtin permissions,
-# unregister the Group model from admin.
-admin.site.unregister(Group)

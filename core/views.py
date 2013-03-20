@@ -2,13 +2,14 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.conf import settings
 from django.http import HttpResponseRedirect
+from django.utils.timezone import now 
 
-
+import sys, traceback
 import hashlib
 
 from core.email import message_from_template
 from core.encode import base62_encode
-from core.models import HMUser
+from core.models import HMUser, UserAccessCode
 from core.forms import SetPasswordForm
 
 def server_error(request):
@@ -34,18 +35,20 @@ def reset_user_password(request, user_email):
     if request.POST:
         context['message'] = "An email has been sent to " + user_email + " with a link to reset their password"
         
-        reset_url = request.get_host() + "/reset-password/" + hashlib.sha1(user_email + settings.SECRET_KEY).hexdigest()
+        access = UserAccessCode.create(HMUser.objects.get(email = user_email))
+        access.save()
         
-#        email = message_from_template(
-#            "email/reset_password_email.html",
-#            "hello@healthfully.me",
-#            "hello@healthfully.me",
-#            [user.email],
-#            ["hello@healthfully.me"],
-#            { "reset_url" : reset_url }
-#        )
-#        email.send()
-    print reset_url
+        reset_url = "http://" + request.get_host() + "/reset-password/" + access.code 
+        
+        email = message_from_template(
+            "email/reset_password_email.html",
+            "help@healthfully.me",
+            "help@healthfully.me",
+            [user.email],
+            ["help@healthfully.me"],
+            { "reset_url" : reset_url }
+        )
+        email.send()
     
     return render_to_response (
             'reset-password.html',
@@ -54,18 +57,41 @@ def reset_user_password(request, user_email):
         )
     
 def set_my_password(request, key):
-    if request.method == 'POST':
-        form = SetPasswordForm(request.POST)
+    context = { 'code' : key }
+    form = None
+    
+    try:
+        code = UserAccessCode.objects.get(code = key)
+        if code.valid_until < now():
+            context['error'] = "Expired Code"
+        elif request.method == 'POST':
+            form = SetPasswordForm(request.POST)
+            
+            if form.is_valid():
+                print form.cleaned_data["password"]
+                user = HMUser.objects.get(email = code.user.email)
+                user.set_password(form.cleaned_data["password"])
+                user.save()
+                code.delete()
+                context['message'] = "Password has been reset"
+        else:
+            form = SetPasswordForm()
+                    
+    except:
+        if not settings.TEST:
+            print sys.exc_info()
+            print sys.exc_value
+            print traceback.format_exc()
         
-        if form.is_valid():
-            return HttpResponseRedirect('/')
-
-    else:
-        form = SetPasswordForm()
-         
+        context['error'] = "Invalid Code"
+    
+    
+    if form:    
+        context['form'] = form
+    
     return render_to_response (
             'set_my_password.html',
-            { 'form' : form },
+            context,
             context_instance=RequestContext(request)
         )
     
