@@ -51,7 +51,7 @@ class LoginInfo(models.Model):
         return show_time_as(self.timestamp, 'UTC')
 
 
-class HMUser(AbstractBaseUser, PermissionsMixin):
+class HMUser(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='Email Address',
         max_length=255,
@@ -97,6 +97,7 @@ class HMUser(AbstractBaseUser, PermissionsMixin):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
+    
     
     def password_admin_reset(self):
         html = "<span>********&nbsp&nbsp&nbsp&nbsp<a href='/admin/tools/reset-password/" + self.email + "'>reset</a></span>";

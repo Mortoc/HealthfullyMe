@@ -13,9 +13,11 @@ import math
 class EmailRequest(models.Model):
     email = models.EmailField()
     created_date = models.DateTimeField(default=now)
+    code_sent = models.BooleanField(default=False)
     
     def created_date_in_EST(self):
         return show_time_as(self.created_date, 'America/New_York')
+    
     
 
 CODE_LENGTH = 5

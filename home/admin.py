@@ -14,7 +14,7 @@ admin.site.register(AuthCode, AuthCodeAdmin)
 
 
 class EmailRequestAdmin(admin.ModelAdmin):
-    list_display = ('email', 'created_date_in_EST')
+    list_display = ('email', 'created_date_in_EST', 'code_sent')
     
 
 admin.site.register(EmailRequest, EmailRequestAdmin)

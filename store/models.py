@@ -107,15 +107,15 @@ class Card(models.Model):
         return self.user.email
     
     def __unicode__(self):
-        return self.type + " | " + self.last4
+        return self.name + " | " + self.type + " | " + self.last4
     
 
 ID_SLUG_LENGTH = 16
 PRIVATE_TRANSACTION_KEY = 349659
 class Transaction(models.Model):
     id = models.AutoField(primary_key=True)
-    id_slug = models.CharField(max_length=ID_SLUG_LENGTH, default='')
-    stripe_id = models.CharField(max_length=64, default="invalid")
+    id_slug = models.CharField(max_length=ID_SLUG_LENGTH, null=True, blank=True)
+    stripe_id = models.CharField(max_length=64, null=True, blank=True)
     shipping_tracking_data = models.CharField(max_length=255, null=True, blank=True)
     shipped = models.BooleanField(default=False)
     offer = models.ForeignKey(Offer)

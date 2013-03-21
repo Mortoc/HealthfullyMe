@@ -12,13 +12,11 @@ class OfferAdmin(admin.ModelAdmin):
     
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('id_slug', 'user', 'card_info', 'offer', 'timestamp_in_est', 'shipped')
-    readonly_fields = ('id_slug', 'stripe_id', 'offer', 'user', 'card', 'timestamp', 'shipped', 'shipping_address')
+    readonly_fields = ('id_slug', 'shipped', )
     
 class CardAdmin(admin.ModelAdmin):
-    fields = ('user', 'fingerprint', 'last4', 'type', 'expire_month', 'expire_year', 'name', 'address_for_admin',)
-    
+    fields = ('user', 'fingerprint', 'last4', 'type', 'expire_month', 'expire_year', 'name', 'address', )
     list_display = ('user_email', 'name', 'type', 'last4',)
-    readonly_fields = ('user', 'fingerprint', 'last4', 'expire_month', 'expire_year', 'address_for_admin', 'type', )
     
     
 admin.site.register(ComingSoonIdea, ComingSoonIdeaAdmin)

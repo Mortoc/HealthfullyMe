@@ -48,3 +48,5 @@ class HMUserAdmin(admin.ModelAdmin):
 admin.site.register(HMUser, HMUserAdmin)
 admin.site.register(Address)
 
+admin.site.unregister(Group)
+

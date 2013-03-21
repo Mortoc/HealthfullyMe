@@ -110,10 +110,6 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "code" : e.code
         }
         
-#        print sys.exc_info()
-#        print sys.exc_value
-#        print traceback.format_exc()
-        
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
     except:
         response_data = {
@@ -127,7 +123,7 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             print traceback.format_exc()
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
-
+        
         
 def vote_ajax(request):
     option1 = int(request.GET['option1'])
