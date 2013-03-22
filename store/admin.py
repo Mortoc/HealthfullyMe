@@ -1,5 +1,5 @@
 from django.contrib import admin
-from store.models import ComingSoonIdea, Offer, Transaction, Card
+from store.models import ComingSoonIdea, Offer, OfferAvailability, Transaction, Card
 from core.models import Address
 
 
@@ -9,6 +9,10 @@ class ComingSoonIdeaAdmin(admin.ModelAdmin):
     
 class OfferAdmin(admin.ModelAdmin):
     list_display = ('header_text', 'buy_window_description', 'offer_price', 'enabled')
+    filter_horizontal = ('availability',)
+    
+class OfferAvailabilityAdmin(admin.ModelAdmin):
+    pass
     
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('id_slug', 'user', 'card_info', 'offer', 'timestamp_in_est', 'shipped')
@@ -23,3 +27,4 @@ admin.site.register(ComingSoonIdea, ComingSoonIdeaAdmin)
 admin.site.register(Offer, OfferAdmin)
 admin.site.register(Transaction, TransactionAdmin)
 admin.site.register(Card, CardAdmin)
+admin.site.register(OfferAvailability, OfferAvailabilityAdmin)

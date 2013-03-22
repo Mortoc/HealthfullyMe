@@ -2,7 +2,7 @@ from django.utils import unittest
 from django.test.client import RequestFactory
 from django.test import TestCase
 from django.contrib.auth import authenticate, login, logout
-from store.models import Transaction, Offer
+from store.models import Transaction, Offer, OfferAvailability
 from store.views import record_charge_ajax
 
 from core.models import HMUser
@@ -70,6 +70,41 @@ class TransactionTest(TestCase):
     def mock_run_stripe_charge_server_error(self, price, stripe_token, username):
         raise Exception("Fake Server Error")
     
+    def test_offer_availability_limits(self):
+        request = self.factory.get('/store/record-charge')
+        request.user = HMUser.objects.get(email=self.test_user.email)
+        request.method = "POST"
+        
+        new_rule = OfferAvailability(time_value=1, time_peroid=3) # 1 month
+        new_rule.save()
+        self.test_offer.availability.add( new_rule )
+        self.test_offer.save()
+        
+        request.POST = {
+            'offer_id' : str(self.test_offer.id),
+            'stripe_token' : "test_token"
+        }
+        
+        # First try should be successful
+        response = record_charge_ajax(
+            request, 
+            self.mock_run_stripe_charge
+        )
+        response_content = json.loads( response.content )
+        self.assertEqual( response_content['status'] ,"success" )
+        self.assertEqual( response.status_code, 200 )
+        
+        request.user = HMUser.objects.get(email=self.test_user.email)
+        
+        # Second try should fail
+        response = record_charge_ajax(
+            request, 
+            self.mock_run_stripe_charge
+        )
+        response_content = json.loads( response.content )
+        self.assertEqual(response_content['status'], 'not-available')
+        self.assertEqual(response.status_code, 200)
+        
     
     def test_record_charge_ajax_on_successful_card(self):
         request = self.factory.get('/store/record-charge')

@@ -29,6 +29,8 @@
                         window.location = "/store/purchase-complete";   
                     } else if( data['status'] == "card-declined" ) {
                         window.location = "/store/purchase-error";
+                    } else if( data['status'] == "not-available" ) {
+                        window.location = "/store/offer-not-available/" + data['offer_id'];
                     } else {
                         window.location = "/server-error";
                     }

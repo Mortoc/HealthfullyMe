@@ -58,7 +58,7 @@ class HMUser(AbstractBaseUser, PermissionsMixin):
         unique=True,
         db_index=True,
     )
-
+    
     created_date = models.DateTimeField(default=now)
     
     first_name = models.CharField(default="", max_length=128)

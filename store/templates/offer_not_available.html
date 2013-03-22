@@ -1,0 +1,30 @@
+{% extends "user_page.html" %}
+{% load humanize %}
+
+{% block more_extra_style %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css" type="text/css" media="screen" />
+{% endblock %}
+
+{% block extra_script_include %}
+  <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+{% endblock %}
+
+{% block main_content %}
+
+    <div style="width: 320px; margin: 50px auto; padding: 0">
+        <h1 class="scripty-header-text" style="width: 100%; text-align: center; float: none">Come back shortly!</h1>
+        
+        <p class="message-text" style="width: 100%; text-align: center; margin-top: 100px">
+            Sorry you reached your order limit. You can place orders again in: <h3 style="margin: 0; padding: 0; line-height: 40px">{{ available_date|naturaltime }}</h3><br />
+        </p>
+        <p class="message-text" style="width: 100%; margin: 0 auto">   
+            You must be asking "Why can't I place more orders"? We're really sorry about this but we have to restrict the number of orders our members can make in a certain period to ensure you are happy. <br /><br />Its important to us that you get what you want in a timely manner, and unfortunately we're just not big enough yet to handle so many orders.
+            
+        </p>
+        
+        <p style="width: 100%; text-align: center; margin:50px 0 50px 0">
+            <a href="/store" >Back</a>
+        </p>        
+    </div>
+
+{% endblock %}

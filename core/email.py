@@ -8,7 +8,7 @@ from store.models import Transaction
 
 import re
 
-SEND_EMAILS_IN_DEV = True
+SEND_EMAILS_IN_DEV = False
 RE_FIND_TITLE_IN_HTML = re.compile('<title>(.+)</title>')
 
 class __DevEmailMessage(EmailMessage):

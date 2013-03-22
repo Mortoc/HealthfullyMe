@@ -78,31 +78,40 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
         
         card = Card.from_stripe_charge(charge, request.user)
         
-        transaction = Transaction(
-            user=request.user,
-            offer=post_offer,
-            card=card,
-            stripe_id=charge.id
-        )
-        transaction.save()
+        if post_offer.user_can_purchase(request.user):
+            transaction = Transaction(
+                user=request.user,
+                offer=post_offer,
+                card=card,
+                stripe_id=charge.id
+            )
+            transaction.save()
+                
+            email = message_from_template(
+                "email/purchase_confirmation.html",
+                "orders@healthfully.me",
+                "help@healthfully.me",
+                [request.user.email],
+                ["orders@healthfully.me"],
+                {
+                    "user" : request.user,
+                    "offer" : post_offer,
+                    "transaction" : transaction,
+                    "shipping_address" : card.address,
+                    "billing_address" : card.address
+                }
+            )
+            email.send()
             
-        email = message_from_template(
-            "email/purchase_confirmation.html",
-            "orders@healthfully.me",
-            "help@healthfully.me",
-            [request.user.email],
-            ["orders@healthfully.me"],
-            {
-                "user" : request.user,
-                "offer" : post_offer,
-                "transaction" : transaction,
-                "shipping_address" : card.address,
-                "billing_address" : card.address
+            return HttpResponse(json.dumps({"status" : "success"}), mimetype="application/json")
+        else:
+            response_data = {
+                "status" : "not-available",
+                "offer_id" : post_offer.id
             }
-        )
-        email.send()
-        
-        return HttpResponse(json.dumps({"status" : "success"}), mimetype="application/json")
+            
+            return HttpResponse(json.dumps(response_data), mimetype="application/json")
+            
     except (stripe.StripeError, stripe.CardError) as e:
         response_data = {
             "status" : "card-declined",
@@ -124,6 +133,13 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
         
+        
+def offer_not_available(request, offer_id):
+    return render(request, "offer_not_available.html",
+    {
+        "available_date" : Offer.objects.get(id=offer_id).next_available_time(request.user)
+    })
+
         
 def vote_ajax(request):
     option1 = int(request.GET['option1'])

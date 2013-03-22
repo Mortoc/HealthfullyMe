@@ -23,6 +23,8 @@ urlpatterns = patterns('',
     url(r'^store/record-charge$', 'store.views.record_charge_ajax', name='record-charge'),
     url(r'^store/purchase-complete$', 'store.views.purchase_complete', name='purchase-complete'),
     url(r'^store/purchase-error$', 'store.views.purchase_error', name='purchase-error'),
+    url(r'^store/offer-not-available/(?P<offer_id>.+)$', 'store.views.offer_not_available', name='offer-not-available'),
+    
     
     url(r'^server-error', 'core.views.server_error', name='server-error'),
     

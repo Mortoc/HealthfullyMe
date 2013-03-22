@@ -7,6 +7,7 @@ from django.utils.safestring import mark_safe
 
 import hashlib
 import math
+from datetime import timedelta
 
 from core.encode import base62_encode
 from core.timeutil import show_time_as
@@ -41,11 +42,136 @@ class Offer(models.Model):
     price = models.IntegerField(default=4000)
     enabled = models.BooleanField(default=False)
     
+    availability = models.ManyToManyField('OfferAvailability', null=True, blank=True)
+    
     def offer_price(self):
         return "${0:.2f}".format(float(self.price) * 0.01)
     
     def __unicode__(self):
         return self.header_text + " | " + self.offer_price()
+    
+    def user_can_purchase(self, user):
+        transactions = Transaction.objects.filter(user = user.pk).order_by("-timestamp")
+        
+        if transactions.count() > 0:
+            for rule in self.availability.all():
+                if not rule.can_add_transaction(transactions):
+                    return False
+        
+        return True
+    
+    def next_available_time(self, user):
+        if self.user_can_purchase(user):
+            return now()
+        
+        transactions = Transaction.objects.filter(user = user.pk).order_by("-timestamp")
+        
+        #print "\n\nChecking User Purchase"
+        #print "{0} has {1} transactions".format(user.email, transactions.count())
+        
+        if transactions.count() > 0:
+            next_availability = now()
+            
+            for rule in self.availability.all():
+                if not rule.can_add_transaction(transactions):
+                    start_time = rule.get_start_time()
+    
+                    first_rule_affected_trans = None
+                    for transaction in transactions:
+                        if transaction.timestamp > start_time:
+                            first_rule_affected_trans = transaction
+                        else:
+                            break
+                        
+                    this_availability = first_rule_affected_trans.timestamp + rule.time_span()
+                    
+                    if not next_availability or this_availability > next_availability:
+                        next_availability = this_availability
+            
+            print "##################"
+            print show_time_as(next_availability, "EST")
+            print "##################"
+            return next_availability
+        
+        return now()
+        
+
+class OfferAvailability(models.Model):
+    id = models.AutoField(primary_key=True)
+    
+    # potential user type key to have different 
+    # availabilities for different types of users
+    
+    purchases = models.IntegerField(default=1)
+    time_value = models.IntegerField(default=1)
+    
+    MINUTE = 0
+    HOUR = 1
+    DAY = 2
+    MONTH = 3
+    TIME_PEROID = (
+        (MINUTE, 'Minutes'),
+        (HOUR, 'Hours'),
+        (DAY, 'Days'),
+        (MONTH, 'Months'),
+    )
+    
+    time_peroid = models.SmallIntegerField(choices=TIME_PEROID)
+    
+    def __unicode__(self):
+        if self.purchases == 0:
+            return "unlimited"
+        
+        time_unit = {
+            0 : "minute",
+            1 : "hour",
+            2 : "day",
+            3 : "month",
+        }
+        
+        if self.purchases > 1:
+            purchases_plural = "s"
+        else:
+            purchases_plural = ""
+        
+        if self.time_value == 1:
+            return "{0} purchase{1} per {2}".format(self.purchases, purchases_plural, time_unit[self.time_peroid])
+               
+        if self.time_value > 1:
+            time_value_plural = "s"
+        else:
+            time_value_plural = ""
+        
+        return "{0} purchase{1} per {2} {3}{4}".format(self.purchases, purchases_plural, self.time_value, time_unit[self.time_peroid], time_value_plural)
+    
+    # given a set of transactions, can we add another without violating this availability rule?
+    def can_add_transaction(self, transactions = []):
+        start_time = self.get_start_time()
+        
+        transactions_in_time_peroid = 0
+        for transaction in transactions:
+            if transaction.timestamp > start_time:
+                transactions_in_time_peroid += 1
+            else:
+                break
+        
+        return transactions_in_time_peroid < self.purchases
+            
+    
+    def time_span(self):
+        if self.time_peroid == self.MINUTE:
+            return timedelta(minutes=self.time_value)
+        elif self.time_peroid == self.HOUR:
+            return timedelta(hours=self.time_value)
+        elif self.time_peroid == self.DAY:
+            return timedelta(days=self.time_value)
+        elif self.time_peroid == self.MONTH:
+            return timedelta(days=self.time_value * 30)
+        else:
+            return timedelta()
+    
+    def get_start_time(self):
+        return now() - self.time_span()
 
 class Card(models.Model):    
     @staticmethod
@@ -108,7 +234,6 @@ class Card(models.Model):
     
     def __unicode__(self):
         return self.name + " | " + self.type + " | " + self.last4
-    
 
 ID_SLUG_LENGTH = 16
 PRIVATE_TRANSACTION_KEY = 349659
