@@ -42,7 +42,7 @@ class HMUserAdmin(admin.ModelAdmin):
     )
     search_fields = ('email',)
     ordering = ('email', 'created_date',)
-    readonly_fields = ('created_date', 'logins', 'password_admin_reset', 'receives_newsletter',)
+    readonly_fields = ('created_date', 'logins', 'password_admin_reset',)
     filter_horizontal = ()
 
 admin.site.register(HMUser, HMUserAdmin)

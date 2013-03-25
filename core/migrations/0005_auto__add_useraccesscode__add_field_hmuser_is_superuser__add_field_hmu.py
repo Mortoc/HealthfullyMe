@@ -23,6 +23,16 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.BooleanField')(default=False),
                       keep_default=False)
 
+        # Adding field 'HMUser.is_staff'
+        db.add_column(u'core_hmuser', 'is_staff',
+                      self.gf('django.db.models.fields.BooleanField')(default=False),
+                      keep_default=False)
+
+        # Adding field 'HMUser.receives_newsletter'
+        db.add_column(u'core_hmuser', 'receives_newsletter',
+                      self.gf('django.db.models.fields.BooleanField')(default=False),
+                      keep_default=False)
+
         # Adding M2M table for field groups on 'HMUser'
         db.create_table(u'core_hmuser_groups', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
@@ -49,6 +59,12 @@ class Migration(SchemaMigration):
 
         # Deleting field 'HMUser.is_superuser'
         db.delete_column(u'core_hmuser', 'is_superuser')
+
+        # Deleting field 'HMUser.is_staff'
+        db.delete_column(u'core_hmuser', 'is_staff')
+
+        # Deleting field 'HMUser.receives_newsletter'
+        db.delete_column(u'core_hmuser', 'receives_newsletter')
 
         # Removing M2M table for field groups on 'HMUser'
         db.delete_table('core_hmuser_groups')

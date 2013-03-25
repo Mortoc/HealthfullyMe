@@ -104,6 +104,7 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             email.send()
             
             return HttpResponse(json.dumps({"status" : "success"}), mimetype="application/json")
+        
         else:
             response_data = {
                 "status" : "not-available",
@@ -119,6 +120,12 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
             "code" : e.code
         }
         
+        if not settings.TEST:
+            print "Card Declined"
+            print sys.exc_info()
+            print sys.exc_value
+            print traceback.format_exc()
+        
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
     except:
         response_data = {
@@ -127,6 +134,7 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
         }
         
         if not settings.TEST:
+            print "Server Error"
             print sys.exc_info()
             print sys.exc_value
             print traceback.format_exc()
