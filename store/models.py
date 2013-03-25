@@ -50,8 +50,9 @@ class Offer(models.Model):
     def __unicode__(self):
         return self.header_text + " | " + self.offer_price()
     
-    def user_can_purchase(self, user):
-        transactions = Transaction.objects.filter(user = user.pk).order_by("-timestamp")
+    def user_can_purchase(self, user, transactions = None):
+        if transactions == None:
+            transactions = Transaction.objects.filter(user = user.pk, offer = self.pk).order_by("-timestamp")
         
         if transactions.count() > 0:
             for rule in self.availability.all():
@@ -60,11 +61,12 @@ class Offer(models.Model):
         
         return True
     
-    def next_available_time(self, user):
-        if self.user_can_purchase(user):
+    def next_available_time(self, user):        
+        transactions = Transaction.objects.filter(user = user.pk, offer = self.pk).order_by("-timestamp")
+        
+        if self.user_can_purchase(user, transactions):
             return now()
         
-        transactions = Transaction.objects.filter(user = user.pk).order_by("-timestamp")
         
         #print "\n\nChecking User Purchase"
         #print "{0} has {1} transactions".format(user.email, transactions.count())
@@ -87,10 +89,7 @@ class Offer(models.Model):
                     
                     if not next_availability or this_availability > next_availability:
                         next_availability = this_availability
-            
-            print "##################"
-            print show_time_as(next_availability, "EST")
-            print "##################"
+                        
             return next_availability
         
         return now()
