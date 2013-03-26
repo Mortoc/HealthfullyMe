@@ -70,15 +70,16 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
         post_offer = Offer.objects.get(id=int(request.POST['offer_id']))
         post_stripe_token = request.POST['stripe_token']
         
-        charge = run_charge(
-            post_offer.price,
-            post_stripe_token,
-            request.user.email 
-        )
-        
-        card = Card.from_stripe_charge(charge, request.user)
-        
         if post_offer.user_can_purchase(request.user):
+            
+            charge = run_charge(
+                post_offer.price,
+                post_stripe_token,
+                request.user.email 
+            )
+            
+            card = Card.from_stripe_charge(charge, request.user)
+            
             transaction = Transaction(
                 user=request.user,
                 offer=post_offer,
