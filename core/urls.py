@@ -2,7 +2,6 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 
-
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -34,6 +33,6 @@ urlpatterns = patterns('',
     url(r'^admin/tools/reset-password/(?P<user_email>.*)$', 'core.views.reset_user_password'),
     url(r'^admin/', include(admin.site.urls)),
     
+	url(r'^pinterest-8ecbej.html', 'core.social_itegration.pinterest_verify'),
     url(r'mobile/test-integration', 'core.mobiletest.test'),
-    
 )
