@@ -24,13 +24,17 @@ urlpatterns = patterns('',
     url(r'^store/purchase-error$', 'store.views.purchase_error', name='purchase-error'),
     url(r'^store/offer-not-available/(?P<offer_id>.+)$', 'store.views.offer_not_available', name='offer-not-available'),
     
-    
     url(r'^server-error', 'core.views.server_error', name='server-error'),
     
     url(r'^reset-password/(?P<key>.*)$', 'core.views.set_my_password'),
+    
+    url(r'^admin/tools/add-new-card', 'giftcards.views.add_new_card_ajax'),
+
+    url(r'^admin/tools/add-giftcards', 'giftcards.views.add_giftcards'),
     url(r'^admin/tools/email-viewer/(?P<email_name>.*)$', 'core.email.view_email'),
     url(r'^admin/tools/users-for-newsletter$', 'core.admintools.users_for_newsletter'),
     url(r'^admin/tools/reset-password/(?P<user_email>.*)$', 'core.views.reset_user_password'),
+    
     url(r'^admin/', include(admin.site.urls)),
     
 	url(r'^pinterest-8ecbej.html', 'core.social_itegration.pinterest_verify'),

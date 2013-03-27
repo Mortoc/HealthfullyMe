@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
-from django.core.mail import EmailMessage
 from django.template import Context, Template
 
 import json        

@@ -1,0 +1,118 @@
+{% extends "user_page.html" %}
+
+
+{% block more_extra_style %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/tools.css" type="text/css" media="screen" />
+{% endblock %}
+
+{% block extra_script_include %}
+    <script type="text/javascript">	
+		var message_timeout = 1500
+		var app_state = "initializing";
+		var input_string = "";
+		var card_id_regex = /636[0-9]{13}/g;
+		var matched_card_id = "";
+		
+		function find_card_id(event){
+			var new_char = String.fromCharCode(event.keyCode);
+			input_string += new_char;
+			
+			var match = card_id_regex.exec(input_string)
+			if( match != null && match.length == 1 && app_state == "ready" ) {
+				console.log(input_string + " -> " + match[0]);
+				matched_card_id = match[0];
+				set_app_state("processing");
+			}
+		}
+		
+		function send_card_to_server() {
+			$.ajax({
+                url: "/admin/tools/add-new-card/",
+                type: "POST",
+                data: {
+                    card_id : matched_card_id
+                },
+                success: function(data) {
+                    if(data['status'] == 'success') {
+						set_app_state("success")
+					} else {
+						$("#error-state-message").html(data['message']);
+						set_app_state("error")
+					}
+                },
+                failure: function(data) {
+					$("#error-state-message").html(data);
+					set_app_state("error")
+                }
+            });
+		}
+		
+		function set_app_state(newstate) {
+			$(document).onkeydown = null;
+			$("#ready-state").hide();
+			$("#processing-state").hide();
+			$("#error-state").hide();
+			$("#success-state").hide();
+			app_state = newstate;
+			
+			switch(app_state) {
+				case "ready":
+					input_string = "";
+					matched_card_id = "";
+					document.onkeydown = find_card_id;
+					$("#ready-state").show();
+				break;
+				case "processing":
+					$("#processing-state-message").html("Processing Gift Card (" + matched_card_id + ")...");
+					$("#processing-state").show();
+					send_card_to_server();
+				break;
+				case "error":
+					$("#error-state").show();
+					
+					setTimeout( function(){
+						set_app_state("ready");
+					},
+					message_timeout);
+				break;
+				case "success":
+					$("#success-state-message").html("Card Added to Inventory (" + matched_card_id + ")");
+					$("#success-state").show();
+
+					setTimeout( function(){
+						set_app_state("ready");
+					},
+					message_timeout);
+				break;
+				default:
+					alert("Invalid state: " + newstate);
+					break;
+			}
+		}
+		
+		
+		$(document).ready(function(){ 
+			set_app_state("ready"); 
+		});
+	</script>
+{% endblock %}
+
+{% block main_content %}
+
+<div id="ready-state" class="tool-window">
+	<span id="ready-state-message">Ready to swipe giftcard</span>
+</div>
+
+<div id="processing-state" class="tool-window">
+	<span id="processing-state-message">Processing...</span>
+</div>
+
+<div id="error-state" class="tool-window">
+	<span id="error-state-message">Error Reading Card, Try Again</span>
+</div>
+
+<div id="success-state" class="tool-window">
+	<span id="success-state-message">Card Accepted</span>
+</div>
+
+{% endblock %}

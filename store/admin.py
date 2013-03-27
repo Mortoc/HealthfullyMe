@@ -17,7 +17,7 @@ class OfferAvailabilityAdmin(admin.ModelAdmin):
 class TransactionAdmin(admin.ModelAdmin):
     list_display = ('id_slug', 'user', 'card_info', 'offer', 'timestamp_in_est', 'shipped')
     readonly_fields = ('id_slug', 'shipped', )
-    search_fields = ('id_slug', 'stripe_id', 'notes')
+    search_fields = ('id_slug', 'stripe_id', 'notes',)
     
 class CardAdmin(admin.ModelAdmin):
     fields = ('user', 'fingerprint', 'last4', 'type', 'expire_month', 'expire_year', 'name', 'address', )
