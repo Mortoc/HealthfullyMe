@@ -1,0 +1,1369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- saved from url=(0116)https://www.vcdelivery.com/Cert/T2/cert_MyCertificate.aspx?BCNID=Y68FLA7TUTS%2bbvOd2fpsJNEjOzgkiBSgHMivGdlaW5U%3d888 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+        Whole Foods Market
+        - Gift Card</title>
+    <!-- code removed for brevity. -->
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+    <!-- code removed for brevity. -->
+    
+<script type="text/javascript" src="{{ STATIC_URL }}/print-giftcard/jquery-1.4.2.js"></script><style type="text/css"></style>
+<script type="text/javascript" src="{{ STATIC_URL }}/print-giftcard/giftango.updated.jquery.simplemodal-1.3.5.js"></script>
+<script type="text/javascript">
+    var SelectedButtonId=null;
+    $.ajaxSetup({
+        cache: false
+    });
+    
+    function bindEvents()
+    {
+        $(".imgEditCardImageDivClass").mouseover(function (event) {
+            $(this).css("border", "5px solid #00412f");
+        });
+
+        $(".imgEditCardImageDivClass").mouseleave(function (event) {
+            $(this).css("border", "5px solid #ffffff");
+        });
+		if("True"=="True")
+		{
+			$(".giftCardImagePickerImage").css("cursor","pointer");
+			$(".giftCardImagePickerButton").css("cursor","pointer");
+		}
+    }
+    
+    $(document).ready(function () 
+    {
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_endRequest(function() {
+            bindEvents();
+        });
+
+        String.prototype.replaceAll = function(strTarget, strSubString) {
+            var strText = this;
+            var intIndexOfMatch = strText.indexOf(strTarget);
+
+            while (intIndexOfMatch != -1) {
+                strText = strText.replace(strTarget, strSubString)
+                intIndexOfMatch = strText.indexOf(strTarget);
+            }
+            return (strText);
+        };
+        
+        bindEvents();
+        
+        $(".giftCardImagePickerButton").click(function (event) {        
+            event.preventDefault();
+            if("True"=="True")
+                showModalEditCardImageDialog();
+        });
+        $(".giftCardImagePickerImage").click(function (event) {
+            event.preventDefault();
+            if("True"=="True")
+                showModalEditCardImageDialog();
+        });    
+        if("True"!="True")
+             $(".giftCardImagePickerButton").hide();
+    });
+    
+    function windowHeight() 
+    {
+        var myHeight = 0;
+        if( typeof( window.innerWidth ) == 'number' ) 
+        {
+            //Non-IE
+            myHeight = window.innerHeight;
+        }
+        else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) 
+        {
+            //IE 6+ in 'standards compliant mode'
+            myHeight = document.documentElement.clientHeight;
+        }
+        else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) 
+        {
+            //IE 4 compatible
+            myHeight = document.body.clientHeight;
+        }
+        return myHeight;
+    }
+    
+    function showModalEditCardImageDialog() 
+    {
+	    if(Math.ceil(12/4) > (Math.floor((windowHeight()-90)/120)))
+	    {
+	        minWidth=625;
+	    }
+	    else
+	    {
+	        minWidth=0;
+	    }
+        if(windowHeight()-90 <400)
+        {
+            maxHeight=400;
+        }
+        else	
+        {
+            maxHeight=windowHeight()-90;
+        }
+        
+		$(".editCardImageDiv").modal(
+        {
+            autoResize:false,
+            maxHeight:maxHeight,
+            minWidth:minWidth,
+            escClose: false,
+            overlayClose: false,
+            dataId: "editCardImageDataId",
+            onOpen: function (dialog) {
+                dialog.overlay.fadeIn('slow', function () {
+                    dialog.container.slideDown('slow', function () {
+                        dialog.data.fadeIn('slow');
+                    });
+                });
+            },
+            onClose: function (dialog) {
+                dialog.data.fadeOut('slow', function () {
+                    dialog.container.slideUp('slow', function () {
+                        dialog.overlay.fadeOut('slow', function () {
+                            $.modal.close(); // must call this!
+                             if(SelectedButtonId!=null)
+                             {
+                                var butt=$("#"+SelectedButtonId);
+                                butt.click();
+                             }
+                        });
+                    });
+                });
+            }			    
+        });    
+    }
+    
+    //card image 
+    function setgiftCardImagePickerImage(id,url,buttonName,imageName)
+    {
+        if(SelectedButtonId!=null)
+        {
+            SelectedButtonId=null;
+            return;
+        }
+        SelectedButtonId=buttonName;
+        $.modal.close();
+        $(".giftCardImagePickerImage").fadeOut("slow",function(){
+            $(".giftCardImagePickerImage").attr("src",'../../GPCGraphics/image-loading-card-sized.gif');
+            $(".giftCardImagePickerImage").fadeIn("slow");
+            $.get(url,function() {
+                $(".giftCardImagePickerImage").attr("src",url);
+            });
+        });
+        if(typeof giftCardImagePickerImageSelected == 'function') 
+        {
+            giftCardImagePickerImageSelected(id,url,buttonName,imageName);
+        } 
+    }
+</script>
+<!-- ie6 png fix -->
+<!--[if lt IE 7]>
+    <style type='text/css'>
+        #simplemodal-container a.modalCloseImg 
+        {
+	        background:none;
+	        right:-14px;
+	        width:22px;
+	        height:26px;
+	        filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+		    src='../../GPCGraphics/modal_dialog_close_image.png', sizingMethod='scale'
+	    }
+    </style>
+<![endif]-->
+<style type="text/css" media="all">
+    .ImageCellDefault{font-size:0px; line-height:0px}
+    #simplemodal-overlay {background-color:#000;}
+	#simplemodal-container {background-color:#ffffff; border:8px solid #555; padding:12px;}    
+    #simplemodal-container a.modalCloseImg 
+    {
+	    background:url(../../GPCGraphics/modal_dialog_close_image.png) no-repeat; /* adjust url as required */
+	    width:25px;
+	    height:29px;
+	    display:inline;
+	    z-index:3200;
+	    position:absolute;
+	    top:-15px;
+	    right:-18px;
+	    cursor:pointer;
+    }
+    .imgLoading
+    {
+        position:absolute;
+        top: 130px; left: 170px;
+    }   
+    .modalDialogHeaderRow
+    {
+    	background-color:#006551;
+    	padding:5px;
+    	border-style:solid;
+    	border-color:#00412f;
+    	border-width:1px;
+    	color:#ffffff;
+        
+    }
+    .imgEditCardImageCellClass
+    {
+    	padding:0px;
+    }
+    .imgEditCardImageDivClass
+    {
+    	border: 5px solid #ffffff;
+    	padding:0px;
+    	width: 136px;
+    	height:86px;
+    }
+    .editCardImageImage
+    {
+    	width:136;
+    	height:86;
+    }
+    
+    .CardImagePickerFontClass{font-family: verdana; font-size: 12px; color: #000000}.CardImagePickerHeaderFontClass{font-family: verdana; font-size: 12px; color: #000000; font-weight: bold;}
+</style>
+
+    <link href="{{ STATIC_URL }}/print-giftcard/cert.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{{ STATIC_URL }}/print-giftcard/ToolBox.js"></script>
+    <script language="javascript" src="{{ STATIC_URL }}/print-giftcard/VCBalanceInquiry.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/print-giftcard/jquery.getUrlParam.js"></script>
+    <script type="text/javascript">
+
+
+        function windowHeight() {
+            var myWidth = 0, myHeight = 0;
+            if (typeof (window.innerWidth) == 'number') {
+                //Non-IE
+                myWidth = window.innerWidth;
+                myHeight = window.innerHeight;
+            }
+            else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+                //IE 6+ in 'standards compliant mode'
+                myWidth = document.documentElement.clientWidth;
+                myHeight = document.documentElement.clientHeight;
+            }
+            else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+                //IE 4 compatible
+                myWidth = document.body.clientWidth;
+                myHeight = document.body.clientHeight;
+            }
+            return myHeight;
+        }
+
+
+        
+    </script>
+    
+    <!-- ie6 png fix -->
+    <!--[if lt IE 7]>
+	    <style type='text/css'>
+	        #simplemodal-container a.modalCloseImg 
+	        {
+		        background:none;
+		        right:-14px;
+		        width:22px;
+		        height:26px;
+		        filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+			    src='../images/x.png', sizingMethod='scale'
+		    }
+	    </style>
+    <![endif]-->
+    <style type="text/css" media="all">
+            
+            body
+            {
+                font-family: Verdana;
+                font-size: 12px;
+	            color: #666666;
+            }
+
+            #logo_holder
+            {
+                position: absolute;
+                top: 10px;
+                left: 30px;
+                border: 0px;
+                width: 200px;
+                height: 150px;
+                height: 119px;
+            }
+
+            p{ padding: 7px;}
+
+	    .ImageCellDefault{font-size:0px; line-height:0px}
+        
+        #simplemodal-overlay {background-color:#000;}
+    	#simplemodal-container {background-color:#ffffff; border:8px solid #555; padding:12px;}
+            	
+        #simplemodal-container a.modalCloseImg 
+	    {
+		    background:url(../images/x.png) no-repeat; /* adjust url as required */
+		    width:25px;
+		    height:29px;
+		    display:inline;
+		    z-index:3200;
+		    position:absolute;
+		    top:-15px;
+		    right:-18px;
+		    cursor:pointer;
+	    }
+        
+        
+        #certificate_wrapper
+        {
+            border: 1px solid #b9b9b9;  
+            padding:0px 0px 0px 0px;
+            width: 670px;
+            position:absolute;    top:8px;
+            
+        }
+        #btnToolboxEditMessage
+        {
+        	
+        }
+        #btnToolboxPrintCard
+        {
+        	
+        }
+        #txtToName
+        {
+            width: 300px;
+        }
+        #txtFromName
+        {
+            width: 300px;
+        }
+        #txtMessage
+        {
+            height: 100px;
+            width: 300px;
+            resize:none;
+        }
+        #txtRegiftToName
+        {
+            width: 300px;
+        }
+        #txtRegiftFromName
+        {
+            width: 300px;
+        }
+        #txtRegiftMessage
+        {
+            height: 100px;
+            width: 300px;
+            resize:none;
+        }
+        .imgLoading
+        {
+            position:absolute;
+            top: 130px; left: 170px;
+        }             
+	    .fntVerify
+	    {
+	        font-family: Verdana;
+            font-size: 12px;
+	        color: #336633;
+	    }
+
+	    .fntAmount
+	    {
+	        font-family: verdana;
+	        font-size: 18px;
+	        font-weight: bold;
+	        color: #000000;
+	    }
+
+	    .fntContent
+	    {
+	        font-family: verdana;
+	        font-size: 12px;
+	        color: #666666;
+	    }
+	    .txtContentOverflowHiddenDivWrapper
+	    {
+	    	overflow:hidden;
+	    }
+	    .txtContentOverflowAutoDivWrapper
+	    {
+	    	overflow:auto;
+	    }
+	    .fntContent a
+	    {
+	        font-family: verdana;
+	        font-size: 12px;
+	        color: #666666;
+	    }
+	    
+
+	    .fntContentBold
+	    {
+	        font-family: verdana;
+	        font-size: 12px;
+	        color: #666666;
+	        font-weight: bold;
+	    }
+
+	    .fntContentLabelLarge
+	    {
+	        font-family: verdana;
+	        font-size: 18px;
+	        font-weight: bold;
+	        color: #000000;
+	    }
+
+	    .fntContentLarge
+	    {
+	        font-family: verdana;
+	        font-size: 18px;
+	        color: #666666;
+	    }
+        
+        .fntContentSmall
+	    {
+	        font-family: verdana;
+	        font-size: 10px;
+	        color: #666666;
+	    }
+	        
+	    .fntContentLargeBold
+	    {
+	        font-family: verdana;
+	        font-size: 18px;
+	        color: #666666;
+	        font-weight: bold;
+	    }
+
+        .fntContentPersonalMsg
+        {
+        	font-family: verdana;
+	        font-size: 16px;
+	        color: #666666;
+	        font-weight:normal;
+        }
+        
+        .fntContentPersonalMsgBold
+        {
+        	font-family: verdana;
+	        font-size: 16px;
+	        color: #666666;
+	        font-weight: bold;
+        }
+        .modalDialogHeaderRow
+        {
+        	background-color:#006551;
+        	padding:5px;
+        	border-style:solid;
+        	border-color:#00412f;
+        	border-width:1px;
+        	color:#ffffff;
+            
+        }
+        .BUTTONGeneralToolBox
+        {
+			cursor:pointer;
+	        font-family: verdana; 
+	        font-size: 12px;
+	        color: #ffffff;
+	        border-style: groove;
+	        border-color: #00412f;
+	        background-color: #006551;
+
+        }
+
+        .BUTTONGeneralToolBoxHover
+        {
+	        font-family: verdana; 
+	        font-size: 12px;
+	        color: #ffffff;
+	        border-style: groove;
+	        border-color: #00412f;
+	        background-color: #006551;
+        }
+        .rowToolboxEditCardImage
+        {
+            
+        }
+        .regiftDivDeminsions
+        {
+        	width:600px;
+        	height:520px;
+        }
+        .rowToolboxSendAsGift
+        {
+        	
+        }
+        .rowToolboxSendToMobile
+        {
+        	display:None;
+        }
+        
+        .imgEditCardImageCellClass
+        {
+        	padding:0px;
+        }
+        .imgEditCardImageDivClass
+        {
+        	border: 5px solid #ffffff;
+        	padding:0px;
+        	width: 136px;
+        	height:86px;
+        }
+        .editCardImageImage
+        {
+        	width:136;
+        	height:86;
+        }       
+         
+        </style>
+    <style type="text/css" media="print">
+            .empty_message_image
+            {
+        	    display:none;
+            }
+            #divHeaderFlash
+            {
+                
+            }
+            #headerTableCell
+            {
+                
+            }
+            
+           
+            
+        </style>
+    <style type="text/css" media="screen">
+            
+            .empty_message_image
+            {
+        	    
+            }
+            
+            
+            
+        </style>
+    
+</head>
+<body>
+    <form method="post" action="{{ STATIC_URL }}/print-giftcard/Whole Foods Market - Gift Card - Print.html" id="frmCertificate">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTkzNjg0Mzg4NQ8WAh4QSXNBY3R1YWxQb3N0YmFja2cWBGYPZBYCZg8PFgIeBFRleHQFBTE4OTIzZGQCAg9kFkACCw8WAh4HVmlzaWJsZWhkAg0PZBYMAgEPDxYCHghJbWFnZVVybAUVLi4vSW1hZ2VzL3Rvb2xib3guZ2lmZGQCAw8PFgIfAQUKUHJpbnQgQ2FyZGRkAgUPDxYCHwEFDEVkaXQgTWVzc2FnZWRkAgcPDxYCHwEFEEVkaXQgQ2FyZCBEZXNpZ25kZAIJDw8WAh8BBQxTZW5kIGFzIEdpZnRkZAILDw8WAh8BZWRkAhEPZBYCAgEPDxYCHwMFOGh0dHBzOi8vYXBwLmdpZnRhbmdvLmNvbS9HUENHcmFwaGljcy8wMTg5MTJfdmNoZWFkZXIucG5nZGQCFQ8WAh8CaBYEZg8WAh8BBQZFbWFpbDpkAgEPFgIfAQUGUGhvbmU6ZAIXD2QWPAIDDxYCHwJoZAIHD2QWAgIBD2QWBgICD2QWAmYPZBYCAgEPZBYCZg8WAh4LXyFJdGVtQ291bnQCDBYYAgEPZBYCAgEPDxYEHwMFJS4uLy4uL0dQQ0dyYXBoaWNzL0NJUl8wMDAwNjBfMDBfVC5wbmceDU9uQ2xpZW50Q2xpY2sFpAFzZXRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2UoMzE1LCcuLi8uLi9HUENHcmFwaGljcy9DSVJfMDAwMDYwXzAwLnBuZycsJ0NhcmRJbWFnZVBpY2tlcjFfZWRpdENhcmRJbWFnZVJlcGVhdGVyX2N0bDAxX2dpZnRDYXJkSW1hZ2VQaWNrZXJJbWFnZXMnLCdDSVJfMDAwMDYwXzAwLnBuZycpO2RkAgMPZBYCAgEPDxYEHwMFJS4uLy4uL0dQQ0dyYXBoaWNzL0NJUl8wMDAwNjBfMjZfVC5wbmcfBQWlAXNldGdpZnRDYXJkSW1hZ2VQaWNrZXJJbWFnZSgxNTU4LCcuLi8uLi9HUENHcmFwaGljcy9DSVJfMDAwMDYwXzI2LnBuZycsJ0NhcmRJbWFnZVBpY2tlcjFfZWRpdENhcmRJbWFnZVJlcGVhdGVyX2N0bDAzX2dpZnRDYXJkSW1hZ2VQaWNrZXJJbWFnZXMnLCdDSVJfMDAwMDYwXzI2LnBuZycpO2RkAgUPZBYCAgEPDxYEHwMFJS4uLy4uL0dQQ0dyYXBoaWNzL0NJUl8wMDAwNjBfMDJfVC5wbmcfBQWkAXNldGdpZnRDYXJkSW1hZ2VQaWNrZXJJbWFnZSgzMTcsJy4uLy4uL0dQQ0dyYXBoaWNzL0NJUl8wMDAwNjBfMDIucG5nJywnQ2FyZEltYWdlUGlja2VyMV9lZGl0Q2FyZEltYWdlUmVwZWF0ZXJfY3RsMDVfZ2lmdENhcmRJbWFnZVBpY2tlckltYWdlcycsJ0NJUl8wMDAwNjBfMDIucG5nJyk7ZGQCBw9kFgICAQ8PFgQfAwUlLi4vLi4vR1BDR3JhcGhpY3MvQ0lSXzAwMDA2MF8wM19ULnBuZx8FBaQBc2V0Z2lmdENhcmRJbWFnZVBpY2tlckltYWdlKDMxOCwnLi4vLi4vR1BDR3JhcGhpY3MvQ0lSXzAwMDA2MF8wMy5wbmcnLCdDYXJkSW1hZ2VQaWNrZXIxX2VkaXRDYXJkSW1hZ2VSZXBlYXRlcl9jdGwwN19naWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzJywnQ0lSXzAwMDA2MF8wMy5wbmcnKTtkZAIJD2QWAgIBDw8WBB8DBSUuLi8uLi9HUENHcmFwaGljcy9DSVJfMDAwMDYwXzA0X1QucG5nHwUFpAFzZXRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2UoMzE5LCcuLi8uLi9HUENHcmFwaGljcy9DSVJfMDAwMDYwXzA0LnBuZycsJ0NhcmRJbWFnZVBpY2tlcjFfZWRpdENhcmRJbWFnZVJlcGVhdGVyX2N0bDA5X2dpZnRDYXJkSW1hZ2VQaWNrZXJJbWFnZXMnLCdDSVJfMDAwMDYwXzA0LnBuZycpO2RkAgsPZBYCAgEPDxYEHwMFJS4uLy4uL0dQQ0dyYXBoaWNzL0NJUl8wMDAwNjBfMDVfVC5wbmcfBQWkAXNldGdpZnRDYXJkSW1hZ2VQaWNrZXJJbWFnZSgzMjAsJy4uLy4uL0dQQ0dyYXBoaWNzL0NJUl8wMDAwNjBfMDUucG5nJywnQ2FyZEltYWdlUGlja2VyMV9lZGl0Q2FyZEltYWdlUmVwZWF0ZXJfY3RsMTFfZ2lmdENhcmRJbWFnZVBpY2tlckltYWdlcycsJ0NJUl8wMDAwNjBfMDUucG5nJyk7ZGQCDQ9kFgICAQ8PFgQfAwUlLi4vLi4vR1BDR3JhcGhpY3MvQ0lSXzAwMDA2MF8wNl9ULnBuZx8FBaQBc2V0Z2lmdENhcmRJbWFnZVBpY2tlckltYWdlKDMyMSwnLi4vLi4vR1BDR3JhcGhpY3MvQ0lSXzAwMDA2MF8wNi5wbmcnLCdDYXJkSW1hZ2VQaWNrZXIxX2VkaXRDYXJkSW1hZ2VSZXBlYXRlcl9jdGwxM19naWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzJywnQ0lSXzAwMDA2MF8wNi5wbmcnKTtkZAIPD2QWAgIBDw8WBB8DBSUuLi8uLi9HUENHcmFwaGljcy9DSVJfMDAwMDYwXzAxX1QucG5nHwUFpAFzZXRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2UoMzE2LCcuLi8uLi9HUENHcmFwaGljcy9DSVJfMDAwMDYwXzAxLnBuZycsJ0NhcmRJbWFnZVBpY2tlcjFfZWRpdENhcmRJbWFnZVJlcGVhdGVyX2N0bDE1X2dpZnRDYXJkSW1hZ2VQaWNrZXJJbWFnZXMnLCdDSVJfMDAwMDYwXzAxLnBuZycpO2RkAhEPZBYCAgEPDxYEHwMFJS4uLy4uL0dQQ0dyYXBoaWNzL0NJUl8wMDAwNjBfMTZfVC5wbmcfBQWkAXNldGdpZnRDYXJkSW1hZ2VQaWNrZXJJbWFnZSg2NzMsJy4uLy4uL0dQQ0dyYXBoaWNzL0NJUl8wMDAwNjBfMTYucG5nJywnQ2FyZEltYWdlUGlja2VyMV9lZGl0Q2FyZEltYWdlUmVwZWF0ZXJfY3RsMTdfZ2lmdENhcmRJbWFnZVBpY2tlckltYWdlcycsJ0NJUl8wMDAwNjBfMTYucG5nJyk7ZGQCEw9kFgICAQ8PFgQfAwUlLi4vLi4vR1BDR3JhcGhpY3MvQ0lSXzAwMDA2MF8xN19ULnBuZx8FBaQBc2V0Z2lmdENhcmRJbWFnZVBpY2tlckltYWdlKDY3NCwnLi4vLi4vR1BDR3JhcGhpY3MvQ0lSXzAwMDA2MF8xNy5wbmcnLCdDYXJkSW1hZ2VQaWNrZXIxX2VkaXRDYXJkSW1hZ2VSZXBlYXRlcl9jdGwxOV9naWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzJywnQ0lSXzAwMDA2MF8xNy5wbmcnKTtkZAIVD2QWAgIBDw8WBB8DBSUuLi8uLi9HUENHcmFwaGljcy9DSVJfMDAwMDYwXzIxX1QucG5nHwUFpAFzZXRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2UoNzAwLCcuLi8uLi9HUENHcmFwaGljcy9DSVJfMDAwMDYwXzIxLnBuZycsJ0NhcmRJbWFnZVBpY2tlcjFfZWRpdENhcmRJbWFnZVJlcGVhdGVyX2N0bDIxX2dpZnRDYXJkSW1hZ2VQaWNrZXJJbWFnZXMnLCdDSVJfMDAwMDYwXzIxLnBuZycpO2RkAhcPZBYCAgEPDxYEHwMFJS4uLy4uL0dQQ0dyYXBoaWNzL0NJUl8wMDAwNjBfMDdfVC5wbmcfBQWkAXNldGdpZnRDYXJkSW1hZ2VQaWNrZXJJbWFnZSgzMjIsJy4uLy4uL0dQQ0dyYXBoaWNzL0NJUl8wMDAwNjBfMDcucG5nJywnQ2FyZEltYWdlUGlja2VyMV9lZGl0Q2FyZEltYWdlUmVwZWF0ZXJfY3RsMjNfZ2lmdENhcmRJbWFnZVBpY2tlckltYWdlcycsJ0NJUl8wMDAwNjBfMDcucG5nJyk7ZGQCBA8WAh4Dc3JjBSQuLi8uLi9HUENHcmFwaGljcy8wMTU0MDVfVkdDXzM3NS5wbmdkAgYPDxYCHwEFBTE4OTIzZGQCCQ8WAh4Fc3R5bGUFGmhlaWdodDoyNTBweDtkaXNwbGF5Om5vbmU7ZAILDw8WAh8BBQNUbzpkZAINDw8WAh8BBQJNZWRkAg8PDxYCHwEFBUZyb206ZGQCEQ8PFgIfAQUCTWVkZAITDw8WAh8BBRFQZXJzb25hbCBNZXNzYWdlOmRkAhUPDxYCHwEFCkdyb2NlcmllcyFkZAIZDw8WAh8BBQYkMjAuMDBkZAIaDw8WAh8BBQLCuWRkAhwPDxYCHgtOYXZpZ2F0ZVVybAVDamF2YXNjcmlwdDogVmVyaWZpeUNlcnRCYWxhbmNlKCdZNjhGTEE3VFVUUytidk9kMmZwc0pCZ0VXM0IwMndPSicpO2RkAh4PDxYEHwEFDlZlcmlmeSBCYWxhbmNlHwgFQ2phdmFzY3JpcHQ6IFZlcmlmaXlDZXJ0QmFsYW5jZSgnWTY4RkxBN1RVVFMrYnZPZDJmcHNKQmdFVzNCMDJ3T0onKTtkZAIgDw8WAh8DBWQuLi9iYXJjb2RlaW1hZ2UuYXNoeD9CQ05JRD1ZNjhGTEE3VFVUUyUyYmJ2T2QyZnBzSkJnRVczQjAyd09KODg4JkJhcmNvZGVUeXBlPTEmQ0JJRD02MzYyNjQxMDgwNDU4MTc3ZGQCJg8PFgQfAQUERXhwOh8CaGRkAicPDxYCHwFlZGQCKQ8PFgIfAmhkZAIqDw8WAh8BZWRkAiwPFgIfAQXrBTx0YWJsZSB3aWR0aD0iMTAwJSI+PHRyPjx0ZD48L3RkPjx0ZCBhbGlnbj0ibGVmdCI+PGZvbnQgc3R5bGU9J2ZvbnQtZmFtaWx5OiB2ZXJkYW5hO2ZvbnQtc2l6ZTogMThweDtjb2xvcjogIzY2NjY2Njtmb250LXdlaWdodDogYm9sZDsnPlVzYWdlIEluc3RydWN0aW9uczwvZm9udD48YnIgLz4NCjxmb250IHN0eWxlPSdmb250LWZhbWlseTogdmVyZGFuYTtmb250LXNpemU6IDEycHg7Y29sb3I6ICM2NjY2NjY7Zm9udC13ZWlnaHQ6IGJvbGQ7Jz5SZWNpcGllbnQ8L2ZvbnQ+DQo8Zm9udCBzdHlsZT0nZm9udC1mYW1pbHk6IHZlcmRhbmE7Zm9udC1zaXplOiAxMnB4O2NvbG9yOiAjNjY2NjY2Oyc+UHJvdGVjdCB0aGlzIGNhcmQgbGlrZSBjYXNoLiBQcmludCB0aGlzIGdpZnQgY2FyZCBhbmQgYnJpbmcgaXQgdG8gV2hvbGUgRm9vZHMgTWFya2V0IGZvciB1c2UuPC9mb250Pg0KPGJyIC8+PGJyIC8+DQo8Zm9udCBzdHlsZT0nZm9udC1mYW1pbHk6IHZlcmRhbmE7Zm9udC1zaXplOiAxMnB4O2NvbG9yOiAjNjY2NjY2O2ZvbnQtd2VpZ2h0OiBib2xkOyc+TWVyY2hhbnQ8L2ZvbnQ+DQo8Zm9udCBzdHlsZT0nZm9udC1mYW1pbHk6IHZlcmRhbmE7Zm9udC1zaXplOiAxMnB4O2NvbG9yOiAjNjY2NjY2Oyc+U2NhbiB0aGUgYmFyIGNvZGUgb3IgdHlwZSB0aGUgbnVtYmVyIGRpc3BsYXllZCB1bmRlciB0aGUgYmFyIGNvZGUgaW50byBvdXIgcGF5bWVudCBzeXN0ZW0uPC9mb250PjwvdGQ+PHRkPjwvdGQ+PC90cj48L3RhYmxlPmQCLg8WAh8CaBYCAgEPFgIfAQUSVGVybXMgJiBDb25kaXRpb25zZAIwDxYCHwEFoAk8dGFibGUgd2lkdGg9IjEwMCUiPjx0cj48dGQ+PC90ZD48dGQgYWxpZ249ImxlZnQiPjxmb250IHN0eWxlPSdmb250LWZhbWlseTogdmVyZGFuYTtmb250LXNpemU6IDE4cHg7Y29sb3I6ICM2NjY2NjY7Zm9udC13ZWlnaHQ6IGJvbGQ7Jz5Db21wYW55IEluZm9ybWF0aW9uPC9mb250Pg0KPGJyIC8+DQo8Zm9udCBzdHlsZT0nZm9udC1mYW1pbHk6IHZlcmRhbmE7Zm9udC1zaXplOiAxMnB4O2NvbG9yOiAjNjY2NjY2O2ZvbnQtd2VpZ2h0OiBib2xkOyc+UGhvbmU6IDwvZm9udD48Zm9udCBzdHlsZT0nZm9udC1mYW1pbHk6IHZlcmRhbmE7Zm9udC1zaXplOiAxMnB4O2NvbG9yOiAjNjY2NjY2Oyc+NTEyLjQ3Ny40NDU1PGZvbnQ+PGJyIC8+DQo8Zm9udCBzdHlsZT0nZm9udC1mYW1pbHk6IHZlcmRhbmE7Zm9udC1zaXplOiAxMnB4O2NvbG9yOiAjNjY2NjY2O2ZvbnQtd2VpZ2h0OiBib2xkOyc+V2Vic2l0ZTogPC9mb250Pjxmb250IHN0eWxlPSdmb250LWZhbWlseTogdmVyZGFuYTtmb250LXNpemU6IDEycHg7Y29sb3I6ICM2NjY2NjY7Jz48YSB0YXJnZXQ9Il9ibGFuayIgY2xhc3M9IkhSRUZGb290ZXJVUkwiIGhyZWY9Imh0dHA6Ly93d3cud2hvbGVmb29kc21hcmtldC5jb20iPnd3dy53aG9sZWZvb2RzbWFya2V0LmNvbTwvYT48Zm9udD48YnIgLz4NCjxmb250IHN0eWxlPSdmb250LWZhbWlseTogdmVyZGFuYTtmb250LXNpemU6IDEycHg7Y29sb3I6ICM2NjY2NjY7Zm9udC13ZWlnaHQ6IGJvbGQ7Jz5FbWFpbDogPC9mb250Pjxmb250IHN0eWxlPSdmb250LWZhbWlseTogdmVyZGFuYTtmb250LXNpemU6IDEycHg7Y29sb3I6ICM2NjY2NjY7Jz48YSB0YXJnZXQ9Il9ibGFuayIgY2xhc3M9IkhSRUZGb290ZXJVUkwiIGhyZWY9Im1haWx0bzpjdXN0b21lci5xdWVzdGlvbnNAd2hvbGVmb29kcy5jb20iPmN1c3RvbWVyLnF1ZXN0aW9uc0B3aG9sZWZvb2RzLmNvbTwvYT48Zm9udD48YnIgLz4NCjxmb250IHN0eWxlPSdmb250LWZhbWlseTogdmVyZGFuYTtmb250LXNpemU6IDEycHg7Y29sb3I6ICM2NjY2NjY7Jz48YSB0YXJnZXQ9Il9ibGFuayIgY2xhc3M9IkhSRUZGb290ZXJVUkwiIGhyZWY9Imh0dHA6Ly93aG9sZWZvb2RzbWFya2V0LmNvbS9zdG9yZXMvIj5DbGljayBIZXJlPC9hPiB0byBmaW5kIGEgc3RvcmUgbmVhciB5b3UuPC9mb250PjwvdGQ+PHRkPjwvdGQ+PC90cj48L3RhYmxlPmQCMg8WAh8CaBYIAgEPFgIfAQUTQ29tcGFueSBpbmZvcm1hdGlvbmQCAw8WAh8BBQZQaG9uZTpkAgcPFgIfAQUIV2Vic2l0ZTpkAgsPFgIfAQUGRW1haWw6ZAI0Dw8WAh8BBfEFVEhFIEZPTExPV0lORyBURVJNUyBBTkQgQ09ORElUSU9OUyBBUFBMWTogVGhlIHB1cmNoYXNlIG9yIHVzZSBvZiB0aGlzIGdpZnQgY2FyZCwgaW4gZGlnaXRhbCBvciBwaHlzaWNhbCBmb3JtLCBjb25zdGl0dXRlcyBhY2NlcHRhbmNlIG9mIHRoZSBjb21wbGV0ZSB0ZXJtcyBhbmQgY29uZGl0aW9ucy4gR2lmdCBjYXJkcyBtdXN0IGJlIHVzZWQgc29sZWx5IGZvciB0aGUgcHVyY2hhc2Ugb2YgbWVyY2hhbmRpc2Ugb3Igc2VydmljZXMgcHJvdmlkZWQgYnkgV2hvbGUgRm9vZHMgTWFya2V0LiBHaWZ0IGNhcmQgaXMgbm90IHJlZGVlbWFibGUgZm9yIGNhc2ggdW5sZXNzIHJlcXVpcmVkIGJ5IGxhdy4gQSBnaWZ0IGNhcmQsIGluIGFueSBmb3JtLCB3aWxsIG5vdCBiZSByZXBsYWNlZCBpZiBsb3N0IG9yIHN0b2xlbiBzbyBwbGVhc2UgdHJlYXQgYXMgY2FzaC4gVGhpcyBnaWZ0IGNhcmQgaXMgaXNzdWVkIGJ5IFdGTSBHaWZ0IENhcmQsIExMQy4gVGhpcyBnaWZ0IGNhcmQgZG9lcyBub3QgZXhwaXJlLCBub3IgZG9lcyBpdCBpbmN1ciBhbnkgZmVlcyBmb3IgYW55IHJlYXNvbi4gRm9yIG1vcmUgaW5mb3JtYXRpb24gcGxlYXNlIHZpc2l0IDxhIHRhcmdldD0iX2JsYW5rIiBjbGFzcz0iSFJFRkZvb3RlclVSTCIgaHJlZj0iaHR0cDovL3d3dy53aG9sZWZvb2RzbWFya2V0LmNvbS9naWZ0Y2FyZHMiPnd3dy53aG9sZWZvb2RzbWFya2V0LmNvbS9naWZ0Y2FyZHM8L2E+IG9yIGNhbGwgMS44NjYuV0ZNLkNBTEwgKDg2Ni05MzYtMjI1NSkuZGQCNg8PFgIfAQUlPHN1cD4xPC9zdXA+TGFzdCBrbm93biBiYWxhbmNlIGNoZWNrOmRkAjcPDxYCHwEFCTMvMjYvMjAxM2RkAjgPDxYCHwJoZGQCOQ8PFgQfCAVDamF2YXNjcmlwdDogVmVyaWZpeUNlcnRCYWxhbmNlKCdZNjhGTEE3VFVUUytidk9kMmZwc0pCZ0VXM0IwMndPSicpOx8CaGRkAjoPDxYCHwJoZGQCPA8PFgIfAQUuJm5ic3A7Jm5ic3A7Jm5ic3A7PHN1cD4yPC9zdXA+RVhQSVJBVElPTiBEQVRFOmRkAj0PDxYCHwEFBE5vbmVkZAIbDxYCHwJnFgICAQ8PFgIfAwU4aHR0cHM6Ly9hcHAuZ2lmdGFuZ28uY29tL0dQQ0dyYXBoaWNzLzAxODkxMl92Y2Zvb3Rlci5wbmdkZAIfDxYCHwEFFEVkaXQgQ3VzdG9tIEdyZWV0aW5nZAIhDxYCHwEFA1RvOmQCIw8WAh8BBQVGcm9tOmQCJw8PFgIfAQUGVXBkYXRlZGQCKQ8PFgIfAQUGQ2FuY2VsZGQCKw8WAh8BBSJTdGVwIDIgb2YgMjogUmVjaXBpZW50IEluZm9ybWF0aW9uZAItDxYCHwEFYFBsZWFzZSB1cGRhdGUgdGhlIGZvbGxvd2luZyBmaWVsZHMgYW5kIGNsaWNrICJTZW5kIGdpZnQiIHRvIGlzc3VlIHRoZSBjYXJkIHRvIHRoZSBuZXcgcmVjaXBpZW50LmQCLw8WAh8BBQtGaXJzdCBOYW1lOmQCMQ8WAh8BBQpMYXN0IE5hbWU6ZAIzDxYCHwEFEFJlY2lwaWVudCBFbWFpbDpkAjUPFgIfAQUOQ29uZmlybSBFbWFpbDpkAjcPFgIfAQUURWRpdCBDdXN0b20gR3JlZXRpbmdkAjkPFgIfAQUDVG86ZAI7DxYCHwEFBUZyb206ZAI9DxYCHwEFCE1lc3NhZ2U6ZAI/Dw8WAh8BBQxTZW5kIGFzIEdpZnRkZAJBDw8WAh8BBQZDYW5jZWxkZAJDDxYCHwEFJ1N0ZXAgMSBvZiAyOiBDb25maXJtIFlvdXIgRW1haWwgQWRkcmVzc2QCRQ8WAh8BBVJQbGVhc2UgZW50ZXIgeW91ciBlbWFpbCBhZGRyZXNzIGJlbG93LiBXZSB3aWxsIHNlbmQgYSBjb25maXJtYXRpb24gdG8gdGhpcyBhZGRyZXNzZAJHDxYCHwEFC1lvdXIgRW1haWw6ZAJJDw8WAh8BBQROZXh0ZGQCSw8PFgIfAQUGQ2FuY2VsZGQCTQ8WAh8BBRFTZW5kIHRvIE15IE1vYmlsZWQCUQ8WAh8BBQ1QaG9uZSBOdW1iZXI6ZAJTDw8WAh8BBRFTZW5kIFRleHQgTWVzc2FnZWRkAlUPDxYCHwEFBkNhbmNlbGRkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYMBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwwMSRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwwMyRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwwNSRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwwNyRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwwOSRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwxMSRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwxMyRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwxNSRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwxNyRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwxOSRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwyMSRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzBUZDYXJkSW1hZ2VQaWNrZXIxJGVkaXRDYXJkSW1hZ2VSZXBlYXRlciRjdGwyMyRnaWZ0Q2FyZEltYWdlUGlja2VySW1hZ2VzOJttdvh4tfMk+0HwE1MJBvjjgRPbR3IwpBJ3u+JXsC0=">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['frmCertificate'];
+if (!theForm) {
+    theForm = document.frmCertificate;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="{{ STATIC_URL }}/print-giftcard/WebResource.axd" type="text/javascript"></script>
+
+
+<script src="{{ STATIC_URL }}/print-giftcard/ScriptResource.axd" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/print-giftcard/ScriptResource(1).axd" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAB6pPLS/q4ElDq/G8/heDj8Xefa8ab6lkcFWjmQTnS4Tk+WTcfRijfqaz+BLXUMOJkyQNyQqgmu4Mlf5xPXkZw/n+RCAS+/p7NfIh/7/62Tz+hExxKUJGa9lr8ygUZ45sWlmG2iME4obdvOKnM+p5x+IF7CB243qdzIOyHv0eehVDwhG5H4Hs7P91Sv4Zcymk5L1rdOGx7fdymGkyXqdYILfKiGeMIyCkjEXUk5wdMz7hkiSeZHp+kvAvhLcGn/ytDIZHodRiWPvnxXUL/7z1AdtOtdV9ra4x9P3aRZfP0y+bRszEWvOE9S3wjJxF9OtBMLygXuUy91AswhdiOM7WjsCZpxXW96H4IBJOJkPUK8Jj4BV5ppUPy5Bzk8Wb9gEOtpv073EqQr70Tk6TBHQ3RMONt/2rp98C5BDlV4GTHOcSjqnTXEBg+DzbadKwrVF8w/0DKXopHoHmcQ4WCDOl4MJG6dQLrqyCw+BmQdiVUduJOJkJJmpK5jQUO5jcMrF4I/MP3f4UCaYMRhOILEKpRpAzUyUmDguCncJ3+LGQfJ/gXAeOXTCVvF3v+EaO981HlbuHeIUc/5KWw9U54qprqwaeSdYuf6lu/0YiKoRyYhAu2Bps26E0HYeRVUMk0+Ehc+cyKPVGlG3UYNxc4D5g2JkQ0LjvlXXp3P/6jRHxtGzFw==">
+</div>
+    <input type="hidden" name="hidOnlyVerifiedTwentyMins" id="hidOnlyVerifiedTwentyMins" value="Value can only be verified once every 20 minutes.">
+    <input type="hidden" name="hidUnableToUpdateBalance" id="hidUnableToUpdateBalance" value="Unable to update balance">
+    <input type="hidden" name="hidBalanceOfCard" id="hidBalanceOfCard" value="The balance of your card is ">
+        <input type="hidden" name="hidAsOf" id="hidAsOf" value="as of">
+    
+    
+    <!-- Cert 2.0 -->
+    <div id="logo_holder">
+    </div>
+    <div id="certificate_wrapper" style="padding: 0px 0px 0px 0px">
+        <div id="divNonGIEContent" style="padding: 0px 0px 0px 0px">
+                </div><table cellpadding="0" cellspacing="0" width="670" border="0">
+            <tbody><tr>
+                <td height="75" id="headerTableCell">
+                    <table cellpadding="0" cellspacing="0">
+                        <tbody><tr>
+                            <td class="ImageCellDefault">
+                                
+                                <div id="divHeaderImage" style="padding: 0px 0px 0px 0px">
+                                    <img id="imgHeader" src="{{ STATIC_URL }}/print-giftcard/018912_vcheader.png" style="border-width:0px;width:670px;">
+                                </div>
+                                
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+            
+            <tr>
+                    <td class="ImageCellDefault">
+                        
+                        
+                        <img src="{{ STATIC_URL }}/print-giftcard/sub_header_bg.gif">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <table cellpadding="0" cellspacing="0" width="620" border="0">
+                            <tbody><tr>
+                                <td class="ImageCellDefault">
+                                    <img src="{{ STATIC_URL }}/print-giftcard/top_box_head.gif" border="0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" border="0">
+                                        <tbody><tr>
+                                            <td class="ImageCellDefault">
+                                                <img src="{{ STATIC_URL }}/print-giftcard/top_box_left.gif" border="0" height="330" width="16">
+                                            </td>
+                                            <td width="100%" valign="top" align="left">
+                                                <table width="100%" cellpadding="0" cellspacing="2" border="0">
+                                                    <tbody><tr>
+                                                        <td colspan="3" valign="top" class="ImageCellDefault">
+                                                            
+                                                            <div id="divGiftCardImage" style="padding: 0px 0px 0px 0px; min-width: 300px;
+                                                                min-height: 190px;">
+                                                                <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', 'frmCertificate', ['fCardImagePicker1$UpdatePanel1',''], [], [], 90, '');
+//]]>
+</script>
+
+<div id="CardImagePicker1_UpdatePanel1">
+	
+        <div id="CardImagePicker1_editCardImageDiv" style="display: none" class="editCardImageDiv">
+            <table width="600px">
+                <tbody><tr>
+                    <td class="modalDialogHeaderRow" colspan="3">
+                        <span class="CardImagePickerHeaderFontClass">
+                            Edit Card Design</span>
+                    </td>
+                </tr>
+            </tbody></table>
+            <br>
+            <span class="CardImagePickerFontClass">
+                Select from the following designs by clicking one of the images below:</span>
+            <br>
+            
+                    <table id="editCardImageTable" width="600px" style="padding: 8;">
+                        <tbody><tr>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl01$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl01_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_00_T.png" onclick="setgiftCardImagePickerImage(315,&#39;../../GPCGraphics/CIR_000060_00.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl01_giftCardImagePickerImages&#39;,&#39;CIR_000060_00.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl03$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl03_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_26_T.png" onclick="setgiftCardImagePickerImage(1558,&#39;../../GPCGraphics/CIR_000060_26.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl03_giftCardImagePickerImages&#39;,&#39;CIR_000060_26.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl05$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl05_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_02_T.png" onclick="setgiftCardImagePickerImage(317,&#39;../../GPCGraphics/CIR_000060_02.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl05_giftCardImagePickerImages&#39;,&#39;CIR_000060_02.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl07$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl07_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_03_T.png" onclick="setgiftCardImagePickerImage(318,&#39;../../GPCGraphics/CIR_000060_03.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl07_giftCardImagePickerImages&#39;,&#39;CIR_000060_03.png&#39;);">
+                        </div>
+                    </td>
+                
+                    </tr>
+                    <tr>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl09$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl09_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_04_T.png" onclick="setgiftCardImagePickerImage(319,&#39;../../GPCGraphics/CIR_000060_04.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl09_giftCardImagePickerImages&#39;,&#39;CIR_000060_04.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl11$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl11_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_05_T.png" onclick="setgiftCardImagePickerImage(320,&#39;../../GPCGraphics/CIR_000060_05.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl11_giftCardImagePickerImages&#39;,&#39;CIR_000060_05.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl13$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl13_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_06_T.png" onclick="setgiftCardImagePickerImage(321,&#39;../../GPCGraphics/CIR_000060_06.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl13_giftCardImagePickerImages&#39;,&#39;CIR_000060_06.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl15$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl15_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_01_T.png" onclick="setgiftCardImagePickerImage(316,&#39;../../GPCGraphics/CIR_000060_01.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl15_giftCardImagePickerImages&#39;,&#39;CIR_000060_01.png&#39;);">
+                        </div>
+                    </td>
+                
+                    </tr>
+                    <tr>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl17$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl17_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_16_T.png" onclick="setgiftCardImagePickerImage(673,&#39;../../GPCGraphics/CIR_000060_16.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl17_giftCardImagePickerImages&#39;,&#39;CIR_000060_16.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl19$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl19_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_17_T.png" onclick="setgiftCardImagePickerImage(674,&#39;../../GPCGraphics/CIR_000060_17.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl19_giftCardImagePickerImages&#39;,&#39;CIR_000060_17.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl21$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl21_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_21_T.png" onclick="setgiftCardImagePickerImage(700,&#39;../../GPCGraphics/CIR_000060_21.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl21_giftCardImagePickerImages&#39;,&#39;CIR_000060_21.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl23$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl23_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_07_T.png" onclick="setgiftCardImagePickerImage(322,&#39;../../GPCGraphics/CIR_000060_07.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl23_giftCardImagePickerImages&#39;,&#39;CIR_000060_07.png&#39;);">
+                        </div>
+                    </td>
+                
+                    </tr> </tbody></table>
+            <br>
+            <span class="CardImagePickerFontClass">
+                </span>
+        </div>
+    
+</div>
+<img src="{{ STATIC_URL }}/print-giftcard/015405_VGC_375.png" id="CardImagePicker1_giftCardImagePickerImage" class="giftCardImagePickerImage" style="height: 190px; width: 300px; cursor: pointer;">
+
+                                                            </div>
+                                                        </td>
+                                                        <td rowspan="3">
+                                                            &nbsp;&nbsp;
+                                                        </td>
+                                                        <td width="100%" rowspan="3" valign="top" align="left">
+                                                            <table cellpadding="0" cellspacing="0" width="100%" height="280px">
+                                                                <tbody><tr>
+                                                                    <td valign="top">
+                                                                        <div id="divImgEditMessageWrapper" style="height: 250px; display: none;" class="txtContentOverflowHiddenDivWrapper">
+                                                                            <table width="100%">
+                                                                                <tbody><tr>
+                                                                                    <td align="center">
+                                                                                        <div id="imgEditMessage" class="empty_message_image" style="font-family: &#39;Gill Sans&#39;, &#39;Gill Sans MT&#39;, Calibri, &#39;Trebuchet MS&#39;, sans-serif;
+                                                                                            font-size: 42px; color: #BABABA; line-height: 41px; cursor: default">
+                                                                                            Click here to add custom message to your card</div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody></table>
+                                                                        </div>
+                                                                        <!-- custom message section -->
+                                                                        <div id="divCustomMessageWrapper" style="width: 256px; height: 250px;" class="txtContentOverflowHiddenDivWrapper">
+                                                                            <table width="100%">
+                                                                                <tbody><tr>
+                                                                                    <td valign="top">
+                                                                                        <span id="lblRecipientLabel" class="fntContentPersonalMsgBold">To:</span>
+                                                                                    </td>
+                                                                                    <td width="100%">
+                                                                                        <div id="divMessageOpeningText" style="max-width: 200px; max-height: 40px; width: 200px; height: 40px;" class="txtContentOverflowHiddenDivWrapper">
+                                                                                            <span id="lblRecipient" class="fntContentPersonalMsg">{{ user.email }}</span>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td colspan="2">
+                                                                                        &nbsp;
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td valign="top">
+                                                                                        <span id="lblPurchaserLabel" class="fntContentPersonalMsgBold">From:</span>
+                                                                                    </td>
+                                                                                    <td width="100%">
+                                                                                        <div id="divMessageClosingText" style="max-width: 200px; max-height: 40px; width: 200px; height: 40px;" class="txtContentOverflowHiddenDivWrapper">
+                                                                                            <span id="lblPurchaser" class="fntContentPersonalMsg">Healthfully.me</span>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td colspan="2">
+                                                                                        &nbsp;
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td colspan="2">
+                                                                                        <span id="lblPersonalMsgLabel" class="fntContentPersonalMsgBold">Personal Message:</span><br/>
+																						<span id="lblPersonalMessage" class="fntContent">It's shoppy time!</span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td colspan="2" valign="top">
+                                                                                        <div id="divMessageBodyText" style="max-width: 254px; max-height: 70px; width: 254px; height: 70px;" class="txtContentOverflowAutoDivWrapper">
+                                                                                            <span id="lblPersonalMessage" class="fntContent"></span>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody></table>
+                                                                        </div>
+                                                                        <!-- end custom message section -->
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td valign="bottom">
+                                                                        <span id="lblProductContent"></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody></table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span id="lblCertAmount" class="fntAmount">$50.00</span><span id="lblAsOfDate" class="fntContent" style="vertical-align: top;"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            <table cellpadding="0" cellspacing="0" border="0" style="min-width: 300px;">
+                                                                <tbody><tr>
+                                                                    <td width="300px">
+                                                                        <img id="imgCertBarCode" src="https://www.vcdelivery.com/Cert/barcodeimage.ashx?BCNID=Y68FLA7TUTS%2bbvOd2fpsJBgEW3B02wOJ888&BarcodeType=1&CBID={{ giftcard.card_id }}" style="border-width:0px;">
+                                                                        
+                                                                        
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="right" style="padding-left: 10;">
+                                                                        <nobr><span id="lblCertExpiration" class="fntContent"></span></nobr>
+                                                                        <br>
+                                                                        <span id="lblPin" class="fntContent"></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody></table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody></table>
+                                            </td>
+                                            <td class="ImageCellDefault">
+                                                <img src="{{ STATIC_URL }}/print-giftcard/top_box_right.gif" border="0" height="330" width="16">
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="ImageCellDefault">
+                                    <img src="{{ STATIC_URL }}/print-giftcard/top_box_bottom.gif" border="0">
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                    </td>
+                </tr>
+                <!-- Begin secondary boxes -->
+                <tr valign="top">
+                    <td colspan="2" align="center" valign="top">
+                        <table cellpadding="0">
+                            <tbody><tr>
+                                <td id="leftBoxCell" valign="top">
+                                    <table width="300" cellpadding="0" cellspacing="0">
+                                        <tbody><tr>
+                                            <td class="ImageCellDefault">
+                                                <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_top.gif">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table cellpadding="0" cellspacing="0">
+                                                    <tbody><tr>
+                                                        <td valign="top" class="ImageCellDefault">
+                                                            <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_left.gif">
+                                                        </td>
+                                                        <td width="298" valign="top">
+                                                            <table width="100%"><tbody><tr><td></td><td align="left"><font style="font-family: verdana;font-size: 18px;color: #666666;font-weight: bold;">Usage Instructions</font><br>
+<font style="font-family: verdana;font-size: 12px;color: #666666;font-weight: bold;">Recipient</font>
+<font style="font-family: verdana;font-size: 12px;color: #666666;">Protect this card like cash. Print this gift card and bring it to Whole Foods Market for use.</font>
+<br><br>
+<font style="font-family: verdana;font-size: 12px;color: #666666;font-weight: bold;">Merchant</font>
+<font style="font-family: verdana;font-size: 12px;color: #666666;">Scan the bar code or type the number displayed under the bar code into our payment system.</font></td><td></td></tr></tbody></table>
+                                                            
+                                                        </td>
+                                                        <td valign="top" align="left" class="ImageCellDefault">
+                                                            <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_right.gif">
+                                                        </td>
+                                                    </tr>
+                                                </tbody></table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ImageCellDefault">
+                                                <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_bottom.gif">
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                                <!--right box -->
+                                <td id="rightBoxCell" valign="top">
+                                    <table width="300" cellpadding="0" cellspacing="0" border="0">
+                                        <tbody><tr>
+                                            <td class="ImageCellDefault">
+                                                <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_top.gif">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top">
+                                                <table cellpadding="0" cellspacing="0">
+                                                    <tbody><tr valign="top">
+                                                        <td class="ImageCellDefault">
+                                                            <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_left.gif">
+                                                        </td>
+                                                        <td width="298" valign="top">
+                                                            <table width="100%"><tbody><tr><td></td><td align="left"><font style="font-family: verdana;font-size: 18px;color: #666666;font-weight: bold;">Company Information</font>
+<br>
+<font style="font-family: verdana;font-size: 12px;color: #666666;font-weight: bold;">Phone: </font><font style="font-family: verdana;font-size: 12px;color: #666666;">512.477.4455<font><br>
+<font style="font-family: verdana;font-size: 12px;color: #666666;font-weight: bold;">Website: </font><font style="font-family: verdana;font-size: 12px;color: #666666;"><a target="_blank" class="HREFFooterURL" href="http://www.wholefoodsmarket.com/">www.wholefoodsmarket.com</a><font><br>
+<font style="font-family: verdana;font-size: 12px;color: #666666;font-weight: bold;">Email: </font><font style="font-family: verdana;font-size: 12px;color: #666666;"><a target="_blank" class="HREFFooterURL" href="mailto:customer.questions@wholefoods.com">customer.questions@wholefoods.com</a><font><br>
+<font style="font-family: verdana;font-size: 12px;color: #666666;"><a target="_blank" class="HREFFooterURL" href="http://wholefoodsmarket.com/stores/">Click Here</a> to find a store near you.</font></font></font></font></font></font></font></td><td></td></tr></tbody></table>
+                                                            
+                                                        </td>
+                                                        <td valign="top" class="ImageCellDefault">
+                                                            <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_right.gif">
+                                                        </td>
+                                                    </tr>
+                                                </tbody></table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ImageCellDefault">
+                                                <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_bottom.gif">
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+                <!-- End secondary boxes -->
+                <tr>
+                    <td align="center">
+                        <table cellpadding="0" cellspacing="0" width="620">
+                            <tbody><tr>
+                                <td align="left">
+                                    <p>
+                                        <font class="fntContentSmall">
+                                            <span id="lblFooterTermsAndConditions">THE FOLLOWING TERMS AND CONDITIONS APPLY: The purchase or use of this gift card, in digital or physical form, constitutes acceptance of the complete terms and conditions. Gift cards must be used solely for the purchase of merchandise or services provided by Whole Foods Market. Gift card is not redeemable for cash unless required by law. A gift card, in any form, will not be replaced if lost or stolen so please treat as cash. This gift card is issued by WFM Gift Card, LLC. This gift card does not expire, nor does it incur any fees for any reason. For more information please visit <a target="_blank" class="HREFFooterURL" href="http://www.wholefoodsmarket.com/giftcards">www.wholefoodsmarket.com/giftcards</a> or call 1.866.WFM.CALL (866-936-2255).</span><br>
+                                            <span id="lblRedundantExpDateLabel">&nbsp;&nbsp;&nbsp;EXPIRATION DATE:</span><span id="lblRedundantExpDateValue">None</span>
+                                        </font>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            
+            <tr>
+                <td class="ImageCellDefault">
+                    
+                    <div id="divFooterImage" style="padding: 0px 0px 0px 0px">
+                        <img id="imgFooter" src="{{ STATIC_URL }}/print-giftcard/018912_vcfooter.png" style="border-width:0px;width:670px;">
+                    </div>
+                    
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+    <!-- edit message modal div-->
+    <div style="display: none" id="editMessageDiv">
+        <!--change inherit to none after designing-->
+        <table style="width: auto;">
+            <tbody><tr>
+                <td class="modalDialogHeaderRow" colspan="3">
+                    <b>
+                        Edit Custom Greeting
+                    </b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td colspan="2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        To:
+                    </b>
+                </td>
+                <td colspan="2">
+                    <input id="txtToName" type="text" size="30">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td colspan="2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        From:
+                    </b>
+                </td>
+                <td colspan="2">
+                    <input id="txtFromName" type="text" size="30">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td colspan="2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        
+                    </b>
+                </td>
+                <td colspan="2" rowspan="4">
+                    <textarea id="txtMessage" cols="20" name="S1" rows="2"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td colspan="2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    <input type="submit" name="btnUpdate" value="Update" id="btnUpdate" class="BUTTONGeneralToolBox">
+                </td>
+                <td>
+                    <input type="submit" name="btnCancle" value="Cancel" id="btnCancle" class="BUTTONGeneralToolBox">
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+    <!-- Regift modal div-->
+    <div style="display: none;" id="regiftDiv" class="regiftDivDeminsions">
+        <!--change inherit to none after designing-->
+        <table style="width: 600px;">
+            <tbody><tr>
+                <td class="modalDialogHeaderRow" colspan="3">
+                    <b>
+                        Step 2 of 2: Recipient Information</b>
+                </td>
+            </tr>
+        </tbody></table>
+        <table style="width: 600px">
+            <tbody><tr style="height: 5px">
+            </tr>
+            <tr>
+                <td style="width: 10px">
+                </td>
+                <td>
+                    Please update the following fields and click "Send gift" to issue the card to the new recipient.
+                </td>
+            </tr>
+        </tbody></table>
+        <table style="width: 500px;">
+            <tbody><tr style="height: 5px;">
+                <td colspan="3">
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 40px;">
+                </td>
+                <td style="width: 150px;">
+                    <b>
+                        First Name:</b>
+                </td>
+                <td>
+                    <input id="txtRegiftFirstName" type="text" style="width: 300px">
+                </td>
+            </tr>
+            <tr style="height: 5px;">
+                <td colspan="3">
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 40px;">
+                </td>
+                <td style="width: 150px;">
+                    <b>
+                        Last Name:</b>
+                </td>
+                <td>
+                    <input id="txtRegiftLastName" type="text" style="width: 300px">
+                </td>
+            </tr>
+            <tr style="height: 5px;">
+                <td colspan="3">
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 40px;">
+                </td>
+                <td style="width: 150px;">
+                    <b>
+                        Recipient Email:</b>
+                </td>
+                <td>
+                    <input id="txtRegiftRecipientEmail" type="text" style="width: 300px">
+                </td>
+            </tr>
+            <tr style="height: 5px;">
+                <td colspan="3">
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 40px;">
+                </td>
+                <td style="width: 150px;">
+                    <b>
+                        Confirm Email:</b>
+                </td>
+                <td>
+                    <input id="txtRegiftConfirmRecipientEmail" type="text" style="width: 300px">
+                </td>
+            </tr>
+            <tr style="height: 30px;">
+                <td colspan="3">
+                </td>
+            </tr>
+        </tbody></table>
+        <table style="width: 600px;">
+            <tbody><tr>
+                <td class="modalDialogHeaderRow" colspan="3">
+                    <b>
+                        Edit Custom Greeting</b>
+                </td>
+            </tr>
+        </tbody></table>
+        <!-- custom message-->
+        <table style="width: 500px;">
+            <tbody><tr style="height: 5px;">
+                <td colspan="3">
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 40px;">
+                </td>
+                <td style="width: 150px;">
+                    <b>
+                        To:</b>
+                </td>
+                <td colspan="2">
+                    <input id="txtRegiftToName" type="text" size="30">
+                </td>
+            </tr>
+            <tr style="height: 5px;">
+                <td colspan="3">
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 40px;">
+                </td>
+                <td style="width: 150px;">
+                    <b>
+                        From:</b>
+                </td>
+                <td colspan="2">
+                    <input id="txtRegiftFromName" type="text" size="30">
+                </td>
+            </tr>
+            <tr style="height: 5px;">
+                <td colspan="3">
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 40px;">
+                </td>
+                <td style="width: 150px;" valign="top">
+                    <b>
+                        Message:
+                    </b>
+                </td>
+                <td colspan="2" rowspan="4" valign="top">
+                    <textarea id="txtRegiftMessage" cols="20" name="S1" rows="2"></textarea>
+                </td>
+            </tr>
+        </tbody></table>
+        <br>
+        <table style="width: 600px;">
+            <tbody><tr>
+                <td style="width: 150px;" align="center">
+                </td>
+                <td style="width: 150px;" align="center">
+                    <input type="submit" name="btnSendAsGift" value="Send as Gift" id="btnSendAsGift" class="BUTTONGeneralToolBox">
+                </td>
+                <td style="width: 150px;" align="center">
+                    <input type="submit" name="btnRegiftCancle" value="Cancel" id="btnRegiftCancle" class="BUTTONGeneralToolBox">
+                </td>
+                <td style="width: 150px;" align="center">
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+    <!-- email address prompt-->
+    <div style="display: none; width: 600px; height: 175px" id="divEmailAddressPrompt">
+        <!--change inherit to none after designing-->
+        <table style="width: 600px;">
+            <tbody><tr>
+                <td class="modalDialogHeaderRow" colspan="3">
+                    <b>
+                        Step 1 of 2: Confirm Your Email Address</b>
+                </td>
+            </tr>
+        </tbody></table>
+        <table style="width: 600px">
+            <tbody><tr style="height: 5px">
+            </tr>
+            <tr>
+                <td style="width: 10px">
+                </td>
+                <td style="font-size: small">
+                    Please enter your email address below. We will send a confirmation to this address
+                </td>
+            </tr>
+        </tbody></table>
+        <table style="width: 600px;">
+            <tbody><tr style="height: 10px;">
+                <td colspan="3">
+                </td>
+            </tr>
+            <tr align="center">
+                <td style="width: 40px;">
+                </td>
+                <td style="width: 120px;">
+                    <b>
+                        Your Email:
+                    </b>
+                </td>
+                <td>
+                    <input id="txtEmailAddressPrompt" type="text" style="width: 300px">
+                </td>
+                <td style="width: 40px;">
+                </td>
+            </tr>
+        </tbody></table>
+        <br>
+        <table style="width: 600px;">
+            <tbody><tr>
+                <td style="width: 150px;" align="center">
+                </td>
+                <td style="width: 150px;" align="center">
+                    <input type="submit" name="btnNextEmailAddressPrompt" value="Next" id="btnNextEmailAddressPrompt" class="BUTTONGeneralToolBox">
+                </td>
+                <td style="width: 150px;" align="center">
+                    <input type="submit" name="btnCancelEmailAddressPrompt" value="Cancel" id="btnCancelEmailAddressPrompt" class="BUTTONGeneralToolBox">
+                </td>
+                <td style="width: 150px;" align="center">
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+    <!-- send to mobile modal div-->
+    <div style="display: none" id="sendToMobileDiv">
+        <!--change inherit to none after designing-->
+        <table style="width: auto;">
+            <tbody><tr>
+                <td class="modalDialogHeaderRow" colspan="3">
+                    <b>Send to My Mobile </b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td colspan="2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+               <td>
+                   <b>Country Code</b> <!-- hardcode for now, need to globalize this label -->
+               </td>
+                <td><select name="ddlCountryCallingCode" id="ddlCountryCallingCode">
+
+</select> </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Phone Number:</b>
+                </td>
+                <td colspan="2">
+                    <input id="txtMobilePhone" type="text" size="30">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td colspan="2">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    <input type="submit" name="btnSendToMobile" value="Send Text Message" id="btnSendToMobile" class="BUTTONGeneralToolBox">
+                </td>
+                <td>
+                    <input type="submit" name="btnSendToMobileCancel" value="Cancel" id="btnSendToMobileCancel" class="BUTTONGeneralToolBox">                    
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+    </form>
+
+
+</body></html>

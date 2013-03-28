@@ -1,0 +1,329 @@
+@charset "UTF-8";
+
+/* fixes iPhone 4 first time transition flash, cause tap button misplacement
+.ui-page * {
+-webkit-transform: rotateY(0deg);
+-moz-transform: rotateY(0deg);
+transform: rotateY(0deg);
+}
+*/
+
+.old-cert-page-class {
+
+}
+
+.new-cert-page-class {
+	display:none;
+}
+
+.no_javascript_class {
+	background-color: #FF0;
+	min-height: 30px; 
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: medium;
+	text-align: center;
+}
+
+.no_javascript_ul_class {
+	list-style-type:none;
+	padding: 0px;
+	margin: 0px;
+	background-color: #DDD;
+}
+
+.no_javascript_hide_objects  {
+	display:none;
+}
+
+.content-class	
+{
+    /*
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#DDD), to(#777));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#DDDDDD', endColorstr='#777777');
+	background-image: -moz-linear-gradient(top, #DDDDDD, #777777);
+	background-image: linear-gradient(to bottom, #DDDDDD, #777777); */
+}
+
+.cert-page-class {
+	/* used to be in content-class, and not !important */
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#EEE), to(#777)) ! important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEEEEE', endColorstr='#777777') ! important;
+	background-image: -moz-linear-gradient(top, #EEEEEE, #777777) ! important;
+	background-image: linear-gradient(to bottom, #EEEEEE, #777777) ! important;
+}
+
+.logo_back_color {
+	background-color: #FFF;
+	background-image:none;
+}
+
+.giftango-header {
+	min-height: 36px;
+	padding-top: 10px;
+	font-size: large;
+	color:#FFF;
+	text-shadow: 1px 0px #0F0;
+	background-color: #000;
+	text-align:center;
+}
+
+.giftango-button {
+	color:white;
+	// background-color: #F00;
+	background-image:none;
+}
+
+.subscribe-fields {
+	margin-top:0.5em;
+	margin-bottom: 0.5em;
+}
+
+.gift-ammout {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: x-large;
+	text-align: center;
+	font-style: normal;
+	font-weight: bold;
+	border-bottom-width: 0px;
+}
+.gift-as-of {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: small;
+	text-align: center;
+	font-style: italic;
+	font-weight:normal;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+}
+
+.gift-nrlabel {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: large;
+	font-weight: normal;
+	text-align: center;
+}
+
+.gift-key {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: large;
+	font-weight: bold;
+	text-align: center;
+}
+
+.lblGiftCardNumber-class 
+{
+    /* does not fix it, rebuild the way the cert works on Monday for next release
+    -webkit-touch-callout: text;
+    -webkit-user-select: text!important;    */
+}
+
+.gift-pin {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: medium;
+	text-align: center;
+	font-style: normal;
+	font-weight:normal;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+}
+
+.gift-expire {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: medium;
+	text-align: center;
+	font-style: normal;
+	font-weight:normal;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+}
+
+.card-wrapper-class {
+	width:94%;
+	margin-left:2%;
+	text-align: center;
+}
+
+.card-front {
+	position:relative;      /* 7/30/12 */
+	z-index:1;
+}
+
+.card-back {
+	display:none;
+	text-align: center;
+	position:relative;      /* <---<<< table was removed because space problems - 7/30/12 */
+	z-index:1;
+}
+
+.inject-barcode-back-class {
+	text-align: center;
+	position:absolute;
+	top:10.5%;
+	left: 5%;
+	width:90%;
+}
+.inject-barcode-back-image-class {      
+	max-width:94%;
+}
+
+.inject-key-back-class 
+{
+    z-index:2;
+    font-size: medium;
+    text-align: center;
+    position:absolute;
+    width:100%;
+	top:10%;
+	left:0px;       /* required for IE */
+	margin: 0 auto; 
+	-webkit-touch-callout: text;
+    -webkit-user-select: text!important;
+}
+
+.inject-pin-back-class {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: large;
+	font-style: normal;
+	font-weight:bold;
+	position:absolute;
+	bottom:34%;
+	text-align: center;
+	width:100%;
+	left:0px; 
+}
+
+.card-images-class 
+{
+    width:100%;
+}
+
+.back-table-class {
+	width:100%;  
+	border: 0px;
+	text-align: center;
+	position:absolute;
+	top:30px;
+}
+
+.main-text {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: large;
+	text-align: left;
+	margin-top: 5px;
+}
+
+.cert-page-cardnumber-w-partner-class {
+	display:none;
+	font-size: 1px; 
+	line-height: 2;
+}
+
+.gift-instructions {
+	font-size: small;
+	font-weight:normal;
+}
+
+.gift-terms {
+	font-size: x-small;
+	font-weight:normal;
+}
+
+.card-tap-to-use-class {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	bottom:-19px;
+	right:-22px;
+}
+
+.card-tap-to-use-image-class {
+	z-index:3;
+	width: 50px;
+	height: 50px;
+}
+
+.card-tap-if-done-class {
+	width: 50px;
+	display:none;
+	position: absolute;
+	bottom:-22px;
+	right:-22px;
+}
+.card-tap-if-done-image-class {
+	z-index:3;
+	width: 50px;
+	height: 50px;
+}
+
+.card-refresh-image-class {
+	width: 30px;
+	height: 30px;
+}
+
+.gift-litCustomMsg-class {
+	font-weight:normal;
+}
+.gift-litCustomMsgToFrom-class {
+	font-weight:bold;
+}
+
+.card-hidden-barcodes-class {
+	/* display:none;	*/
+}
+
+.hidden-product-back-class {
+	display:none;	
+}
+
+.legal-text {
+	font-size: x-small;
+	font-style: italic;
+	margin-top: 1em;
+}
+
+.start-page-class {
+	display:none;
+}
+
+.start-page-logo-class {
+	background-color: #FFF;
+	max-height: 144px;
+}
+.start-page-logo-image-class 
+{
+    background-color: #FFF;
+	max-height: 140px;
+}
+
+.start-page-table-class {
+	background-color: #FFF;
+}
+
+.start-page-top-class {
+	height: 0px;
+}
+
+.start-page-bottom-class {
+	height: 0px;
+}
+
+.quickflip-cert-card {
+	min-height: 50px; 
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+}
+
+.wholePageHideClass {
+	display:block;
+}
+
+.half-space-break
+{
+    min-height:5px;
+}
+
+.whole-space-break
+{
+    min-height:10px;
+}

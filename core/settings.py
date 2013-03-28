@@ -1,6 +1,13 @@
 import dj_database_url
 import os, sys
+import socket
 
+try:
+    HOSTNAME = socket.gethostname()
+    if ".local" in HOSTNAME:
+        raise "Shouldn't use the weird mac localhost naming thing"
+except:
+    HOSTNAME = 'localhost:8000'
 
 LIVE = False # dev == False, live == True
 TEST = 'test' in sys.argv

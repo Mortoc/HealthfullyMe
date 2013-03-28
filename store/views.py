@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import Context, Template
+from django.conf import settings
 
 import json        
 import random
@@ -8,9 +9,9 @@ import sys
 import stripe
 import traceback
 
-from core import settings
 from core.email import message_from_template
 from store.models import ComingSoonIdea, Offer, Transaction, Card
+from store.fulfillment import fulfill_transaction
 
 
 def main(request):
@@ -41,6 +42,8 @@ def main(request):
 def purchase_complete(request):
     recent_transaction = Transaction.objects.filter(user=request.user.pk).order_by('-timestamp')[0]
     recent_offer = recent_transaction.offer;
+    
+    fulfill_transaction( recent_transaction )
     
     return render(request, "purchase_complete.html",
     {

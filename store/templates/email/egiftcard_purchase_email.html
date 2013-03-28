@@ -1,0 +1,23 @@
+{% extends "email/boilerplate.html" %} 
+{% block subject %}Your Whole Foods Gift Card ({{ transaction.id_slug }}){% endblock %} 
+{% block body %}
+<style>
+    @import url(http://fonts.googleapis.com/css?family=Signika);
+</style>
+
+<font color="#666666" face="Signika, sans-serif">
+<p style="font-size:16px;line-height:20px;padding:10px">
+    <span>Here's your gift card link.</span><br/>
+    <span><a href="{{ giftcard.fulfillment_url }}">Whole Foods Giftcard</a></span><br/>
+	<br/>
+    <span>If you view that link on a computer, you can just print it out.</span><br/>
+    <span>If you view that link on a smartphone, you can just show it to your cashier when you checkout.</span><br/>
+    <span>Enjoy!</span><br/>
+	
+    <br />
+    <span>Your Healthfully Me Support Team,</span><br />
+    <br />
+    <span>Emily, Jamie, Brittany, and Caitlin</span>
+</p>
+</font>
+{% endblock %}

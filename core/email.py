@@ -19,6 +19,7 @@ def message_from_template(template_path, from_email, reply_to, send_to, bcc = []
     template = get_template( template_path )
     
     message = template.render( Context(context) )
+    print message
     message = minify_html(message)
     
     subject = __get_email_subject_from_message(message)

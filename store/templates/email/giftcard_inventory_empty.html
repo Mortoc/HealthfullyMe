@@ -1,0 +1,15 @@
+{% extends "email/boilerplate.html" %} 
+{% block subject %}Unable to fulfill order: {{ transaction.id_slug }}{% endblock %} 
+{% block body %}
+<style>
+    @import url(http://fonts.googleapis.com/css?family=Signika);
+</style>
+
+<font color="#666666" face="Signika, sans-serif">
+<p style="font-size:16px;line-height:20px;padding:10px">
+    <span>{{ user.email }} purchased an egift card but the inventory is empty.<br/>Transaction ID: {{ transaction.id_slug }}</span><br/>
+	<br/>
+	<span><a href="http://{{ hostname }}/fufill_egiftcard/{{ transaction.id_slug }}">Click here</a> to fulfill after inventory is restocked</span><br/>
+</p>
+</font>
+{% endblock %}

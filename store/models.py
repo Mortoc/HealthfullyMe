@@ -42,6 +42,14 @@ class Offer(models.Model):
     price = models.IntegerField(default=4000)
     enabled = models.BooleanField(default=False)
     
+    EGIFTCARD_EMAIL = 'EGE'
+    MANUAL = 'MAN'
+    FULFILLMENT_CHOICES = (
+        (MANUAL, 'Manual Fulfillment'),
+        (EGIFTCARD_EMAIL, 'Electronic Gift Card Email'),
+    )
+    fulfillment = models.CharField( max_length=3, choices=FULFILLMENT_CHOICES, default=MANUAL)
+    
     availability = models.ManyToManyField('OfferAvailability', null=True, blank=True)
     
     def offer_price(self):
@@ -66,10 +74,6 @@ class Offer(models.Model):
         
         if self.user_can_purchase(user, transactions):
             return now()
-        
-        
-        #print "\n\nChecking User Purchase"
-        #print "{0} has {1} transactions".format(user.email, transactions.count())
         
         if transactions.count() > 0:
             next_availability = now()
@@ -276,6 +280,9 @@ class Transaction(models.Model):
         elif len(self.shipping_tracking_data) <= 2 and self.shipped:
             self.shipped = False
             self.save()
+            
+    def __unicode__(self):
+        return "Transaction {0}".format(self.id_slug)
         
         
 def model_saved(sender, **kwargs):

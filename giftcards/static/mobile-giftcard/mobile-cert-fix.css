@@ -1,0 +1,13 @@
+/*
+NOTE: please verify that the changed white-space to pre-wrap still applies to any updated version of jquery-mobile
+*/
+.ui-li-desc
+{
+	font-size:12px;
+	font-weight:normal;
+	display:block;
+	margin:-.5em 0 .6em;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:pre-wrap;
+}

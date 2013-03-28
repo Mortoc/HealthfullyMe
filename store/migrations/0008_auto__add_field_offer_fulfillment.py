@@ -8,51 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Giftcard.sold_date'
-        db.delete_column(u'giftcards_giftcard', 'sold_date')
-
-        # Deleting field 'Giftcard.assigned_to'
-        db.delete_column(u'giftcards_giftcard', 'assigned_to')
-
-        # Adding field 'Giftcard.transaction'
-        db.add_column(u'giftcards_giftcard', 'transaction',
-                      self.gf('django.db.models.fields.related.ForeignKey')(to=orm['store.Transaction'], null=True, blank=True),
+        # Adding field 'Offer.fulfillment'
+        db.add_column(u'store_offer', 'fulfillment',
+                      self.gf('django.db.models.fields.CharField')(default='MAN', max_length=3),
                       keep_default=False)
-
-        # Adding field 'Giftcard.fulfillment_url'
-        db.add_column(u'giftcards_giftcard', 'fulfillment_url',
-                      self.gf('django.db.models.fields.CharField')(max_length=128, null=True, blank=True),
-                      keep_default=False)
-
-        # Adding index on 'Giftcard', fields ['card_id']
-        db.create_index(u'giftcards_giftcard', ['card_id'])
-
-        # Adding unique constraint on 'Giftcard', fields ['card_id']
-        db.create_unique(u'giftcards_giftcard', ['card_id'])
 
 
     def backwards(self, orm):
-        # Removing unique constraint on 'Giftcard', fields ['card_id']
-        db.delete_unique(u'giftcards_giftcard', ['card_id'])
-
-        # Removing index on 'Giftcard', fields ['card_id']
-        db.delete_index(u'giftcards_giftcard', ['card_id'])
-
-        # Adding field 'Giftcard.sold_date'
-        db.add_column(u'giftcards_giftcard', 'sold_date',
-                      self.gf('django.db.models.fields.DateTimeField')(null=True),
-                      keep_default=False)
-
-        # Adding field 'Giftcard.assigned_to'
-        db.add_column(u'giftcards_giftcard', 'assigned_to',
-                      self.gf('django.db.models.fields.EmailField')(max_length=75, null=True),
-                      keep_default=False)
-
-        # Deleting field 'Giftcard.transaction'
-        db.delete_column(u'giftcards_giftcard', 'transaction_id')
-
-        # Deleting field 'Giftcard.fulfillment_url'
-        db.delete_column(u'giftcards_giftcard', 'fulfillment_url')
+        # Deleting field 'Offer.fulfillment'
+        db.delete_column(u'store_offer', 'fulfillment')
 
 
     models = {
@@ -112,16 +76,6 @@ class Migration(SchemaMigration):
             'timestamp': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.HMUser']", 'null': 'True'})
         },
-        u'giftcards.giftcard': {
-            'Meta': {'object_name': 'Giftcard'},
-            'card_id': ('django.db.models.fields.BigIntegerField', [], {'unique': 'True', 'db_index': 'True'}),
-            'created_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'fulfillment_url': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'organization': ('django.db.models.fields.CharField', [], {'max_length': '4'}),
-            'remaining_value': ('django.db.models.fields.DecimalField', [], {'max_digits': '16', 'decimal_places': '2'}),
-            'transaction': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['store.Transaction']", 'null': 'True', 'blank': 'True'})
-        },
         u'store.card': {
             'Meta': {'object_name': 'Card'},
             'address': ('django.db.models.fields.related.ForeignKey', [], {'default': 'None', 'to': u"orm['core.Address']", 'null': 'True'}),
@@ -133,6 +87,14 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
             'type': ('django.db.models.fields.CharField', [], {'max_length': '32'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.HMUser']"})
+        },
+        u'store.comingsoonidea': {
+            'Meta': {'object_name': 'ComingSoonIdea'},
+            'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '160'}),
+            'times_selected': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'times_shown': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         u'store.offer': {
             'Meta': {'object_name': 'Offer'},
@@ -174,4 +136,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['giftcards']
+    complete_apps = ['store']

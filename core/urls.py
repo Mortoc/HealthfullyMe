@@ -5,8 +5,8 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # serving static files through gunicorn on heroku for now. This isn't going to scale nicely,
-    #  eventually we're gonna want to put our static files on S3
+    # TODO: stop serving static files through gunicorn on heroku
+    #  Obviously this isn't going to scale nicely - we're gonna want to put our static files on S3
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     
     url(r'^$', 'home.views.index', name='index'),
@@ -29,7 +29,13 @@ urlpatterns = patterns('',
     url(r'^reset-password/(?P<key>.*)$', 'core.views.set_my_password'),
     
     url(r'^admin/tools/add-new-card', 'giftcards.views.add_new_card_ajax'),
-
+    
+    url(r'^fufill_egiftcard/(?P<transaction_id>.*)$', 'store.fulfillment.fulfill_egiftcard_direct'),
+    
+    url(r'^giftcards/redeem-wholefoods-giftcard/(?P<transaction_id>.+)$', 'giftcards.views.redeem_card'),
+    url(r'^giftcards/redeem-wholefoods-giftcard-mobile/(?P<transaction_id>.+)$', 'giftcards.views.redeem_card_mobile'),
+    url(r'^giftcards/redeem-wholefoods-giftcard-print/(?P<transaction_id>.+)$', 'giftcards.views.redeem_card_print'),
+    
     url(r'^admin/tools/add-giftcards', 'giftcards.views.add_giftcards'),
     url(r'^admin/tools/email-viewer/(?P<email_name>.*)$', 'core.email.view_email'),
     url(r'^admin/tools/users-for-newsletter$', 'core.admintools.users_for_newsletter'),
@@ -37,6 +43,5 @@ urlpatterns = patterns('',
     
     url(r'^admin/', include(admin.site.urls)),
     
-	url(r'^pinterest-8ecbej.html', 'core.social_itegration.pinterest_verify'),
-    url(r'mobile/test-integration', 'core.mobiletest.test'),
+	url(r'^pinterest-8ecbe.html', 'core.social_itegration.pinterest_verify'),
 )
