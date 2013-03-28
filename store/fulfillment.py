@@ -30,7 +30,7 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
                 "email/giftcard_inventory_empty.html",
                 "the_server@healthfully.me",
                 "noreply@healthfully.me",
-                ["mortoc@healthfully.me"],
+                ["orders@healthfully.me"],
                 [],
                 {
                     "user" : transaction.user,
