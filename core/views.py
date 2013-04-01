@@ -7,6 +7,7 @@ from django.utils.timezone import now
 import sys, traceback
 import hashlib
 
+from core.ssl_utils import secure_required
 from core.email import message_from_template
 from core.encode import base62_encode
 from core.models import HMUser, UserAccessCode
@@ -19,6 +20,7 @@ def server_error(request):
             context_instance=RequestContext(request)
     )
     
+@secure_required
 def reset_user_password(request, user_email):
     
     # only staff can reset a user's password with this page
@@ -56,6 +58,7 @@ def reset_user_password(request, user_email):
             context_instance=RequestContext(request)
         )
     
+@secure_required
 def set_my_password(request, key):
     context = { 'code' : key }
     form = None

@@ -2,25 +2,30 @@ import dj_database_url
 import os, sys
 import socket
 
-try:
-    HOSTNAME = socket.gethostname()
-    if ".local" in HOSTNAME:
-        raise "Shouldn't use the weird mac localhost naming thing"
-except:
-    HOSTNAME = 'localhost:8000'
-
 LIVE = False # dev == False, live == True
 TEST = 'test' in sys.argv
 
 if os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LIVE":
     LIVE = True
+    HOSTNAME = "www.healthfully.me"
 elif os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "DEV":
     LIVE = False
+    
+    socket_hostname = socket.gethostname()
+    if ".local" in socket_hostname or "127.0.0.1" in socket_hostname or "localhost" in socket_hostname:
+        HOSTNAME = "localhost:8000"
+    else:
+        HOSTNAME = "healthfullyme-dev.herokuapp.com"
+    
 else:
     raise Exception("HEALTHFULLY_ME_DEPLOYMENT hasn't been set on this machine")
     
+if LIVE:
+    print "LIVE: " + HOSTNAME
+else:
+    print "DEV: " + HOSTNAME
 
-DEBUG = True
+DEBUG = not LIVE
 TEMPLATE_DEBUG = DEBUG
 
 BASE_DIR = os.path.dirname( os.path.abspath(__file__) )
@@ -40,6 +45,7 @@ else:
     }
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Stripe

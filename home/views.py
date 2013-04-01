@@ -6,6 +6,7 @@ from django.core.mail import EmailMessage
 
 import hashlib
 
+from core.ssl_utils import secure_required
 from core.models import HMUser
 from core.validators import validate_email
 from core.email import message_from_template
@@ -15,6 +16,7 @@ from home.forms import UserLoginForm, UserRegistrationForm, EmailRequestForm
 def enum(**enums):
     return type('Enum', (), enums)
 
+@secure_required
 def login_user(request):
     if request.user.is_authenticated():
         HttpResponseRedirect('/store/')
@@ -66,6 +68,7 @@ def use_auth_code(auth_code, user):
     except AuthCode.DoesNotExist:
         return AuthCodeResult.INVALID
     
+@secure_required
 def register_user(request):
     if request.user.is_authenticated():
         HttpResponseRedirect('/store/')
@@ -120,7 +123,7 @@ def register_user(request):
 
 def index(request):
     return render(request, "index.html", {
-       'form' : EmailRequestForm()                    
+       'form' : EmailRequestForm()
     });
     
     

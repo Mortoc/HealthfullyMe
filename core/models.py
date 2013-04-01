@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth.signals import user_logged_in
+from django.db.models.signals import post_save
 from django.utils.timezone import now
 from django.utils.safestring import mark_safe
 from django.contrib.auth.hashers import make_password
@@ -101,9 +102,21 @@ class HMUser(AbstractBaseUser, PermissionsMixin):
     def password_admin_reset(self):
         html = "<span>********&nbsp&nbsp&nbsp&nbsp<a href='/admin/tools/reset-password/" + self.email + "'>reset</a></span>";
         return mark_safe(html)
+        
+    def on_save(self):
+        if self.is_admin and not self.is_staff:
+            self.is_staff = True
+            self.save()
     
     password_admin_reset.allow_tags = True
     password_admin_reset.short_description = "Password"
+    
+    
+def model_saved(sender, **kwargs):
+    instance = kwargs['instance']
+    instance.on_save()
+
+post_save.connect(model_saved, sender=HMUser)
     
 # SingleUserUrl a key for a url that's tied to a single user account
 class UserAccessCode(models.Model):

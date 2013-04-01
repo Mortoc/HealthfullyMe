@@ -9,11 +9,12 @@ import sys
 import stripe
 import traceback
 
+from core.ssl_utils import secure_required
 from core.email import message_from_template
 from store.models import ComingSoonIdea, Offer, Transaction, Card
 from store.fulfillment import fulfill_transaction
 
-
+@secure_required
 def main(request):
     if request.user.is_anonymous():
         return HttpResponseRedirect("/")
@@ -39,6 +40,7 @@ def main(request):
         
         return render(request, "store_main.html", context)
         
+@secure_required
 def purchase_complete(request):
     recent_transaction = Transaction.objects.filter(user=request.user.pk).order_by('-timestamp')[0]
     recent_offer = recent_transaction.offer;
@@ -53,6 +55,7 @@ def purchase_complete(request):
         "billing_address" : recent_transaction.card.address
     })
     
+@secure_required
 def purchase_error(request):
     return render(request, "purchase_error.html", {})
     
@@ -64,7 +67,8 @@ def run_stripe_charge(price, stripe_token, username):
         card=stripe_token,
         description=username
     )
-        
+
+@secure_required        
 def record_charge_ajax(request, run_charge=run_stripe_charge):
     try:
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -144,7 +148,7 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
         
         return HttpResponse(json.dumps(response_data), mimetype="application/json")
         
-        
+@secure_required
 def offer_not_available(request, offer_id):
     return render(request, "offer_not_available.html",
     {
@@ -152,6 +156,7 @@ def offer_not_available(request, offer_id):
     })
 
         
+
 def vote_ajax(request):
     option1 = int(request.GET['option1'])
     idea1 = ComingSoonIdea.objects.get(id=option1)

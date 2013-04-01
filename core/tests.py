@@ -7,6 +7,7 @@ from django.contrib.auth.models import AnonymousUser
 
 from home.views import login_user, logout_user
 from core.models import *
+from core.test.TestCasePlus import TestCasePlus
 
 class MockSession(dict):
     def __init__(self):
@@ -21,7 +22,7 @@ class MockSession(dict):
     def set_test_cookie(self):
         pass
     
-class HMUserVerification(TestCase):
+class HMUserVerification(TestCasePlus):
     def setUp(self):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
@@ -34,19 +35,18 @@ class HMUserVerification(TestCase):
         self.test_user.save()
         
     def do_login(self, email, password):
-        request = self.factory.get('/login')
-        request.user = AnonymousUser()
-        request.session = MockSession()
-        request.user.session = request.session 
-        
-        request.method = "POST"
-        request.POST = {
+        return self.secure_post('/login', {
             'email' : email,
             'password' : password,
-        }
+        })
         
-        return login_user(request)
-    
+    def test_admins_are_autmatically_made_staff(self):
+        self.test_user.is_admin = True
+        self.test_user.is_staff = False
+        self.test_user.save()
+
+        self.assertEqual(self.test_user.is_staff, True)
+        
         
     def test_logins_are_recorded(self):
         initial_logins = self.test_user.logins.count()

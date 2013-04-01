@@ -1,18 +1,17 @@
 from django.utils import unittest
-from django.test.client import RequestFactory
 from django.test import TestCase
 from django.contrib.auth import authenticate, login, logout
 from store.models import Transaction, Offer, OfferAvailability
 from store.views import record_charge_ajax
 
 from core.models import HMUser
+from core.test.TestCasePlus import TestCasePlus
 import json
 import stripe
 
-class TransactionTest(TestCase):
+class TransactionTest(TestCasePlus):
     def setUp(self):
-        # Every test needs access to the request factory.
-        self.factory = RequestFactory()
+        super(TransactionTest, self).setUp()
         
         self.test_user = HMUser.objects.create_user (
             email = "TEST@USER.COM", 
@@ -70,8 +69,8 @@ class TransactionTest(TestCase):
     def mock_run_stripe_charge_server_error(self, price, stripe_token, username):
         raise Exception("Fake Server Error")
     
-    def test_offer_availability_limits(self):
-        request = self.factory.get('/store/record-charge')
+    def test_offer_availability_limits(self):        
+        request = self.get_secure_request('/store/record-charge')
         request.user = HMUser.objects.get(email=self.test_user.email)
         request.method = "POST"
         
@@ -107,7 +106,7 @@ class TransactionTest(TestCase):
         
     
     def test_record_charge_ajax_on_successful_card(self):
-        request = self.factory.get('/store/record-charge')
+        request = self.get_secure_request('/store/record-charge')
         request.user = self.test_user
         request.method = "POST"
         request.POST = {
@@ -127,7 +126,7 @@ class TransactionTest(TestCase):
 
 
     def test_record_charge_ajax_error_handling(self):
-        request = self.factory.get('/store/record-charge')
+        request = self.get_secure_request('/store/record-charge')
         request.user = self.test_user
         request.method = "POST"
         request.POST = {
