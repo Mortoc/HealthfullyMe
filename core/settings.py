@@ -3,6 +3,7 @@ import os, sys
 import socket
 
 LIVE = False # dev == False, live == True
+LOCAL = False
 TEST = 'test' in sys.argv
 
 if os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LIVE":
@@ -14,6 +15,7 @@ elif os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "DEV":
     socket_hostname = socket.gethostname()
     if ".local" in socket_hostname or "127.0.0.1" in socket_hostname or "localhost" in socket_hostname:
         HOSTNAME = "localhost:8000"
+        LOCAL = True
     else:
         HOSTNAME = "healthfullyme-dev.herokuapp.com"
     
