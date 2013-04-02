@@ -1,12 +1,49 @@
-html {
-    width: 100%;
+
+* {
+    margin: 0;
+    padding: 0; 
 }
 
-body {
-    width: 100%;
+html, body {
+    height: 100%; 
+    min-height: 480px;
+    overflow: hidden;
+}
+
+#main {
+    overflow:auto;
+	padding-bottom: 150px;
+}  /* must be same height as the footer */
+
+#footer {position: relative;
+	margin-top: -150px; /* negative value of footer height */
+	margin-left: -20px;
+	margin-right: -20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	
+	height: 150px;
+	clear:both;
+	background-color:#7FC44E;
+    border-top: 4px solid #24adae;
+} 
+
+#footer .email-link {
+    float: right;
+    color: white;
+    margin: 24px 20px;
+    line-height: 20px;
     
-    background-color: #24adae;
-    padding: 0;
+    padding: 0 0 8px 28px;
+    
+    background: url(../img/email-icon.png) 0 0 no-repeat;
+}
+
+#footer .social-link {
+    float: right;
+    color: white;
+    margin: 24px 21px;
+    line-height: 20px;
 }
 
 h3 {
@@ -21,7 +58,6 @@ h3 {
 }
 
 .main-content {
-    min-height: 600px;
     height: 100%;
 
 	max-width: 900px;
@@ -32,6 +68,9 @@ h3 {
 	height: 100%;
 	width: 100%;
 	background-color: white;
+	padding: 0;
+	margin: 0;
+    overflow-y: scroll;
 }
 
 .centered-main-content {
@@ -44,7 +83,7 @@ h3 {
     background-color: white;
 }
 
-.logo-container {
+.social-container {
     float:none;
     
     margin: 50px auto;
@@ -133,7 +172,7 @@ h3 {
 
 .login-header-text {
     float: left;
-    font-family: 'Montez', sans-serif;
+    font-family: 'Lobster Two', sans-serif;
     font-size: 50px;
     color: #ffa05b;
     height: 64px;
@@ -201,18 +240,22 @@ h3 {
 .top-bar {
     background-color:#7FC44E;
     position: relative; 
-    height: 48px;
+    height: 72px;
     width: 100%;
     top: 0;    
-
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
     
     border-bottom: 4px solid #24adae;
 }
 
-.top-bar .login-link {
+
+.login-link {
     float: right;
     color: white;
-    margin: 14px 21px;
+    margin: 24px 21px;
     line-height: 20px;
 }
 
@@ -260,8 +303,8 @@ h3 {
 
 .scripty-header-text {
     float: left;
-    font-family: 'Montez', sans-serif;
-    font-size: 50px;
+    font-family: 'Lobster Two', sans-serif;
+    font-size: 40px;
     color: #ffa05b;
     height: 64px;
     line-height: 64px;
@@ -289,6 +332,7 @@ h3 {
     float: none;
     font-family: 'Signika', sans-serif;
     font-size: 16px;
+    line-height: 32px;
     color:#666666;
     text-align: justify;
 }
@@ -302,43 +346,67 @@ h3 {
     text-align: justify;
 }
 
+.tiny-logo {
+    position:absolute; 
+    top:5px; 
+    left:10px;
+}
+
 a {
     font-family: 'Signika', sans-serif;
 }
 	
-
-/* ====================================================== */
-/* ! Provide higher res assets for high-res displays      */
-/* ====================================================== */
-
 /* Swap out assets for retina displays
 @media only screen and (-webkit-min-device-pixel-ratio: 2) { 
 
 }*/
 @media only screen and (max-width: 767px) {
     
-    .message-container {
-        margin: 20px auto;
+    .background {
+        padding: -20px;
     }
-    .logo {
-        position: relative;
-        left: 8px;
+    
+    
+    .tiny-logo {
+        position: absolute; 
+        top: 6px; 
+        left: 10px;
+    }
+    
+    .social-container {
+        display: none;
     }
 }
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
     
+    .social-container {
+        display: none;
+    }
+    
     body {
         zoom: 0.75;
+        margin: 0;
+        padding: 0;
+    }
+    
+    
+    .tiny-logo {
+        position: absolute; 
+        top: 6px; 
+        left: 10px;
+    }
+    
+    .background {
+        padding: -20px;
     }
     
     .scripty-header-text {
-        font-size: 50px;
-        line-height: 64px;
+        font-size: 30px;
     }
         
     .header-text {
-        font-size: 37px;
+        font-size: 28px;
         line-height: 38px;
     }
     

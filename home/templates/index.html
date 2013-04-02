@@ -5,16 +5,12 @@
 {% endblock %}
 
 {% block main_content %}
+
 <div class="row-fluid">
-    
-    <div class="span6">
-        <div class="logo-container">
-            <img class="logo" src="{{ STATIC_URL }}img/hm-logo.jpg"></img>    
-        </div>
-    </div>
-    
+	
     <div class="span6">
         <div class="message-container">
+		
             <div class="message-row">
                 <span class="header-text">Take the stress out of</span>
             </div>
@@ -31,7 +27,7 @@
             
             <div class="message-row">
                 <p class="message-text">
-                    We partner with care providers to make healthy eating easy, fun, and affordable for you and your family. We’re launching our closed beta soon so request your invite today!
+                    We make healthy eating easy, fun, and affordable for you and your family!
                 </p>
             </div>
             
@@ -50,7 +46,15 @@
                 {% endif %}
             </div>
         </div>
-    </div>    
+    </div>
+    <div class="span6">
+        <div class="social-container" onmousedown="console.log('clicked')">
+			<script type="text/javascript" src="https://s3-us-west-1.amazonaws.com/hypes-images/assets/scripts/tintembed.js"></script>        
+			<div class="tintup-holder" style="-webkit-overflow-scrolling:touch;overflow:hidden;position:relative;height:410px;width:425px;">
+			<iframe class="tintup" src="http://www.tintup.com/healthfullyme?embed=true&height=500&width=425&cols=2" style="height:600px;width:425px;border:none;"></iframe></div>
+       </div>
+    </div>
+    
 </div>
         
 {% endblock %}

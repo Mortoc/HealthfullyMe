@@ -42,10 +42,18 @@
 	</div>
 </div>
 
-<div class="top-bar" style="background-color: rgba(255, 255, 255, 0.0);">
-    <span class="login-link" style="width: 100%; text-align: center">
-       <a href="mailto:hello@healthfully.me">Contact Us</a>
-    </span>
+
+<div id="footer" class="footer-bar">
+	<a class="email-link" href="mailto:hello@healthfully.me">Email Us</a>
+	<div class="social-link" style="margin-top:22px"><a data-pin-do="buttonFollow" href="http://pinterest.com/healthfullyme/">Healthfully.me</a></div>
+	<!-- <iframe class="social-link" src="//www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2Fhealthfullyme&amp;layout=button_count&amp;show_faces=false&amp;colorscheme=light&amp;font=verdana&amp;width=100" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px;" allowTransparency="true"></iframe> -->
+	
+<a href="https://twitter.com/HealthfullyMe" class="twitter-follow-button login-link" data-show-count="false">Follow @HealthfullyMe</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
+
+<a href="/">
+<img src="{{ STATIC_URL }}img/tiny-logo.png" class="tiny-logo"/>
+</a>
 {% endblock %}
 
