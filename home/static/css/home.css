@@ -313,6 +313,26 @@ h3 {
     text-align: center;
 }
 
+.leafy-header {
+    float: left;
+    font-family: 'Lobster Two', sans-serif;
+    font-size: 40px;
+    color: #ffa05b;
+    height: 64px;
+    line-height: 64px;
+    
+    width: 325px;
+    text-align: center;
+}
+
+.leafy-header:before {
+    content: url(../img/leaves-left.png);
+}
+
+.leafy-header:after {
+    content: url(../img/leaves-right.png);
+}
+
 .green-dash {
     float: left;
 
@@ -365,7 +385,6 @@ a {
     .background {
         padding: -20px;
     }
-    
     
     .tiny-logo {
         position: absolute; 
