@@ -34,12 +34,6 @@ class HMUserVerification(TestCasePlus):
         
         self.test_user.save()
         
-    def do_login(self, email, password):
-        return self.secure_post('/login', {
-            'email' : email,
-            'password' : password,
-        })
-        
     def test_admins_are_autmatically_made_staff(self):
         self.test_user.is_admin = True
         self.test_user.is_staff = False

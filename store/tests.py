@@ -1,6 +1,7 @@
 from django.utils import unittest
 from django.test import TestCase
 from django.contrib.auth import authenticate, login, logout
+from django.conf import settings
 from store.models import Transaction, Offer, OfferAvailability
 from store.views import record_charge_ajax
 
@@ -14,7 +15,7 @@ class TransactionTest(TestCasePlus):
         super(TransactionTest, self).setUp()
         
         self.test_user = HMUser.objects.create_user (
-            email = "TEST@USER.COM", 
+            email = "TEST@USER.COM".lower(), 
             password = "OMG_TESTS!"
         )
         
@@ -103,6 +104,19 @@ class TransactionTest(TestCasePlus):
         response_content = json.loads( response.content )
         self.assertEqual(response_content['status'], 'not-available')
         self.assertEqual(response.status_code, 200)
+        
+    def test_logged_in_user_can_access_store_page(self):
+        self.do_login(self.test_user.email, self.test_user.password)
+        
+        self.assertTrue( self.test_user.is_authenticated )
+        
+        response = self.secure_get('/store')
+        
+        self.assertEqual(response.status_code, 200)
+        
+        # check for a random bit of content that would be in the 
+        #  correctly-rendered page
+        self.assertTrue( settings.STRIPE_PUBLIC_KEY in str(response) )
         
     
     def test_record_charge_ajax_on_successful_card(self):

@@ -104,3 +104,18 @@ class RegistrationVerification(TestCasePlus):
         
         self.assertEqual(response.status_code, 200)
         self.assertEqual(existing_user_count, HMUser.objects.all().count(), "Invalid auth code still created a user")
+        
+        
+        
+    def test_logged_in_user_sees(self):
+        existing_user_count = HMUser.objects.all().count()
+
+        response = self.secure_post('/register', {
+            'auth_code' : 'nocode',
+            'email' : 'test_register_invalid_auth_declines@test.com',
+            'password' : 'test_password',
+            'password_again' : 'test_password'
+        })
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(existing_user_count, HMUser.objects.all().count(), "Invalid auth code still created a user")

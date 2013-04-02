@@ -120,8 +120,10 @@ def register_user(request):
             context_instance=RequestContext(request)
         )
 
-
+@secure_required
 def index(request):
+    print request.user.is_authenticated
+    
     return render(request, "index.html", {
        'form' : EmailRequestForm()
     });

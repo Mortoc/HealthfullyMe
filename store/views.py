@@ -16,7 +16,7 @@ from store.fulfillment import fulfill_transaction
 
 @secure_required
 def main(request):
-    if request.user.is_anonymous():
+    if not request.user.is_authenticated:
         return HttpResponseRedirect("/")
     else:
         three_random_ideas = list(ComingSoonIdea.objects.filter(active=True).order_by('?'))

@@ -25,6 +25,7 @@ html, body {
 	height: 150px;
 	clear:both;
 	background-color:#7FC44E;
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjN2ZjNDRlIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiM2N2FjMzUiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
     border-top: 4px solid #24adae;
 } 
 
@@ -68,7 +69,7 @@ h3 {
 	height: 100%;
 	width: 100%;
 	background-color: white;
-	padding: 0;
+    padding: 0;
 	margin: 0;
     overflow-y: scroll;
 }
@@ -239,6 +240,7 @@ h3 {
 
 .top-bar {
     background-color:#7FC44E;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjN2ZjNDRlIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiM2N2FjMzUiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
     position: relative; 
     height: 72px;
     width: 100%;

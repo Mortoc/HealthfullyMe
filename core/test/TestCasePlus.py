@@ -5,6 +5,14 @@ class TestCasePlus(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         
+        
+    def do_login(self, email, password):
+        return self.secure_post('/login', {
+            'email' : email,
+            'password' : password,
+        })
+        
+        
     def get_secure_request(self, url):
         kwargs = {}
         kwargs["wsgi.url_scheme"] = "https"
