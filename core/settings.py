@@ -6,9 +6,12 @@ LIVE = False # dev == False, live == True
 LOCAL = False
 TEST = 'test' in sys.argv
 
+# set the hostname manually here, I haven't figured out a reliable
+# way yet to get this (other than the response's host)
 if os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LIVE":
     LIVE = True
     HOSTNAME = "www.healthfully.me"
+    
 elif os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "DEV":
     LIVE = False
     

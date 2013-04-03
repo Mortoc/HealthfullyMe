@@ -40,9 +40,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>16</integer>
+				<integer>5</integer>
 				<key>line</key>
-				<integer>12</integer>
+				<integer>21</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -56,7 +56,7 @@
 				<key>column</key>
 				<integer>8</integer>
 				<key>line</key>
-				<integer>26</integer>
+				<integer>34</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -112,74 +112,28 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>4</integer>
+				<integer>17</integer>
 				<key>line</key>
-				<integer>363</integer>
+				<integer>44</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>355</integer>
+			<integer>41</integer>
 		</dict>
 		<key>home/templates/base.html</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>64</integer>
+				<integer>38</integer>
 				<key>line</key>
-				<integer>47</integer>
+				<integer>97</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>39</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>53</integer>
-				<key>line</key>
-				<integer>47</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>64</integer>
-				<key>line</key>
-				<integer>47</integer>
-			</dict>
-		</dict>
-		<key>home/templates/index.html</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>36</integer>
-				<key>line</key>
-				<integer>50</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>8</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>20</integer>
-				<key>line</key>
-				<integer>50</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>36</integer>
-				<key>line</key>
-				<integer>50</integer>
-			</dict>
+			<integer>48</integer>
 		</dict>
 		<key>home/templates/user_page.html</key>
 		<dict>
@@ -188,12 +142,26 @@
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>20</integer>
+				<integer>43</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>10</integer>
+			<integer>20</integer>
+		</dict>
+		<key>home/tests.py</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>8</integer>
+				<key>line</key>
+				<integer>81</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>68</integer>
 		</dict>
 		<key>store/fulfillment.py</key>
 		<dict>
@@ -244,26 +212,26 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>8</integer>
+				<integer>40</integer>
 				<key>line</key>
-				<integer>75</integer>
+				<integer>112</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>52</integer>
+			<integer>85</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>store/fulfillment.py</string>
 		<string>store/tests.py</string>
-		<string>core/test/TestCasePlus.py</string>
-		<string>core/settings.py</string>
+		<string>home/tests.py</string>
 		<string>home/templates/user_page.html</string>
-		<string>home/templates/index.html</string>
 		<string>home/static/css/home.css</string>
+		<string>core/test/TestCasePlus.py</string>
 		<string>home/templates/base.html</string>
+		<string>core/settings.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>

@@ -23,7 +23,7 @@ html, body {
 	padding-right: 20px;
 	
 	height: 150px;
-	clear:both;
+	clear: both;
 	background-color:#7FC44E;
 	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjN2ZjNDRlIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiM2N2FjMzUiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
     border-top: 4px solid #24adae;
@@ -43,8 +43,9 @@ html, body {
 #footer .social-link {
     float: right;
     color: white;
-    margin: 24px 21px;
-    line-height: 20px;
+    margin: 18px 20px;
+    width: 32px;
+    height: 32px;
 }
 
 h3 {
@@ -89,10 +90,13 @@ h3 {
     
     margin: 50px auto;
     width: 371px;
+    
+    display: box;
 }
 
 .logo {
     width: 371px;   
+    
 }
 
 .default-form {
@@ -405,12 +409,16 @@ a {
         display: none;
     }
     
+    .social-link {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    
     body {
         zoom: 0.75;
         margin: 0;
         padding: 0;
     }
-    
     
     .tiny-logo {
         position: absolute; 
@@ -423,6 +431,10 @@ a {
     }
     
     .scripty-header-text {
+        font-size: 30px;
+    }
+    
+    .leafy-header {
         font-size: 30px;
     }
         

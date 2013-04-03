@@ -121,9 +121,7 @@ def register_user(request):
         )
 
 @secure_required
-def index(request):
-    print request.user.is_authenticated
-    
+def index(request):    
     return render(request, "index.html", {
        'form' : EmailRequestForm()
     });
