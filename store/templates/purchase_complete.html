@@ -11,13 +11,7 @@
         <h1 class="scripty-header-text" style="width: 100%; margin-top: 30px">Order Successful</h1>
         <br style="clear: both;" />
         <p class="order-message">
-            Your order has been placed :)<br/>
-            If you'd like us to ship your order to a different address please contact us at  
-            <a href="mailto:help@healthfully.me?subject=Update Shipping for Order #{{ transaction.id_slug }}">
-                help@healthfully.me.
-            </a> 
-            <br />
-            We'll take care of the rest.
+            {{ completed_order_copy }}
         </p>
         
         <div style="clear: both;">
@@ -27,10 +21,8 @@
         <div class="span5 confirmation-panel">
             <p class="order-message">
                 Your order number is {{ transaction.id_slug }}.
-                You'll recieve an email confirmation shortly at {{ user.email }}.
+                You'll receive an email confirmation shortly at {{ user.email }}.
                 <br />
-                <br />
-                Please allow 1-3 business days for delivery.
             </p>
             <div style="clear: both;">
             </div>
@@ -40,26 +32,10 @@
             <div class="address-container">
                 <p class="address-text">
                     <b>Shipping Address:</b><br />
-                    {{ shipping_address.name }}<br />
-                    {{ shipping_address.line1 }}<br />
+					{% autoescape off %}
+					{{ shipping_address }}
+					{% endautoescape %}
                     
-                    {% if shipping_address.line2 %}
-                        {{ shipping_address.line2 }}<br />
-                    {% endif %}
-                    
-                    {{ shipping_address.city }}
-                    
-                    {% if shipping_address.state %}
-                        , {{ shipping_address.state }}
-                    {% endif %}
-                    
-                    <br />
-                    {{ shipping_address.zip }}
-                    
-                    {% if shipping_address.country %}
-                        <br />
-                        {{ shipping_address.country }}
-                    {% endif %}
                 </p>
                 
             <div style="clear: both;">
@@ -68,26 +44,9 @@
             <div class="address-container">
                 <p class="address-text">
                     <b>Billing Address:</b><br />
-                    {{ billing_address.name }}<br />
-                    {{ billing_address.line1 }}<br />
-                    
-                    {% if billing_address.line2 %}
-                        {{ billing_address.line2 }}<br />
-                    {% endif %}
-                    
-                    {{ billing_address.city }}
-                    
-                    {% if billing_address.state %}
-                        , {{ billing_address.state }}
-                    {% endif %}
-                    
-                    <br />
-                    {{ billing_address.zip }}
-                    
-                    {% if billing_address.country %}
-                        <br />
-                        {{ billing_address.country }}
-                    {% endif %}
+					{% autoescape off %}
+					{{ billing_address }}
+					{% endautoescape %}
                 </p>
             </div>
         </div>

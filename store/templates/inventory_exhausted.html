@@ -1,0 +1,40 @@
+{% extends "user_page.html" %}
+
+{% block more_extra_style %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/store.css" type="text/css" media="screen" />
+{% endblock %}
+
+{% block main_content %}
+
+<div class="row-fluid">
+    <div class="span12">
+        <h1 class="scripty-header-text" style="width: 100%; margin-top: 30px">Backordered</h1>
+        <br style="clear: both;" />
+        <p class="order-message">
+            {{ completed_order_copy }}
+        </p>
+        
+        <div style="clear: both;">
+        </div>
+    </div>
+    <div class="span10 offset1 confirmation-container">
+        <div class="span12 confirmation-panel">
+            <p class="order-message">
+				This item is currently backordered. We will send your card within the next couple business days.<br/>
+                <br />
+				For more information or to modify an order, please contact us at <a href="orders@healthfully.me">orders@healthfully.me</a>
+            </p>
+            <div style="clear: both;">
+            </div>
+        </div>
+    </div>
+    
+    <div class="span12" style="padding: 30px">
+        <a href="/store">
+            <button class="confirmation-button">Back</button>
+        </a>
+    </div>
+          
+</div>
+
+{% endblock %}

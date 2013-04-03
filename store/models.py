@@ -49,6 +49,7 @@ class Offer(models.Model):
         (EGIFTCARD_EMAIL, 'Electronic Gift Card Email'),
     )
     fulfillment = models.CharField( max_length=3, choices=FULFILLMENT_CHOICES, default=MANUAL)
+    completed_order_copy = models.TextField(default="", null=True, blank=True)
     
     availability = models.ManyToManyField('OfferAvailability', null=True, blank=True)
     
