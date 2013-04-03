@@ -199,6 +199,8 @@
                         </div>
                     </div> -->
                     
+					<!-- Don't show this section unless there's 3 ideas -->
+					{% if idea3 %} 
                     <h2 class="section-header">Coming Soon...</h2>
                     <span style="position: relative; top: -12px; left: 10px;">Help us, help you!  Click on an idea below to cast your vote on what new member service we offer next.   What would you find useful?</span>
                     <div class="span12">
@@ -236,8 +238,9 @@
                         {% endif %}
                         
                         <div style="clear: both;">
-                        </div>  
+                        </div> 
                     </div>
+					{% endif %}
                 </div>
                 
             </div>

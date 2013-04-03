@@ -1,6 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster+Two:700);
+@import url(https://fonts.googleapis.com/css?family=Signika:300);
 
 .store-headline {
-    font-family: 'Montez', sans-serif;
+    font-family: 'Lobster Two', sans-serif;
     font-size: 50px;
     color: #ffa05b;
     
@@ -151,11 +153,15 @@ span {
     float: left;
 }
 
+#store-content {
+    padding-bottom: 200px;
+}
+
 #store-content .processing-header {
     float: left;
     font-family: 'Signika', sans-serif;
     font-size: 24px;
-    color:#666666;
+    color: #666666;
     width: 100%;
     text-align: center;
 }
@@ -211,14 +217,10 @@ span {
 }
 
 @media (max-width: 767px) { 
-    .main-content { 
+    .main-content{
         padding: 50px;
-        overflow: hidden;
     }
     
-    .body {
-        overflow-y: scroll;
-    }
     .confirmation-panel-left {
         border-left: 0;
         

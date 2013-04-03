@@ -8,12 +8,28 @@ from store.models import Offer, Transaction
 from giftcards.models import Giftcard
 
 def fulfill_transaction(transaction):
-    if transaction.offer.fulfillment == Offer.EGIFTCARD_EMAIL:
+    if transaction.offer.fulfillment == Offer.MANUAL:
+        fulfill_manual(transaction)
+    elif transaction.offer.fulfillment == Offer.EGIFTCARD_EMAIL:
         fulfill_egiftcard(transaction)
         
-    # do nothing for Offer.MANUAL
-        
-        
+def fulfill_manual(transaction):        
+    email = message_from_template(
+        "email/purchase_confirmation.html",
+        "orders@healthfully.me",
+        "help@healthfully.me",
+        [transaction.user.email],
+        ["orders@healthfully.me"],
+        {
+            "user" : transaction.user,
+            "offer" : transaction.offer,
+            "transaction" : transaction,
+            "shipping_address" : transaction.card.address,
+            "billing_address" : transaction.card.address
+        }
+    )
+    email.send()
+
 def fulfill_egiftcard(transaction, send_failure_email=True):    
     try:
         Giftcard.objects.get(transaction=transaction)
@@ -24,7 +40,6 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
     giftcard_inventory = Giftcard.objects.filter(transaction=None)
     
     if len(giftcard_inventory) == 0:
-        
         if send_failure_email:
             email = message_from_template(
                 "email/giftcard_inventory_empty.html",
@@ -63,7 +78,6 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
             }
         )
         email.send()
-        
         return True
         
 def fulfill_egiftcard_direct(request, transaction_id):

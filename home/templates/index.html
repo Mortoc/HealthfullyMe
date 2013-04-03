@@ -29,7 +29,7 @@
             
             <div class="message-row">
                 {% if user.is_authenticated %}
-                    <input class="orange-button" style="width: 304px; margin-top: 50px;" type="submit" onclick="window.location = '/store'" value="Go to the Store"></input>
+                    <input class="orange-button" style="width: 100%; margin-top: 50px;" type="submit" onclick="window.location = '/store'" value="Go to the Store"></input>
                 {% else %}
                 <form class="default-form" action="submit-email/" method="post">
                     {% csrf_token %}
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="span6">
-        <div class="social-container" onmousedown="console.log('clicked')">
+        <div class="social-container">
 			<script type="text/javascript" src="https://s3-us-west-1.amazonaws.com/hypes-images/assets/scripts/tintembed.js"></script>        
 			<div class="tintup-holder" style="-webkit-overflow-scrolling:touch;overflow:hidden;position:relative;height:410px;width:425px;">
 			<iframe class="tintup" src="http://www.tintup.com/healthfullyme?embed=true&height=500&width=425&cols=2" style="height:600px;width:425px;border:none;"></iframe></div>

@@ -93,22 +93,6 @@ def record_charge_ajax(request, run_charge=run_stripe_charge):
                 stripe_id=charge.id
             )
             transaction.save()
-                
-            email = message_from_template(
-                "email/purchase_confirmation.html",
-                "orders@healthfully.me",
-                "help@healthfully.me",
-                [request.user.email],
-                ["orders@healthfully.me"],
-                {
-                    "user" : request.user,
-                    "offer" : post_offer,
-                    "transaction" : transaction,
-                    "shipping_address" : card.address,
-                    "billing_address" : card.address
-                }
-            )
-            email.send()
             
             return HttpResponse(json.dumps({"status" : "success"}), mimetype="application/json")
         
