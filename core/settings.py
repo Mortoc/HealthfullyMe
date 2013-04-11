@@ -14,21 +14,16 @@ if os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LIVE":
     
 elif os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "DEV":
     LIVE = False
+    HOSTNAME = "healthfullyme-dev.herokuapp.com"
     
-    socket_hostname = socket.gethostname()
-    if ".local" in socket_hostname or "127.0.0.1" in socket_hostname or "localhost" in socket_hostname:
-        HOSTNAME = "localhost:8000"
-        LOCAL = True
-    else:
-        HOSTNAME = "healthfullyme-dev.herokuapp.com"
+elif os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LOCAL":
+    LIVE = False
+    HOSTNAME = "localhost:8000"
+    LOCAL = True
     
 else:
     raise Exception("HEALTHFULLY_ME_DEPLOYMENT hasn't been set on this machine")
-    
-if LIVE:
-    print "LIVE: " + HOSTNAME
-else:
-    print "DEV: " + HOSTNAME
+
 
 DEBUG = not LIVE
 TEMPLATE_DEBUG = DEBUG

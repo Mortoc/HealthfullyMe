@@ -35,7 +35,7 @@ class Giftcard(models.Model):
 
 def model_saved(sender, **kwargs):
     instance = kwargs['instance']
-    if instance.fulfillment_url == None and instance.transaction != None:
+    if (instance.fulfillment_url == None or instance.fulfillment_url == "") and instance.transaction != None:
         instance.generate_fulfillment_url()
 
 post_save.connect(model_saved, sender=Giftcard)
