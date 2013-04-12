@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     
     url(r'^$', 'home.views.index', name='index'),
+    
     url(r'^login', 'home.views.login_user', name='login'),
     url(r'^logout', 'home.views.logout_user', name='logout'),
     url(r'^register', 'home.views.register_user', name='register'),
@@ -40,6 +41,8 @@ urlpatterns = patterns('',
     url(r'^admin/tools/email-viewer/(?P<email_name>.*)$', 'core.email.view_email'),
     url(r'^admin/tools/users-for-newsletter$', 'core.admintools.users_for_newsletter'),
     url(r'^admin/tools/reset-password/(?P<user_email>.*)$', 'core.views.reset_user_password'),
+    
+    url(r'^admin/tools$', 'core.views.all_tools'),
     
     url(r'^admin/', include(admin.site.urls)),
     

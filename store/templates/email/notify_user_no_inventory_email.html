@@ -1,5 +1,5 @@
 {% extends "email/boilerplate.html" %} 
-{% block subject %}Healthfully Me Order: {{ transaction.id_slug }}{% endblock %} 
+{% block subject %}Healthfully Me Order Backlogged - {{ transaction.id_slug }}{% endblock %} 
 {% block body %}
 <style>
     @import url(http://fonts.googleapis.com/css?family=Signika);
@@ -7,28 +7,25 @@
 
 <font color="#666666" face="Signika, sans-serif">
 <p style="font-size:16px;line-height:20px;padding:10px">
-    
-    <span>Thank you For Your Order! Please allow for 1-3 <br />Business days for your order to be delivered. If you have <br />any questions or feedback, please send us an email at<br /> 
-    <a href="mailto:help@healthfully.me?subject={{ transaction.id_slug }} - Support">help@healthfully.me.</a></span><br />
-    <br /> 
-    <br />
+    <span>Thank you for your order! We are out of stock for your item, so we'll be in</span><br/>
+    <span>touch and will get your order fufilled as soon as we can.  Have questions</span><br/>
+    <span>or feedback?  Just email us at <a href="mailto:help@healthfully.me">help@healthfully.me</a>.</span><br/>
+	<br/>
     <span>Purchase Summary:</span><br />
     <br />
     <span>Member ID:  {{ user.email }} </span><br />
     <span>Transaction ID: {{ transaction.id_slug }}</span><br />
     <span>Offer ID: {{ offer.buy_window_title }}</span><br />
     <br />
-    <span>Your Order Will Be Shipped To:</span><br />   
-    <br />
-    <span>{{ shipping_address }} </span><br />
-    <br />
-    <span>While you wait for your order to arrive, follow us <br />for updates and healthy living tips on our<br /> 
+    <span>While you wait for your order to arrive, follow us</span><br />
+    <span>for updates, healthful recipes, and other healthy living tips</span><br />
+    <span>on our
     <a href="http://blog.healthfully.me/">blog</a>, 
     <a href="https://twitter.com/HealthfullyMe/">twitter</a>, 
     <a href="https://www.facebook.com/healthfullyme">facebook</a>, 
     <a href="http://pinterest.com/healthfullyme/">pinterest</a>, and 
     <a href="http://instagram.com/healthfullyme">instagram</a>!</span><br />
-    
+
     <br />
     <span>Your Healthfully Me Support Team,</span><br />
     <br />
@@ -36,3 +33,14 @@
 </p>
 </font>
 {% endblock %}
+
+
+
+
+
+
+
+
+Your Healthfully Me Support Team,
+
+Emily, Jamie, Brittany, and Caitlin

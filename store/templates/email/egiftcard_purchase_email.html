@@ -8,7 +8,11 @@
 <font color="#666666" face="Signika, sans-serif">
 <p style="font-size:16px;line-height:20px;padding:10px">
     <span>Hi!</span><br/>
-	<span>Here is the link to the Whole Foods eGift Card you ordered:</span></br>
+	<span>Here is the link to the Whole Foods eGift Card you ordered:</span><br/>
+    <span><a href="{{ giftcard.fulfillment_url }}">Whole Foods Giftcard</a></span><br/>
+    <span>Member ID: {{ user.email }}</span><br/>
+    <span>Transaction ID: {{ transaction.id_slug }}</span><br/>
+    <span>Offer ID: {{ offer.buy_window_title }}</span><br/>
     <span><a href="{{ giftcard.fulfillment_url }}">Whole Foods Giftcard</a></span><br/>
 	<br/>
     <span>You can redeem your eGift Card at any Whole Foods location in one of two ways:</span><br/>

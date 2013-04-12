@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
+from django.conf import settings
 from django.core.mail import EmailMessage
 
 import hashlib
@@ -12,6 +13,8 @@ from core.validators import validate_email
 from core.email import message_from_template
 from home.models import EmailRequest, AuthCode
 from home.forms import UserLoginForm, UserRegistrationForm, EmailRequestForm
+
+
 
 def enum(**enums):
     return type('Enum', (), enums)
@@ -33,8 +36,12 @@ def login_user(request):
             user = authenticate(email=email, password=password)
             
             if user is not None:
-                login(request, user)
-                return HttpResponseRedirect('/')
+                
+                if settings.DOWN_FOR_MAINTENANCE and not user.is_staff:
+                    error = "The site is currently down for maintenance. Please try again later"
+                else:
+                    login(request, user)
+                    return HttpResponseRedirect('/')
             else:
                 error = "Invalid Username or Password"
     else:
@@ -84,32 +91,36 @@ def register_user(request):
             # create the user here but only save it if the auth code is good
             user = HMUser.objects.create_user(email=email, password=password)
             
-            auth_code_result = use_auth_code(auth_code, user)
-            if auth_code_result == AuthCodeResult.SUCCESS:
-                user.receives_newsletter = form.cleaned_data['newsletter']
-                user.save()
-                
-                user = authenticate(email=email, password=password)
-                login(request, user)
-                
-                email = message_from_template(
-                    "email/welcome_new_registration.html",
-                    "hello@healthfully.me",
-                    "hello@healthfully.me",
-                    [user.email],
-                    ["hello@healthfully.me"]
-                )
-                email.send()
-                
-                return HttpResponseRedirect('/')
-        
-            elif auth_code_result == AuthCodeResult.PREVIOUSLY_USED:
+            if settings.DOWN_FOR_MAINTENANCE and not user.is_staff:
+                form._errors['invite_code'] = form.error_class(["The site is currently down for maintenance. Please try again later"])
                 user.delete()
-                form._errors['invite_code'] = form.error_class(["No uses left"])
-            
             else:
-                user.delete()
-                form._errors['invite_code'] = form.error_class(["Invalid Code"])
+                auth_code_result = use_auth_code(auth_code, user)
+                if auth_code_result == AuthCodeResult.SUCCESS:
+                    user.receives_newsletter = form.cleaned_data['newsletter']
+                    user.save()
+                
+                    user = authenticate(email=email, password=password)
+                    login(request, user)
+                
+                    email = message_from_template(
+                        "email/welcome_new_registration.html",
+                        "hello@healthfully.me",
+                        "hello@healthfully.me",
+                        [user.email],
+                        ["hello@healthfully.me"]
+                    )
+                    email.send()
+                
+                    return HttpResponseRedirect('/')
+        
+                elif auth_code_result == AuthCodeResult.PREVIOUSLY_USED:
+                    user.delete()
+                    form._errors['invite_code'] = form.error_class(["No uses left"])
+            
+                else:
+                    user.delete()
+                    form._errors['invite_code'] = form.error_class(["Invalid Code"])
             
     else:
         form = UserRegistrationForm()
@@ -121,7 +132,10 @@ def register_user(request):
         )
 
 @secure_required
-def index(request):    
+def index(request):
+    if settings.DOWN_FOR_MAINTENANCE and not request.user.is_staff:
+        return render(request, "down_for_maintenance.html", {});
+        
     return render(request, "index.html", {
        'form' : EmailRequestForm()
     });

@@ -44,22 +44,22 @@
 
 
 <div id="footer" class="footer-bar">
-	<a class="social-link" href="mailto:hello@healthfully.me">
+	<a class="social-link" href="mailto:hello@healthfully.me" onclick="analytics.track('/footer/clicked-email-us', {})">
 		<img src="{{ STATIC_URL }}img/email.png"></img>
 	</a>
-	<a class="social-link" href="https://www.facebook.com/healthfullyme">
+	<a class="social-link" href="https://www.facebook.com/healthfullyme" onclick="analytics.track('/footer/clicked-facebook', {})">
 		<img src="{{ STATIC_URL }}img/thefacebook.png"></img>
 	</a>
-	<a class="social-link" href="https://twitter.com/healthfullyme">
+	<a class="social-link" href="https://twitter.com/healthfullyme" onclick="analytics.track('/footer/clicked-twitter', {})">
 		<img src="{{ STATIC_URL }}img/twitter.png"></img>
 	</a>
-	<a class="social-link" href="http://pinterest.com/healthfullyme/">
+	<a class="social-link" href="http://pinterest.com/healthfullyme/" onclick="analytics.track('/footer/clicked-pinterest', {})">
 		<img src="{{ STATIC_URL }}img/pinterest.png"></img>
 	</a>
-	<a class="social-link" href="http://instagram.com/healthfullyme">
+	<a class="social-link" href="http://instagram.com/healthfullyme" onclick="analytics.track('/footer/clicked-instagram', {})">
 		<img src="{{ STATIC_URL }}img/instagram.png"></img>
 	</a>
-	<a class="social-link" href="http://healthfullyme.uservoice.com/forums/200210-general">
+	<a class="social-link" href="http://healthfullyme.uservoice.com/forums/200210-general" onclick="analytics.track('/footer/clicked-uservoice', {})">
 		<img src="{{ STATIC_URL }}img/feedback.png"></img>
 	</a>
 </div>

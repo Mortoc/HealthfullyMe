@@ -3,10 +3,14 @@ from django.template import RequestContext
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.utils.timezone import now 
+from django.core.urlresolvers import reverse, NoReverseMatch
 
-import sys, traceback
+import sys
+import traceback
 import hashlib
+import re
 
+from core.urls import urlpatterns
 from core.ssl_utils import secure_required
 from core.email import message_from_template
 from core.encode import base62_encode
@@ -19,6 +23,37 @@ def server_error(request):
             {}, 
             context_instance=RequestContext(request)
     )
+    
+
+RE_IS_TOOL_URL = re.compile('.*admin//tools/(.*)')
+
+@secure_required
+def all_tools(request):
+    tool_list = []
+    
+    for url in urlpatterns:
+        
+        try:
+            real_url = HttpResponseRedirect(reverse(url._callback_str, args={}))
+            
+            match = RE_IS_TOOL_URL.search( reversed )
+        
+            if match:
+                tool = object()
+                tool.name = match.group(1)
+                tool.url = reversed
+                tools_list.append(tool)
+                
+        except NoReverseMatch:
+            pass
+        
+    
+    return render_to_response(
+        'tool_index.html',
+        { 'tool_list', tool_list },
+        context_instance=RequestContext(request)
+    )
+    
     
 @secure_required
 def reset_user_password(request, user_email):

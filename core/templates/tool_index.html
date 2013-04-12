@@ -1,0 +1,16 @@
+{% extends "user_page.html" %}
+
+{% block more_extra_style %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/tools.css" type="text/css" media="screen" />
+{% endblock %}
+
+{% block main_content %}
+
+<h1>All the tools</h1>
+<ul>
+	{% for tool in tool_list %}
+	<li><a href="{{ tool.url }}">{{ tool.name }}</a></li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

@@ -6,6 +6,8 @@ LIVE = False # dev == False, live == True
 LOCAL = False
 TEST = 'test' in sys.argv
 
+DOWN_FOR_MAINTENANCE = os.environ.get('HEALTHFULLY_ME_MAINTENANCE', "none") == "TRUE"
+
 # set the hostname manually here, I haven't figured out a reliable
 # way yet to get this (other than the response's host)
 if os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LIVE":

@@ -46,7 +46,7 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
     
         if len(giftcard_inventory) == 0:
             if send_failure_email:
-                email = message_from_template(
+                staff_email = message_from_template(
                     "email/giftcard_inventory_empty.html",
                     "the_server@healthfully.me",
                     "noreply@healthfully.me",
@@ -58,7 +58,20 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
                         "hostname" : settings.HOSTNAME
                     }
                 )
-                email.send()
+                user_email = message_from_template(
+                    "email/notify_user_no_inventory_email.html",
+                    "orders@healthfully.me",
+                    "noreply@healthfully.me",
+                    [transaction.user.email],
+                    ["orders@healthfully.me"],
+                    {
+                        "user" : transaction.user,
+                        "transaction" : transaction
+                    }
+                )
+                
+                user_email.send()
+                staff_email.send()
             return False, {}
         
         else:
@@ -79,6 +92,7 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
                 {
                     "user" : transaction.user,
                     "transaction" : transaction,
+                    "offer" : transaction.offer,
                     "giftcard" : purchased_card
                 }
             )
