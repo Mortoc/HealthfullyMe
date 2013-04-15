@@ -20,7 +20,9 @@
     <br />
     <span>Your Order Will Be Shipped To:</span><br />   
     <br />
-    <span>{{ shipping_address }} </span><br />
+	{% autoescape off %}
+    <span>{{ shipping_address }}</span><br />
+	{% endautoescape %}
     <br />
     <span>While you wait for your order to arrive, follow us <br />for updates and healthy living tips on our<br /> 
     <a href="http://blog.healthfully.me/">blog</a>, 
