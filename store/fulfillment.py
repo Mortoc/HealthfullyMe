@@ -55,7 +55,7 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
                     {
                         "user" : transaction.user,
                         "transaction" : transaction,
-                        "hostname" : settings.HOSTNAME
+                        "hostname" : settings.HOSTNAME,
                         "offer" : transaction.offer
                     }
                 )
