@@ -24,8 +24,8 @@ def fulfill_manual(transaction):
             "user" : transaction.user,
             "offer" : transaction.offer,
             "transaction" : transaction,
-            "shipping_address" : transaction.card.address.html(),
-            "billing_address" : transaction.card.address.html()
+            "shipping_address" : transaction.card.address.__unicode__(),
+            "billing_address" : transaction.card.address.__unicode__()
         }
     )
     email.send()
@@ -33,8 +33,8 @@ def fulfill_manual(transaction):
     return True, {
         "offer" : transaction.offer,
         "transaction" : transaction,
-        "shipping_address" : transaction.card.address.html(),
-        "billing_address" : transaction.card.address.html(),
+        "shipping_address" : transaction.card.address.__unicode__(),
+        "billing_address" : transaction.card.address.__unicode__(),
         "completed_order_copy" : transaction.offer.completed_order_copy
     }
 
@@ -102,7 +102,7 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
         "offer" : transaction.offer,
         "transaction" : transaction,
         "shipping_address" : "Delivered via email",
-        "billing_address" : transaction.card.address.html(),
+        "billing_address" : transaction.card.address.__unicode__(),
         "completed_order_copy" : transaction.offer.completed_order_copy
     }
         
