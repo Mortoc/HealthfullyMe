@@ -69,20 +69,18 @@ def view_email(request, email_name):
     
 def __get_special_context(request, email_name):
     # put any specific context to be loaded for testing emails here
+    context = { }
+    context["user"] = request.user
     
-    if email_name == "purchase_confirmation.html" or \
-       email_name == "notify_user_no_inventory_email.html":
-        context = { }
-        context["user"] = request.user
-    
+    try:
         transaction = Transaction.objects.filter(user=request.user).order_by('-timestamp')[0]    
         context["offer"] = transaction.offer
         context["transaction"] = transaction
         context["shipping_address"] = transaction.card.address
         context["billing_address"] = transaction.card.address
+    except:
+        pass
 
-        return context
-    else:
-        return {}
+    return context
         
     
