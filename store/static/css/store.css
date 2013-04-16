@@ -178,7 +178,7 @@ span {
 }
 
 .confirmation-panel-left {
-    height: 300px;
+    min-height: 200px;
     
     border-left: 2px solid #eda933;
     padding: 20px;
@@ -221,7 +221,8 @@ span {
         padding: 50px;
     }
     
-    .confirmation-panel-left {
+    .confirmation-panel-left {        
+        min-height: 300px;
         border-left: 0;
         
         border-top: 2px solid #eda933;

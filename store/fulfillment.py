@@ -56,7 +56,7 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
                         "user" : transaction.user,
                         "transaction" : transaction,
                         "hostname" : settings.HOSTNAME,
-                        "offer_name" : transaction.offer.buy_window_title
+                        "offer" : transaction.offer
                     }
                 )
                 user_email = message_from_template(
@@ -67,7 +67,8 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
                     ["orders@healthfully.me"],
                     {
                         "user" : transaction.user,
-                        "transaction" : transaction
+                        "transaction" : transaction,
+                        "offer" : transaction.offer
                     }
                 )
                 
