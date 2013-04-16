@@ -1,7 +1,8 @@
 {% extends "user_page.html" %}
+{% load static from staticfiles %}
 
 {% block more_extra_style %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/store.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href='{% static "css/store.css" %}' type="text/css" media="screen" />
 {% endblock %}
 
 {% block main_content %}

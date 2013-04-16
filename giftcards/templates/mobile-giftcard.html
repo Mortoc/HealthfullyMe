@@ -1,13 +1,15 @@
 <!DOCTYPE html>
+{% load static from staticfiles %}
+
 <!-- saved from url=(0114)https://www.vcdelivery.com/Cert/T2/cert_MyCert_M.aspx?BCNID=Y68FLA7TUTS%2bbvOd2fpsJOPmUmV%2bsr68JmqYZmBvk4g%3d888& -->
 <html xmlns="http://www.w3.org/1999/xhtml" class="ui-mobile"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--<base href="https://www.vcdelivery.com/Cert/T2/cert_MyCert_M.aspx?BCNID=Y68FLA7TUTS%2bbvOd2fpsJOPmUmV%2bsr68JmqYZmBvk4g%3d888&amp;">--><base href="."><title>Whole Foods Market - Gift Card</title>
 	<!-- No Zooming, Android has all kinds of problems, and iPhone handles it but it can be more confusing than helpful -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"><meta name="HandheldFriendly" content="true"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no"><link href="{{ STATIC_URL }}mobile-giftcard/mobile-cert.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"><meta name="HandheldFriendly" content="true"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no"><link href='{% static "mobile-giftcard/mobile-cert.css" %}' rel="stylesheet" type="text/css">
 	
-	<!-- jQuery Mobile 1.1.1 Release -->
+	<!-- jQuery Mobilelease -->
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css">
-    <script src="{{ STATIC_URL }}mobile-giftcard/jquery-1.7.1.min.js" type="text/javascript"></script>
-    <script src="{{ STATIC_URL }}mobile-giftcard/jquery.mobile-1.1.1.min.js" type="text/javascript"></script>
+    <script src='{% static "mobile-giftcard/jquery-1.7.1.min.js" %}' type="text/javascript"></script>
+    <script src='{% static "mobile-giftcard/jquery.mobile-1.1.1.min.js" %}' type="text/javascript"></script>
     <!-- Fallback to local JQuery if CDN is not available -->
     <script type="text/javascript">
         if (typeof jQuery == 'undefined') {
@@ -15,14 +17,14 @@
             document.write(unescape("%3Cscript src='resources/jquery-1.7.1.min.js' type='text/javascript'%3E%3C/script%3E"));
             document.write(unescape("%3Cscript src='resources/jquery.mobile-1.1.1.min.js' type='text/javascript'%3E%3C/script%3E"));
         }
-    </script><link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}mobile-giftcard/jquery.mobile-1.1.1.min.css"><script src="{{ STATIC_URL }}mobile-giftcard/jquery-1.7.1.min(1).js" type="text/javascript"></script><style type="text/css"></style><script src="{{ STATIC_URL }}mobile-giftcard/jquery.mobile-1.1.1.min(1).js" type="text/javascript"></script>
+    </script><link rel="stylesheet" type="text/css" href='{% static "mobile-giftcard/jquery.mobile-1.1.1.min.css" %}'><script src='{% static "mobile-giftcard/jquery-1.7.1.min.js" %}' type="text/javascript"></script><style type="text/css"></style><script src='{% static "mobile-giftcard/jquery.mobile-1.1.1.min.js" %}' type="text/javascript"></script>
 	
     <!-- for color, MIT license  http://jpaq.org/documentation/Color+Class/ -->
-    <script type="text/javascript" src="{{ STATIC_URL }}mobile-giftcard/jPaq-1.0.6.1008-mini.js"></script>
+    <script type="text/javascript" src='{% static "mobile-giftcard/jPaq-1.0.6.1008-mini.js" %}'></script>
     <!-- <script type="text/javascript" src="resources/jPaq-1.0.6.1008-full.js"></script> -->
     
-    <script type="text/javascript" src="{{ STATIC_URL }}mobile-giftcard/jquery-textFill-0.1.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}mobile-giftcard/jquery.getUrlParam.js"></script>
+    <script type="text/javascript" src='{% static "mobile-giftcard/jquery-textFill-0.1.js" %}'></script>
+    <script type="text/javascript" src='{% static "mobile-giftcard/jquery.getUrlParam.js" %}'></script>
     
 	<script type="text/javascript" language="javascript">
 		// Because the asp globals do not get to included JavaScript
@@ -33,12 +35,12 @@
 	    var gLightColor = "#526b2a";
 	    var gDisallowMobileView = "False";
 	</script>
-    <script type="text/javascript" src="{{ STATIC_URL }}mobile-giftcard/steve-utils.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}mobile-giftcard/mobile-cert-top.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}mobile-giftcard/add-card-roundhouse-top.js"></script>    
+    <script type="text/javascript" src='{% static "mobile-giftcard/steve-utils.js" %}'></script>
+	<script type="text/javascript" src='{% static "mobile-giftcard/mobile-cert-top.js" %}'></script>
+    <script type="text/javascript" src='{% static "mobile-giftcard/add-card-roundhouse-top.js" %}'></script>    
 	
     <!-- Fix for Usage line wrapping -->
-    <link href="{{ STATIC_URL }}mobile-giftcard/mobile-cert-fix.css" rel="stylesheet" type="text/css">
+    <link href='{% static "mobile-giftcard/mobile-cert-fix.css" %}' rel="stylesheet" type="text/css">
 
 	<!-- 
 		For browsers with JavasScript off
@@ -87,7 +89,7 @@
     </noscript>
 	
 	<div id="wholePage" class="wholePageHideClass">
-		<form method="post" action="{{ STATIC_URL }}mobile-giftcard/Whole Foods Market - Gift Card - Mobile.html" id="frmCertificateMobile">
+		<form method="post" action='{% static "mobile-giftcard/Whole Foods Market - Gift Card - Mobile.html" %}' id="frmCertificateMobile">
 <div class="aspNetHidden">
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEyNTkxMzc5OTMPZBYCAgEPZBYEAgsPFgIeB1Zpc2libGVoFgRmDxYCHgRUZXh0BQZFbWFpbDpkAgEPFgIfAQUGUGhvbmU6ZAIND2QWGGYPFgIfAGhkAgEPZBYGZg8PFgIfAGhkZAIBDw8WAh8BBRA2MzYyNjQxMDgwNDU4MTc3ZGQCAg8PFgIfAGhkZAICDxYCHwBoZAIDDxYCHwBoZAIEDxYCHwBoZAIFDw8WAh8AaGRkAgYPDxYCHwEFDTxiPjwvYj4kMjAuMDBkZAIHDw8WAh4LTmF2aWdhdGVVcmwFQ2phdmFzY3JpcHQ6IFZlcmlmaXlDZXJ0QmFsYW5jZSgnWTY4RkxBN1RVVFMrYnZPZDJmcHNKQmdFVzNCMDJ3T0onKTtkZAIID2QWAmYPDxYCHwEFCTMvMjYvMjAxM2RkAgkPZBYEAgEPDxYCHwEFEDYzNjI2NDEwODA0NTgxNzdkZAIDDw8WBB8BZR8AaGRkAgoPFgIfAGhkAgsPZBYEAgEPFgIfAQULRXhwaXJhdGlvbjpkAgMPDxYCHwEFBE5vbmVkZGRMTWAG8/Qw9IypqfEWuvILGJt/Hnejg0dxs2vv4mfgYg==">
 </div>
@@ -119,15 +121,15 @@
 						
 						<div id="divVCardWithGraphic" class="card-wrapper-class" align="center">
 							<div class="card-front">
-								<a href="" onclick="showCardBack(1)" class="ui-link"><img id="giftCardImage" src="{{ STATIC_URL }}mobile-giftcard/015405_VGC_375.png" class="card-images-class"></a>	
+								<a href="" onclick="showCardBack(1)" class="ui-link"><img id="giftCardImage" src='{% static "mobile-giftcard/015405_VGC_375.png" %}' class="card-images-class"></a>	
                               
                                 <div class="card-tap-to-use-class">
-							        <a href="" onclick="showCardBack(0)" class="ui-link"><img id="card-tap-to-use-image" class="card-tap-to-use-image-class" src="{{ STATIC_URL }}mobile-giftcard/tap-to-use.png"></a>
+							        <a href="" onclick="showCardBack(0)" class="ui-link"><img id="card-tap-to-use-image" class="card-tap-to-use-image-class" src='{% static "mobile-giftcard/tap-to-use.png" %}'></a>
 						        </div>
 							</div>
 								
 							<div class="card-back">
-								<a href="" onclick="showCardFront(1)" class="ui-link"><img id="backCardEmptyImage" src="{{ STATIC_URL }}mobile-giftcard/card-back.png" class="card-images-class"></a>
+								<a href="" onclick="showCardFront(1)" class="ui-link"><img id="backCardEmptyImage" src='{% static "mobile-giftcard/card-back.png" %}' class="card-images-class"></a>
 								
                                 <div class="inject-barcode-back-class">
                                 </div>
@@ -141,7 +143,7 @@
 								</div>
 
                                 <div class="card-tap-if-done-class">
-							        <a href="" onclick="showCardFront(0)" class="ui-link"><img id="card-tap-if-done-image" class="card-tap-if-done-image-class" src="{{ STATIC_URL }}mobile-giftcard/tap-if-done.png"></a>
+							        <a href="" onclick="showCardFront(0)" class="ui-link"><img id="card-tap-if-done-image" class="card-tap-if-done-image-class" src='{% static "mobile-giftcard/tap-if-done.png" %}'></a>
                                 </div>
                                 
 							</div>
@@ -154,7 +156,7 @@
 							</div>
 							<div style="display: inline-block;">
 								<span id="more-features-image" style="display:none; margin-bottom:0px; padding-top:2px; padding-bottom:0px">
-									<a href="" onclick="goto_wallet_page(&#39;???&#39;)" class="ui-link"><img src="{{ STATIC_URL }}mobile-giftcard/more-features.png" style="width:120px; float:left" alt="More features"></a>
+									<a href="" onclick="goto_wallet_page(&#39;???&#39;)" class="ui-link"><img src='{% static "mobile-giftcard/more-features.png" %}' style="width:120px; float:left" alt="More features"></a>
 								</span>	
 							</div>
 						</div>
@@ -245,7 +247,7 @@
 						<td id="start-page-top" class="start-page-top-class" style="background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(59, 82, 28)), to(rgb(255, 255, 255))); height: 374.5px; background-position: initial initial; background-repeat: initial initial;">&nbsp;</td>
 					  </tr>
 					  <tr>
-						<td align="center" valign="middle" id="start-page-logo" class="start-page-logo-class"><img id="start-page-logo-image" src="{{ STATIC_URL }}mobile-giftcard/018912_Logo.jpg" class="start-page-logo-image-class" alt="logo image" style=""></td>
+						<td align="center" valign="middle" id="start-page-logo" class="start-page-logo-class"><img id="start-page-logo-image" src='{% static "mobile-giftcard/018912_Logo.jpg" %}' class="start-page-logo-image-class" alt="logo image" style=""></td>
 					  </tr>
 					  <tr>
 						<td id="start-page-bottom" class="start-page-bottom-class" style="background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255)), to(rgb(59, 82, 28))); height: 374.5px; background-position: initial initial; background-repeat: initial initial;">&nbsp;</td>
@@ -288,7 +290,7 @@
 	
 	</div>		<!-- /wholePage -->
 
-	<script type="text/javascript" src="{{ STATIC_URL }}mobile-giftcard/mobile-cert-bottom.js"></script>
+	<script type="text/javascript" src='{% static "mobile-giftcard/mobile-cert-bottom.js" %}'></script>
 
 
 

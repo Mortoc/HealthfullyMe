@@ -1,3 +1,5 @@
+{% load static from staticfiles %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <!-- saved from url=(0116)https://www.vcdelivery.com/Cert/T2/cert_MyCertificate.aspx?BCNID=Y68FLA7TUTS%2bbvOd2fpsJNEjOzgkiBSgHMivGdlaW5U%3d888 -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,8 +10,8 @@
     <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
     <!-- code removed for brevity. -->
     
-<script type="text/javascript" src="{{ STATIC_URL }}/print-giftcard/jquery-1.4.2.js"></script><style type="text/css"></style>
-<script type="text/javascript" src="{{ STATIC_URL }}/print-giftcard/giftango.updated.jquery.simplemodal-1.3.5.js"></script>
+<script type="text/javascript" src='{% static "/print-giftcard/jquery-1.4.2.js" %}'></script><style type="text/css"></style>
+<script type="text/javascript" src='{% static "/print-giftcard/giftango.updated.jquery.simplemodal-1.3.5.js" %}'></script>
 <script type="text/javascript">
     var SelectedButtonId=null;
     $.ajaxSetup({
@@ -226,10 +228,10 @@
     .CardImagePickerFontClass{font-family: verdana; font-size: 12px; color: #000000}.CardImagePickerHeaderFontClass{font-family: verdana; font-size: 12px; color: #000000; font-weight: bold;}
 </style>
 
-    <link href="{{ STATIC_URL }}/print-giftcard/cert.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="{{ STATIC_URL }}/print-giftcard/ToolBox.js"></script>
-    <script language="javascript" src="{{ STATIC_URL }}/print-giftcard/VCBalanceInquiry.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}/print-giftcard/jquery.getUrlParam.js"></script>
+    <link href='{% static "/print-giftcard/cert.css" %}' rel="stylesheet" type="text/css">
+    <script type="text/javascript" src='{% static "/print-giftcard/ToolBox.js" %}'></script>
+    <script language="javascript" src='{% static "/print-giftcard/VCBalanceInquiry.js" %}'></script>
+    <script type="text/javascript" src='{% static "/print-giftcard/jquery.getUrlParam.js" %}'></script>
     <script type="text/javascript">
 
 
@@ -548,7 +550,7 @@
     
 </head>
 <body>
-    <form method="post" action="{{ STATIC_URL }}/print-giftcard/Whole Foods Market - Gift Card - Print.html" id="frmCertificate">
+    <form method="post" action='{% static "/print-giftcard/Whole Foods Market - Gift Card - Print.html" %}' id="frmCertificate">
 <div class="aspNetHidden">
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
@@ -572,11 +574,11 @@ function __doPostBack(eventTarget, eventArgument) {
 </script>
 
 
-<script src="{{ STATIC_URL }}/print-giftcard/WebResource.axd" type="text/javascript"></script>
+<script src='{% static "/print-giftcard/WebResource.axd" %}' type="text/javascript"></script>
 
 
-<script src="{{ STATIC_URL }}/print-giftcard/ScriptResource.axd" type="text/javascript"></script>
-<script src="{{ STATIC_URL }}/print-giftcard/ScriptResource(1).axd" type="text/javascript"></script>
+<script src='{% static "/print-giftcard/ScriptResource.axd" %}' type="text/javascript"></script>
+<script src='{% static "/print-giftcard/ScriptResource(1).axd" %}' type="text/javascript"></script>
 <div class="aspNetHidden">
 
 	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAB6pPLS/q4ElDq/G8/heDj8Xefa8ab6lkcFWjmQTnS4Tk+WTcfRijfqaz+BLXUMOJkyQNyQqgmu4Mlf5xPXkZw/n+RCAS+/p7NfIh/7/62Tz+hExxKUJGa9lr8ygUZ45sWlmG2iME4obdvOKnM+p5x+IF7CB243qdzIOyHv0eehVDwhG5H4Hs7P91Sv4Zcymk5L1rdOGx7fdymGkyXqdYILfKiGeMIyCkjEXUk5wdMz7hkiSeZHp+kvAvhLcGn/ytDIZHodRiWPvnxXUL/7z1AdtOtdV9ra4x9P3aRZfP0y+bRszEWvOE9S3wjJxF9OtBMLygXuUy91AswhdiOM7WjsCZpxXW96H4IBJOJkPUK8Jj4BV5ppUPy5Bzk8Wb9gEOtpv073EqQr70Tk6TBHQ3RMONt/2rp98C5BDlV4GTHOcSjqnTXEBg+DzbadKwrVF8w/0DKXopHoHmcQ4WCDOl4MJG6dQLrqyCw+BmQdiVUduJOJkJJmpK5jQUO5jcMrF4I/MP3f4UCaYMRhOILEKpRpAzUyUmDguCncJ3+LGQfJ/gXAeOXTCVvF3v+EaO981HlbuHeIUc/5KWw9U54qprqwaeSdYuf6lu/0YiKoRyYhAu2Bps26E0HYeRVUMk0+Ehc+cyKPVGlG3UYNxc4D5g2JkQ0LjvlXXp3P/6jRHxtGzFw==">
@@ -600,7 +602,7 @@ function __doPostBack(eventTarget, eventArgument) {
                             <td class="ImageCellDefault">
                                 
                                 <div id="divHeaderImage" style="padding: 0px 0px 0px 0px">
-                                    <img id="imgHeader" src="{{ STATIC_URL }}/print-giftcard/018912_vcheader.png" style="border-width:0px;width:670px;">
+                                    <img id="imgHeader" src='{% static "/print-giftcard/018912_vcheader.png" %}' style="border-width:0px;width:670px;">
                                 </div>
                                 
                             </td>
@@ -613,7 +615,7 @@ function __doPostBack(eventTarget, eventArgument) {
                     <td class="ImageCellDefault">
                         
                         
-                        <img src="{{ STATIC_URL }}/print-giftcard/sub_header_bg.gif">
+                        <img src='{% static "/print-giftcard/sub_header_bg.gif" %}'>
                     </td>
                 </tr>
                 <tr>
@@ -621,7 +623,7 @@ function __doPostBack(eventTarget, eventArgument) {
                         <table cellpadding="0" cellspacing="0" width="620" border="0">
                             <tbody><tr>
                                 <td class="ImageCellDefault">
-                                    <img src="{{ STATIC_URL }}/print-giftcard/top_box_head.gif" border="0">
+                                    <img src='{% static "/print-giftcard/top_box_head.gif" %}' border="0">
                                 </td>
                             </tr>
                             <tr>
@@ -629,7 +631,7 @@ function __doPostBack(eventTarget, eventArgument) {
                                     <table cellpadding="0" cellspacing="0" border="0">
                                         <tbody><tr>
                                             <td class="ImageCellDefault">
-                                                <img src="{{ STATIC_URL }}/print-giftcard/top_box_left.gif" border="0" height="330" width="16">
+                                                <img src='{% static "/print-giftcard/top_box_left.gif" %}' border="0" height="330" width="16">
                                             </td>
                                             <td width="100%" valign="top" align="left">
                                                 <table width="100%" cellpadding="0" cellspacing="2" border="0">
@@ -665,52 +667,25 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                 
                     <td align="center" class="imgEditCardImageCellClass">
                         <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl01$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl01_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_00_T.png" onclick="setgiftCardImagePickerImage(315,&#39;../../GPCGraphics/CIR_000060_00.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl01_giftCardImagePickerImages&#39;,&#39;CIR_000060_00.png&#39;);">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl01$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl01_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_00_T.png" %}' onclick="setgiftCardImagePickerImage(315,&#39;../../GPCGraphics/CIR_000060_00.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl01_giftCardImagePickerImages&#39;,&#39;CIR_000060_00.png&#39;);">
                         </div>
                     </td>
                 
                     <td align="center" class="imgEditCardImageCellClass">
                         <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl03$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl03_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_26_T.png" onclick="setgiftCardImagePickerImage(1558,&#39;../../GPCGraphics/CIR_000060_26.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl03_giftCardImagePickerImages&#39;,&#39;CIR_000060_26.png&#39;);">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl03$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl03_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_26_T.png" %}' onclick="setgiftCardImagePickerImage(1558,&#39;../../GPCGraphics/CIR_000060_26.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl03_giftCardImagePickerImages&#39;,&#39;CIR_000060_26.png&#39;);">
                         </div>
                     </td>
                 
                     <td align="center" class="imgEditCardImageCellClass">
                         <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl05$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl05_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_02_T.png" onclick="setgiftCardImagePickerImage(317,&#39;../../GPCGraphics/CIR_000060_02.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl05_giftCardImagePickerImages&#39;,&#39;CIR_000060_02.png&#39;);">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl05$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl05_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_02_T.png" %}' onclick="setgiftCardImagePickerImage(317,&#39;../../GPCGraphics/CIR_000060_02.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl05_giftCardImagePickerImages&#39;,&#39;CIR_000060_02.png&#39;);">
                         </div>
                     </td>
                 
                     <td align="center" class="imgEditCardImageCellClass">
                         <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl07$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl07_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_03_T.png" onclick="setgiftCardImagePickerImage(318,&#39;../../GPCGraphics/CIR_000060_03.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl07_giftCardImagePickerImages&#39;,&#39;CIR_000060_03.png&#39;);">
-                        </div>
-                    </td>
-                
-                    </tr>
-                    <tr>
-                
-                    <td align="center" class="imgEditCardImageCellClass">
-                        <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl09$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl09_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_04_T.png" onclick="setgiftCardImagePickerImage(319,&#39;../../GPCGraphics/CIR_000060_04.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl09_giftCardImagePickerImages&#39;,&#39;CIR_000060_04.png&#39;);">
-                        </div>
-                    </td>
-                
-                    <td align="center" class="imgEditCardImageCellClass">
-                        <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl11$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl11_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_05_T.png" onclick="setgiftCardImagePickerImage(320,&#39;../../GPCGraphics/CIR_000060_05.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl11_giftCardImagePickerImages&#39;,&#39;CIR_000060_05.png&#39;);">
-                        </div>
-                    </td>
-                
-                    <td align="center" class="imgEditCardImageCellClass">
-                        <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl13$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl13_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_06_T.png" onclick="setgiftCardImagePickerImage(321,&#39;../../GPCGraphics/CIR_000060_06.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl13_giftCardImagePickerImages&#39;,&#39;CIR_000060_06.png&#39;);">
-                        </div>
-                    </td>
-                
-                    <td align="center" class="imgEditCardImageCellClass">
-                        <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl15$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl15_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_01_T.png" onclick="setgiftCardImagePickerImage(316,&#39;../../GPCGraphics/CIR_000060_01.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl15_giftCardImagePickerImages&#39;,&#39;CIR_000060_01.png&#39;);">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl07$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl07_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_03_T.png" %}' onclick="setgiftCardImagePickerImage(318,&#39;../../GPCGraphics/CIR_000060_03.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl07_giftCardImagePickerImages&#39;,&#39;CIR_000060_03.png&#39;);">
                         </div>
                     </td>
                 
@@ -719,25 +694,52 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                 
                     <td align="center" class="imgEditCardImageCellClass">
                         <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl17$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl17_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_16_T.png" onclick="setgiftCardImagePickerImage(673,&#39;../../GPCGraphics/CIR_000060_16.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl17_giftCardImagePickerImages&#39;,&#39;CIR_000060_16.png&#39;);">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl09$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl09_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_04_T.png" %}' onclick="setgiftCardImagePickerImage(319,&#39;../../GPCGraphics/CIR_000060_04.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl09_giftCardImagePickerImages&#39;,&#39;CIR_000060_04.png&#39;);">
                         </div>
                     </td>
                 
                     <td align="center" class="imgEditCardImageCellClass">
                         <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl19$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl19_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_17_T.png" onclick="setgiftCardImagePickerImage(674,&#39;../../GPCGraphics/CIR_000060_17.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl19_giftCardImagePickerImages&#39;,&#39;CIR_000060_17.png&#39;);">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl11$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl11_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_05_T.png" %}' onclick="setgiftCardImagePickerImage(320,&#39;../../GPCGraphics/CIR_000060_05.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl11_giftCardImagePickerImages&#39;,&#39;CIR_000060_05.png&#39;);">
                         </div>
                     </td>
                 
                     <td align="center" class="imgEditCardImageCellClass">
                         <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl21$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl21_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_21_T.png" onclick="setgiftCardImagePickerImage(700,&#39;../../GPCGraphics/CIR_000060_21.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl21_giftCardImagePickerImages&#39;,&#39;CIR_000060_21.png&#39;);">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl13$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl13_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_06_T.png" %}' onclick="setgiftCardImagePickerImage(321,&#39;../../GPCGraphics/CIR_000060_06.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl13_giftCardImagePickerImages&#39;,&#39;CIR_000060_06.png&#39;);">
                         </div>
                     </td>
                 
                     <td align="center" class="imgEditCardImageCellClass">
                         <div class="imgEditCardImageDivClass">
-                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl23$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl23_giftCardImagePickerImages" class="editCardImageImage" src="{{ STATIC_URL }}/print-giftcard/CIR_000060_07_T.png" onclick="setgiftCardImagePickerImage(322,&#39;../../GPCGraphics/CIR_000060_07.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl23_giftCardImagePickerImages&#39;,&#39;CIR_000060_07.png&#39;);">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl15$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl15_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_01_T.png" %}' onclick="setgiftCardImagePickerImage(316,&#39;../../GPCGraphics/CIR_000060_01.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl15_giftCardImagePickerImages&#39;,&#39;CIR_000060_01.png&#39;);">
+                        </div>
+                    </td>
+                
+                    </tr>
+                    <tr>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl17$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl17_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_16_T.png" %}' onclick="setgiftCardImagePickerImage(673,&#39;../../GPCGraphics/CIR_000060_16.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl17_giftCardImagePickerImages&#39;,&#39;CIR_000060_16.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl19$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl19_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_17_T.png" %}' onclick="setgiftCardImagePickerImage(674,&#39;../../GPCGraphics/CIR_000060_17.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl19_giftCardImagePickerImages&#39;,&#39;CIR_000060_17.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl21$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl21_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_21_T.png" %}' onclick="setgiftCardImagePickerImage(700,&#39;../../GPCGraphics/CIR_000060_21.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl21_giftCardImagePickerImages&#39;,&#39;CIR_000060_21.png&#39;);">
+                        </div>
+                    </td>
+                
+                    <td align="center" class="imgEditCardImageCellClass">
+                        <div class="imgEditCardImageDivClass">
+                            <input type="image" name="CardImagePicker1$editCardImageRepeater$ctl23$giftCardImagePickerImages" id="CardImagePicker1_editCardImageRepeater_ctl23_giftCardImagePickerImages" class="editCardImageImage" src='{% static "/print-giftcard/CIR_000060_07_T.png" %}' onclick="setgiftCardImagePickerImage(322,&#39;../../GPCGraphics/CIR_000060_07.png&#39;,&#39;CardImagePicker1_editCardImageRepeater_ctl23_giftCardImagePickerImages&#39;,&#39;CIR_000060_07.png&#39;);">
                         </div>
                     </td>
                 
@@ -748,7 +750,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
         </div>
     
 </div>
-<img src="{{ STATIC_URL }}/print-giftcard/015405_VGC_375.png" id="CardImagePicker1_giftCardImagePickerImage" class="giftCardImagePickerImage" style="height: 190px; width: 300px; cursor: pointer;">
+<img src='{% static "/print-giftcard/015405_VGC_375.png" %}' id="CardImagePicker1_giftCardImagePickerImage" class="giftCardImagePickerImage" style="height: 190px; width: 300px; cursor: pointer;">
 
                                                             </div>
                                                         </td>
@@ -857,7 +859,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                                                 </tbody></table>
                                             </td>
                                             <td class="ImageCellDefault">
-                                                <img src="{{ STATIC_URL }}/print-giftcard/top_box_right.gif" border="0" height="330" width="16">
+                                                <img src='{% static "/print-giftcard/top_box_right.gif" %}' border="0" height="330" width="16">
                                             </td>
                                         </tr>
                                     </tbody></table>
@@ -865,7 +867,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                             </tr>
                             <tr>
                                 <td class="ImageCellDefault">
-                                    <img src="{{ STATIC_URL }}/print-giftcard/top_box_bottom.gif" border="0">
+                                    <img src='{% static "/print-giftcard/top_box_bottom.gif" %}' border="0">
                                 </td>
                             </tr>
                         </tbody></table>
@@ -885,7 +887,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                                     <table width="300" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                             <td class="ImageCellDefault">
-                                                <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_top.gif">
+                                                <img src='{% static "/print-giftcard/bottom_boxes_top.gif" %}'>
                                             </td>
                                         </tr>
                                         <tr>
@@ -893,7 +895,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                                                 <table cellpadding="0" cellspacing="0">
                                                     <tbody><tr>
                                                         <td valign="top" class="ImageCellDefault">
-                                                            <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_left.gif">
+                                                            <img src='{% static "/print-giftcard/bottom_boxes_left.gif" %}'>
                                                         </td>
                                                         <td width="298" valign="top">
                                                             <table width="100%"><tbody><tr><td></td><td align="left"><font style="font-family: verdana;font-size: 18px;color: #666666;font-weight: bold;">Usage Instructions</font><br>
@@ -905,7 +907,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                                                             
                                                         </td>
                                                         <td valign="top" align="left" class="ImageCellDefault">
-                                                            <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_right.gif">
+                                                            <img src='{% static "/print-giftcard/bottom_boxes_right.gif" %}'>
                                                         </td>
                                                     </tr>
                                                 </tbody></table>
@@ -913,7 +915,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                                         </tr>
                                         <tr>
                                             <td class="ImageCellDefault">
-                                                <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_bottom.gif">
+                                                <img src='{% static "/print-giftcard/bottom_boxes_bottom.gif" %}'>
                                             </td>
                                         </tr>
                                     </tbody></table>
@@ -923,7 +925,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                                     <table width="300" cellpadding="0" cellspacing="0" border="0">
                                         <tbody><tr>
                                             <td class="ImageCellDefault">
-                                                <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_top.gif">
+                                                <img src='{% static "/print-giftcard/bottom_boxes_top.gif" %}'>
                                             </td>
                                         </tr>
                                         <tr>
@@ -931,7 +933,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                                                 <table cellpadding="0" cellspacing="0">
                                                     <tbody><tr valign="top">
                                                         <td class="ImageCellDefault">
-                                                            <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_left.gif">
+                                                            <img src='{% static "/print-giftcard/bottom_boxes_left.gif" %}'>
                                                         </td>
                                                         <td width="298" valign="top">
                                                             <table width="100%"><tbody><tr><td></td><td align="left"><font style="font-family: verdana;font-size: 18px;color: #666666;font-weight: bold;">Company Information</font>
@@ -943,7 +945,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                                                             
                                                         </td>
                                                         <td valign="top" class="ImageCellDefault">
-                                                            <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_right.gif">
+                                                            <img src='{% static "/print-giftcard/bottom_boxes_right.gif" %}'>
                                                         </td>
                                                     </tr>
                                                 </tbody></table>
@@ -951,7 +953,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                                         </tr>
                                         <tr>
                                             <td class="ImageCellDefault">
-                                                <img src="{{ STATIC_URL }}/print-giftcard/bottom_boxes_bottom.gif">
+                                                <img src='{% static "/print-giftcard/bottom_boxes_bottom.gif" %}'>
                                             </td>
                                         </tr>
                                     </tbody></table>
@@ -982,7 +984,7 @@ Sys.WebForms.PageRequestManager._initialize('CardImagePicker1$ScriptManager1', '
                 <td class="ImageCellDefault">
                     
                     <div id="divFooterImage" style="padding: 0px 0px 0px 0px">
-                        <img id="imgFooter" src="{{ STATIC_URL }}/print-giftcard/018912_vcfooter.png" style="border-width:0px;width:670px;">
+                        <img id="imgFooter" src='{% static "/print-giftcard/018912_vcfooter.png" %}' style="border-width:0px;width:670px;">
                     </div>
                     
                 </td>

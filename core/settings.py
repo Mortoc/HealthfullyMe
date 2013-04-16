@@ -127,10 +127,9 @@ AUTH_USER_MODEL = 'core.HMUser'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '../core/static'),
-    os.path.join(BASE_DIR, '../home/static'),
-    os.path.join(BASE_DIR, '../store/static'),
 )
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_ACCESS_KEY_ID = 'AKIAIK2BWYP2BEYCMBWQ'
