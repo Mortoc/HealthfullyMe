@@ -17,10 +17,7 @@ class __DevEmailMessage(EmailMessage):
 
 def message_from_template(template_path, from_email, reply_to, send_to, bcc = [], context={}):
     template = get_template( template_path )
-    
     message = template.render( Context(context) )
-    message = minify_html(message)
-    
     subject = __get_email_subject_from_message(message)
     
     if settings.LIVE or SEND_EMAILS_IN_DEV:
