@@ -46,10 +46,6 @@ else:
         ) 
     }
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SESSION_COOKIE_SECURE = LIVE
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 # Stripe
 if not LIVE:
     # Test Key
@@ -133,6 +129,11 @@ STATICFILES_DIRS = (
 )
 
 HTTPS_SUPPORT = False
+
+if HTTPS_SUPPORT:
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SESSION_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
