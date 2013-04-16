@@ -30,17 +30,24 @@ def login_user(request):
         form = UserLoginForm(request.POST)
         
         if form.is_valid():
+            print "Login Form Valid"
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             
+            
+            print "Logging in with {0} : {1}".format(email, password)
             user = authenticate(email=email, password=password)
             
             if user is not None:
+                print "User found"
                 
                 if settings.DOWN_FOR_MAINTENANCE and not user.is_staff:
                     error = "The site is currently down for maintenance. Please try again later"
                 else:
                     login(request, user)
+                    
+                    print "Login successful? {0}".format(request.user.is_authenticated())
+                    
                     return HttpResponseRedirect('/')
             else:
                 error = "Invalid Username or Password"

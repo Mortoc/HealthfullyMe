@@ -119,7 +119,10 @@ MEDIA_URL = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+if LIVE:
+    STATIC_URL = 'http://healthfully-me-dev.s3-website-us-east-1.amazonaws.com/'
+else:
+    STATIC_URL = 'http://healthfully-me-live.s3-website-us-east-1.amazonaws.com/'
 
 SOUTH_TESTS_MIGRATE = False
 
