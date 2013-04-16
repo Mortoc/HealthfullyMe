@@ -27,7 +27,7 @@ else:
     raise Exception("HEALTHFULLY_ME_DEPLOYMENT hasn't been set on this machine")
 
 
-DEBUG = not LIVE
+DEBUG = True #not LIVE
 TEMPLATE_DEBUG = DEBUG
 
 BASE_DIR = os.path.dirname( os.path.abspath(__file__) )
