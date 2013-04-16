@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>home/templates/down_for_maintenance.html</string>
+	<string>store/views.py</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,26 +21,12 @@
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
-		<key>core/settings.py</key>
+		<key>core/views.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>85</integer>
-				<key>line</key>
-				<integer>8</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>core/urls.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>4</integer>
+				<integer>33</integer>
 				<key>line</key>
 				<integer>12</integer>
 			</dict>
@@ -49,87 +35,25 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>core/views.py</key>
+		<key>store/views.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>16</integer>
+				<integer>5</integer>
 				<key>line</key>
-				<integer>22</integer>
+				<integer>65</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>14</integer>
-		</dict>
-		<key>home/templates/down_for_maintenance.html</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>136</integer>
-				<key>line</key>
-				<integer>19</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>home/tests.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>8</integer>
-				<key>line</key>
-				<integer>81</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>55</integer>
-		</dict>
-		<key>store/templates/email/purchase_confirmation.html</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>116</integer>
-				<key>line</key>
-				<integer>24</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>76</integer>
-				<key>line</key>
-				<integer>29</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>116</integer>
-				<key>line</key>
-				<integer>24</integer>
-			</dict>
+			<integer>27</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>core/views.py</string>
-		<string>store/templates/email/purchase_confirmation.html</string>
-		<string>core/urls.py</string>
-		<string>core/settings.py</string>
-		<string>home/tests.py</string>
-		<string>home/templates/down_for_maintenance.html</string>
+		<string>store/views.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
