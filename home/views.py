@@ -140,6 +140,8 @@ def register_user(request):
 
 @secure_required
 def index(request):
+    print "User is authenticated: {0}".format(request.user.is_authenticated())
+    
     if settings.DOWN_FOR_MAINTENANCE and not request.user.is_staff:
         return render(request, "down_for_maintenance.html", {});
         

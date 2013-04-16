@@ -132,6 +132,8 @@ AUTH_USER_MODEL = 'core.HMUser'
 STATICFILES_DIRS = (
 )
 
+HTTPS_SUPPORT = False
+
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
