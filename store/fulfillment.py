@@ -56,7 +56,7 @@ def fulfill_egiftcard(transaction, send_failure_email=True):
                         "user" : transaction.user,
                         "transaction" : transaction,
                         "hostname" : settings.HOSTNAME,
-                        "offer" : transaction.offer
+                        "offer_name" : transaction.offer.buy_window_title
                     }
                 )
                 user_email = message_from_template(
