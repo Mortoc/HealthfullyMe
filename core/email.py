@@ -78,6 +78,7 @@ def __get_special_context(request, email_name):
         context["transaction"] = transaction
         context["shipping_address"] = transaction.card.address
         context["billing_address"] = transaction.card.address
+        context["offer_name"] = transaction.offer.buy_window_title
     except:
         pass
 

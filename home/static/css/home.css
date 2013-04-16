@@ -387,22 +387,6 @@ a {
 @media only screen and (-webkit-min-device-pixel-ratio: 2) { 
 
 }*/
-@media only screen and (max-width: 767px) {
-    
-    .background {
-        padding: -20px;
-    }
-    
-    .tiny-logo {
-        position: absolute; 
-        top: 6px; 
-        left: 10px;
-    }
-    
-    .social-container {
-        display: none;
-    }
-}
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
     
