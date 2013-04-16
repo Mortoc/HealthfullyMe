@@ -117,12 +117,6 @@ MEDIA_ROOT = ''
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = ''
 
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, '../static_compiled/')
-
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
@@ -137,6 +131,17 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, '../home/static'),
     os.path.join(BASE_DIR, '../store/static'),
 )
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_ACCESS_KEY_ID = 'AKIAIK2BWYP2BEYCMBWQ'
+AWS_SECRET_ACCESS_KEY = '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'
+
+if LIVE:
+    AWS_STORAGE_BUCKET_NAME = 'healthfully-me-live'
+else:
+    AWS_STORAGE_BUCKET_NAME = 'healthfully-me-dev'
+    
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -196,6 +201,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'gunicorn',
     'south',
+    'storages',
     
     'home',
     'giftcards',
