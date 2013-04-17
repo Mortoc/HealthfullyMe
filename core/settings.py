@@ -128,8 +128,8 @@ AUTH_USER_MODEL = 'core.HMUser'
 STATICFILES_DIRS = (
 )
 
-HTTPS_SUPPORT = False
-
+# SSL Settings
+HTTPS_SUPPORT = True
 if HTTPS_SUPPORT:
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SESSION_COOKIE_SECURE = True
