@@ -5,6 +5,7 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^grappelli/', include('grappelli.urls')),
     
     url(r'^$', 'home.views.index', name='index'),
     

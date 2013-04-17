@@ -151,8 +151,8 @@ STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -195,6 +195,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -213,6 +214,8 @@ INSTALLED_APPS = (
     'store',
     'core'
 )
+
+GRAPPELLI_ADMIN_TITLE = "Healthfully.me Admin"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
