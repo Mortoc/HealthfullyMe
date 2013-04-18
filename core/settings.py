@@ -195,7 +195,6 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'grappelli',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -214,8 +213,6 @@ INSTALLED_APPS = (
     'store',
     'core'
 )
-
-GRAPPELLI_ADMIN_TITLE = "Healthfully.me Admin"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

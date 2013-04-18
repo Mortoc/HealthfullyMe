@@ -4,9 +4,7 @@ from django.conf import settings
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    (r'^grappelli/', include('grappelli.urls')),
-    
+urlpatterns = patterns('',    
     url(r'^$', 'home.views.index', name='index'),
     
     url(r'^login', 'home.views.login_user', name='login'),

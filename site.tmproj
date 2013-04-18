@@ -26,14 +26,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>45</integer>
+				<integer>14</integer>
 				<key>line</key>
-				<integer>217</integer>
+				<integer>130</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>194</integer>
+			<integer>109</integer>
 		</dict>
 		<key>core/ssl_utils.py</key>
 		<dict>
@@ -49,19 +49,33 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>core/urls.py</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>48</integer>
+				<key>line</key>
+				<integer>7</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>home/templates/index.html</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>6</integer>
+				<integer>12</integer>
 				<key>line</key>
-				<integer>59</integer>
+				<integer>16</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>12</integer>
+			<integer>0</integer>
 		</dict>
 		<key>home/tests.py</key>
 		<dict>
@@ -108,11 +122,12 @@
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>core/settings.py</string>
 		<string>core/ssl_utils.py</string>
 		<string>home/tests.py</string>
 		<string>store/views.py</string>
 		<string>home/templates/index.html</string>
+		<string>core/urls.py</string>
+		<string>core/settings.py</string>
 		<string>store/templates/store_main.html</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
