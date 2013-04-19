@@ -129,7 +129,7 @@ STATICFILES_DIRS = (
 )
 
 # SSL Settings
-HTTPS_SUPPORT = True
+HTTPS_SUPPORT = not LOCAL
 if HTTPS_SUPPORT:
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SESSION_COOKIE_SECURE = True
@@ -195,6 +195,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
