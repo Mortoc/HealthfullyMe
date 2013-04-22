@@ -22,9 +22,9 @@ class ComingSoonIdea(models.Model):
     
     def selection_percentage(self):
         if self.times_shown > 0:
-            return "{0:.0f} %".format(float(100 * self.times_selected) / float(self.times_shown))
+            return u"{0:.0f} %".format(float(100 * self.times_selected) / float(self.times_shown))
         else:
-            return "Not Yet Shown"
+            return u"Not Yet Shown"
 
 
 class Offer(models.Model):
@@ -54,10 +54,10 @@ class Offer(models.Model):
     availability = models.ManyToManyField('OfferAvailability', null=True, blank=True)
     
     def offer_price(self):
-        return "${0:.2f}".format(float(self.price) * 0.01)
+        return u"${0:.2f}".format(float(self.price) * 0.01)
     
     def __unicode__(self):
-        return self.header_text + " | " + self.offer_price()
+        return u"{0} | {1}".format(self.header_text, self.offer_price())
     
     def user_can_purchase(self, user, transactions = None):
         if transactions == None:
@@ -139,14 +139,14 @@ class OfferAvailability(models.Model):
             purchases_plural = ""
         
         if self.time_value == 1:
-            return "{0} purchase{1} per {2}".format(self.purchases, purchases_plural, time_unit[self.time_peroid])
+            return u"{0} purchase{1} per {2}".format(self.purchases, purchases_plural, time_unit[self.time_peroid])
                
         if self.time_value > 1:
             time_value_plural = "s"
         else:
             time_value_plural = ""
         
-        return "{0} purchase{1} per {2} {3}{4}".format(self.purchases, purchases_plural, self.time_value, time_unit[self.time_peroid], time_value_plural)
+        return u"{0} purchase{1} per {2} {3}{4}".format(self.purchases, purchases_plural, self.time_value, time_unit[self.time_peroid], time_value_plural)
     
     # given a set of transactions, can we add another without violating this availability rule?
     def can_add_transaction(self, transactions = []):
@@ -260,7 +260,7 @@ class Transaction(models.Model):
         return self.card.address.__unicode__()
     
     def card_info(self):
-        return "{0}  |  ...{1}".format(self.card.type, self.card.last4)
+        return u"{0}  |  ...{1}".format(self.card.type, self.card.last4)
     
     def generate_id_slug(self):
         
@@ -283,7 +283,7 @@ class Transaction(models.Model):
             self.save()
             
     def __unicode__(self):
-        return "Transaction {0}".format(self.id_slug)
+        return u"Transaction {0}".format(self.id_slug)
         
         
 def model_saved(sender, **kwargs):

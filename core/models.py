@@ -139,6 +139,8 @@ class UserAccessCode(models.Model):
     created_date = models.DateTimeField(default=now)
     valid_until = models.DateTimeField(null=True, blank=True)
 
+    def __unicode__(self):
+        return "{0} - {1}".format(self.user, self.code)
 
 def add_login_info(sender, user, request, **kwargs):
     login_info = LoginInfo(user=user)
@@ -162,10 +164,19 @@ class Address(models.Model):
 
     def __unicode__(self):
         if self.line2 and self.line2 != " ":
-            return "{0}\n{1}\n{2}\n{3}, {4}\n{5}\n{6}".format(self.name, self.line1, self.line2, self.city, self.state, self.zip, self.country)
+            return u"{0}\n{1}\n{2}\n{3}, {4}\n{5}\n{6}".format(self.name, self.line1, self.line2, self.city, self.state, self.zip, self.country)
         else:
-            return "{0}\n{1}\n{2}, {3}\n{4}\n{5}".format(self.name, self.line1, self.city, self.state, self.zip, self.country)
+            return u"{0}\n{1}\n{2}, {3}\n{4}\n{5}".format(self.name, self.line1, self.city, self.state, self.zip, self.country)
         
     def html(self):
         return self.__unicode__().replace("\n", "<br />")
+        
+        
+class Tag(models.Model):
+    id = models.AutoField(primary_key=True)
+    text = models.CharField(max_length=64)
+    
+    def __unicode__(self):
+        return self.text
+    
     

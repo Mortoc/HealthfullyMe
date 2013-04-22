@@ -104,6 +104,14 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+if LIVE:
+    STATIC_URL = 'http://healthfully-me-dev.s3-website-us-east-1.amazonaws.com/'
+else:
+    STATIC_URL = 'http://healthfully-me-live.s3-website-us-east-1.amazonaws.com/'
+    
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = ''
@@ -112,13 +120,6 @@ MEDIA_ROOT = ''
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = ''
-
-# URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
-if LIVE:
-    STATIC_URL = 'http://healthfully-me-dev.s3-website-us-east-1.amazonaws.com/'
-else:
-    STATIC_URL = 'http://healthfully-me-live.s3-website-us-east-1.amazonaws.com/'
 
 SOUTH_TESTS_MIGRATE = False
 
@@ -209,11 +210,15 @@ INSTALLED_APPS = (
     'south',
     'storages',
     
+    'core',
+    'store',
     'home',
     'giftcards',
-    'store',
-    'core'
+    'recipes'
 )
+
+# Grappelli Settings
+GRAPPELLI_ADMIN_TITLE = "Healthfully.me Admin"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

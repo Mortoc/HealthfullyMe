@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^grappelli/', include('grappelli.urls')),
-    
+
     url(r'^$', 'home.views.index', name='index'),
     
     url(r'^login', 'home.views.login_user', name='login'),
@@ -22,6 +22,8 @@ urlpatterns = patterns('',
     url(r'^store/purchase-complete$', 'store.views.purchase_complete', name='purchase-complete'),
     url(r'^store/purchase-error$', 'store.views.purchase_error', name='purchase-error'),
     url(r'^store/offer-not-available/(?P<offer_id>.+)$', 'store.views.offer_not_available', name='offer-not-available'),
+
+    url(r'^recipes/(?P<recipe_id>.+)$', 'recipes.views.view_recipe', name='view-recipe'),
     
     url(r'^server-error', 'core.views.server_error', name='server-error'),
     

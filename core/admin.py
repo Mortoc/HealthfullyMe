@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from core.models import HMUser, Address
+from core.models import HMUser, Address, Tag
 
 class HMUserAdmin(admin.ModelAdmin):
     list_display = ('email', 'created_date', 'is_admin',)
@@ -16,10 +16,10 @@ class HMUserAdmin(admin.ModelAdmin):
     search_fields = ('email',)
     ordering = ('email', 'created_date',)
     readonly_fields = ('created_date', 'logins', 'password_admin_reset',)
-    filter_horizontal = ()
 
 admin.site.register(HMUser, HMUserAdmin)
 admin.site.register(Address)
+admin.site.register(Tag)
 
 admin.site.unregister(Group)
 

@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.template import Context, Template
 from django.conf import settings
 
-import json        
+import json
 import random
 import sys
 import stripe

@@ -116,7 +116,7 @@ class TransactionTest(TestCasePlus):
         
         # check for a random bit of content that would be in the 
         #  correctly-rendered page
-        self.assertTrue( settings.STRIPE_PUBLIC_KEY in str(response) )
+        self.assertTrue( settings.SEGMENT_IO_KEY in str(response) )
         
     
     def test_record_charge_ajax_on_successful_card(self):
