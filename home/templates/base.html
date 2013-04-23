@@ -7,11 +7,13 @@
 
     <head>
         <meta charset="utf-8" />
-        <meta property="og:description" content="Take the stress out of eating healthy." />
-        <meta property="og:url" content="http://www.healthfully.me" />
-        <meta property="og:title" content="Healthfully.me" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content='{% static "img/hm-logo.jpg" %}' />
+		{% block facebook_meta %}
+	        <meta property="og:description" content="Take the stress out of eating healthy." />
+	        <meta property="og:url" content="http://www.healthfully.me" />
+	        <meta property="og:title" content="Healthfully.me" />
+	        <meta property="og:type" content="website" />
+	        <meta property="og:image" content='{% static "img/hm-logo.jpg" %}' />
+		{% endblock %}
         {% block extra_meta %}{% endblock %}
         
         <title>{% block title %}{% endblock %}</title>

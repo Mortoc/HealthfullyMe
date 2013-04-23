@@ -72,7 +72,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-
 # Email settings
 EMAIL_HOST = "smtp.sendgrid.net"
 EMAIL_HOST_USER = "mortoc"
@@ -106,11 +105,13 @@ USE_TZ = True
 
 
 # URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
+STATIC_URL = '/static/'
+
 if LIVE:
-    STATIC_URL = 'http://healthfully-me-dev.s3-website-us-east-1.amazonaws.com/'
-else:
-    STATIC_URL = 'http://healthfully-me-live.s3-website-us-east-1.amazonaws.com/'
+    STATIC_URL = 'https://s3.amazonaws.com/healthfully-me-live/'
+elif not LOCAL:
+    STATIC_URL = 'https://s3.amazonaws.com/healthfully-me-dev/'
+
     
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
@@ -139,6 +140,8 @@ if HTTPS_SUPPORT:
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
 AWS_ACCESS_KEY_ID = 'AKIAIK2BWYP2BEYCMBWQ'
 AWS_SECRET_ACCESS_KEY = '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'
 
@@ -146,15 +149,13 @@ if LIVE:
     AWS_STORAGE_BUCKET_NAME = 'healthfully-me-live'
 else:
     AWS_STORAGE_BUCKET_NAME = 'healthfully-me-dev'
-    
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.

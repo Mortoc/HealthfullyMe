@@ -323,12 +323,12 @@ h3 {
 .leafy-header {
     float: left;
     font-family: 'Lobster Two', sans-serif;
-    font-size: 40px;
+    font-size: 38px;
     color: #ffa05b;
     height: 64px;
     line-height: 64px;
-    
-    width: 325px;
+    margin-left: 5px;
+    width: 320px;
     text-align: center;
 }
 
@@ -388,7 +388,7 @@ a {
 
 }*/
 
-@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+@media only screen and (max-width: 787px), only screen and (max-device-width: 787px) {
     
     .social-container {
         display: none;
@@ -397,12 +397,6 @@ a {
     .social-link {
         margin-left: 10%;
         margin-right: 10%;
-    }
-    
-    body {
-        zoom: 0.75;
-        margin: 0;
-        padding: 0;
     }
     
     .tiny-logo {
@@ -432,6 +426,16 @@ a {
         padding: 32px;
         margin: 64px;
     }
+    
+    body {
+        margin: 0;
+        padding: 0;
+    }
+}
 
-
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+    
+    body {
+        zoom: 0.75;
+    }
 }

@@ -39,10 +39,13 @@
 						$("#error-state-message").html(data['message']);
 						set_app_state("error")
 					}
+					
+					input_string = "";
                 },
                 failure: function(data) {
 					$("#error-state-message").html(data);
 					set_app_state("error")
+					input_string = "";
                 }
             });
 		}
@@ -68,6 +71,8 @@
 					send_card_to_server();
 				break;
 				case "error":
+					input_string = "";
+					matched_card_id = "";
 					$("#error-state").show();
 					
 					setTimeout( function(){

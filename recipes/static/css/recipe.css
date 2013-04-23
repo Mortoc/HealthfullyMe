@@ -1,0 +1,124 @@
+#recipe {
+    margin-top: 50px;
+    margin-bottom: 200px;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    background-color: #fafafa;
+}
+
+#recipe h1 {
+   width: 100%;
+   text-align: center;
+   background: #d64b4b;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffa05b), to(#f07c28));
+   background: -webkit-linear-gradient(top, #ffa05b, #f07c28);
+   background: -moz-linear-gradient(top, #ffa05b, #f07c28);
+   background: -ms-linear-gradient(top, #ffa05b, #f07c28);
+   background: -o-linear-gradient(top, #ffa05b, #f07c28);
+   background-image: -ms-linear-gradient(top, #ffa05b 0%, #f07c28 100%);
+   -webkit-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
+   -moz-box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
+   box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
+   font-family: 'Signika', sans-serif;
+   
+   border: 1px solid #f07c28;
+   box-shadow: 0 0 4px 0 #999;
+
+   border-radius: 4px;
+   font-size: 19px;
+   color: rgba(255, 255, 255, 0.9);
+   text-shadow: black 1px 1px 1px inset;
+   padding: 15px 10px;
+}
+
+#recipe h3 {
+    color: #666;
+    line-height: 20px;
+    font-size: 14px;
+    font-family: 'Signika', sans-serif;
+    text-align: left;
+    margin: 0;
+    padding: 10px;
+}
+
+#recipe h2 {
+    color: #666;
+    line-height: 24px;
+    font-size: 20px;
+    font-family: 'Signika', sans-serif;
+    text-align: left;
+    margin: 0;
+    padding: 10px;
+}
+
+#recipe .left-header {
+    width: auto;
+    float: left;
+    text-align: left;
+}
+
+#recipe .right-header {
+    width: auto;
+    float: right;
+    text-align: right;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+#recipe .head-container {
+    padding: 20px;
+    height: 200px;
+}
+
+#recipe #recipe-image-container {
+    padding: 20px;
+    position: relative;
+}
+
+#recipe .recipe-image {
+    position: absolute;
+    top: auto;
+    left: 30px;
+    max-width: 380px;
+    box-shadow: 0 0 4px 0 #999;
+    border: 1px solid #999;
+}
+
+#share-icons {
+    float: left;
+    width: 400px;
+    padding-left: 15px;
+}
+
+#ingredient-container {
+    float: left;
+    padding: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    font-family: 'Signika', sans-serif;    
+}
+
+#ingredient-container p {
+    padding: 0 30px;
+    line-height: 20px;
+    font-size: 14px;
+    font-family: 'Signika', sans-serif;    
+}
+
+#ingredient-container ul {
+    padding-left: 20px;
+    list-style-type: circle;
+}
+
+
+@media only screen and (max-width: 787px), only screen and (max-device-width: 787px) {
+    
+    #recipe #recipe-image-container {
+        min-height: 400px;
+        zoom: 1.2;
+    }
+    
+    #recipe h1 {
+        width: auto;
+    }
+}

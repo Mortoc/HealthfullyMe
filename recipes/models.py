@@ -1,8 +1,11 @@
 from django.db import models
 from django.utils.timezone import now
 from django.conf import settings
+from django.utils.safestring import mark_safe 
 
 from core.models import HMUser, Tag
+
+import random
 
 class UnitOfMeasure(models.Model):
     name = models.CharField(primary_key=True, max_length=32)
@@ -24,14 +27,17 @@ class IngredientListing(models.Model):
     amount_denominator = models.PositiveSmallIntegerField(default=1)
     unit = models.ForeignKey( UnitOfMeasure, null=True, blank=True, default=None )
     ingredient = models.ForeignKey( Ingredient )
+    notes = models.CharField( max_length=255, blank=True, default=None )
     optional = models.BooleanField( default=False )
 
     def __unicode__(self):
-        number = "ERROR"
-        if self.amount_denominator == 1:
-            number = self.amount_numerator
-        else:
-            number = "{0}/{1}".format( self.amount_numerator, self.amount_denominator )
+        number = ""
+        
+        if self.amount_numerator > 0 and self.amount_denominator > 0:
+            if self.amount_denominator == 1:
+                number = self.amount_numerator
+            else:
+                number = "{0}/{1}".format( self.amount_numerator, self.amount_denominator )
             
         unit = ""
         if self.unit:
@@ -40,15 +46,26 @@ class IngredientListing(models.Model):
         optional = ""
         if self.optional:
             optional = " (Optional)"
+        
+        notes = ""
+        if self.notes:
+            notes = " " + self.notes
             
-        return u"{0} {1}{2}{3}".format( number, unit, self.ingredient, optional )
+        return u"{0} {1}{2}{3}{4}".format( number, unit, self.ingredient, optional, notes )
+        
+class RecipeImg(models.Model):
+    id = models.AutoField(primary_key=True)
+    url = models.CharField(max_length=255)
+    
+    def __unicode__(self):
+        return self.url
     
 class Recipe(models.Model):
     id = models.AutoField(primary_key=True)
     
     title = models.CharField(max_length=128)
-    img = models.CharField(max_length=255)
-    tags = models.ManyToManyField(Tag)
+    images = models.ManyToManyField(RecipeImg)
+    tags = models.ManyToManyField(Tag, blank=True, default=None)
     ingredient_list = models.ManyToManyField(IngredientListing)
     instructions = models.TextField(default="")
     
@@ -58,11 +75,31 @@ class Recipe(models.Model):
     created_by = models.ForeignKey(HMUser)
     created_date = models.DateTimeField(default=now)
     
+    serves = models.PositiveSmallIntegerField(default=2)
+    prep_time_hours = models.PositiveSmallIntegerField(default=0)
+    prep_time_minutes = models.PositiveSmallIntegerField(default=20)
+    
+    refrigeration_life_days = models.PositiveSmallIntegerField(blank=True, null=True, default=None)
+    
     def image_thumbnail(self):
-        return u"<img src=\"{0}\" height=\"64px\"></img>".format(self.img)
+        img_url = ""
+        
+        images = list(self.images.all())
+        img_len = len(images)
+        if img_len > 0:
+            img_url = images[random.randint(0, img_len - 1)].url
+            
+        return u"<img src=\"{0}\" height=\"64px\"></img>".format(img_url)
     image_thumbnail.short_description = 'Thumb'
     image_thumbnail.allow_tags = True
     
     
     def __unicode__(self):
         return self.title
+        
+    def get_instructions_html(self):
+        return mark_safe(self.instructions)
+        
+    get_instructions_html.allow_tags = True
+        
+        

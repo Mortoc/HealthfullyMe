@@ -8,6 +8,13 @@ from recipes.models import Recipe
 def view_recipe(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=int(recipe_id))
     
+    icon = None
+    try:
+        icon = recipe.images.all()[0].url
+    except:
+        pass
+    
     return render(request, "view-recipe.html", {
         "recipe" : recipe,
+        "icon" : icon
     })
