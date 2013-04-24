@@ -13,7 +13,7 @@
 
 {% block more_extra_style %}
 	<link rel="stylesheet" href='{{ STATIC_URL }}css/recipe.css' type="text/css" media="screen" />
-	<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+	<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
 	<script type="text/javascript">stLight.options({publisher: "042989d5-619e-4199-be35-b4bae45c2680", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 {% endblock %}
 
@@ -43,7 +43,6 @@
 			{% endif %}
 			
 			<div id="share-icons">
-				
 				<span class='st_facebook_large' st_image="{{ icon }}" st_title="Healthfully.me {{ recipe.title }}" displayText='Facebook'></span>
 				<span class='st_twitter_large' st_image="{{ icon }}" st_title="Healthfully.me {{ recipe.title }}" displayText='Tweet'></span>
 				<span class='st_pinterest_large' st_image="{{ icon }}" st_title="Healthfully.me {{ recipe.title }}" displayText='Pinterest'></span>
