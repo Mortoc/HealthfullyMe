@@ -89,7 +89,7 @@
     left: 228px;
     width: 165px;
     height: 72px;
-    padding: 10px 10px 15px 10px; 
+    padding: 5px 10px 15px 10px; 
     
     border-radius: 4px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2) inset;
@@ -127,7 +127,7 @@
     
     #recipe #recipe-image-container {
         min-height: 400px;
-        zoom: 1.2share-icons;
+        zoom: 1.2;
     }
     
     #recipe h1 {
@@ -135,7 +135,7 @@
     }
     
     #share-icons {
-        top: -30px;
-        left: 120px;
+        top: -50px;
+        left: 150px;
     }
 }
