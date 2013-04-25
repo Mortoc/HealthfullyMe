@@ -8,7 +8,12 @@
 
 <div class="row-fluid">
 	
+	{% if featured_recipe %}
+    <div class="span6">
+	{% else %}
     <div class="span12">
+	{% endif %}
+	
         <div class="message-container">
 		
             <div class="message-row">
@@ -29,14 +34,14 @@
             
             <div class="message-row">
                 {% if user.is_authenticated %}
-                    <input class="orange-button" style="width: 100%; margin-top: 50px;" type="submit" onclick="window.location = '/store'" value="Go to the Store"></input>
+                    <input class="orange-button" style="width: 100%" type="submit" onclick="window.location = '/store'" value="Go to the Store"></input>
                 {% else %}
                 <form class="default-form" action="submit-email/" method="post">
                     {% csrf_token %}
                     <div class="text-box">
                         {{ form.as_p }}
                     </div>
-                    <input class="green-button" style="width: 100%; margin-top: -12px" type="submit" value="Request an invite code" />
+                    <input class="green-button" type="submit" value="Request an invite code" />
                 </form>
                     <a style="float: left; margin-left: 115px;" href="/register/">I already have a code</a>
                 {% endif %}
@@ -44,6 +49,15 @@
         </div>
     </div>
     <div class="span6">
+		{% if featured_recipe %}
+		<div id="featured-recipe-container" onmouseclick="document.location='{% url 'view-recipe' {{ featured_recipe.id }}'">
+		    <h1>Featured Recipe!</h1>
+			<h3>{{ featured_recipe.title }}</h3>
+			<img class="recipe-thumbnail" src="{{ featured_recipe.thumbnail_url }}"></img>
+			<br/>
+			<a href="{% url 'view-recipes' %}">View all the Recipes</a>
+		</div>
+		{% endif %}
     </div>
 </div>
         

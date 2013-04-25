@@ -100,7 +100,25 @@ class Recipe(models.Model):
     
     refrigeration_life_days = models.PositiveSmallIntegerField(blank=True, null=True, default=None)
     
-    def image_thumbnail(self):
+    featured = models.BooleanField(default=False)
+    
+    def prep_time_formatted(self):
+        result = u""
+        if self.prep_time_hours > 0:
+            hours_plural = "s" if self.prep_time_hours > 1 else ""
+            result = u"{0} hour{1}".format(self.prep_time_hours, hours_plural)
+            
+        if self.prep_time_minutes > 0:
+            comma = ", " if self.prep_time_hours > 0 else ""
+            min_plural = "s" if self.prep_time_minutes > 0 else ""
+            result = u"{0}{1}{2} minute{3}".format(result, comma, self.prep_time_minutes, min_plural)
+        
+        if self.prep_time_minutes == 0 and self.prep_time_hours == 0:
+            result = "Instant"                
+        return result;
+        
+
+    def thumbnail_url(self):
         img_url = ""
         
         images = list(self.images.all())
@@ -108,7 +126,10 @@ class Recipe(models.Model):
         if img_len > 0:
             img_url = images[random.randint(0, img_len - 1)].url
             
-        return u"<img src=\"{0}\" height=\"64px\"></img>".format(img_url)
+        return img_url
+            
+    def image_thumbnail(self):
+        return u"<img src=\"{0}\" height=\"64px\"></img>".format( self.thumbnail_url() )
     image_thumbnail.short_description = 'Thumb'
     image_thumbnail.allow_tags = True
     

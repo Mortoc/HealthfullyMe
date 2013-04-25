@@ -1,0 +1,29 @@
+{% extends "user_page.html" %}
+{% load static from staticfiles %}
+
+{% block title %}Healthfully Me Recipes{% endblock %}
+
+{% block more_extra_style %}
+	<link rel="stylesheet" href='{{ STATIC_URL }}css/recipe.css' type="text/css" media="screen" />
+{% endblock %}
+
+{% block main_content %}
+<span class="breadcrumbs"><a href="{% url 'index' %}">Home</a> / View Recipes</span>
+
+<div class="row-fluid recipe-card-container">
+	{% for recipe in recipes %}
+	<div id="recipe{{ recipe.id }}" class="span4 recipe-card" onmousedown="document.location='{% url 'view-recipe' recipe.id %}'">
+		<h1>{{ recipe.title }}</h1>
+		<h5>Prep-time: {{ recipe.prep_time_formatted }}<br/>
+		Serves: {{ recipe.serves }}</h5><br/>
+		<img class="recipe-thumbnail" src="{{ recipe.thumbnail_url }}"></img>
+	</div>
+	{% endfor %}
+	
+	<div class="span12 breadcrumbs">
+		<span><a href="{% url 'store' %}">Save some money on these meals with our featured deals!</a></span>
+	</div>
+</div>
+
+
+{% endblock %}

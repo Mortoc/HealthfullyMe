@@ -6,6 +6,8 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 
     <head>
+		<link href="{{ STATIC_URL }}favicon.ico" rel="icon" type="image/x-icon">
+		
         <meta charset="utf-8" />
 		{% block facebook_meta %}
 	        <meta property="og:description" content="Take the stress out of eating healthy." />

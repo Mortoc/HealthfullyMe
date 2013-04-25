@@ -13,7 +13,7 @@ from core.validators import validate_email
 from core.email import message_from_template
 from home.models import EmailRequest, AuthCode
 from home.forms import UserLoginForm, UserRegistrationForm, EmailRequestForm
-
+from recipes.models import Recipe
 
 
 def enum(**enums):
@@ -136,9 +136,17 @@ def register_user(request):
 def index(request):    
     if settings.DOWN_FOR_MAINTENANCE and not request.user.is_staff:
         return render(request, "down_for_maintenance.html", {});
+    
+    # get a random featured recipe
+    featured_recipe = None
+    try:
+        featured_recipe = Recipe.objects.filter(featured=True).order_by('?')[0]
+    except:
+        pass
         
     return render(request, "index.html", {
-       'form' : EmailRequestForm()
+       'form' : EmailRequestForm(),
+       'featured_recipe' : featured_recipe
     });
     
     

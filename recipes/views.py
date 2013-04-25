@@ -18,3 +18,8 @@ def view_recipe(request, recipe_id):
         "recipe" : recipe,
         "icon" : icon
     })
+    
+def view_recipes(request):
+    return render(request, "view-recipes.html", {
+        "recipes" : Recipe.objects.all()
+    })
