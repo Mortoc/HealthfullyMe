@@ -7,7 +7,7 @@ import json, sys, traceback, re
 from core.ssl_utils import secure_required
 from core import settings
 from giftcards.models import Giftcard
-from store.models import Transaction
+from store.models import Transaction, Offer
 
 @secure_required
 def add_giftcards(request):
@@ -82,4 +82,30 @@ def redeem_card_print(request, transaction_id):
         { "giftcard" : giftcard }
     )
     
-        
+    
+@secure_required
+def egiftcard_inventory(request):
+    all_cards = list(Giftcard.objects.all())
+    total_cards = len(all_cards)
+    available_cards = len(list(Giftcard.objects.filter(transaction=None)))
+    purchased_cards = total_cards - available_cards
+    
+    egiftcard_transactions = []
+    for transaction in Transaction.objects.all():
+        if transaction.offer.fulfillment == Offer.EGIFTCARD_EMAIL:
+            egiftcard_transactions.append(transaction)
+            
+    total_orders = len(egiftcard_transactions)
+    
+    for card in all_cards:
+        if card.is_sold():
+            egiftcard_transactions.remove(card.transaction)
+            
+    return render( request, "egiftcard-inventory.html", { 
+        "total_cards" : total_cards,
+        "purchased_cards" : purchased_cards,
+        "available_cards" : available_cards,
+        "total_orders" :  total_orders,
+        "backlogged_orders" : len(egiftcard_transactions)
+    })
+    

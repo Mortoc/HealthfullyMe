@@ -12,15 +12,15 @@ DOWN_FOR_MAINTENANCE = os.environ.get('HEALTHFULLY_ME_MAINTENANCE', "none") == "
 # way yet to get this (other than the response's host)
 if os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LIVE":
     LIVE = True
-    HOSTNAME = "www.healthfully.me"
+    HOSTNAME = "https://www.healthfully.me"
     
 elif os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "DEV":
     LIVE = False
-    HOSTNAME = "healthfullyme-dev.herokuapp.com"
+    HOSTNAME = "https://healthfullyme-dev.herokuapp.com"
     
 elif os.environ.get('HEALTHFULLY_ME_DEPLOYMENT', "none") == "LOCAL":
     LIVE = False
-    HOSTNAME = "localhost:8000"
+    HOSTNAME = "http://localhost:8000"
     LOCAL = True
     
 else:

@@ -13,7 +13,10 @@
 
 {% block more_extra_style %}
 	<link rel="stylesheet" href='{{ STATIC_URL }}css/recipe.css' type="text/css" media="screen" />
-	<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+
+	<!-- ShareThis Widgets -->
+	<script type="text/javascript">var switchTo5x=true;</script>
+	<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 	<script type="text/javascript">stLight.options({publisher: "042989d5-619e-4199-be35-b4bae45c2680", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 {% endblock %}
 
@@ -41,12 +44,6 @@
 			{% if recipe.attribution %}
 				<h3 class="right-header">by <a href="{{ recipe.attribution_link }}">{{ recipe.attribution }}</a></h3>
 			{% endif %}
-			
-			<div id="share-icons">
-				<span class='st_facebook_large' st_image="{{ icon }}" st_title="Healthfully.me {{ recipe.title }}" displayText='Facebook'></span>
-				<span class='st_twitter_large' st_image="{{ icon }}" st_title="Healthfully.me {{ recipe.title }}" displayText='Tweet'></span>
-				<span class='st_pinterest_large' st_image="{{ icon }}" st_title="Healthfully.me {{ recipe.title }}" displayText='Pinterest'></span>
-			</div>
 		</div>
 	
 		<div class="span6">
@@ -55,11 +52,19 @@
 					<img class="recipe-image" alt="" src="{{ image.url }}"></img>
 				{% endfor %}
 			</div>
+			
+			<div id="share-icons">
+				<h5>Share this Recipe:</h5>
+				<span class='st_facebook_large' displayText='Facebook'></span>
+				<span class='st_twitter_large' displayText='Tweet'></span>
+				<span class='st_pinterest_large' displayText='Pinterest'></span>
+				<span class='st_email_large' displayText='Email'></span>
+			</div>
 		</div>
 	</div>
 	
 	<div class="row-fluid">
-		<div id="ingredient-container" class="span12">
+		<div id="ingredient-container" class="span11">
 			<h2>Ingredients</h2>
 			<ul>
 				{% for ingredient in recipe.ingredient_list.all %}

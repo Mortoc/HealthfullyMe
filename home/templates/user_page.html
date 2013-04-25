@@ -22,7 +22,7 @@
 
 {% block body %}
 
-<div class="top-bar" style="float: none;">
+<div class="top-bar green-textured" style="float: none;">
     {% if user.is_authenticated %}
     <span class="login-link">
        Welcome {{ user.email }} | <a href="/logout">Logout</a>
@@ -44,7 +44,7 @@
 </div>
 
 
-<div id="footer" class="footer-bar">
+<div id="footer" class="footer-bar green-textured">
 	<a class="social-link" href="mailto:hello@healthfully.me" onclick="analytics.track('/footer/clicked-email-us', {})">
 		<img src='{% static "img/email.png" %}'></img>
 	</a>

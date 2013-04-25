@@ -38,9 +38,11 @@ urlpatterns = patterns('',
     url(r'^giftcards/redeem-wholefoods-giftcard-print/(?P<transaction_id>.+)$', 'giftcards.views.redeem_card_print'),
     
     url(r'^admin/tools/add-giftcards', 'giftcards.views.add_giftcards'),
+    url(r'^admin/tools/view-egiftcard-inventory', 'giftcards.views.egiftcard_inventory'),
     url(r'^admin/tools/email-viewer/(?P<email_name>.*)$', 'core.email.view_email'),
     url(r'^admin/tools/users-for-newsletter$', 'core.admintools.users_for_newsletter'),
     url(r'^admin/tools/reset-password/(?P<user_email>.*)$', 'core.views.reset_user_password'),
+
     
     url(r'^admin/tools$', 'core.views.all_tools'),
     

@@ -1,0 +1,43 @@
+{% extends "user_page.html" %}
+{% load static from staticfiles %}
+
+{% block more_extra_style %}
+    <link rel="stylesheet" href='{% static "css/tools.css" %}' type="text/css" media="screen" />
+{% endblock %}
+
+{% block extra_script_include %}
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Total eGiftcards {{ total_cards }}', ''],
+          ['Sold', {{ purchased_cards }}],
+          ['Available', {{ available_cards }}],
+        ]);
+
+		var options = {
+			colors : [ '#ffa05b', '#7FC44E' ],
+			fontName : "Signika",
+			fontSize : 18,
+		}
+
+        var chart = new google.visualization.PieChart(document.getElementById('inventory_chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+{% endblock %}
+
+{% block main_content %}
+
+<div class="tool-window">
+	<span>eGiftcard Inventory</span>
+	<div id="inventory_chart_div" style="width: 700px; height: 400px;">
+	</div>
+	<span>Total Orders: {{ total_orders }}</span><br/>
+	<span>Backlogged Orders: {{ backlogged_orders }}</span>
+</div>
+
+{% endblock %}
+
