@@ -422,7 +422,7 @@ h3 {
     box-shadow: 0 0 5px rgba(0, 0, 0, .2);
 }
 
-#featured-recipe-container a {
+#featured-recipe-container #all-recipes-link {
     position: absolute;
     bottom: 10px;
     left: 10px;
