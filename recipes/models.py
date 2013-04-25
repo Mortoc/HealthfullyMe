@@ -17,6 +17,7 @@ class UnitOfMeasure(models.Model):
 class Ingredient(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
+    pluralized_name = models.CharField(max_length=255)
     
     def __unicode__(self):
         return self.name
@@ -29,20 +30,31 @@ class IngredientListing(models.Model):
     ingredient = models.ForeignKey( Ingredient )
     notes = models.CharField( max_length=255, blank=True, default=None )
     optional = models.BooleanField( default=False )
+    force_pluralized = models.BooleanField( default=False )
 
     def __unicode__(self):
         number = ""
         
+        # Format the fraction nicely
         if self.amount_numerator > 0 and self.amount_denominator > 0:
+            # 3/1 Cups should read '3 Cups'
             if self.amount_denominator == 1:
                 number = self.amount_numerator
+                
+            # 3/2 Cups should read '1 1/2 Cups'
+            elif self.amount_numerator > self.amount_denominator:
+                integer = self.amount_numberator / self.amount_denominator;
+                remainder = self.amount_numberator % self.amount_denominator;
+                number = "{0} {1}/{2}".format( integer, remainder, self.amount_denominator )
+                
+            # 1/2 Cups should read '1/2 Cups'
             else:
                 number = "{0}/{1}".format( self.amount_numerator, self.amount_denominator )
-            
+        
         unit = ""
         if self.unit:
             unit = "{0} ".format(self.unit)
-            
+        
         optional = ""
         if self.optional:
             optional = " (Optional)"
@@ -51,7 +63,14 @@ class IngredientListing(models.Model):
         if self.notes:
             notes = " " + self.notes
             
-        return u"{0} {1}{2}{3}{4}".format( number, unit, self.ingredient, optional, notes )
+        # Ingredient.name or Ingredient.pluralized_name
+        ingredient = ""
+        if self.force_pluralized or (self.amount_numerator != 0 and self.amount_numerator != self.amount_denominator):
+            ingredient = self.ingredient.pluralized_name
+        else:
+            ingredient = self.ingredient.name
+            
+        return u"{0} {1}{2}{3}{4}".format( number, unit, ingredient, notes, optional )
         
 class RecipeImg(models.Model):
     id = models.AutoField(primary_key=True)
