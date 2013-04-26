@@ -139,7 +139,7 @@
     position: absolute;
     top: 30px;
     left: 30px;
-    max-width: 380px;
+    max-width: 360px;
     box-shadow: 0 0 4px 0 #999;
     border: 1px solid #999;
     border-radius: 4px;
@@ -149,7 +149,7 @@
     background-color: #eee;
     position: relative;
     top: 350px;
-    left: 228px;
+    left: 205px;
     width: 165px;
     height: 72px;
     padding: 5px 10px 15px 10px; 
@@ -187,10 +187,18 @@
 
 
 @media only screen and (max-width: 787px), only screen and (max-device-width: 787px) {
-    
+    #recipe .recipe-image {
+        position: absolute;
+        top: 50px;
+        max-width: 320px;
+    }
+
     #recipe #recipe-image-container {
         min-height: 400px;
-        zoom: 1.2;
+    }
+    
+    #recipe .right-header {
+        float: left;
     }
     
     #recipe h1 {
@@ -201,10 +209,9 @@
         margin: 30px;
     }
     
-    
     .recipe-card .recipe-thumbnail {
+        position: relative;
         width: 325px;
-        margin: 0 auto;
     }
     
     #share-icons {
