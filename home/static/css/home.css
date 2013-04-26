@@ -1,23 +1,19 @@
 @import url(https://fonts.googleapis.com/css?family=Lobster+Two:700);
 @import url(https://fonts.googleapis.com/css?family=Signika:300);
 
-* {
-    margin: 0;
-    padding: 0; 
-}
-
 html, body {
-    height: 100%; 
     min-height: 480px;
     overflow: hidden;
+    height: 100%;
 }
 
 #main {
-    overflow:auto;
-	padding-bottom: 150px;
-}  /* must be same height as the footer */
+    overflow: auto;
+	padding-bottom: 150px; /* must be same height as the footer */
+}
 
-#footer {position: relative;
+#footer {
+    position: relative;
 	margin-top: -150px; /* negative value of footer height */
 	margin-left: -20px;
 	margin-right: -20px;
@@ -50,7 +46,12 @@ html, body {
     width: 32px;
     height: 32px;
 }
-
+/*
+.row-fluid .span12 { margin-left : 0px; }
+.row-fluid .span6:nth-child(2n + 3) { margin-left : 0px; }
+.row-fluid .span4:nth-child(3n + 4) { margin-left : 0px; }
+.row-fluid .span3:nth-child(4n + 5) { margin-left : 0px; }
+*/
 h3 {
     font-family: 'Signika', sans-serif;
     font-size: 25px;
@@ -67,15 +68,16 @@ h3 {
 
 	max-width: 900px;
 	margin: 0 auto;
+	
 	z-index: -100;
 }
+
 
 .background {
 	height: 100%;
 	width: 100%;
 	background-color: white;
     padding: 0;
-	margin: 0 0 -64px 0;
 	z-index: -100;
     overflow-y: scroll;
 }
@@ -197,9 +199,9 @@ h3 {
     width: 100%;
 }
 
-.orange-button {
-    float: left;
+.orange-button{
     background-color: #ffa05b;
+    float: left;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
@@ -214,7 +216,7 @@ h3 {
     width: 100%;
     padding: 12px 24px;
     margin: 0 auto;
-    text-shadow: 1px 1px 0px #cd8a15;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, .2);
     
     cursor: pointer;
 }.orange-button:hover {
@@ -222,33 +224,46 @@ h3 {
 }.orange-button:active {
     position: relative;
     top: 1px;
+}.orange-button:link {
+    color: inherit;
+}
+
+.orange-button a {
+    font-family: 'Signika', sans-serif;
+    color: white;
 }
 
 .green-button {
     background-color: #7fc44e;
+    float: left;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
-    border: 1px solid #7abc4c;
+    border: 1px solid #549824;
     display: inline-block;
     color: #ffffff;
 
     font-family: 'Signika', sans-serif;
     font-size: 15px;
-    
-    width: 350px !important;
-    max-width: 350px !important;
-    min-width: 350px !important;
-    padding: 12px 24px;
-    text-decoration: none;
-    text-shadow: 1px 1px 0px #7abc4c;
+
     text-align: center;
+    width: 100%;
+    padding: 12px 24px;
+    margin: 0 auto;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, .2);
     
+    cursor: pointer;
 }.green-button:hover {
     background-color: #97e161;
 }.green-button:active {
     position: relative;
     top: 1px;
+}.green-button:link {
+    color: white;
+}
+.green-button a {
+    font-family: 'Signika', sans-serif;
+    color: white;
 }
 
 .green-textured {    
@@ -377,7 +392,7 @@ h3 {
 
 #featured-recipe-container {
     position: relative;
-    margin: 70px auto;
+    margin: 70px auto 200px auto;
     width: 350px;
     min-height: 425px;
     padding-top: 5px;

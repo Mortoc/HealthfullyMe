@@ -43,9 +43,13 @@ class IngredientListing(models.Model):
                 
             # 3/2 Cups should read '1 1/2 Cups'
             elif self.amount_numerator > self.amount_denominator:
-                integer = self.amount_numberator / self.amount_denominator;
-                remainder = self.amount_numberator % self.amount_denominator;
-                number = "{0} {1}/{2}".format( integer, remainder, self.amount_denominator )
+                integer = self.amount_numerator / self.amount_denominator;
+                remainder = self.amount_numerator % self.amount_denominator;
+                
+                if remainder == 0:
+                    number = "{0}".format( integer )
+                else:
+                    number = "{0} {1}/{2}".format( integer, remainder, self.amount_denominator )
                 
             # 1/2 Cups should read '1/2 Cups'
             else:

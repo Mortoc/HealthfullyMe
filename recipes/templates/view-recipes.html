@@ -8,20 +8,24 @@
 {% endblock %}
 
 {% block main_content %}
-<span class="breadcrumbs"><a href="{% url 'index' %}">Home</a> / View Recipes</span>
 
 <div class="row-fluid recipe-card-container">
+	<div class="span12">
+		<span class="breadcrumbs"><a href="{% url 'index' %}">Home</a> / View Recipes</span>
+	</div>
 	{% for recipe in recipes %}
-	<div id="recipe{{ recipe.id }}" class="span4 recipe-card" onmousedown="document.location='{% url 'view-recipe' recipe.id %}'">
-		<h1>{{ recipe.title }}</h1>
-		<h5>Prep-time: {{ recipe.prep_time_formatted }}<br/>
-		Serves: {{ recipe.serves }}</h5><br/>
-		<img class="recipe-thumbnail" src="{{ recipe.thumbnail_url }}"></img>
+	<div id="recipe{{ recipe.id }}" class="span5 text-center">
+		<div class="recipe-card" onclick="document.location='{% url 'view-recipe' recipe.id %}'">
+			<h1>{{ recipe.title }}</h1>
+			<h5>Prep-time: {{ recipe.prep_time_formatted }}<br/>
+			Serves: {{ recipe.serves }}</h5><br/>
+			<img class="recipe-thumbnail" src="{{ recipe.thumbnail_url }}"></img>
+		</div>
 	</div>
 	{% endfor %}
 	
-	<div class="span12 breadcrumbs">
-		<span><a href="{% url 'store' %}">Save some money on these meals with our featured deals!</a></span>
+	<div class="span10 orange-button" style="margin-top: 20px">
+		<a href="{% url 'store' %}">Save some money on these meals with our featured deals!</a>
 	</div>
 </div>
 

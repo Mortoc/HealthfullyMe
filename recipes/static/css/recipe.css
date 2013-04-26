@@ -1,28 +1,41 @@
 .recipe-card-container{
     margin-top: 40px;
     margin-bottom: 200px;
-    padding: 10px;
 }
 
 .recipe-card {
-    position: relative;
     border-radius: 4px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
     background-color: #fafafa;
     padding: 20px;
     margin-top: 25px;
+    height: 400px;
     cursor: pointer;
 } .recipe-card:hover {
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.75);
+    background-color: #fff;
 } .recipe-card:active {
-    box-shadow: 0 1px 5px rgba(0, 0, 0, .75);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 1);
 }
 
 .recipe-card h1 {
+    width: 100%;
+    text-align: left;
+    background: #d64b4b;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffa05b), to(#f07c28));
+    background: -webkit-linear-gradient(top, #ffa05b, #f07c28);
+    background: -moz-linear-gradient(top, #ffa05b, #f07c28);
+    background: -ms-linear-gradient(top, #ffa05b, #f07c28);
+    background: -o-linear-gradient(top, #ffa05b, #f07c28);
+    background-image: -ms-linear-gradient(top, #ffa05b 0%, #f07c28 100%);
+    box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
+
     font-family: 'Signika', sans-serif;
-    color: #666;
-    font-size: 24px;
-    line-height: 30px;
+    color: #fff;
+    font-size: 15px;
+    line-height: 24px;
+    padding: 10px 10px 10px 30px;
+    margin: -5px -20px 10px -20px;
 }
 
 .recipe-card h5 {
@@ -40,12 +53,10 @@
 }
 
 .breadcrumbs {
-    position: relative;
-    top: 30px;
-    margin: 20px;
     font-family: 'Signika', sans-serif;
     color: #666;
     font-size: 18px;
+    margin-left: 20px;
 }
 
 #recipe {
@@ -137,7 +148,7 @@
 #share-icons {
     background-color: #eee;
     position: relative;
-    top: 320px;
+    top: 350px;
     left: 228px;
     width: 165px;
     height: 72px;
@@ -184,6 +195,16 @@
     
     #recipe h1 {
         width: auto;
+    }
+    
+    .recipe-card {
+        margin: 30px;
+    }
+    
+    
+    .recipe-card .recipe-thumbnail {
+        width: 325px;
+        margin: 0 auto;
     }
     
     #share-icons {

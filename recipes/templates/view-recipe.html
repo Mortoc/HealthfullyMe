@@ -21,10 +21,12 @@
 {% endblock %}
 
 {% block main_content %}
-<span class="breadcrumbs"><a href="{% url 'index' %}">Home</a> / <a href="{% url 'view-recipes' %}">View Recipes</a> / {{ recipe.title }}</span>
 
 <div id="recipe">
 	<div class="row-fluid">
+		<div class="span12">
+			<span class="breadcrumbs"><a href="{% url 'index' %}">Home</a> / <a href="{% url 'view-recipes' %}">View Recipes</a> / {{ recipe.title }}</span>
+		</div>
 		<div class="span6 head-container">
 			<h1>{{ recipe.title }}</h1>
 		

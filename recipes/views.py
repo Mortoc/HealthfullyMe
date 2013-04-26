@@ -21,5 +21,5 @@ def view_recipe(request, recipe_id):
     
 def view_recipes(request):
     return render(request, "view-recipes.html", {
-        "recipes" : Recipe.objects.all()
+        "recipes" : Recipe.objects.all().order_by("created_date")
     })
