@@ -31,7 +31,7 @@
     box-shadow: rgba(000,000,000,0.3) 0 1px 1px;
 
     font-family: 'Signika', sans-serif;
-    color: #fff;
+    color: #ffffff;
     font-size: 15px;
     line-height: 24px;
     padding: 10px 10px 10px 30px;
@@ -40,7 +40,7 @@
 
 .recipe-card h5 {
     font-family: 'Signika', sans-serif;
-    color: #777;
+    color: #777777;
     font-size: 14px;
     line-height: 20px;
     margin: 0;
@@ -54,7 +54,7 @@
 
 .breadcrumbs {
     font-family: 'Signika', sans-serif;
-    color: #666;
+    color: #666666;
     font-size: 18px;
     margin-left: 20px;
 }
@@ -82,7 +82,7 @@
     font-family: 'Signika', sans-serif;
 
     border: 1px solid #f07c28;
-    box-shadow: 0 0 4px 0 #999;
+    box-shadow: 0 0 4px 0 #999999;
 
     border-radius: 4px;
     font-size: 19px;
@@ -92,7 +92,7 @@
 }
 
 #recipe h3 {
-    color: #666;
+    color: #666666;
     line-height: 20px;
     font-size: 14px;
     font-family: 'Signika', sans-serif;
@@ -102,7 +102,7 @@
 }
 
 #recipe h2 {
-    color: #666;
+    color: #666666;
     line-height: 24px;
     font-size: 20px;
     font-family: 'Signika', sans-serif;
@@ -147,7 +147,7 @@
 }
 
 #share-icons {
-    background-color: #eee;
+    background-color: #eeeeee;
     position: relative;
     top: 350px;
     left: 205px;
@@ -160,7 +160,7 @@
 }
 
 #share-icons h5 {
-    color: #444;
+    color: #444444;
     line-height: 20px;
     font-size: 14px;
     font-family: 'Signika', sans-serif;    

@@ -11,7 +11,7 @@ class IngredientListingAdmin(admin.ModelAdmin):
 
 class RecipeAdmin(admin.ModelAdmin):
     filter_horizontal = ('tags', 'ingredient_list', 'images',)
-    list_display = ('title', 'created_by', 'image_thumbnail',)
+    list_display = ('title', 'created_by', 'image_thumbnail', 'featured',)
         
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Ingredient)
