@@ -21,7 +21,7 @@
 .recipe-card h1 {
     width: 100%;
     text-align: left;
-    background: #d64b4b;
+    background: #ffa05b;
     background: -webkit-gradient(linear, left top, left bottom, from(#ffa05b), to(#f07c28));
     background: -webkit-linear-gradient(top, #ffa05b, #f07c28);
     background: -moz-linear-gradient(top, #ffa05b, #f07c28);
@@ -71,7 +71,7 @@
 #recipe h1 {
     width: 100%;
     text-align: center;
-    background: #d64b4b;
+    background: #ffa05b;
     background: -webkit-gradient(linear, left top, left bottom, from(#ffa05b), to(#f07c28));
     background: -webkit-linear-gradient(top, #ffa05b, #f07c28);
     background: -moz-linear-gradient(top, #ffa05b, #f07c28);
@@ -140,6 +140,7 @@
     top: 30px;
     left: 30px;
     max-width: 360px;
+    max-height: 320px;
     box-shadow: 0 0 4px 0 #999;
     border: 1px solid #999;
     border-radius: 4px;
