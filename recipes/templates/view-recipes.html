@@ -11,11 +11,11 @@
 
 <div class="row-fluid recipe-card-container">
 	<div class="span12">
-		<span class="breadcrumbs"><a href="{% url 'index' %}">Home</a> / View Recipes</span>
+		<span class="breadcrumbs"><a href="{% url 'index' %}" onclick="analytics.track('/view-recipes/clicked-breadcrums', {'target' : 'Home' });">Home</a> / View Recipes</span>
 	</div>
 	{% for recipe in recipes %}
 	<div id="recipe{{ recipe.id }}" class="span5 text-center">
-		<div class="recipe-card" onclick="document.location='{% url 'view-recipe' recipe.id %}'">
+		<div class="recipe-card" onclick="document.location='{% url 'view-recipe' recipe.id %}'; analytics.track('/view-recipes/clicked-recipe', { recipe : '{{ recipe.id }}', recipe_name : '{{ recipe.title }}' });">
 			<h1>{{ recipe.title }}</h1>
 			<h5>Prep-time: {{ recipe.prep_time_formatted }}<br/>
 			Serves: {{ recipe.serves }}</h5><br/>
@@ -24,8 +24,8 @@
 	</div>
 	{% endfor %}
 	
-	<div class="span10 orange-button" style="margin-top: 20px">
-		<a href="{% url 'store' %}">Save some money on these meals with our featured deals!</a>
+	<div class="span10 orange-button" style="margin-top: 20px" onclick="analytics.track('/view-recipes/clicked-store-link', {}); document.location = '{% url 'store' %}';">
+		Save some money on these meals with our featured deals!
 	</div>
 </div>
 

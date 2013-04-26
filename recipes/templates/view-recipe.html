@@ -25,7 +25,7 @@
 <div id="recipe">
 	<div class="row-fluid">
 		<div class="span12">
-			<span class="breadcrumbs"><a href="{% url 'index' %}">Home</a> / <a href="{% url 'view-recipes' %}">View Recipes</a> / {{ recipe.title }}</span>
+			<span class="breadcrumbs"><a href="{% url 'index' %}" onclick="analytics.track('/view-recipe/{{ recipe.id }}/clicked-breadcrums', {'target' : 'Home' });">Home</a> / <a href="{% url 'view-recipes' %}" onclick="analytics.track('/view-recipe/{{ recipe.id }}/clicked-breadcrums', { 'target' : 'View Recipes' });">View Recipes</a> / {{ recipe.title }}</span>
 		</div>
 		<div class="span6 head-container">
 			<h1>{{ recipe.title }}</h1>
@@ -41,7 +41,7 @@
 			</h3>
 		
 			{% if recipe.attribution %}
-				<h3 class="right-header">by <a href="{{ recipe.attribution_link }}">{{ recipe.attribution }}</a></h3>
+				<h3 class="right-header">by <a href="{{ recipe.attribution_link }}" onclick="analytics.track('/view-recipe/{{ recipe.id }}/clicked-attribution-link', { 'name' : '{{ recipe.attribution }}' });">{{ recipe.attribution }}</a></h3>
 			{% endif %}
 		</div>
 	
@@ -54,10 +54,10 @@
 			
 			<div id="share-icons">
 				<h5>Share this Recipe:</h5>
-				<span class='st_facebook_large' displayText='Facebook'></span>
-				<span class='st_twitter_large' displayText='Tweet'></span>
-				<span class='st_pinterest_large' displayText='Pinterest'></span>
-				<span class='st_email_large' displayText='Email'></span>
+				<span class='st_facebook_large' onclick="analytics.track('/view-recipe/{{ recipe.id }}/clicked-share-link', { 'social' : 'facebook' });" displayText='Facebook'></span>
+				<span class='st_twitter_large' onclick="analytics.track('/view-recipe/{{ recipe.id }}/clicked-share-link', { 'social' : 'twitter' });" displayText='Tweet'></span>
+				<span class='st_pinterest_large' onclick="analytics.track('/view-recipe/{{ recipe.id }}/clicked-share-link', { 'social' : 'pinterest' });" displayText='Pinterest'></span>
+				<span class='st_email_large' onclick="analytics.track('/view-recipe/{{ recipe.id }}/clicked-share-link', { 'social' : 'email' });" displayText='Email'></span>
 			</div>
 		</div>
 	</div>
@@ -82,7 +82,7 @@
 		</div>
 
 		<div id="bottom-link" class="span14">
-			<a class="orange-button" style="width: 375px!important; margin: 50px;" href="{% url 'store' %}">Save money on this meal with our deals</a>
+			<a class="orange-button" style="width: 375px!important; margin: 50px;" onclick="analytics.track('/view-recipe/{{ recipe.id }}/clicked-store-link', {});" href="{% url 'store' %}">Save money on this meal with our deals</a>
 		</div>
 	</div>
 	

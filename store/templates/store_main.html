@@ -243,8 +243,8 @@
                     </div>
 					{% endif %}
                 </div>
-                <div class="span11 text-center">
-					<a href="{% url 'view-recipes' %}" class="orange-button">Discover our collection of healthy recipes</a>
+				<div class="span10 orange-button" style="margin-top: 20px" onclick="analytics.track('/store/clicked-view-recipes-link', {}); document.location='{% url 'view-recipes' %}';">
+					Browse our collection of healthy recipes
 				</div>
             </div>
         </div>        
