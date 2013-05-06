@@ -28,7 +28,8 @@ class Giftcard(models.Model):
     
     def generate_fulfillment_url(self):
         if self.is_sold():
-            self.fulfillment_url = "http://" + settings.HOSTNAME + "/giftcards/redeem-wholefoods-giftcard/" + self.transaction.id_slug 
+            self.fulfillment_url = settings.HOSTNAME + "/giftcards/redeem-wholefoods-giftcard/" + self.transaction.id_slug 
+            print self.fulfillment_url
             self.save()
             
             
